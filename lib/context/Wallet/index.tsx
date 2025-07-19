@@ -1,95 +1,148 @@
 import { createContext, use, useState, useEffect, type Context } from 'react';
-import { getWalletState } from '../../utils/cashMethods';
 import Loading from '../../components/Loading/DefaultLoading';
 import {
-    createNewWallet, 
-    deriveAccount, 
-    createWallet,
+    generateMnemonic, 
+    verifyWallet, 
+    buildWallet,
 } from './creation';
-import {
-    activateWallet,
-    activateNewWallet,
-    addNewSavedWallet,
-    deleteWallet,
-    getActiveWallet,
-    getSavedWallet,
-    getWallet,
-    getWalletDetails,
-    getWalletOnStartup,
-    renameWallet,
-} from './management';
-import {
-    loadCashtabSettings,
-    changeSettings,
-} from './settings';
-import {
-    forceWalletUpdate,
-    updateWallet,
-    writeWalletstate,
-} from './update';
+// import {
+//     activateWallet,
+//     activateNewWallet,
+//     addNewSavedWallet,
+//     deleteWallet,
+//     getActiveWallet,
+//     getSavedWallet,
+//     getWallet,
+//     getWalletDetails,
+//     getWalletOnStartup,
+//     renameWallet,
+// } from './management';
+// import {
+//     loadCashtabSettings,
+//     changeSettings,
+// } from './settings';
 
-import { type Wallet } from './types';
+// @ts-ignore
+import bcash from '@hansekontor/checkout-components';
+const { Mnemonic } = bcash;
+import { type Wallet, type WalletState } from './types';
+import localforage from 'localforage';
+import CashtabState from './management';
 
 type WalletContextType = {
-    wallet: Wallet
+    wallet: Wallet | null,
+    createWallet: Function,
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
-const WalletWrapper = ( { children, passWallet }: 
-    { children: React.ReactElement, passWallet: Wallet }
+export const WalletProvider = ( { children }: 
+    { children: React.ReactElement }
 ) => {
-    const [wallet, setWallet] = useState(passWallet);
-    const { slpBalancesAndUtxos } = getWalletState(wallet);
-
-    return (
-        <WalletContext value={{
-            wallet, 
-        }}>
-            {children}
-        </WalletContext>
-    )
-}
-
-export const WalletProvider = ({ children }: 
-    { children: React.ReactElement}
-) => {
-
-    const [wallet, setWallet] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [wallet, setWallet] = useState(null);
+    const [wallet, ] = useState(null);
+    const [cashtabState, setCashtabState] = useState(new CashtabState());
+    // const [isLoading, setIsLoading] = useState(true);
+    const [walletLoading, setWalletLoading ] = useState(false);
+    const [walletLoaded, setWalletLoaded] = useState(false);
 
     useEffect(() => {
-        // const fetchWallet = async () => {
-        //     try {
-        //         const walletFromStorage = await getWalletOnStartup();
-        //         if (walletFromStorage) {
-        //             setWallet(walletFromStorage);
-        //         } else {
-        //             const newWallet = await createNewWallet();
-        //             setWallet(newWallet);
-        //         }
-        //     } catch (error) {
-        //         console.error("Error fetching wallet", error);
-        //     } finally {
-                // setIsLoading(false);
-        //     }
-        // };
+        loadCashtabState();
+    }, [])
 
-        fetchWallet();
-    });
+    useEffect(() => {
+        console.log("cashtabState", cashtabState);
+    })
 
-    if (isLoading) {
-        return <Loading>{"Loading Wallet..."}</Loading>;
+    useEffect(() => {
+        if (walletLoaded && cashtabState.wallets.length > 0) {
+            update(cashtabState);
+            setWalletLoading(false);
+        } else if (walletLoaded) {
+            setWalletLoading(false);
+        }
+    }, [walletLoaded, cashtabState.wallets[0]?.name])
+
+    const loadCashtabState = async () => {
+        console.log("loadCashtabState()");
+        setWalletLoading(true);
+        const wallets = await localforage.getItem("wallets");
+        console.log("loadCashtabState found wallets", wallets);
+        if (wallets) {
+            console.log("set stored wallets clause");
+            const newState = Object.assign(cashtabState, { wallets });
+            console.log("new cashtab state", newState);
+            setCashtabState(newState);            
+        } else {
+            setWalletLoading(false);
+        }
+        setWalletLoaded(true);
+    };
+
+    const createWallet = (mnemonicInput?: string) => {
+        console.log("createWallet()");
+        const mnemonic = mnemonicInput ? 
+            Mnemonic.fromPhrase(mnemonicInput) : 
+            generateMnemonic();
+    
+        // verify uniqueness of new wallet in saved wallets
+        // todo: integrate save wallets
+        const isNewWallet = verifyWallet(mnemonic, []);
+        if (isNewWallet) {
+            // build Wallet type
+            const newWallet = buildWallet(mnemonic);
+            console.log("newWallet", newWallet);
+            // update
+            updateCashtabState("wallets", [...cashtabState.wallets, newWallet]);
+        } else {
+            console.error("Wallet already exists");
+            // notification
+        }
     }
 
-    if (!wallet) {
-        console.error("No wallet found");
-        return <Loading>No Wallet Found!</Loading>; // Handle case where wallet is not found
+    const updateCashtabState = async (key: string, value: Wallet[]) => {
+        console.log("updateCashtabState key", key, "value", value);
+    
+        setCashtabState({ ...cashtabState, [`${key}`]: value});
+    
+        // value = getJsonWallets(value as Wallet[]);
+    
+        setWalletLoading(true);
+        await localforage.setItem(key, value);
+        setWalletLoading(false);
     }
 
+    const update = async (cashtabState: CashtabState) => {
+        console.log("update()");
+    
+        const activeWallet = cashtabState.wallets[0];
+        // todo: get indexer data for wallet
+    
+        const newWalletState: WalletState = {
+            balances: {
+                totalBalance: 0,
+                totalBalanceInSatoshis: 0
+            },
+            tokenBalance: 0,
+            utxos: [],
+            tokens: [],
+            slpBalancesAndUtxos: {},
+            parsedTxHistory: []
+        };
+    
+        // update state and storage
+        activeWallet.state = newWalletState;
+        const remainingWallets = cashtabState.wallets.slice(1);
+        await updateCashtabState('wallets', [activeWallet, ...remainingWallets]);
+    }
+    
     return (
-        <WalletWrapper passWallet={wallet}>
+        <WalletContext value={{
+            wallet,
+            createWallet,
+        }}>
             {children}
-        </WalletWrapper>
+            {walletLoading && <Loading>{"Loading Wallet..."}</Loading>}
+        </WalletContext>
     )
 }
 

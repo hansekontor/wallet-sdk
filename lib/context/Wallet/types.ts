@@ -1,19 +1,23 @@
+export interface CashtabState {
+    wallets: Wallet[] | [],
+}
+
 export type Wallet = {
     mnemonic: string, 
     name: string, 
     Path1899: Path,
-    state: State
+    state: WalletState
 }
 
-type Path = {
+export type Path = {
     publicKey: string, 
     cashAddress: string, 
     slpAddress: string, 
     fundingWif: string
-    // funding address?
+    legacyAddress: string
 }
 
-export type State = {
+export type WalletState = {
     balances: Balances,
     tokenBalance: number,
     utxos: object[] | [],

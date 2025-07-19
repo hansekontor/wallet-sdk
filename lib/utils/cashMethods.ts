@@ -1,7 +1,7 @@
-import { type Wallet, type State } from '../context/Wallet/types';
+import { type Wallet, type WalletState } from '../context/Wallet/types';
 
-export const getWalletState = (wallet: Wallet): State => {
-    if (!wallet || !wallet.state) {
+export const getWalletState = (wallet?: Wallet): WalletState => {
+    if (!wallet) {
         return {
             balances: { totalBalance: 0, totalBalanceInSatoshis: 0 },
             tokenBalance: 0,

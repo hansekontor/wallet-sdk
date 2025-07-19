@@ -1,6 +1,7 @@
 import { createContext, use, useState, type Context } from 'react';
 import { validateMnemonic } from '../../utils/mnemonic';
 import Loading from '../../components/Loading/DefaultLoading';
+import { useWallet } from '../Wallet';
 
 type Wallet = {
     placeholder: boolean
@@ -12,7 +13,7 @@ type App = {
     validateMnemonic: Function, 
     updateWallet: Function, 
     changeWallet: Function, 
-    createWallet: Function,
+    addWallet: Function,
     send: Function, 
     receive: object,
     bridge: Function,
@@ -25,8 +26,11 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
+    const { createWallet } = useWallet();
+
     const [loadingStatus, setLoadingStatus] = useState("");
-    const [walletUpdateAvailable, setWalletUpdateAvailable] = useState(false);
+    // const [walletUpdateAvailable, setWalletUpdateAvailable] = useState(false);
+    const [walletUpdateAvailable, ] = useState(false);
 
     const wallet = {
         placeholder: true
@@ -46,16 +50,27 @@ export const AppProvider = ({ children }:
     const changeWallet = (name: string) => {
         // find wallet 
         // activate wallet / change wallet order
+        console.log("name", name);
     };
 
     /**
      * Creates new wallet randomly or by imported mnemonic, adds it to saved wallets and activates it. 
-     * @param name
      * @param mnemonic 
      */
-    const createWallet = async (name: string, mnemonic?: string) => {
-        // if mnemonic import wallet
-        // else create random wallet
+    const addWallet = async (mnemonic?: string) => {
+        // if valid mnemonic is specified, import wallet
+        // else create new random wallet
+        console.log("addWallet mnemonic", mnemonic);
+        if (mnemonic) {
+            console.log("addWallet import wallet");
+            const isValidMnemonic = validateMnemonic(mnemonic);
+            if (isValidMnemonic) {
+                createWallet(mnemonic);
+            }
+        } else {
+            console.log("addWallet create new wallet");
+            createWallet();
+        }
 
         // add to saved wallet
         // activate wallet
@@ -71,6 +86,7 @@ export const AppProvider = ({ children }:
      * @param testOnly 
      */
     const send = async (amount: number, addresses: string[], testOnly: boolean = false) => {
+        console.log(amount, addresses, testOnly);
         // manage utxos and change
         // build transaction
         // sign transaction
@@ -95,6 +111,7 @@ export const AppProvider = ({ children }:
      * @param type 
      */
     const withdraw = (amount: number, type: "giftcard" | "fiat") => {
+        console.log(amount, type);
         // build burn tx
         // sign burn tx
         // broadcast burn tx
@@ -107,7 +124,7 @@ export const AppProvider = ({ children }:
         validateMnemonic, 
         updateWallet, 
         changeWallet,
-        createWallet,
+        addWallet,
         send,
         receive, 
         bridge,
@@ -118,7 +135,7 @@ export const AppProvider = ({ children }:
     return (
         <AppContext value={context}>
             {children}
-            {loadingStatus && <Loading>{loadingStatus}</Loading>}
+            {loadingStatus.length > 0 && <Loading>{loadingStatus}</Loading>}
         </AppContext>
     )
 }
