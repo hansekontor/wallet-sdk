@@ -27,11 +27,13 @@ import bcash from '@hansekontor/checkout-components';
 const { Mnemonic } = bcash;
 import { type Wallet, type WalletState } from './types';
 import localforage from 'localforage';
-import CashtabState from './management';
+import CashtabState, { getWalletOrder } from './management';
 
 type WalletContextType = {
-    wallet: Wallet | null,
+    wallet: Wallet | undefined,
+    cashtab: any,
     createWallet: Function,
+    activateWallet: Function
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
@@ -39,7 +41,7 @@ export const WalletProvider = ( { children }:
     { children: React.ReactElement }
 ) => {
     // const [wallet, setWallet] = useState(null);
-    const [wallet, ] = useState(null);
+    const [wallet, setWallet] = useState<Wallet | undefined>();
     const [cashtabState, setCashtabState] = useState(new CashtabState());
     // const [isLoading, setIsLoading] = useState(true);
     const [walletLoading, setWalletLoading ] = useState(false);
@@ -133,12 +135,20 @@ export const WalletProvider = ( { children }:
         activeWallet.state = newWalletState;
         const remainingWallets = cashtabState.wallets.slice(1);
         await updateCashtabState('wallets', [activeWallet, ...remainingWallets]);
+        setWallet(activeWallet);
+    }
+
+    const activateWallet = async (walletToActivate: Wallet) => {
+        const newStoredWallets = getWalletOrder(walletToActivate, cashtabState.wallets);   
+        updateCashtabState("wallets", newStoredWallets);
     }
     
     return (
         <WalletContext value={{
             wallet,
+            cashtab: cashtabState,
             createWallet,
+            activateWallet,
         }}>
             {children}
             {walletLoading && <Loading>{"Loading Wallet..."}</Loading>}

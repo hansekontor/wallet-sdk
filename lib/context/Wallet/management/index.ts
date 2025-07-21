@@ -40,6 +40,18 @@ export const renameWallet = () => {
 
 }
 
+export const getWalletOrder = (activeWallet: Wallet, wallets: Wallet[]) => {
+    const walletOrder = [activeWallet];
+    for (let i = 0; i < wallets.length; i++) {
+        const isActiveWallet = wallets[i].name === activeWallet.name;
+        if (!isActiveWallet) {
+            walletOrder.push(wallets[i]);
+        }
+    }
+
+    return walletOrder;
+}
+
 // Copyright (c) 2024 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.

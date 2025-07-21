@@ -2,13 +2,13 @@ import { createContext, use, useState, type Context } from 'react';
 import { validateMnemonic } from '../../utils/mnemonic';
 import Loading from '../../components/Loading/DefaultLoading';
 import { useWallet } from '../Wallet';
+import { type Wallet } from '../Wallet/types';
+import CashtabState from '../Wallet/management';
 
-type Wallet = {
-    placeholder: boolean
-}
 
 type App = {
-    wallet: Wallet,
+    wallet: Wallet | undefined,
+    cashtab: CashtabState,
     walletUpdateAvailable: boolean, 
     validateMnemonic: Function, 
     updateWallet: Function, 
@@ -26,15 +26,11 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet } = useWallet();
+    const { createWallet, cashtab, wallet, activateWallet } = useWallet();
 
     const [loadingStatus, setLoadingStatus] = useState("");
     // const [walletUpdateAvailable, setWalletUpdateAvailable] = useState(false);
     const [walletUpdateAvailable, ] = useState(false);
-
-    const wallet = {
-        placeholder: true
-    };
 
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
@@ -47,10 +43,21 @@ export const AppProvider = ({ children }:
      * Changes the active wallet to the one with the specified wallet name.
      * @param name 
      */
-    const changeWallet = (name: string) => {
-        // find wallet 
-        // activate wallet / change wallet order
-        console.log("name", name);
+    const changeWallet = async (name: string) => {        
+        const isValidWalletInput = name.length === 5;
+        if (isValidWalletInput) {
+            // find wallet 
+            const newWallet = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
+            if (newWallet) {
+                // activate wallet / change wallet order
+                await activateWallet(newWallet);
+            } else {
+                throw new Error("Wallet not found")
+            }
+
+        } else {
+            throw new Error("Invalid wallet name");
+        }
     };
 
     /**
@@ -120,6 +127,7 @@ export const AppProvider = ({ children }:
 
     const context: App = {
         wallet, 
+        cashtab,
         walletUpdateAvailable, 
         validateMnemonic, 
         updateWallet, 
