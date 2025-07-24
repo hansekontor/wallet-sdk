@@ -101,13 +101,78 @@ export const AppProvider = ({ children }:
      * @param addresses 
      * @param testOnly 
      */
-    const send = async (amount: number, addresses: string[], testOnly: boolean = false) => {
+    const send = async (amount: number, addresses: string[], sandbox: boolean, testOnly: boolean = false) => {
+        if (!wallet?.Path1899) {
+            throw new Error("No wallet found");
+        }
+
         console.log(amount, addresses, testOnly);
-        // manage utxos and change
+        const tokens = wallet.state.slpBalancesAndUtxos.tokens;
+        const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
+
+        // get postage for MUSD
+        const postage = await getPostage(tokenId);
+
         // build transaction
+        const remainderAddress = wallet.Path1899.cashAddress;
+        const tx = await buildSendTx(amount, wallet, addresses, tokenId, postage, remainderAddress);
+
         // sign transaction
+        const keyRingArray = KeyRing.fromSecret(wallet.Path1899.fundingWif);
+        const hashTypes = Script.hashType;
+        const sighashType = postage ?
+            hashTypes.ALL | hashTypes.ANYONECANPAY | hashTypes.SIGHASH_FORKID 
+            : hashTypes.ALL | hashTypes.SIGHASH_FORKID;
+        tx.sign(keyRingArray, sighashType);
+
+        // get output raw hex
+        let txidStr;
+        const rawTx = tx.toRaw();
+        const hex = rawTx.toString('hex');
+        console.log("hex", hex);
+
         // broadcast transaction
-        // return something
+        if (postage) {
+            // todo: remove hard coded url
+            const postageUrl = "https://pay.badger.cash/postage?currency=etoken";
+            const paymentObj = {
+                merchantData: Buffer.alloc(0),
+                transactions: [rawTx],
+                refundTo:[{
+                    script: Script.fromAddress(remainderAddress).toRaw(),
+                    value: 0
+                }],
+                memo: ''
+            };               
+            const type = "etoken";
+
+            const paymentAck = await postPayment(
+                postageUrl, 
+                paymentObj,
+                type
+            );
+            if (paymentAck.payment) {
+                const transactionIds = paymentAck.payment.transactions.map((t:any) =>
+                    TX.fromRaw(t).txid()
+                );
+                txidStr = transactionIds[0];
+                console.log("MUSD txid", txidStr);
+            }
+        } else {
+            let broadcast = { success: true };
+            if (!testOnly) {
+                broadcast = await broadcastTx(hex);
+            } 
+            txidStr = tx.txid().toString('hex');
+
+            if (broadcast.success) {
+                console.log("MUSD txid", txidStr);
+            }
+        }
+
+        // todo: remove hardcoded explorer link
+        const link = `https://explorer.e.cash/tx/${txidStr}`;
+        return link
     };
 
     /**
