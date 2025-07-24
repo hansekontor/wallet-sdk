@@ -4,6 +4,14 @@ import Loading from '../../components/Loading/DefaultLoading';
 import { useWallet } from '../Wallet';
 import { type Wallet } from '../Wallet/types';
 import CashtabState from '../Wallet/management';
+import useEcash from '../../hooks/useEcash';
+// @ts-ignore
+import bcash from '@hansekontor/checkout-components';
+const {
+    TX,
+    KeyRing, 
+    Script, 
+} = bcash;
 
 
 type App = {
@@ -26,7 +34,8 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet, cashtab, wallet, activateWallet } = useWallet();
+    const { createWallet, cashtab, wallet, activateWallet, update } = useWallet();
+    const { getPostage, buildSendTx, broadcastTx, postPayment } = useEcash();
 
     const [loadingStatus, setLoadingStatus] = useState("");
     // const [walletUpdateAvailable, setWalletUpdateAvailable] = useState(false);
@@ -36,7 +45,7 @@ export const AppProvider = ({ children }:
      * Synchronizes the currently active wallet and updates transactions and balances.
      */
     const updateWallet = async () => {
-
+        update(cashtab);
     };
 
     /**

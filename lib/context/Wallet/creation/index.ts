@@ -2,8 +2,7 @@
 import bcash from '@hansekontor/checkout-components';
 const { Mnemonic, HDPrivateKey, KeyRing } = bcash;
 import cashaddr from 'ecashaddrjs';
-import { getWalletState } from '../../../utils/cashMethods';
-import { type Wallet, type Path } from '../types';
+import { WalletState, type Wallet, type Path } from '../types';
 
 
 export const generateMnemonic = () => {
@@ -52,7 +51,7 @@ export const buildWallet = (mnemonic: any) => {
         mnemonic: mnemonic,
         name,
         Path1899,
-        state: getWalletState(),
+        state: new WalletState(),
     };
 }
 

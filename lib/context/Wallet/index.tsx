@@ -5,18 +5,14 @@ import {
     verifyWallet, 
     buildWallet,
 } from './creation';
-// import {
-//     activateWallet,
-//     activateNewWallet,
-//     addNewSavedWallet,
-//     deleteWallet,
-//     getActiveWallet,
-//     getSavedWallet,
-//     getWallet,
-//     getWalletDetails,
-//     getWalletOnStartup,
-//     renameWallet,
-// } from './management';
+import CashtabState, { getWalletOrder } from './management';
+import {
+    getUtxos, 
+    getBalances, 
+    getSlpBalancesAndUtxos,
+    getTxHistory, 
+    parseTxHistory
+} from './update';
 // import {
 //     loadCashtabSettings,
 //     changeSettings,
@@ -27,13 +23,13 @@ import bcash from '@hansekontor/checkout-components';
 const { Mnemonic } = bcash;
 import { type Wallet, type WalletState } from './types';
 import localforage from 'localforage';
-import CashtabState, { getWalletOrder } from './management';
 
 type WalletContextType = {
     wallet: Wallet | undefined,
     cashtab: any,
     createWallet: Function,
-    activateWallet: Function
+    activateWallet: Function,
+    update: Function,
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
@@ -114,21 +110,24 @@ export const WalletProvider = ( { children }:
     }
 
     const update = async (cashtabState: CashtabState) => {
-        console.log("update()");
-    
+        console.log("update()");    
         const activeWallet = cashtabState.wallets[0];
+        if (!activeWallet) {
+            throw new Error("No wallet found");
+        }
+
         // todo: get indexer data for wallet
-    
+        const utxos = await getUtxos(activeWallet.Path1899.cashAddress);
+        const slpBalancesAndUtxos = getSlpBalancesAndUtxos(utxos);
+        const balances = getBalances(slpBalancesAndUtxos);
+        const txHistory = await getTxHistory(activeWallet.Path1899.cashAddress);
+        const parsedTxHistory = parseTxHistory(txHistory);
+        
         const newWalletState: WalletState = {
-            balances: {
-                totalBalance: 0,
-                totalBalanceInSatoshis: 0
-            },
-            tokenBalance: 0,
-            utxos: [],
-            tokens: [],
-            slpBalancesAndUtxos: {},
-            parsedTxHistory: []
+            balances,
+            utxos,
+            slpBalancesAndUtxos,
+            parsedTxHistory,
         };
     
         // update state and storage
@@ -149,6 +148,7 @@ export const WalletProvider = ( { children }:
             cashtab: cashtabState,
             createWallet,
             activateWallet,
+            update,
         }}>
             {children}
             {walletLoading && <Loading>{"Loading Wallet..."}</Loading>}
