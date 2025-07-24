@@ -133,8 +133,7 @@ export const AppProvider = ({ children }:
 
         // broadcast transaction
         if (postage) {
-            // todo: remove hard coded url
-            const postageUrl = "https://pay.badger.cash/postage?currency=etoken";
+            const postageUrl = import.meta.env.VITE_POSTAGE_URL;
             const paymentObj = {
                 merchantData: Buffer.alloc(0),
                 transactions: [rawTx],
@@ -170,8 +169,7 @@ export const AppProvider = ({ children }:
             }
         }
 
-        // todo: remove hardcoded explorer link
-        const link = `https://explorer.e.cash/tx/${txidStr}`;
+        const link = `${import.meta.env.VITE_EXPLORER_URL}/tx/${txidStr}`;
         return link
     };
 

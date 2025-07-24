@@ -155,7 +155,7 @@ export const useEcash = () => {
     }
 
     const broadcastTx = async (hex: string) => {
-        const url = `${getIndexerUrl()}/broadcast`;
+        const url = `${import.meta.env.VITE_INDEXER_URL}/broadcast`;
         const method = "POST";
         const body = JSON.stringify({ tx: hex});
 
@@ -164,12 +164,6 @@ export const useEcash = () => {
 
         return resultJson;
 
-    }
-
-    const getIndexerUrl = () => {
-        // todo: remove hardcoded url
-        const url = "https://ecash.badger.cash:8332";
-        return url;
     }
 
     const calculatePostage = (inputCount: number, tokenRecipientCount: number, postageObj: any) => {
@@ -279,8 +273,7 @@ export const useEcash = () => {
 
     const getPostage = async (tokenId: string) => {
         try {
-            // todo: remove hardcoded url
-            const postageUrl = "https://pay.badger.cash/postage?currency=etoken";
+            const postageUrl = import.meta.env.VITE_POSTAGE_URL;
             const result = await fetch(postageUrl);
             const postageObj = await result.json();
             const stamp = postageObj.stamps.find(

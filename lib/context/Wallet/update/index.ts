@@ -1,8 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { type SlpBalancesAndUtxos, type Balances, Tokens } from '../types';
 
-// todo: remove hard coded env vars
-const indexerUrl = "https://ecash.badger.cash:8332"
+const indexerUrl = import.meta.env.VITE_INDEXER_URL;
 
 export const getUtxos = async (address: string) => {
     const result = await fetch(`${indexerUrl}/coin/address/${address}?slp=true`);
