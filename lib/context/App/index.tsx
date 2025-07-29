@@ -1,6 +1,5 @@
-import { createContext, use, useState, type Context } from 'react';
+import { createContext, use, useState, useEffect, type Context } from 'react';
 import { validateMnemonic } from '../../utils/mnemonic';
-import Loading from '../../components/Loading/DefaultLoading';
 import { useWallet } from '../Wallet';
 import { type Wallet } from '../Wallet/types';
 import CashtabState from '../Wallet/management';
@@ -15,18 +14,18 @@ const {
 
 
 type App = {
+    status: string,
     wallet: Wallet | undefined,
     cashtab: CashtabState,
-    walletUpdateAvailable: boolean, 
     validateMnemonic: Function, 
     updateWallet: Function, 
     changeWallet: Function, 
     addWallet: Function,
+    deleteWallet: Function,
     send: Function, 
     receive: object,
     bridge: Function,
     withdraw: Function,
-    setLoadingStatus: Function
 }
 export const AppContext: Context<App> = createContext({} as App);
 
@@ -34,12 +33,20 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet, cashtab, wallet, activateWallet, update } = useWallet();
+    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, removeWallet } = useWallet();
     const { getPostage, buildSendTx, broadcastTx, postPayment } = useEcash();
 
-    const [loadingStatus, setLoadingStatus] = useState("");
-    // const [walletUpdateAvailable, setWalletUpdateAvailable] = useState(false);
-    const [walletUpdateAvailable, ] = useState(false);
+    const [status, setStatus] = useState<string>("IDLE");
+
+    // handle wallet loading status
+    useEffect(() => {
+        const walletLoadingCode = "WALLET_LOADING";
+        if (walletLoading) {
+            setStatus(walletLoadingCode);
+        } else if (status === walletLoadingCode) {
+            setStatus("IDLE")
+        }
+    }, [walletLoading])
 
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
@@ -96,6 +103,26 @@ export const AppProvider = ({ children }:
     };
 
     /**
+     * Deletes a wallet from stored wallets.
+     * @param name 
+     */
+    const deleteWallet = async (name: string) => {
+        console.log("deleteWallet()");
+        const isValidWalletInput = name.length === 5;
+        if (isValidWalletInput) {
+            // find wallet 
+            const walletToDelete = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
+            if (walletToDelete) {
+                await removeWallet(walletToDelete);
+            } else {
+                throw new Error("Wallet not found")
+            }
+        } else {
+            throw new Error("Invalid wallet name");
+        }
+    }
+
+    /**
      * Sends MUSD to specifed output addresses.
      * @param amount 
      * @param addresses 
@@ -105,6 +132,8 @@ export const AppProvider = ({ children }:
         if (!wallet?.Path1899) {
             throw new Error("No wallet found");
         }
+
+        setStatus("SENDING");
 
         console.log(amount, addresses, testOnly);
         const tokens = wallet.state.slpBalancesAndUtxos.tokens;
@@ -166,6 +195,7 @@ export const AppProvider = ({ children }:
 
             if (broadcast.success) {
                 console.log("MUSD txid", txidStr);
+                setStatus("SENDING_SUCCESS");
             }
         }
 
@@ -198,24 +228,23 @@ export const AppProvider = ({ children }:
     };
 
     const context: App = {
+        status,
         wallet, 
         cashtab,
-        walletUpdateAvailable, 
         validateMnemonic, 
         updateWallet, 
         changeWallet,
         addWallet,
+        deleteWallet,
         send,
         receive, 
         bridge,
         withdraw,
-        setLoadingStatus,   
     };
 
     return (
         <AppContext value={context}>
             {children}
-            {loadingStatus.length > 0 && <Loading>{loadingStatus}</Loading>}
         </AppContext>
     )
 }

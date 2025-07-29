@@ -1,5 +1,9 @@
 import { createContext, use, useState, useEffect, type Context } from 'react';
-import Loading from '../../components/Loading/DefaultLoading';
+import localforage from 'localforage';
+// @ts-ignore
+import bcash from '@hansekontor/checkout-components';
+const { Mnemonic } = bcash;
+
 import {
     generateMnemonic, 
     verifyWallet, 
@@ -13,23 +17,17 @@ import {
     getTxHistory, 
     parseTxHistory
 } from './update';
-// import {
-//     loadCashtabSettings,
-//     changeSettings,
-// } from './settings';
-
-// @ts-ignore
-import bcash from '@hansekontor/checkout-components';
-const { Mnemonic } = bcash;
+import EventBus from '../../utils/events';
 import { type Wallet, type WalletState } from './types';
-import localforage from 'localforage';
 
 type WalletContextType = {
     wallet: Wallet | undefined,
     cashtab: any,
     createWallet: Function,
     activateWallet: Function,
+    removeWallet: Function,
     update: Function,
+    walletLoading: boolean,
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
@@ -39,17 +37,12 @@ export const WalletProvider = ( { children }:
     // const [wallet, setWallet] = useState(null);
     const [wallet, setWallet] = useState<Wallet | undefined>();
     const [cashtabState, setCashtabState] = useState(new CashtabState());
-    // const [isLoading, setIsLoading] = useState(true);
     const [walletLoading, setWalletLoading ] = useState(false);
     const [walletLoaded, setWalletLoaded] = useState(false);
 
     useEffect(() => {
         loadCashtabState();
     }, [])
-
-    useEffect(() => {
-        console.log("cashtabState", cashtabState);
-    })
 
     useEffect(() => {
         if (walletLoaded && cashtabState.wallets.length > 0) {
@@ -76,7 +69,7 @@ export const WalletProvider = ( { children }:
         setWalletLoaded(true);
     };
 
-    const createWallet = (mnemonicInput?: string) => {
+    const createWallet = async (mnemonicInput?: string) => {
         console.log("createWallet()");
         const mnemonic = mnemonicInput ? 
             Mnemonic.fromPhrase(mnemonicInput) : 
@@ -90,7 +83,8 @@ export const WalletProvider = ( { children }:
             const newWallet = buildWallet(mnemonic);
             console.log("newWallet", newWallet);
             // update
-            updateCashtabState("wallets", [...cashtabState.wallets, newWallet]);
+            await updateCashtabState("wallets", [...cashtabState.wallets, newWallet]);
+            EventBus.emit("WALLET_ADDED", "success");
         } else {
             console.error("Wallet already exists");
             // notification
@@ -101,8 +95,6 @@ export const WalletProvider = ( { children }:
         console.log("updateCashtabState key", key, "value", value);
     
         setCashtabState({ ...cashtabState, [`${key}`]: value});
-    
-        // value = getJsonWallets(value as Wallet[]);
     
         setWalletLoading(true);
         await localforage.setItem(key, value);
@@ -135,11 +127,19 @@ export const WalletProvider = ( { children }:
         const remainingWallets = cashtabState.wallets.slice(1);
         await updateCashtabState('wallets', [activeWallet, ...remainingWallets]);
         setWallet(activeWallet);
+        EventBus.emit("WALLET_UPDATED", "success");
     }
 
     const activateWallet = async (walletToActivate: Wallet) => {
         const newStoredWallets = getWalletOrder(walletToActivate, cashtabState.wallets);   
-        updateCashtabState("wallets", newStoredWallets);
+        await updateCashtabState("wallets", newStoredWallets);
+        EventBus.emit("WALLET_CHANGED", "success");
+    }
+
+    const removeWallet = async (walletToDelete: Wallet) => {
+        const newStoredWallets = cashtabState.wallets.filter((wallet: Wallet) => wallet.name !== walletToDelete.name);
+        await updateCashtabState("wallets", newStoredWallets);
+        EventBus.emit("WALLET_DELETED", "success");
     }
     
     return (
@@ -148,10 +148,11 @@ export const WalletProvider = ( { children }:
             cashtab: cashtabState,
             createWallet,
             activateWallet,
+            removeWallet,
             update,
+            walletLoading
         }}>
             {children}
-            {walletLoading && <Loading>{"Loading Wallet..."}</Loading>}
         </WalletContext>
     )
 }
