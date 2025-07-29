@@ -1,5 +1,5 @@
 {
-  "name": "wallet-sdk",
+  "name": "@hansekontor/wallet-sdk",
   "version": "1.0.0",
   "type": "module",
   "module": "./dist/wallet-sdk.js",
