@@ -8,3 +8,6 @@ export * from "./context/Wallet";
 
 // utils
 export * from "./utils/events";
+
+// types 
+export * from "./context/Wallet/types";
