@@ -4,6 +4,7 @@ import { useWallet } from '../Wallet';
 import { type Wallet } from '../Wallet/types';
 import CashtabState from '../Wallet/management';
 import useEcash from '../../hooks/useEcash';
+import EventBus from '../../utils/events';
 // @ts-ignore
 import bcash from '@hansekontor/checkout-components';
 const {
@@ -33,20 +34,23 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, removeWallet } = useWallet();
+    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, walletLoaded, removeWallet } = useWallet();
     const { getPostage, buildSendTx, broadcastTx, postPayment } = useEcash();
 
-    const [status, setStatus] = useState<string>("IDLE");
+    const [status, setStatus] = useState<string>("WALLET_INIT");
 
     // handle wallet loading status
     useEffect(() => {
         const walletLoadingCode = "WALLET_LOADING";
-        if (walletLoading) {
-            setStatus(walletLoadingCode);
-        } else if (status === walletLoadingCode) {
-            setStatus("IDLE")
+        const isInitializing = !walletLoaded;
+        if (!isInitializing) {
+            if (walletLoading) {
+                setStatus(walletLoadingCode);                
+            } else {
+                setStatus("IDLE");                
+            }
         }
-    }, [walletLoading])
+    }, [walletLoading, walletLoaded])
 
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
@@ -133,7 +137,7 @@ export const AppProvider = ({ children }:
             throw new Error("No wallet found");
         }
 
-        setStatus("SENDING");
+        setStatus("SENDING_TOKENS");
 
         console.log(amount, addresses, testOnly);
         const tokens = wallet.state.slp.tokens;
@@ -195,7 +199,7 @@ export const AppProvider = ({ children }:
 
             if (broadcast.success) {
                 console.log("MUSD txid", txidStr);
-                setStatus("SENDING_SUCCESS");
+                EventBus.emit("TOKENS_SENT", "success");
             }
         }
 

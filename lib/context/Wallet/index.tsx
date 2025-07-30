@@ -29,6 +29,7 @@ type WalletContextType = {
     removeWallet: Function,
     update: Function,
     walletLoading: boolean,
+    walletLoaded: boolean
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
@@ -38,20 +39,25 @@ export const WalletProvider = ( { children }:
     // const [wallet, setWallet] = useState(null);
     const [wallet, setWallet] = useState<Wallet | undefined>();
     const [cashtabState, setCashtabState] = useState(new CashtabState());
-    const [walletLoading, setWalletLoading ] = useState(false);
+    const [walletLoading, setWalletLoading ] = useState(true);
     const [walletLoaded, setWalletLoaded] = useState(false);
 
+    // initial loading
     useEffect(() => {
         loadCashtabState();
     }, [])
 
+    // emit event if initial loading is over and sync with indexer if wallet was found in storage
     useEffect(() => {
-        if (walletLoaded && cashtabState.wallets.length > 0) {
-            update(cashtabState);
-            setWalletLoading(false);
-        } else if (walletLoaded) {
-            setWalletLoading(false);
-        }
+        if (walletLoaded) {
+            EventBus.emit("WALLET_LOADED", "success");
+
+            if (cashtabState.wallets.length > 0) {
+                update(cashtabState);
+            } else {
+                setWalletLoading(false);
+            }
+        } 
     }, [walletLoaded, cashtabState.wallets[0]?.name])
 
     // sync with indexer every 10s 
@@ -65,7 +71,6 @@ export const WalletProvider = ( { children }:
 
     const loadCashtabState = async () => {
         console.log("loadCashtabState()");
-        setWalletLoading(true);
         const wallets = await localforage.getItem("wallets");
         console.log("loadCashtabState found wallets", wallets);
         if (wallets) {
@@ -73,8 +78,6 @@ export const WalletProvider = ( { children }:
             const newState = Object.assign(cashtabState, { wallets });
             console.log("new cashtab state", newState);
             setCashtabState(newState);            
-        } else {
-            setWalletLoading(false);
         }
         setWalletLoaded(true);
     };
@@ -160,7 +163,8 @@ export const WalletProvider = ( { children }:
             activateWallet,
             removeWallet,
             update,
-            walletLoading
+            walletLoading,
+            walletLoaded,
         }}>
             {children}
         </WalletContext>
