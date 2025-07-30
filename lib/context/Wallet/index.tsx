@@ -13,7 +13,7 @@ import CashtabState, { getWalletOrder } from './management';
 import {
     getUtxos, 
     getBalances, 
-    getSlpBalancesAndUtxos,
+    getSlp,
     getTxHistory, 
     parseTxHistory
 } from './update';
@@ -120,15 +120,15 @@ export const WalletProvider = ( { children }:
 
         // todo: get indexer data for wallet
         const utxos = await getUtxos(activeWallet.Path1899.cashAddress);
-        const slpBalancesAndUtxos = getSlpBalancesAndUtxos(utxos);
-        const balances = getBalances(slpBalancesAndUtxos);
+        const slp = getSlp(utxos);
+        const balances = getBalances(slp);
         const txHistory = await getTxHistory(activeWallet.Path1899.cashAddress);
         const parsedTxHistory = parseTxHistory(txHistory);
         
         const newWalletState: WalletState = {
             balances,
             utxos,
-            slpBalancesAndUtxos,
+            slp,
             parsedTxHistory,
         };
     

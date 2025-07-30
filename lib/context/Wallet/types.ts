@@ -22,14 +22,14 @@ export type Path = {
 export interface WalletStateInterface {
     balances: Balances,
     utxos: any[] | [],
-    slpBalancesAndUtxos: SlpBalancesAndUtxos,
+    slp: Slp,
     parsedTxHistory: any[] | [],
 }
 
 export class WalletState implements WalletStateInterface {
     balances: Balances;
     utxos: any[] | [];
-    slpBalancesAndUtxos: SlpBalancesAndUtxos;
+    slp: Slp;
     parsedTxHistory: any[] | [];
     
     constructor() {
@@ -39,7 +39,7 @@ export class WalletState implements WalletStateInterface {
         };
         this.utxos = [];
         this.parsedTxHistory = [];
-        this.slpBalancesAndUtxos = {
+        this.slp = {
             tokens: new Tokens(),
             slpUtxos: [],
             nonSlpUtxos: []
@@ -48,7 +48,7 @@ export class WalletState implements WalletStateInterface {
 
 }
 
-export type SlpBalancesAndUtxos = {
+export type Slp = {
     tokens: Tokens,
     nonSlpUtxos: object[] | [],
     slpUtxos: object[] | []

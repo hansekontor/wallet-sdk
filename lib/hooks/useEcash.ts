@@ -20,12 +20,12 @@ export const useEcash = () => {
 
     const buildSendTx = async (amount: number, wallet: Wallet, addresses: string[], tokenId: string, postageData: any, remainderAddress: string) => {        
         // prepare utxos
-        const slpBalancesAndUtxos = wallet.state.slpBalancesAndUtxos;
-        const nonSlpCoins = slpBalancesAndUtxos.nonSlpUtxos.map((utxo: any) => 
+        const slp = wallet.state.slp;
+        const nonSlpCoins = slp.nonSlpUtxos.map((utxo: any) => 
             Coin.fromJSON(utxo)
         );
 
-        const tokenUtxos: any[] = slpBalancesAndUtxos.slpUtxos.filter(
+        const tokenUtxos: any[] = slp.slpUtxos.filter(
             (utxo: any) => {
                 if (
                     utxo && 
@@ -42,7 +42,7 @@ export const useEcash = () => {
         }
 
         // prepare tokens
-        const tokens = slpBalancesAndUtxos.tokens;
+        const tokens = slp.tokens;
         let tokenEntry: any = {};
         switch(tokenId) {
             case (tokens.prod.tokenId):

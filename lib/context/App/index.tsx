@@ -136,7 +136,7 @@ export const AppProvider = ({ children }:
         setStatus("SENDING");
 
         console.log(amount, addresses, testOnly);
-        const tokens = wallet.state.slpBalancesAndUtxos.tokens;
+        const tokens = wallet.state.slp.tokens;
         const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
 
         // get postage for MUSD

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { type SlpBalancesAndUtxos, type Balances, Tokens } from '../types';
+import { type Slp, type Balances, Tokens } from '../types';
 
 const indexerUrl = import.meta.env.VITE_INDEXER_URL;
 
@@ -10,8 +10,8 @@ export const getUtxos = async (address: string) => {
     return utxos;
 }
 
-export const getBalances = (slpBalancesAndUtxos: SlpBalancesAndUtxos): Balances => {
-    const totalBalanceInSatoshis = slpBalancesAndUtxos.nonSlpUtxos.reduce(
+export const getBalances = (slp: Slp): Balances => {
+    const totalBalanceInSatoshis = slp.nonSlpUtxos.reduce(
         (previousBalance: number, utxo: any) => previousBalance + utxo.value, 0
     );
     const totalBalance = fromSmallestDenomination(totalBalanceInSatoshis);
@@ -24,7 +24,7 @@ export const getBalances = (slpBalancesAndUtxos: SlpBalancesAndUtxos): Balances 
     return balances;
 }
 
-export const getSlpBalancesAndUtxos = (utxos: any[]) => {
+export const getSlp = (utxos: any[]) => {
     const nonSlpUtxos = utxos.filter((utxo: any) => 
         !utxo.slp || (utxo.slp && utxo.slp.value == "0")
     );
@@ -60,13 +60,13 @@ export const getSlpBalancesAndUtxos = (utxos: any[]) => {
     }
 
 
-    const slpBalancesAndUtxos = {
+    const slp = {
         tokens,
         nonSlpUtxos,
         slpUtxos,
     };
 
-    return slpBalancesAndUtxos;
+    return slp;
 }
 
 export const getTxHistory = async (address: string) => {
