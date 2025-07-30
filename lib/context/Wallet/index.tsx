@@ -19,6 +19,7 @@ import {
 } from './update';
 import EventBus from '../../utils/events';
 import { type Wallet, type WalletState } from './types';
+import useTimeout from '../../hooks/useTimeout';
 
 type WalletContextType = {
     wallet: Wallet | undefined,
@@ -52,6 +53,15 @@ export const WalletProvider = ( { children }:
             setWalletLoading(false);
         }
     }, [walletLoaded, cashtabState.wallets[0]?.name])
+
+    // sync with indexer every 10s 
+    useTimeout(() => {
+        if (wallet) {
+            console.log("useTimeout UPDATE WALLET");
+            update(cashtabState);            
+        }
+
+    }, 10000);
 
     const loadCashtabState = async () => {
         console.log("loadCashtabState()");
