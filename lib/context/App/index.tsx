@@ -93,6 +93,8 @@ export const AppProvider = ({ children }:
             const isValidMnemonic = validateMnemonic(mnemonic);
             if (isValidMnemonic) {
                 createWallet(mnemonic);
+            } else {
+                throw new Error("Invalid mnemonic")
             }
         } else {
             console.log("addWallet create new wallet");
