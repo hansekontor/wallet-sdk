@@ -84,7 +84,7 @@ export const AppProvider = ({ children }:
      * Creates new wallet randomly or by imported mnemonic, adds it to saved wallets and activates it. 
      * @param mnemonic 
      */
-    const addWallet = async (mnemonic?: string) => {
+    const addWallet = async (activateWallet: boolean, mnemonic?: string) => {
         // if valid mnemonic is specified, import wallet
         // else create new random wallet
         console.log("addWallet mnemonic", mnemonic);
@@ -92,13 +92,13 @@ export const AppProvider = ({ children }:
             console.log("addWallet import wallet");
             const isValidMnemonic = validateMnemonic(mnemonic);
             if (isValidMnemonic) {
-                createWallet(mnemonic);
+                createWallet(activateWallet, mnemonic);
             } else {
                 throw new Error("Invalid mnemonic")
             }
         } else {
             console.log("addWallet create new wallet");
-            createWallet();
+            createWallet(activateWallet);
         }
 
         // add to saved wallet

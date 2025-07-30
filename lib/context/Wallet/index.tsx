@@ -82,8 +82,7 @@ export const WalletProvider = ( { children }:
         setWalletLoaded(true);
     };
 
-    const createWallet = async (mnemonicInput?: string) => {
-        console.log("createWallet()");
+    const createWallet = async (activate: boolean, mnemonicInput?: string) => {
         const mnemonic = mnemonicInput ? 
             Mnemonic.fromPhrase(mnemonicInput) : 
             generateMnemonic();
@@ -96,11 +95,14 @@ export const WalletProvider = ( { children }:
             const newWallet = buildWallet(mnemonic);
             console.log("newWallet", newWallet);
             // update
-            await updateCashtabState("wallets", [...cashtabState.wallets, newWallet]);
+            if (activate) {
+                await updateCashtabState("wallets", [newWallet, ...cashtabState.wallets]);
+            } else {
+                await updateCashtabState("wallets", [...cashtabState.wallets, newWallet]);
+            }
             EventBus.emit("WALLET_ADDED", "success");
         } else {
-            console.error("Wallet already exists");
-            // notification
+            throw new Error("Wallet already exists");
         }
     }
 
