@@ -47,18 +47,16 @@ export const getSlp = (utxos: any[]) => {
 
             if (!hasBaton) {
                 if (isProdMUSD) {
-                    tokens.prod.balance = new BigNumber(tokens.prod.balance).plus(
-                        new BigNumber(slpUtxo.slp.value)
-                    );                        
+                    tokens.prod.rawBalance = new BigNumber(tokens.prod.balance).plus(slpUtxo.slp.value).toNumber();                        
                 } else {
-                    tokens.sandbox.balance = new BigNumber(tokens.sandbox.balance).plus(
-                        new BigNumber(slpUtxo.slp.value)
-                    );  
+                    tokens.sandbox.rawBalance = new BigNumber(tokens.sandbox.balance).plus(slpUtxo.slp.value).toNumber();  
                 }
             }
         } 
     }
 
+    tokens.prod.balance = new BigNumber(tokens.prod.rawBalance).dividedBy(10**tokens.prod.info.decimals).toNumber();
+    tokens.sandbox.balance = new BigNumber(tokens.sandbox.rawBalance).dividedBy(10**tokens.sandbox.info.decimals).toNumber();
 
     const slp = {
         tokens,

@@ -60,7 +60,8 @@ export type Balances = {
 }
 
 export type Token = {
-    balance: any,
+    rawBalance: number,
+    balance: number,
     info: any,
     tokenId: string,
 }
@@ -76,12 +77,23 @@ export class Tokens implements TokensInterface {
 
     constructor() {
         this.prod = {
-            balance: new BigNumber(0),
-            info: {},
-            tokenId: ""
+            rawBalance: 0,
+            balance: 0,
+            info: {
+                "tokenId": "52b12c03466936e7e3b2dcfcff847338c53c611ba8ab74dd8e4dadf7ded12cf6",
+                "ticker": "BUX",
+                "name": "Badger Universal Token",
+                "uri": "https://bux.digital",
+                "hash": "",
+                "decimals": 4,
+                "version": 2,
+                "vaultScriptHash": "08d6edf91c7b93d18306d3b8244587e43f11df4b"
+            },
+            tokenId: "52b12c03466936e7e3b2dcfcff847338c53c611ba8ab74dd8e4dadf7ded12cf6"
         };
 
         this.sandbox = {
+            rawBalance: 0,
             balance: 0,
             info: {
                 "tokenId": "4075459e0ac841f234bc73fc4fe46fe5490be4ed98bc8ca3f9b898443a5a381a",
