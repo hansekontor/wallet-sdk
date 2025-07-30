@@ -1,11 +1,9 @@
-import BigNumber from "bignumber.js"
-
 export interface CashtabState {
     wallets: Wallet[] | [],
 }
 
 export type Wallet = {
-    mnemonic: string, 
+    mnemonic: any,
     name: string, 
     Path1899: Path,
     state: WalletState
@@ -21,16 +19,16 @@ export type Path = {
 
 export interface WalletStateInterface {
     balances: Balances,
-    utxos: any[] | [],
+    utxos: unknown[] | [],
     slp: Slp,
-    parsedTxHistory: any[] | [],
+    parsedTxHistory: unknown[] | [],
 }
 
 export class WalletState implements WalletStateInterface {
     balances: Balances;
-    utxos: any[] | [];
+    utxos: unknown[] | [];
     slp: Slp;
-    parsedTxHistory: any[] | [];
+    parsedTxHistory: unknown[] | [];
     
     constructor() {
         this.balances = {
@@ -62,8 +60,19 @@ export type Balances = {
 export type Token = {
     rawBalance: number,
     balance: number,
-    info: any,
+    info: TokenInfo,
     tokenId: string,
+}
+
+export type TokenInfo = {
+    name: string,
+    hash: string,
+    ticker: string,
+    decimals: number,
+    tokenId: string,
+    uri: string,
+    vaultScriptHash: string,
+    version: number
 }
 
 interface TokensInterface {
@@ -108,5 +117,4 @@ export class Tokens implements TokensInterface {
             tokenId: "4075459e0ac841f234bc73fc4fe46fe5490be4ed98bc8ca3f9b898443a5a381a"
         };
     }
-
 }
