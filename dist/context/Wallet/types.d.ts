@@ -2,7 +2,7 @@ export interface CashtabState {
     wallets: Wallet[] | [];
 }
 export type Wallet = {
-    mnemonic: string;
+    mnemonic: any;
     name: string;
     Path1899: Path;
     state: WalletState;
@@ -16,18 +16,18 @@ export type Path = {
 };
 export interface WalletStateInterface {
     balances: Balances;
-    utxos: any[] | [];
-    slpBalancesAndUtxos: SlpBalancesAndUtxos;
-    parsedTxHistory: any[] | [];
+    utxos: unknown[] | [];
+    slp: Slp;
+    parsedTxHistory: unknown[] | [];
 }
 export declare class WalletState implements WalletStateInterface {
     balances: Balances;
-    utxos: any[] | [];
-    slpBalancesAndUtxos: SlpBalancesAndUtxos;
-    parsedTxHistory: any[] | [];
+    utxos: unknown[] | [];
+    slp: Slp;
+    parsedTxHistory: unknown[] | [];
     constructor();
 }
-export type SlpBalancesAndUtxos = {
+export type Slp = {
     tokens: Tokens;
     nonSlpUtxos: object[] | [];
     slpUtxos: object[] | [];
@@ -37,9 +37,20 @@ export type Balances = {
     totalBalanceInSatoshis: number;
 };
 export type Token = {
-    balance: any;
-    info: any;
+    rawBalance: number;
+    balance: number;
+    info: TokenInfo;
     tokenId: string;
+};
+export type TokenInfo = {
+    name: string;
+    hash: string;
+    ticker: string;
+    decimals: number;
+    tokenId: string;
+    uri: string;
+    vaultScriptHash: string;
+    version: number;
 };
 interface TokensInterface {
     prod: Token;

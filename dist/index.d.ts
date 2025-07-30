@@ -3,3 +3,4 @@ export * from './context/Auth';
 export * from './context/App';
 export * from './context/Wallet';
 export * from './utils/events';
+export * from './context/Wallet/types';

@@ -8,6 +8,7 @@ type WalletContextType = {
     removeWallet: Function;
     update: Function;
     walletLoading: boolean;
+    walletLoaded: boolean;
 };
 export declare const WalletContext: Context<WalletContextType>;
 export declare const WalletProvider: ({ children }: {
