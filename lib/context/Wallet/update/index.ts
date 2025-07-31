@@ -37,7 +37,6 @@ export const getSlp = (utxos: any[]) => {
 
     for (let i = 0; i < slpUtxos.length; i++) {
         const slpUtxo = slpUtxos[i];
-        console.log("slputxo i", i, slpUtxo);
         const tokenId = slpUtxo.slp.tokenId;
         const isProdMUSD = tokenId === tokens.prod.tokenId;
         const isSandboxMUSD = tokenId === tokens.sandbox.tokenId;
@@ -47,9 +46,11 @@ export const getSlp = (utxos: any[]) => {
 
             if (!hasBaton) {
                 if (isProdMUSD) {
-                    tokens.prod.rawBalance = new BigNumber(tokens.prod.balance).plus(slpUtxo.slp.value).toNumber();                        
+                    const newBigNumberBalance = new BigNumber(tokens.prod.rawBalance).plus(slpUtxo.slp.value); 
+                    tokens.prod.rawBalance = newBigNumberBalance.toNumber();                        
                 } else {
-                    tokens.sandbox.rawBalance = new BigNumber(tokens.sandbox.balance).plus(slpUtxo.slp.value).toNumber();  
+                    const newBigNumberBalance = new BigNumber(tokens.sandbox.rawBalance).plus(slpUtxo.slp.value);
+                    tokens.sandbox.rawBalance = newBigNumberBalance.toNumber();  
                 }
             }
         } 
