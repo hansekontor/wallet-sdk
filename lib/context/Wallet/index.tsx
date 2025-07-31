@@ -20,6 +20,7 @@ import {
 import EventBus from '../../utils/events';
 import { type Wallet, type WalletState } from './types';
 import useTimeout from '../../hooks/useTimeout';
+import deepEqual from 'deep-equal';
 
 type WalletContextType = {
     wallet: Wallet | undefined,
@@ -117,14 +118,23 @@ export const WalletProvider = ( { children }:
     }
 
     const update = async (cashtabState: CashtabState) => {
-        console.log("update()");    
         const activeWallet = cashtabState.wallets[0];
         if (!activeWallet) {
             throw new Error("No wallet found");
         }
 
-        // todo: get indexer data for wallet
-        const utxos = await getUtxos(activeWallet.Path1899.cashAddress);
+        const address = activeWallet.Path1899.cashAddress;
+
+        // get indexed data for wallet
+        const utxos = await getUtxos(address);
+        const previousUtxos = activeWallet.state.utxos;
+        const utxosHaveChanged = !deepEqual(utxos, previousUtxos);
+        console.log("utxosHAveChanged", utxosHaveChanged);
+        if (!utxosHaveChanged) {
+            if (!wallet)
+                setWallet(activeWallet);
+            return;
+        }
         const slp = getSlp(utxos);
         const balances = getBalances(slp);
         const txHistory = await getTxHistory(activeWallet.Path1899.cashAddress);
@@ -140,8 +150,10 @@ export const WalletProvider = ( { children }:
         // update state and storage
         activeWallet.state = newWalletState;
         const remainingWallets = cashtabState.wallets.slice(1);
-        await updateCashtabState('wallets', [activeWallet, ...remainingWallets]);
-        setWallet(activeWallet);
+        const newWallets = [activeWallet, ...remainingWallets];
+        await updateCashtabState('wallets', newWallets);
+        setWallet(activeWallet);           
+
         EventBus.emit("WALLET_UPDATED", "success");
     }
 
