@@ -61,4 +61,17 @@ export declare class Tokens implements TokensInterface {
     sandbox: Token;
     constructor();
 }
+export type ParsedTx = {
+    txid: string;
+    height: number;
+    blocktime: number;
+    confirmations: number;
+    outgoing: boolean;
+    type: "SEND" | "MINT" | "BURN";
+    sender: string;
+    recipients: string[];
+    sandbox: boolean;
+    amountSent: number;
+    amountReceived: number;
+};
 export {};
