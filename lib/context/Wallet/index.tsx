@@ -15,7 +15,7 @@ import {
     getBalances, 
     getSlp,
     getTxHistory, 
-    parseTxHistory
+    parseTxHistory,
 } from './update';
 import EventBus from '../../utils/events';
 import { type Wallet, type WalletState } from './types';
@@ -137,8 +137,8 @@ export const WalletProvider = ( { children }:
         }
         const slp = getSlp(utxos);
         const balances = getBalances(slp);
-        const txHistory = await getTxHistory(activeWallet.Path1899.cashAddress);
-        const parsedTxHistory = parseTxHistory(txHistory);
+        const txHistory = await getTxHistory(address);
+        const parsedTxHistory = parseTxHistory(txHistory, address);
         
         const newWalletState: WalletState = {
             balances,

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { type Slp, type Balances, Tokens } from '../types';
+import { type Slp, type Balances, type ParsedTx, Tokens } from '../types';
 
 const indexerUrl = import.meta.env.VITE_INDEXER_URL;
 
@@ -76,10 +76,97 @@ export const getTxHistory = async (address: string) => {
     return txHistory;
 }
 
-export const parseTxHistory = (txHistory: any[]) => {
-    const parsedTxHistory = txHistory;
+export const parseTxHistory = (txHistory: any[], address: string) => {
+    const parsedTxHistory = [];
+    const tokens = new Tokens();
+
+    for (let i = 0; i < txHistory.length; i++) {
+        const tx = txHistory[i];
+
+        // skip tx if no relevant token was used
+        const relevantTokenIds = [tokens.prod.tokenId, tokens.sandbox.tokenId];
+        const hasRelevantToken = relevantTokenIds.includes(tx.slpToken?.tokenId);
+        if (!hasRelevantToken) {
+            continue;
+        }
+
+        const parsedTx = parseTx(tx, address);
+        parsedTxHistory.push(parsedTx);
+    }
 
     return parsedTxHistory;
+}
+
+const parseTx = (tx: any, address: string) => {
+    const parsedTx = {} as ParsedTx;
+
+    parsedTx.txid = tx.hash;
+    parsedTx.height = tx.height;
+
+    parsedTx.blocktime = tx.time;
+    parsedTx.confirmations = tx.confirmations;
+
+    const tokens = new Tokens();
+    const isSandbox = tx.slpToken.tokenId === tokens.sandbox.tokenId;
+    parsedTx.sandbox = isSandbox;
+
+    parsedTx.amountSent = 0; 
+    parsedTx.amountReceived = 0;
+
+    parsedTx.sender = tx.inputs[0].coin.address;
+
+    // check if tx is outgoing
+    let outgoing = false;
+    for (const input of tx.inputs) {
+        const isOwnAddress = address === input.coin.address;
+        if (isOwnAddress) {
+            outgoing = true;
+            break;
+        }
+    }
+    parsedTx.outgoing = outgoing;
+ 
+    // get SLP tx type
+    const firstSlpOutput = tx.outputs.find((output: any) => output.slp);
+    const type = firstSlpOutput.slp.type;
+    parsedTx.type = type;
+
+    // collect all recipients
+    const recipients = [];
+    for (const output of tx.outputs) {
+        if (output.slp) {
+            recipients.push(output.address);
+        }
+    }
+    parsedTx.recipients = recipients;
+
+    const totalSent = tx.inputs.filter((input: any) => 
+            input.coin.slp &&
+            address === input.coin.address &&
+            type != "MINT"
+        )
+        .reduce((previous: any, current: any) => previous.plus(current.coin.slp.value), new BigNumber(0));
+
+    const totalReceived = tx.outputs.filter((output: any) =>
+            output.slp &&
+            address === output.address &&
+            output.slp.type != "BATON"
+        )
+        .reduce((previous: any, current: any) => previous.plus(current.slp.value), new BigNumber(0));
+
+    const divisor = 10 ** parseInt(tx.slpToken.decimals);
+
+    if (totalSent.gte(totalReceived)) {
+        const rawDelta = totalSent.minus(totalReceived);
+        const delta = rawDelta.div(divisor);
+        parsedTx.amountSent = delta.toNumber();
+    } else {
+        const rawDelta = totalReceived.minus(totalSent);
+        const delta = rawDelta.div(divisor);
+        parsedTx.amountReceived = delta.toNumber();
+    }
+
+    return parsedTx;
 }
 
 const fromSmallestDenomination = (amount: number) => {
