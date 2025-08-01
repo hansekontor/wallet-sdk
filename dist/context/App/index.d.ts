@@ -3,6 +3,7 @@ import { Wallet } from '../Wallet/types';
 import { default as CashtabState } from '../Wallet/management';
 type App = {
     status: string;
+    hasInitialized: boolean;
     wallet: Wallet | undefined;
     cashtab: CashtabState;
     validateMnemonic: Function;
