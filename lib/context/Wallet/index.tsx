@@ -30,7 +30,7 @@ type WalletContextType = {
     removeWallet: Function,
     update: Function,
     walletLoading: boolean,
-    walletLoaded: boolean
+    hasInitialized: boolean
 }
 export const WalletContext: Context<WalletContextType> = createContext({} as WalletContextType);
 
@@ -41,7 +41,8 @@ export const WalletProvider = ( { children }:
     const [wallet, setWallet] = useState<Wallet | undefined>();
     const [cashtabState, setCashtabState] = useState(new CashtabState());
     const [walletLoading, setWalletLoading ] = useState(true);
-    const [walletLoaded, setWalletLoaded] = useState(false);
+    const [hasInitialized, setHasInitialized] = useState(false);
+    const [storageLoaded, setStorageLoaded] = useState(false);
 
     // initial loading
     useEffect(() => {
@@ -50,16 +51,12 @@ export const WalletProvider = ( { children }:
 
     // emit event if initial loading is over and sync with indexer if wallet was found in storage
     useEffect(() => {
-        if (walletLoaded) {
-            EventBus.emit("WALLET_LOADED", "success");
-
-            if (cashtabState.wallets.length > 0) {
-                update(cashtabState);
-            } else {
-                setWalletLoading(false);
-            }
-        } 
-    }, [walletLoaded, cashtabState.wallets[0]?.name])
+        if (cashtabState.wallets.length > 0) {
+            update(cashtabState);
+        } else {
+            setWalletLoading(false);
+        }
+    }, [hasInitialized, storageLoaded, cashtabState.wallets[0]?.name])
 
     // sync with indexer every 10s 
     useTimeout(() => {
@@ -71,11 +68,14 @@ export const WalletProvider = ( { children }:
     const loadCashtabState = async () => {
         const wallets = await localforage.getItem("wallets");
         if (wallets) {
-            console.log("set stored wallets clause");
+            console.log("Loading stored wallets");
             const newState = Object.assign(cashtabState, { wallets });
             setCashtabState(newState);            
+        } else {
+            console.log("No stored wallets available")
+            setHasInitialized(true);
         }
-        setWalletLoaded(true);
+        setStorageLoaded(true);
     };
 
     const createWallet = async (activate: boolean, mnemonicInput?: string) => {
@@ -122,32 +122,34 @@ export const WalletProvider = ( { children }:
         const utxos = await getUtxos(address);
         const previousUtxos = activeWallet.state.utxos;
         const utxosHaveChanged = !deepEqual(utxos, previousUtxos);
-        console.log("utxosHAveChanged", utxosHaveChanged);
-        if (!utxosHaveChanged) {
-            if (!wallet)
-                setWallet(activeWallet);
-            return;
-        }
-        const slp = getSlp(utxos);
-        const balances = getBalances(slp);
-        const txHistory = await getTxHistory(address);
-        const parsedTxHistory = parseTxHistory(txHistory, address);
+        if (utxosHaveChanged) {
+            const slp = getSlp(utxos);
+            const balances = getBalances(slp);
+            const txHistory = await getTxHistory(address);
+            const parsedTxHistory = parseTxHistory(txHistory, address);
+            
+            const newWalletState: WalletState = {
+                balances,
+                utxos,
+                slp,
+                parsedTxHistory,
+            };
         
-        const newWalletState: WalletState = {
-            balances,
-            utxos,
-            slp,
-            parsedTxHistory,
-        };
-    
-        // update state and storage
-        activeWallet.state = newWalletState;
-        const remainingWallets = cashtabState.wallets.slice(1);
-        const newWallets = [activeWallet, ...remainingWallets];
-        await updateCashtabState('wallets', newWallets);
-        setWallet(activeWallet);           
+            activeWallet.state = newWalletState;
 
-        EventBus.emit("WALLET_UPDATED", "success");
+            const remainingWallets = cashtabState.wallets.slice(1);
+            const newWallets = [activeWallet, ...remainingWallets];
+            await updateCashtabState('wallets', newWallets);
+            EventBus.emit("WALLET_UPDATED", "success");
+        } else {
+            setWalletLoading(false);
+        }
+
+        setWallet(activeWallet);           
+        if (!hasInitialized) {
+            setHasInitialized(true);
+        }            
+
     }
 
     const activateWallet = async (walletToActivate: Wallet) => {
@@ -171,7 +173,7 @@ export const WalletProvider = ( { children }:
             removeWallet,
             update,
             walletLoading,
-            walletLoaded,
+            hasInitialized,
         }}>
             {children}
         </WalletContext>

@@ -16,6 +16,7 @@ const {
 
 type App = {
     status: string,
+    hasInitialized: boolean,
     wallet: Wallet | undefined,
     cashtab: CashtabState,
     validateMnemonic: Function, 
@@ -34,23 +35,24 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, walletLoaded, removeWallet } = useWallet();
+    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, hasInitialized, removeWallet } = useWallet();
     const { getPostage, buildSendTx, broadcastTx, postPayment } = useEcash();
 
     const [status, setStatus] = useState<string>("WALLET_INIT");
 
     // handle wallet loading status
     useEffect(() => {
-        const walletLoadingCode = "WALLET_LOADING";
-        const isInitializing = !walletLoaded;
-        if (!isInitializing) {
-            if (walletLoading) {
-                setStatus(walletLoadingCode);                
-            } else {
-                setStatus("IDLE");                
+        const isIdle = hasInitialized && !walletLoading;
+        if (isIdle) {
+            setStatus("WALLET_IDLE");
+        } else {
+            if (hasInitialized) {
+                if (status !== "WALLET_LOADING") {
+                    setStatus("WALLET_LOADING");
+                }
             }
         }
-    }, [walletLoading, walletLoaded])
+    }, [hasInitialized, walletLoading])
 
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
@@ -230,6 +232,7 @@ export const AppProvider = ({ children }:
 
     const context: App = {
         status,
+        hasInitialized,
         wallet, 
         cashtab,
         validateMnemonic, 
