@@ -87,9 +87,7 @@ export const AppProvider = ({ children }:
     const addWallet = async (activateWallet: boolean, mnemonic?: string) => {
         // if valid mnemonic is specified, import wallet
         // else create new random wallet
-        console.log("addWallet mnemonic", mnemonic);
         if (mnemonic) {
-            console.log("addWallet import wallet");
             const isValidMnemonic = validateMnemonic(mnemonic);
             if (isValidMnemonic) {
                 createWallet(activateWallet, mnemonic);
@@ -97,7 +95,6 @@ export const AppProvider = ({ children }:
                 throw new Error("Invalid mnemonic")
             }
         } else {
-            console.log("addWallet create new wallet");
             createWallet(activateWallet);
         }
 
@@ -113,7 +110,6 @@ export const AppProvider = ({ children }:
      * @param name 
      */
     const deleteWallet = async (name: string) => {
-        console.log("deleteWallet()");
         const isValidWalletInput = name.length === 5;
         if (isValidWalletInput) {
             // find wallet 
@@ -141,7 +137,6 @@ export const AppProvider = ({ children }:
 
         setStatus("SENDING_TOKENS");
 
-        console.log(amount, addresses, testOnly);
         const tokens = wallet.state.slp.tokens;
         const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
 

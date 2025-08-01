@@ -64,20 +64,15 @@ export const WalletProvider = ( { children }:
     // sync with indexer every 10s 
     useTimeout(() => {
         if (wallet) {
-            console.log("useTimeout UPDATE WALLET");
             update(cashtabState);            
         }
-
     }, 10000);
 
     const loadCashtabState = async () => {
-        console.log("loadCashtabState()");
         const wallets = await localforage.getItem("wallets");
-        console.log("loadCashtabState found wallets", wallets);
         if (wallets) {
             console.log("set stored wallets clause");
             const newState = Object.assign(cashtabState, { wallets });
-            console.log("new cashtab state", newState);
             setCashtabState(newState);            
         }
         setWalletLoaded(true);
@@ -108,8 +103,6 @@ export const WalletProvider = ( { children }:
     }
 
     const updateCashtabState = async (key: string, value: Wallet[]) => {
-        console.log("updateCashtabState key", key, "value", value);
-    
         setCashtabState({ ...cashtabState, [`${key}`]: value});
     
         setWalletLoading(true);

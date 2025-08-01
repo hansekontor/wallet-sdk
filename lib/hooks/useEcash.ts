@@ -150,7 +150,6 @@ export const useEcash = () => {
             await tx.fund([...tokenCoins, nonSlpCoins], fundingOptions);
         }
 
-        console.log("build tx", tx.toRaw().toString("hex"));
         return tx;
     }
 
@@ -279,8 +278,6 @@ export const useEcash = () => {
             const stamp = postageObj.stamps.find(
                 (s: any) => s.tokenId === tokenId
             );
-            console.log("postageObj", postageObj);
-            console.log("stamp", stamp);
             if (stamp) {
                 const postage = {
                     address: postageObj.address,
