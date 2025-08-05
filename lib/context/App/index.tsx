@@ -25,8 +25,8 @@ type App = {
     renameWallet: Function,
     addWallet: Function,
     deleteWallet: Function,
+    getMaxSendAmount: Function,
     send: Function, 
-    receive: object,
     bridge: Function,
     withdraw: Function,
 }
@@ -40,6 +40,7 @@ export const AppProvider = ({ children }:
     const { getPostage, getTokenPostage, getMaxPostageAmount, buildSendTx, broadcastTx, postPayment } = useEcash();
 
     const [status, setStatus] = useState<string>("WALLET_INIT");
+    const [postageObj, setPostageObj] = useState(null);
 
     // handle wallet loading status
     useEffect(() => {
@@ -54,6 +55,17 @@ export const AppProvider = ({ children }:
             }
         }
     }, [hasInitialized, walletLoading])
+
+    // get postage data
+    useEffect(() => {
+        const getPostageForMaxAmount = async () => {
+            const postage = await getPostage();
+            setPostageObj(postage);
+        }
+
+        if (!postageObj)
+            getPostageForMaxAmount();
+    }, [])
 
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
@@ -163,7 +175,7 @@ export const AppProvider = ({ children }:
         const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
 
         // get postage for MUSD
-        const postage = await getPostage(tokenId);
+        const postage = await getTokenPostage(tokenId);
 
         // build transaction
         const remainderAddress = wallet.Path1899.cashAddress;
@@ -226,13 +238,6 @@ export const AppProvider = ({ children }:
         return link
     };
 
-    /**
-     * Contains receiving data.
-     */
-    const receive = {
-
-    };
-
     const bridge = () => {
 
     };
@@ -250,6 +255,23 @@ export const AppProvider = ({ children }:
         // use burn tx for cashout
     };
 
+    /**
+     * Calculates the maximum amount to be send after applying the required postage rate.
+     * @param sandbox 
+     * @returns 
+     */
+    const getMaxSendAmount = (sandbox: boolean = false) => {
+        if (!wallet)
+            throw new Error("No wallet available");
+
+        const postageAmount = getMaxPostageAmount(sandbox, wallet, postageObj);
+        const tokens = wallet.state.slp.tokens;
+        const tokenBalance = sandbox ? tokens.sandbox.balance : tokens.prod.balance;
+        const maxSendAmount = tokenBalance - postageAmount;
+
+        return maxSendAmount;
+    }
+
     const context: App = {
         status,
         hasInitialized,
@@ -261,8 +283,8 @@ export const AppProvider = ({ children }:
         renameWallet,
         addWallet,
         deleteWallet,
+        getMaxSendAmount,
         send,
-        receive, 
         bridge,
         withdraw,
     };

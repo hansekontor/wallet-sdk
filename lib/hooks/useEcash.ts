@@ -270,32 +270,62 @@ export const useEcash = () => {
         return Math.ceil(totalWeight / 4)
     }
 
-    const getPostage = async (tokenId: string) => {
+    const getTokenPostage = async (tokenId: string) => {
         try {
-            const postageUrl = import.meta.env.VITE_POSTAGE_URL;
-            const result = await fetch(postageUrl);
-            const postageObj = await result.json();
-            const stamp = postageObj.stamps.find(
-                (s: any) => s.tokenId === tokenId
-            );
-            if (stamp) {
-                const postage = {
-                    address: postageObj.address,
-                    weight: postageObj.weight,
-                    stamp
-                };
+            const postageObj = await getPostage();
+            const stamp = getStamp(postageObj, tokenId);
 
-                return postage;
-            }
+            return stamp;
         } catch(err) {
             console.error(err);
         }
+    }
+
+    const getPostage = async () => {
+        const postageUrl = import.meta.env.VITE_POSTAGE_URL;
+        const result = await fetch(postageUrl);
+        const postageObj = await result.json();  
         
-        return null;
+        return postageObj;
+    }
+
+    const getStamp = (postageObj: any, tokenId: string) => {
+        const stamp = postageObj.stamps.find(
+            (s: any) => s.tokenId === tokenId
+        );
+        if (stamp) {
+            const postage = {
+                address: postageObj.address,
+                weight: postageObj.weight,
+                stamp
+            };
+
+            return postage;
+        } else {
+            return null;
+        }
+    }
+
+    const getMaxPostageAmount = (sandbox: boolean, wallet: Wallet, postageObj: any) => {
+        let postageAmount = 0;
+        const tokens = wallet.state.slp.tokens;
+        const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
+        const tokenUtxos = wallet.state.slp.slpUtxos.filter((utxo: any) => utxo.slp.tokenId === tokenId);
+        const tokenUtxoCount = tokenUtxos.length;
+        const recipientCount = 1;
+        const postageData = getStamp(postageObj, tokenId);
+        if (!postageData)
+            throw new Error("No postage data available")
+        const postageBaseCost = calculatePostage(tokenUtxoCount, recipientCount, postageData);
+        postageAmount = postageBaseCost / 10 ** postageData.stamp.decimals;
+
+        return postageAmount;            
     }
 
     return {
         getPostage,
+        getTokenPostage,
+        getMaxPostageAmount,
         buildSendTx,
         broadcastTx,
         postPayment,
