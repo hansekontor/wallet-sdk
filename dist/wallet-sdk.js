@@ -117149,14 +117149,11 @@ const fv = (e, c, l) => new Promise((w, m) => {
       f(l);
     },
     changeWallet: async (fe) => {
-      if (fe.length === 5) {
-        const se = l.wallets.find((D) => D.name === fe);
-        if (se)
-          await m(se);
-        else
-          throw new Error("Wallet not found");
-      } else
-        throw new Error("Invalid wallet name");
+      const ue = l.wallets.find((se) => se.name === fe);
+      if (ue)
+        await m(ue);
+      else
+        throw new Error("Wallet not found");
     },
     renameWallet: async (fe, ue) => {
       if (!(ue.length <= 40))
@@ -117177,14 +117174,11 @@ const fv = (e, c, l) => new Promise((w, m) => {
         c(fe);
     },
     deleteWallet: async (fe) => {
-      if (fe.length === 5) {
-        const se = l.wallets.find((D) => D.name === fe);
-        if (se)
-          await a(se);
-        else
-          throw new Error("Wallet not found");
-      } else
-        throw new Error("Invalid wallet name");
+      const ue = l.wallets.find((se) => se.name === fe);
+      if (ue)
+        await a(ue);
+      else
+        throw new Error("Wallet not found");
     },
     getMaxSendAmount: (fe = !1) => {
       if (!w)
