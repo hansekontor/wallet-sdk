@@ -28,6 +28,7 @@ type WalletContextType = {
     createWallet: Function,
     activateWallet: Function,
     removeWallet: Function,
+    renameWalletLocally: Function,
     update: Function,
     walletLoading: boolean,
     hasInitialized: boolean
@@ -163,6 +164,20 @@ export const WalletProvider = ( { children }:
         await updateCashtabState("wallets", newStoredWallets);
         EventBus.emit("WALLET_DELETED", "success");
     }
+
+    const renameWalletLocally = async (walletToRename: Wallet, newName: string) => {
+        const newStoredWallets = cashtabState.wallets.map((wallet: Wallet) => {
+            const isWalletToRename = wallet.name === walletToRename.name;
+            if (isWalletToRename) {
+                const renamedWallet = wallet;
+                renamedWallet.name = newName;
+                return renamedWallet;
+            } else {
+                return wallet;
+            }
+        });
+        await updateCashtabState("wallets", newStoredWallets);
+    }
     
     return (
         <WalletContext value={{
@@ -171,6 +186,7 @@ export const WalletProvider = ( { children }:
             createWallet,
             activateWallet,
             removeWallet,
+            renameWalletLocally,
             update,
             walletLoading,
             hasInitialized,

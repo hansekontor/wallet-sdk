@@ -22,6 +22,7 @@ type App = {
     validateMnemonic: Function, 
     updateWallet: Function, 
     changeWallet: Function, 
+    renameWallet: Function,
     addWallet: Function,
     deleteWallet: Function,
     send: Function, 
@@ -35,8 +36,8 @@ export const AppProvider = ({ children }:
     { children: React.ReactElement}
 ) => {
 
-    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, hasInitialized, removeWallet } = useWallet();
-    const { getPostage, buildSendTx, broadcastTx, postPayment } = useEcash();
+    const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, hasInitialized, removeWallet, renameWalletLocally } = useWallet();
+    const { getPostage, getTokenPostage, getMaxPostageAmount, buildSendTx, broadcastTx, postPayment } = useEcash();
 
     const [status, setStatus] = useState<string>("WALLET_INIT");
 
@@ -106,6 +107,25 @@ export const AppProvider = ({ children }:
 
         // update wallet
     };
+
+    /**
+     * Changes the name of a wallet and updates the storage
+     * @param oldName 
+     * @param newName 
+     */
+    const renameWallet = async (oldName: string, newName: string) => {
+        const hasValidLength = newName.length <= 40;
+        if (!hasValidLength) {
+            throw new Error("New name is too long (>40)");
+        }
+
+        const walletToRename = cashtab.wallets.find((wallet: Wallet) => wallet.name === oldName);
+        if (walletToRename) {
+            await renameWalletLocally(walletToRename, newName);
+        } else {
+            throw new Error("No wallet found with name"+oldName);
+        }
+    }
 
     /**
      * Deletes a wallet from stored wallets.
@@ -238,6 +258,7 @@ export const AppProvider = ({ children }:
         validateMnemonic, 
         updateWallet, 
         changeWallet,
+        renameWallet,
         addWallet,
         deleteWallet,
         send,
