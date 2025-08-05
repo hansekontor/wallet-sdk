@@ -79,19 +79,13 @@ export const AppProvider = ({ children }:
      * @param name 
      */
     const changeWallet = async (name: string) => {        
-        const isValidWalletInput = name.length === 5;
-        if (isValidWalletInput) {
-            // find wallet 
-            const newWallet = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
-            if (newWallet) {
-                // activate wallet / change wallet order
-                await activateWallet(newWallet);
-            } else {
-                throw new Error("Wallet not found")
-            }
-
+        // find wallet 
+        const newWallet = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
+        if (newWallet) {
+            // activate wallet / change wallet order
+            await activateWallet(newWallet);
         } else {
-            throw new Error("Invalid wallet name");
+            throw new Error("Wallet not found")
         }
     };
 
@@ -144,17 +138,12 @@ export const AppProvider = ({ children }:
      * @param name 
      */
     const deleteWallet = async (name: string) => {
-        const isValidWalletInput = name.length === 5;
-        if (isValidWalletInput) {
-            // find wallet 
-            const walletToDelete = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
-            if (walletToDelete) {
-                await removeWallet(walletToDelete);
-            } else {
-                throw new Error("Wallet not found")
-            }
+        // find wallet 
+        const walletToDelete = cashtab.wallets.find((wallet: Wallet) => wallet.name === name);
+        if (walletToDelete) {
+            await removeWallet(walletToDelete);
         } else {
-            throw new Error("Invalid wallet name");
+            throw new Error("Wallet not found")
         }
     }
 
