@@ -6,6 +6,7 @@ type WalletContextType = {
     createWallet: Function;
     activateWallet: Function;
     removeWallet: Function;
+    renameWalletLocally: Function;
     update: Function;
     walletLoading: boolean;
     hasInitialized: boolean;

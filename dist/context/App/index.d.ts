@@ -9,10 +9,11 @@ type App = {
     validateMnemonic: Function;
     updateWallet: Function;
     changeWallet: Function;
+    renameWallet: Function;
     addWallet: Function;
     deleteWallet: Function;
+    getMaxSendAmount: Function;
     send: Function;
-    receive: object;
     bridge: Function;
     withdraw: Function;
 };
