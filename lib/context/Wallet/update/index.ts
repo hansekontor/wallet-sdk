@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
-import { type Slp, type Balances, type ParsedTx, Tokens } from '../types';
+import { type Slp, type Balances, type ParsedTx, type Token } from '../types';
+import Tokens from '../tokens';
 
 const indexerUrl = import.meta.env.VITE_INDEXER_URL;
 
@@ -33,34 +34,39 @@ export const getSlp = (utxos: any[]) => {
         utxo.slp && (utxo.slp.value != "0" || utxo.slp.type == "MINT")
     );
 
-    const tokens = new Tokens();
+    const tokensById = {} as {[key: string]: Token};
+    const supportedTokens = new Tokens().supported;
+    for (const token of supportedTokens) {
+        tokensById[token.tokenId] = token;
+    }
 
     for (let i = 0; i < slpUtxos.length; i++) {
         const slpUtxo = slpUtxos[i];
-        const tokenId = slpUtxo.slp.tokenId;
-        const isProdMUSD = tokenId === tokens.prod.tokenId;
-        const isSandboxMUSD = tokenId === tokens.sandbox.tokenId;
-        const isMUSD = isProdMUSD || isSandboxMUSD;
-        if (isMUSD) {
+        const tokenId: string = slpUtxo.slp.tokenId;
+        const hasTokenEntry = Object.hasOwn(tokensById, tokenId);
+        if (hasTokenEntry) {
             const hasBaton = slpUtxo.slp.type === "BATON";
-
+            const tokenEntry = tokensById[tokenId];
+            tokenEntry.hasBaton = hasBaton;
             if (!hasBaton) {
-                if (isProdMUSD) {
-                    const newBigNumberBalance = new BigNumber(tokens.prod.rawBalance).plus(slpUtxo.slp.value); 
-                    tokens.prod.rawBalance = newBigNumberBalance.toNumber();                        
-                } else {
-                    const newBigNumberBalance = new BigNumber(tokens.sandbox.rawBalance).plus(slpUtxo.slp.value);
-                    tokens.sandbox.rawBalance = newBigNumberBalance.toNumber();  
-                }
+                const newBigNumberBalance = new BigNumber(tokenEntry.rawBalance).plus(slpUtxo.slp.value); 
+                tokenEntry.rawBalance = newBigNumberBalance.toNumber();
             }
-        } 
+            tokensById[tokenId] = tokenEntry;
+        }
     }
 
-    tokens.prod.balance = new BigNumber(tokens.prod.rawBalance).dividedBy(10**tokens.prod.info.decimals).toNumber();
-    tokens.sandbox.balance = new BigNumber(tokens.sandbox.rawBalance).dividedBy(10**tokens.sandbox.info.decimals).toNumber();
+    const tokenIds = Object.keys(tokensById);
+    const newTokens = [];
+    for (const tokenId of tokenIds) {
+        const token = tokensById[tokenId];
+        const balance = new BigNumber(token.rawBalance).div(10**token.info.decimals).toNumber();
+        token.balance = balance;
+        newTokens.push(token);
+    }
 
     const slp = {
-        tokens,
+        tokens: newTokens,
         nonSlpUtxos,
         slpUtxos,
     };
@@ -78,14 +84,13 @@ export const getTxHistory = async (address: string) => {
 
 export const parseTxHistory = (txHistory: any[], address: string) => {
     const parsedTxHistory = [];
-    const tokens = new Tokens();
 
     for (let i = 0; i < txHistory.length; i++) {
         const tx = txHistory[i];
 
         // skip tx if no relevant token was used
-        const relevantTokenIds = [tokens.prod.tokenId, tokens.sandbox.tokenId];
-        const hasRelevantToken = relevantTokenIds.includes(tx.slpToken?.tokenId);
+        const supportedTokens = new Tokens().supported;
+        const hasRelevantToken = supportedTokens.find((token: Token) => token.tokenId === tx.slpToken?.tokenId);
         if (!hasRelevantToken) {
             continue;
         }
@@ -105,10 +110,6 @@ const parseTx = (tx: any, address: string) => {
 
     parsedTx.blocktime = tx.time;
     parsedTx.confirmations = tx.confirmations;
-
-    const tokens = new Tokens();
-    const isSandbox = tx.slpToken.tokenId === tokens.sandbox.tokenId;
-    parsedTx.sandbox = isSandbox;
 
     parsedTx.amountSent = 0; 
     parsedTx.amountReceived = 0;

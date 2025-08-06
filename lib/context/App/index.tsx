@@ -1,7 +1,7 @@
 import { createContext, use, useState, useEffect, type Context } from 'react';
 import { validateMnemonic } from '../../utils/mnemonic';
 import { useWallet } from '../Wallet';
-import { type Wallet } from '../Wallet/types';
+import { type Wallet, type Token} from '../Wallet/types';
 import CashtabState from '../Wallet/management';
 import useEcash from '../../hooks/useEcash';
 import EventBus from '../../utils/events';
@@ -12,6 +12,8 @@ const {
     KeyRing, 
     Script, 
 } = bcash;
+
+export { Tokens } from '../Wallet/tokens';
 
 
 type App = {
@@ -154,15 +156,17 @@ export const AppProvider = ({ children }:
      * @param addresses 
      * @param testOnly 
      */
-    const send = async (amount: number, addresses: string[], sandbox: boolean, testOnly: boolean = false) => {
-        if (!wallet?.Path1899) {
+    const send = async (amount: number, addresses: string[], tokenId: string, testOnly: boolean = false) => {
+        if (!wallet) {
             throw new Error("No wallet found");
         }
 
-        setStatus("SENDING_TOKENS");
+        const hasToken = wallet.state.slp.tokens.find((token: Token) => token.tokenId === tokenId) ? true : false;
+        if (!hasToken) {
+            throw new Error("Unknown token");
+        }
 
-        const tokens = wallet.state.slp.tokens;
-        const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
+        setStatus("SENDING_TOKENS");
 
         // get postage for MUSD
         const postage = await getTokenPostage(tokenId);
