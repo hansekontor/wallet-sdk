@@ -26,6 +26,7 @@ type App = {
     addWallet: Function,
     deleteWallet: Function,
     getMaxSendAmount: Function,
+    calculatePostageAmount: Function,
     send: Function, 
     bridge: Function,
     withdraw: Function,
@@ -37,7 +38,7 @@ export const AppProvider = ({ children }:
 ) => {
 
     const { createWallet, cashtab, wallet, activateWallet, update, walletLoading, hasInitialized, removeWallet, renameWalletLocally } = useWallet();
-    const { getPostage, getTokenPostage, getMaxPostageAmount, buildSendTx, broadcastTx, postPayment } = useEcash();
+    const { getPostageObj, getTokenPostage, getPostageAmount, buildSendTx, broadcastTx, postPayment } = useEcash();
 
     const [status, setStatus] = useState<string>("WALLET_INIT");
     const [postageObj, setPostageObj] = useState(null);
@@ -59,7 +60,7 @@ export const AppProvider = ({ children }:
     // get postage data
     useEffect(() => {
         const getPostageForMaxAmount = async () => {
-            const postage = await getPostage();
+            const postage = await getPostageObj();
             setPostageObj(postage);
         }
 
@@ -246,19 +247,35 @@ export const AppProvider = ({ children }:
 
     /**
      * Calculates the maximum amount to be send after applying the required postage rate.
-     * @param sandbox 
+     * @param tokenId 
      * @returns 
      */
-    const getMaxSendAmount = (sandbox: boolean = false) => {
+    const getMaxSendAmount = (tokenId: string) => {
         if (!wallet)
             throw new Error("No wallet available");
 
-        const postageAmount = getMaxPostageAmount(sandbox, wallet, postageObj);
-        const tokens = wallet.state.slp.tokens;
-        const tokenBalance = sandbox ? tokens.sandbox.balance : tokens.prod.balance;
+        const postageAmount = getPostageAmount(tokenId, wallet, postageObj);
+        const tokenEntry = wallet.state.slp.tokens.find((token: Token) => token.tokenId === tokenId);
+        if (!tokenEntry)
+            throw new Error("Unknown token");
+        const tokenBalance = tokenEntry.balance;
         const maxSendAmount = tokenBalance - postageAmount;
 
         return maxSendAmount;
+    }
+    /**
+     * Calculates the postage amount for a given token
+     * @param amount 
+     * @param tokenId 
+     * @returns 
+     */
+    const calculatePostageAmount = (amount: number, tokenId: string) => {
+        if (!wallet) 
+            throw new Error("No wallet available");
+
+        const postageAmount = getPostageAmount(tokenId, wallet, postageObj, amount);
+
+        return postageAmount;
     }
 
     const context: App = {
@@ -273,6 +290,7 @@ export const AppProvider = ({ children }:
         addWallet,
         deleteWallet,
         getMaxSendAmount,
+        calculatePostageAmount,
         send,
         bridge,
         withdraw,

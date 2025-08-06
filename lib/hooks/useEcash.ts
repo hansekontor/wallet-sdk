@@ -8,7 +8,7 @@ import { U64 } from 'n64';
 // @ts-ignore
 import { postPayment } from '../utils/b70'
 
-import { type Wallet } from '../context/Wallet/types';
+import { type Wallet, type Token } from '../context/Wallet/types';
 
 // todo: replace currency object
 const currency = {
@@ -43,16 +43,7 @@ export const useEcash = () => {
 
         // prepare tokens
         const tokens = slp.tokens;
-        let tokenEntry: any = {};
-        switch(tokenId) {
-            case (tokens.prod.tokenId):
-                tokenEntry = tokens.prod;
-                break;
-            case (tokens.sandbox.tokenId):
-                tokenEntry = tokens.sandbox;
-                break;
-        };
-
+        const tokenEntry = tokens.find((token: Token) => token.tokenId === tokenId);
         if (!tokenEntry) {
             throw new Error("Unknown token");
         }
@@ -165,7 +156,7 @@ export const useEcash = () => {
 
     }
 
-    const calculatePostage = (inputCount: number, tokenRecipientCount: number, postageObj: any) => {
+    const calculatePostage = (inputCount: number, tokenRecipientCount: number, postageData: any) => {
         // add outputs stamp + change + tokenOutputs
         const sendAmountArray = ["1", "1"];
         for (let i = 0; i < tokenRecipientCount; i++) {
@@ -187,13 +178,13 @@ export const useEcash = () => {
         byteCount += 546 * (sendAmountArray.length - inputCount);
 
         // get required stamps
-        let stampsNeeded = Math.ceil(byteCount / postageObj.weight);
+        let stampsNeeded = Math.ceil(byteCount / postageData.weight);
         if (stampsNeeded < 1) {
             stampsNeeded = 1;
         }
 
         // return final postage
-        const postage = postageObj.stamp.rate * stampsNeeded;
+        const postage = postageData.stamp.rate * stampsNeeded;
         return postage;
     }
 
@@ -272,7 +263,7 @@ export const useEcash = () => {
 
     const getTokenPostage = async (tokenId: string) => {
         try {
-            const postageObj = await getPostage();
+            const postageObj = await getPostageObj();
             const stamp = getStamp(postageObj, tokenId);
 
             return stamp;
@@ -281,7 +272,7 @@ export const useEcash = () => {
         }
     }
 
-    const getPostage = async () => {
+    const getPostageObj = async () => {
         const postageUrl = import.meta.env.VITE_POSTAGE_URL;
         const result = await fetch(postageUrl);
         const postageObj = await result.json();  
@@ -306,26 +297,67 @@ export const useEcash = () => {
         }
     }
 
-    const getMaxPostageAmount = (sandbox: boolean, wallet: Wallet, postageObj: any) => {
-        let postageAmount = 0;
-        const tokens = wallet.state.slp.tokens;
-        const tokenId = sandbox ? tokens.sandbox.tokenId : tokens.prod.tokenId;
-        const tokenUtxos = wallet.state.slp.slpUtxos.filter((utxo: any) => utxo.slp.tokenId === tokenId);
-        const tokenUtxoCount = tokenUtxos.length;
-        const recipientCount = 1;
-        const postageData = getStamp(postageObj, tokenId);
-        if (!postageData)
-            throw new Error("No postage data available")
-        const postageBaseCost = calculatePostage(tokenUtxoCount, recipientCount, postageData);
-        postageAmount = postageBaseCost / 10 ** postageData.stamp.decimals;
+    const getPostageAmount = (tokenId: string, wallet: Wallet, postageObj: any, amount?: number) => {
+        const tokenPostageData = getStamp(postageObj, tokenId);
+        if (!tokenPostageData)
+            throw new Error("No postage available for this token");
+        const token = wallet.state.slp.tokens.find((token: Token) => token.tokenId === tokenId);
+        if (!token)
+            throw new Error("Token not found in wallet");
 
-        return postageAmount;            
+        const tokenUtxos = wallet.state.slp.slpUtxos.filter((utxo: any) => utxo.slp.tokenId === tokenId);
+        let tokenUtxoCount = 0;
+        if (!amount) {
+            tokenUtxoCount = tokenUtxos.length;
+            const postageBaseAmount = calculatePostage(tokenUtxoCount, 1, tokenPostageData);
+            const rawPostageBaseAmount = new BigNumber(postageBaseAmount);
+            const divisor = new BigNumber(10**tokenPostageData.stamp.decimals);
+            const rawPostageAmount = rawPostageBaseAmount.div(divisor);
+            const postageAmount = rawPostageAmount.toNumber();
+
+            return postageAmount;
+
+        } else {
+            let finalTokenAmountSent = new BigNumber(0);
+            let rawPostageBaseAmount = new BigNumber(0);
+            let tokenAmountBeingSentToAddress = new BigNumber(amount).times(10 ** tokenPostageData.stamp.decimals);
+            let totalTokenOutputAmount = tokenAmountBeingSentToAddress;
+
+            const tokenCoins = [];
+            for (let i = 0; i < tokenUtxos.length; i++) {
+                // add utxo
+                const tokenCoin = Coin.fromJSON(tokenUtxos[i]);
+                tokenCoins.push(tokenCoin);
+
+                // get token value of utxo
+                const addedTokenValue = new BigNumber(tokenUtxos[i].slp.value);
+                finalTokenAmountSent = finalTokenAmountSent.plus(addedTokenValue);
+
+                // get required postage amount
+                const utxoCount = tokenCoins.length;
+                const postageBaseAmount = calculatePostage(utxoCount, 1, tokenPostageData);
+                rawPostageBaseAmount = new BigNumber(postageBaseAmount);
+                totalTokenOutputAmount = tokenAmountBeingSentToAddress.plus(rawPostageBaseAmount);
+
+                // break condition
+                const hasEnoughTokens = totalTokenOutputAmount.lte(finalTokenAmountSent);
+                if (hasEnoughTokens) {
+                    break;
+                }
+            }
+            const divisor = new BigNumber(10**tokenPostageData.stamp.decimals);
+            const rawPostageAmount = rawPostageBaseAmount.div(divisor);
+            const postageAmount = rawPostageAmount.toNumber();
+            
+            return postageAmount
+        }
     }
 
     return {
-        getPostage,
+        getPostageObj,
         getTokenPostage,
-        getMaxPostageAmount,
+        calculatePostage,
+        getPostageAmount,
         buildSendTx,
         broadcastTx,
         postPayment,
