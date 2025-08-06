@@ -1,3 +1,5 @@
+import { Token } from './tokens';
+export { type Token, type TokenInfo } from './tokens';
 export interface CashtabState {
     wallets: Wallet[] | [];
 }
@@ -28,39 +30,14 @@ export declare class WalletState implements WalletStateInterface {
     constructor();
 }
 export type Slp = {
-    tokens: Tokens;
-    nonSlpUtxos: object[] | [];
-    slpUtxos: object[] | [];
+    tokens: Token[];
+    nonSlpUtxos: any[] | [];
+    slpUtxos: any[] | [];
 };
 export type Balances = {
     totalBalance: number;
     totalBalanceInSatoshis: number;
 };
-export type Token = {
-    rawBalance: number;
-    balance: number;
-    info: TokenInfo;
-    tokenId: string;
-};
-export type TokenInfo = {
-    name: string;
-    hash: string;
-    ticker: string;
-    decimals: number;
-    tokenId: string;
-    uri: string;
-    vaultScriptHash: string;
-    version: number;
-};
-interface TokensInterface {
-    prod: Token;
-    sandbox: Token;
-}
-export declare class Tokens implements TokensInterface {
-    prod: Token;
-    sandbox: Token;
-    constructor();
-}
 export type ParsedTx = {
     txid: string;
     height: number;
@@ -70,8 +47,7 @@ export type ParsedTx = {
     type: "SEND" | "MINT" | "BURN";
     sender: string;
     recipients: string[];
-    sandbox: boolean;
+    tokenId: string;
     amountSent: number;
     amountReceived: number;
 };
-export {};

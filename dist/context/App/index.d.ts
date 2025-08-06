@@ -1,6 +1,7 @@
 import { Context } from 'react';
 import { Wallet } from '../Wallet/types';
 import { default as CashtabState } from '../Wallet/management';
+export { Tokens } from '../Wallet/tokens';
 type App = {
     status: string;
     hasInitialized: boolean;
@@ -13,6 +14,7 @@ type App = {
     addWallet: Function;
     deleteWallet: Function;
     getMaxSendAmount: Function;
+    calculatePostageAmount: Function;
     send: Function;
     bridge: Function;
     withdraw: Function;
@@ -22,4 +24,3 @@ export declare const AppProvider: ({ children }: {
     children: React.ReactElement;
 }) => import("react/jsx-runtime").JSX.Element;
 export declare const useApp: () => App;
-export {};
