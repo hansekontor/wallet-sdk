@@ -111,7 +111,7 @@ export const WalletProvider = ( { children }:
         setWalletLoading(false);
     }
 
-    const update = async (cashtabState: CashtabState) => {
+    const update = async (cashtabState: CashtabState, forceUpdate: boolean = false) => {
         const activeWallet = cashtabState.wallets[0];
         if (!activeWallet) {
             throw new Error("No wallet found");
@@ -123,7 +123,7 @@ export const WalletProvider = ( { children }:
         const utxos = await getUtxos(address);
         const previousUtxos = activeWallet.state.utxos;
         const utxosHaveChanged = !deepEqual(utxos, previousUtxos);
-        if (utxosHaveChanged) {
+        if (utxosHaveChanged || forceUpdate) {
             const slp = getSlp(utxos);
             const balances = getBalances(slp);
             const txHistory = await getTxHistory(address);

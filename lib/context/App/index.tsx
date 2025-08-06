@@ -73,8 +73,8 @@ export const AppProvider = ({ children }:
     /**
      * Synchronizes the currently active wallet and updates transactions and balances.
      */
-    const updateWallet = async () => {
-        update(cashtab);
+    const updateWallet = async (forceUpdate: boolean) => {
+        update(cashtab, forceUpdate);
     };
 
     /**
