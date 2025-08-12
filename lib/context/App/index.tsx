@@ -16,23 +16,96 @@ const {
 export { Tokens } from '../Wallet/tokens';
 
 
+/**
+ * The context shape for the app.
+ */
 type App = {
-    status: string,
-    hasInitialized: boolean,
-    wallet: Wallet | undefined,
-    cashtab: CashtabState,
-    validateMnemonic: (mnemonic: string) => boolean, 
-    updateWallet: (forceUpdate: boolean) => Promise<void>, 
-    changeWallet: (name: string) => Promise<void>, 
-    renameWallet: (oldName: string, newName: string) => Promise<void>,
-    addWallet: (activateWallet: boolean, mnemonic?: string) => Promise<void>,
-    deleteWallet: (name: string) => Promise<void>,
-    getMaxSendAmount: (tokenId: string) => number,
-    calculatePostageAmount: (amount: number, tokenId: string) => number,
-    send: (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) => Promise<string>, 
-    bridge: () => void,
-    withdraw: (amount: number, type: "giftcard" | "fiat") => void,
-}
+  /** Current status of the wallet */
+  status: string;
+
+  /** Whether the wallet system has initialized */
+  hasInitialized: boolean;
+
+  /** The active wallet, or undefined if none */
+  wallet: Wallet | undefined;
+
+  /** Cashtab state */
+  cashtab: CashtabState;
+
+  /**
+   * Validate a mnemonic phrase.
+   * @param mnemonic The mnemonic string to validate.
+   * @returns True if valid, false otherwise.
+   */
+  validateMnemonic: (mnemonic: string) => boolean;
+
+  /**
+   * Synchronizes the currently active wallet and updates transactions and balances.
+   * @param forceUpdate Whether to force update the wallet.
+   */
+  updateWallet: (forceUpdate: boolean) => Promise<void>;
+
+  /**
+   * Changes the active wallet to the one with the specified wallet name.
+   * @param name The wallet name to switch to.
+   */
+  changeWallet: (name: string) => Promise<void>;
+
+  /**
+   * Creates and adds a wallet, optionally from a mnemonic, and activates it.
+   * @param activateWallet Whether to activate the wallet after adding.
+   * @param mnemonic Optional mnemonic phrase to import the wallet.
+   */
+  addWallet: (activateWallet: boolean, mnemonic?: string) => Promise<void>;
+
+  /**
+   * Renames a wallet.
+   * @param oldName Old wallet name.
+   * @param newName New wallet name.
+   */
+  renameWallet: (oldName: string, newName: string) => Promise<void>;
+
+  /**
+   * Deletes a wallet by name.
+   * @param name The name of the wallet to delete.
+   */
+  deleteWallet: (name: string) => Promise<void>;
+
+  /**
+   * Calculates the max amount that can be sent for a token after postage.
+   * @param tokenId The token identifier.
+   * @returns The max sendable amount.
+   */
+  getMaxSendAmount: (tokenId: string) => number;
+
+  /**
+   * Calculates postage amount for a token and amount.
+   * @param amount The amount for postage calculation.
+   * @param tokenId The token identifier.
+   * @returns The postage amount.
+   */
+  calculatePostageAmount: (amount: number, tokenId: string) => number;
+
+  /**
+   * Sends tokens to specified addresses.
+   * @param amount Amount to send.
+   * @param addresses Array of recipient addresses.
+   * @param tokenId Token identifier.
+   * @param testOnly Whether to run as a test without broadcasting.
+   * @returns Link to the transaction.
+   */
+  send: (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) => Promise<string>;
+
+  /** Placeholder function to bridge */
+  bridge: () => void;
+
+  /**
+   * Withdraw tokens via giftcard or fiat.
+   * @param amount Amount to withdraw.
+   * @param type "giftcard" or "fiat"
+   */
+  withdraw: (amount: number, type: "giftcard" | "fiat") => void;
+};
 export const AppContext: Context<App> = createContext({} as App);
 
 export const AppProvider = ({ children }: 
@@ -307,6 +380,13 @@ export const AppProvider = ({ children }:
     )
 }
 
+/**
+ * Hook to access the App context.
+ * Must be used within an AppProvider.
+ * 
+ * @throws Will throw an error if used outside of AppProvider.
+ * @returns The current app context object with wallet and state management functions.
+ */
 export const useApp = () => {
     const context = use(AppContext);
     if (!context) {
