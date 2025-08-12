@@ -1,29 +1,26 @@
-import { createContext, use, type Context } from 'react';
+import { createContext, useContext } from "react";
 
 type Auth = {
-    isAuthenticationRequired: boolean
-}
-export const AuthContext: Context<Auth> = createContext({} as Auth);
+  isAuthenticationRequired: boolean;
+};
 
-export const AuthProvider = ({ children }: 
-    { children: React.ReactNode}
-) => {
-    const context: Auth = {
-        isAuthenticationRequired: false
-    };
+export const AuthContext = createContext<Auth | undefined>(undefined);
 
-    return (
-        <AuthContext value={context}>
-            {children}
-        </AuthContext>
-    )
-}
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const context: Auth = {
+    isAuthenticationRequired: false,
+  };
+
+  return (
+    <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+  );
+};
 
 export const useAuth = () => {
-    const context = use(AuthContext);
-    if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
 
-    return context;
-}
+  return context;
+};
