@@ -5,7 +5,7 @@ import { type Wallet, type Token} from '../Wallet/types';
 import CashtabState from '../Wallet/management';
 import useEcash from '../../hooks/useEcash';
 import EventBus from '../../utils/events';
-// @ts-ignore
+// @ts-expect-error: bcash does not have TypeScript types available
 import bcash from '@hansekontor/checkout-components';
 const {
     TX,
@@ -21,17 +21,17 @@ type App = {
     hasInitialized: boolean,
     wallet: Wallet | undefined,
     cashtab: CashtabState,
-    validateMnemonic: Function, 
-    updateWallet: Function, 
-    changeWallet: Function, 
-    renameWallet: Function,
-    addWallet: Function,
-    deleteWallet: Function,
-    getMaxSendAmount: Function,
-    calculatePostageAmount: Function,
-    send: Function, 
-    bridge: Function,
-    withdraw: Function,
+    validateMnemonic: (mnemonic: string) => boolean, 
+    updateWallet: (forceUpdate: boolean) => Promise<void>, 
+    changeWallet: (name: string) => Promise<void>, 
+    renameWallet: (oldName: string, newName: string) => Promise<void>,
+    addWallet: (activateWallet: boolean, mnemonic?: string) => Promise<void>,
+    deleteWallet: (name: string) => Promise<void>,
+    getMaxSendAmount: (tokenId: string) => number,
+    calculatePostageAmount: (amount: number, tokenId: string) => number,
+    send: (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) => Promise<string>, 
+    bridge: () => void,
+    withdraw: (amount: number, type: "giftcard" | "fiat") => void,
 }
 export const AppContext: Context<App> = createContext({} as App);
 
@@ -209,7 +209,7 @@ export const AppProvider = ({ children }:
                 type
             );
             if (paymentAck.payment) {
-                const transactionIds = paymentAck.payment.transactions.map((t:any) =>
+                const transactionIds = paymentAck.payment.transactions.map((t: Buffer) =>
                     TX.fromRaw(t).txid()
                 );
                 txidStr = transactionIds[0];
