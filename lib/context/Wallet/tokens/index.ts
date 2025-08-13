@@ -19,6 +19,7 @@ export type TokenInfo = {
 
 export class Tokens {
     supported: Token[];
+    supportedMap: Record<string, Token>;
     prod: Token;
     sandbox: Token;
 
@@ -60,6 +61,7 @@ export class Tokens {
         ]
         this.prod = this.supported[0];
         this.sandbox = this.supported[1];
+        this.supportedMap = this.supported.reduce( (map: Record<string, Token>, token: Token) => ({ ...map , [token.tokenId]: token}), {});
     }
 }
 
