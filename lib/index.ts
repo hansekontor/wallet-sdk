@@ -11,3 +11,7 @@ export * from "./utils/events";
 // types
 export * from "./context/Wallet/types";
 export type { Contact } from "./hooks/useContacts";
+
+// supported tokens
+export * from "./constants/supportedTokens";
+export * from "./utils/getToken";
