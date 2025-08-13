@@ -2,18 +2,44 @@ import { ECASH } from "../assets/networks";
 import { BUX, UNKNOWN } from "../assets/tokens";
 import type { JSX } from "react";
 
+/**
+ * Represents a token supported by the application.
+ */
 export interface SupportedToken {
+  /** Unique identifier for the token. */
   tokenId: string;
+
+  /** Token ticker symbol (e.g., "MUSD"). */
   ticker: string;
+
+  /** Full human-readable name of the token. */
   name: string;
+
+  /** Token website or metadata URI. */
   uri: string;
+
+  /** Optional hash of the token metadata. */
   hash: string;
+
+  /** Number of decimal places the token supports. */
   decimals: number;
+
+  /** Version of the token standard or contract. */
   version: number;
+
+  /** Script hash used in vault or token logic. */
   vaultScriptHash: string;
+
+  /** Whether the token has a baton (for minting). */
   hasBaton: boolean;
+
+  /** Network identifier the token belongs to (e.g., "eCash"). */
   network: string;
+
+  /** React component rendering the token's icon. */
   tokenIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+
+  /** React component rendering the network's icon. */
   networkIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
@@ -65,7 +91,8 @@ export const SUPPORTED_TOKENS: Record<string, SupportedToken> = {
 };
 
 // Array of all tokens
-export const SUPPORTED_TOKENS_LIST: SupportedToken[] = Object.values(SUPPORTED_TOKENS);
+export const SUPPORTED_TOKENS_LIST: SupportedToken[] =
+  Object.values(SUPPORTED_TOKENS);
 
 // Map for quick lookup by tokenId
 export const SUPPORTED_TOKENS_MAP: Map<string, SupportedToken> = new Map(
