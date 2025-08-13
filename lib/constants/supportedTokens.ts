@@ -37,10 +37,10 @@ export interface SupportedToken {
   network: string;
 
   /** React component rendering the token's icon. */
-  tokenIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  TokenIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 
   /** React component rendering the network's icon. */
-  networkIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  NetworkIcon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
 export const UNKNOWN_TOKEN: SupportedToken = {
@@ -54,8 +54,8 @@ export const UNKNOWN_TOKEN: SupportedToken = {
   vaultScriptHash: "",
   hasBaton: false,
   network: "UNKNOWN",
-  tokenIcon: UNKNOWN,
-  networkIcon: UNKNOWN,
+  TokenIcon: UNKNOWN,
+  NetworkIcon: UNKNOWN,
 };
 
 // The object of all supported tokens, keyed by tokenId
@@ -71,8 +71,8 @@ export const SUPPORTED_TOKENS: Record<string, SupportedToken> = {
     vaultScriptHash: "08d6edf91c7b93d18306d3b8244587e43f11df4b",
     hasBaton: false,
     network: "eCash",
-    tokenIcon: BUX,
-    networkIcon: ECASH,
+    TokenIcon: BUX,
+    NetworkIcon: ECASH,
   },
   "4075459e0ac841f234bc73fc4fe46fe5490be4ed98bc8ca3f9b898443a5a381a": {
     tokenId: "4075459e0ac841f234bc73fc4fe46fe5490be4ed98bc8ca3f9b898443a5a381a",
@@ -85,8 +85,8 @@ export const SUPPORTED_TOKENS: Record<string, SupportedToken> = {
     vaultScriptHash: "16748bbeb9fa3f2bdeb0fc5f7e23dd9ad166ace6",
     hasBaton: false,
     network: "eCash",
-    tokenIcon: BUX,
-    networkIcon: ECASH,
+    TokenIcon: BUX,
+    NetworkIcon: ECASH,
   },
 };
 
