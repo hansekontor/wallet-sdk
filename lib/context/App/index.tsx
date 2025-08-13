@@ -20,92 +20,93 @@ export { Tokens } from '../Wallet/tokens';
  * The context shape for the app.
  */
 type App = {
-  /** Current status of the wallet */
-  status: string;
+    /** Current status of the wallet */
+    status: string;
 
-  /** Whether the wallet system has initialized */
-  hasInitialized: boolean;
+    /** Whether the wallet system has initialized */
+    hasInitialized: boolean;
 
-  /** The active wallet, or undefined if none */
-  wallet: Wallet | undefined;
+    /** The active wallet, or undefined if none */
+    wallet: Wallet | undefined;
 
-  /** Cashtab state */
-  cashtab: CashtabState;
+    /** Cashtab state */
+    cashtab: CashtabState;
 
-  /**
-   * Validate a mnemonic phrase.
-   * @param mnemonic The mnemonic string to validate.
-   * @returns True if valid, false otherwise.
-   */
-  validateMnemonic: (mnemonic: string) => boolean;
+    /**
+     * Validate a mnemonic phrase.
+     * @param mnemonic The mnemonic string to validate.
+     * @returns True if valid, false otherwise.
+     */
+    validateMnemonic: (mnemonic: string) => boolean;
 
-  /**
-   * Synchronizes the currently active wallet and updates transactions and balances.
-   * @param forceUpdate Whether to force update the wallet.
-   */
-  updateWallet: (forceUpdate: boolean) => Promise<void>;
+    /**
+     * Synchronizes the currently active wallet and updates transactions and balances.
+     * @param forceUpdate Whether to force update the wallet.
+     */
+    updateWallet: (forceUpdate: boolean) => Promise<void>;
 
-  /**
-   * Changes the active wallet to the one with the specified wallet name.
-   * @param name The wallet name to switch to.
-   */
-  changeWallet: (name: string) => Promise<void>;
+    /**
+     * Changes the active wallet to the one with the specified wallet name.
+     * @param name The name of the wallet to switch to.
+     */
+    changeWallet: (name: string) => Promise<void>;
 
-  /**
-   * Creates and adds a wallet, optionally from a mnemonic, and activates it.
-   * @param activateWallet Whether to activate the wallet after adding.
-   * @param mnemonic Optional mnemonic phrase to import the wallet.
-   */
-  addWallet: (activateWallet: boolean, mnemonic?: string) => Promise<void>;
+    /**
+     * Creates a new wallet randomly or by imported mnemonic, adds it to saved wallets and activates it. 
+     * @param activateWallet Whether to activate the wallet after adding.
+     * @param mnemonic Optional mnemonic phrase to import a wallet.
+     */
+    addWallet: (activateWallet: boolean, mnemonic?: string) => Promise<void>;
 
-  /**
-   * Renames a wallet.
-   * @param oldName Old wallet name.
-   * @param newName New wallet name.
-   */
-  renameWallet: (oldName: string, newName: string) => Promise<void>;
+    /**
+     * Renames a wallet and updates the storage.
+     * @param oldName Old wallet name.
+     * @param newName New wallet name.
+     */
+    renameWallet: (oldName: string, newName: string) => Promise<void>;
 
-  /**
-   * Deletes a wallet by name.
-   * @param name The name of the wallet to delete.
-   */
-  deleteWallet: (name: string) => Promise<void>;
+    /**
+     * Deletes a wallet from stored wallets.
+     * @param name The name of the wallet to delete.
+     */
+    deleteWallet: (name: string) => Promise<void>;
 
-  /**
-   * Calculates the max amount that can be sent for a token after postage.
-   * @param tokenId The token identifier.
-   * @returns The max sendable amount.
-   */
-  getMaxSendAmount: (tokenId: string) => number;
+    /**
+     * Calculates the max token amount to be sent after applying postage.
+     * @param tokenId Token ID.
+     * @returns The max sendable token amount.
+     */
+    getMaxSendAmount: (tokenId: string) => number;
 
-  /**
-   * Calculates postage amount for a token and amount.
-   * @param amount The amount for postage calculation.
-   * @param tokenId The token identifier.
-   * @returns The postage amount.
-   */
-  calculatePostageAmount: (amount: number, tokenId: string) => number;
+    /**
+     * Calculates postage amount.
+     * @param amount The formatted token amount.
+     * @param tokenId Token ID.
+     * @returns The postage amount.
+     */
+    calculatePostageAmount: (amount: number, tokenId: string) => number;
 
-  /**
-   * Sends tokens to specified addresses.
-   * @param amount Amount to send.
-   * @param addresses Array of recipient addresses.
-   * @param tokenId Token identifier.
-   * @param testOnly Whether to run as a test without broadcasting.
-   * @returns Link to the transaction.
-   */
-  send: (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) => Promise<string>;
+    /**
+     * Sends tokens to specified output addresses.
+     * @param amount Formatted token amount to send.
+     * @param addresses Array of recipient addresses.
+     * @param tokenId Token ID.
+     * @param testOnly Whether to omit broadcasting the transaction.
+     * @returns Explorer link to the transaction.
+     */
+    send: (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) => Promise<string>;
 
-  /** Placeholder function to bridge */
-  bridge: () => void;
+    /** Placeholder function to bridge */
+    bridge: () => void;
 
-  /**
-   * Withdraw tokens via giftcard or fiat.
-   * @param amount Amount to withdraw.
-   * @param type "giftcard" or "fiat"
-   */
-  withdraw: (amount: number, type: "giftcard" | "fiat") => void;
+    /**
+     * Builds and broadcast BURN transaction and uses it for cashout.
+     * @param amount Formatted token amount to withdraw.
+     * @param type "giftcard" or "fiat"
+     */
+    withdraw: (amount: number, type: "giftcard" | "fiat") => void;
 };
+
 export const AppContext: Context<App> = createContext({} as App);
 
 export const AppProvider = ({ children }: 
@@ -143,16 +144,17 @@ export const AppProvider = ({ children }:
             getPostageForMaxAmount();
     }, [])
 
-    /**
-     * Synchronizes the currently active wallet and updates transactions and balances.
-     */
+  /**
+   * Synchronizes the currently active wallet and updates transactions and balances.
+   * @param forceUpdate Whether to force update the wallet.
+   */
     const updateWallet = async (forceUpdate: boolean) => {
         update(cashtab, forceUpdate);
     };
 
     /**
      * Changes the active wallet to the one with the specified wallet name.
-     * @param name 
+     * @param name The name of the wallet to switch to.
      */
     const changeWallet = async (name: string) => {        
         // find wallet 
@@ -166,8 +168,9 @@ export const AppProvider = ({ children }:
     };
 
     /**
-     * Creates new wallet randomly or by imported mnemonic, adds it to saved wallets and activates it. 
-     * @param mnemonic 
+     * Creates a new wallet randomly or by imported mnemonic, adds it to saved wallets and activates it. 
+     * @param activateWallet Whether to activate the wallet after adding.
+     * @param mnemonic Optional mnemonic phrase to import a wallet.
      */
     const addWallet = async (activateWallet: boolean, mnemonic?: string) => {
         // if valid mnemonic is specified, import wallet
@@ -191,9 +194,9 @@ export const AppProvider = ({ children }:
     };
 
     /**
-     * Changes the name of a wallet and updates the storage
-     * @param oldName 
-     * @param newName 
+     * Renames a wallet and updates the storage.
+     * @param oldName Old wallet name.
+     * @param newName New wallet name.
      */
     const renameWallet = async (oldName: string, newName: string) => {
         const hasValidLength = newName.length <= 40;
@@ -211,7 +214,7 @@ export const AppProvider = ({ children }:
 
     /**
      * Deletes a wallet from stored wallets.
-     * @param name 
+     * @param name The name of the wallet to delete.
      */
     const deleteWallet = async (name: string) => {
         // find wallet 
@@ -224,10 +227,12 @@ export const AppProvider = ({ children }:
     }
 
     /**
-     * Sends MUSD to specifed output addresses.
-     * @param amount 
-     * @param addresses 
-     * @param testOnly 
+     * Sends tokens to specified output addresses.
+     * @param amount Formatted token amount to send.
+     * @param addresses Array of recipient addresses.
+     * @param tokenId Token ID.
+     * @param testOnly Whether to omit broadcasting the transaction.
+     * @returns Explorer link to the transaction.
      */
     const send = async (amount: number, addresses: string[], tokenId: string, testOnly: boolean = false) => {
         if (!wallet) {
@@ -310,9 +315,9 @@ export const AppProvider = ({ children }:
     };
 
     /**
-     * Faciliates a BURN transaction for MUSD and cashes out via selected type.
-     * @param amount 
-     * @param type 
+     * Builds and broadcast BURN transaction and uses it for cashout.
+     * @param amount Formatted token amount to withdraw.
+     * @param type "giftcard" or "fiat"
      */
     const withdraw = (amount: number, type: "giftcard" | "fiat") => {
         console.log(amount, type);
@@ -323,9 +328,9 @@ export const AppProvider = ({ children }:
     };
 
     /**
-     * Calculates the maximum amount to be send after applying the required postage rate.
-     * @param tokenId 
-     * @returns 
+     * Calculates the max token amount to be sent after applying postage.
+     * @param tokenId Token ID.
+     * @returns The max sendable token amount.
      */
     const getMaxSendAmount = (tokenId: string) => {
         if (!wallet)
@@ -340,11 +345,12 @@ export const AppProvider = ({ children }:
 
         return maxSendAmount;
     }
+
     /**
-     * Calculates the postage amount for a given token
-     * @param amount 
-     * @param tokenId 
-     * @returns 
+     * Calculates postage amount.
+     * @param amount The formatted token amount.
+     * @param tokenId Token ID.
+     * @returns The postage amount.
      */
     const calculatePostageAmount = (amount: number, tokenId: string) => {
         if (!wallet) 
