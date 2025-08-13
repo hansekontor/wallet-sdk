@@ -17,6 +17,7 @@ export type TokenInfo = {
 };
 export declare class Tokens {
     supported: Token[];
+    supportedMap: Record<string, Token>;
     prod: Token;
     sandbox: Token;
     constructor();

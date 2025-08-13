@@ -1,9 +1,12 @@
 import { jsx as fn } from "react/jsx-runtime";
-import { createContext as ol, use as al, useRef as tm, useEffect as dn, useState as ki } from "react";
-const v8 = ol({}), rm = ({ children: e }) => /* @__PURE__ */ fn(v8, { value: {
-  isAuthenticationRequired: !1
-}, children: e }), yv = () => {
-  const e = al(v8);
+import { createContext as ol, useContext as tm, useRef as rm, useEffect as dn, useState as ki, use as y8 } from "react";
+const v8 = ol(void 0), im = ({ children: e }) => {
+  const c = {
+    isAuthenticationRequired: !1
+  };
+  return /* @__PURE__ */ fn(v8.Provider, { value: c, children: e });
+}, vv = () => {
+  const e = tm(v8);
   if (!e)
     throw new Error("useAuth must be used within an AuthProvider");
   return e;
@@ -12,7 +15,7 @@ var Ft = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
 function Nr(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
-function im(e) {
+function nm(e) {
   if (Object.prototype.hasOwnProperty.call(e, "__esModule")) return e;
   var c = e.default;
   if (typeof c == "function") {
@@ -46,9 +49,9 @@ var qo = { exports: {} };
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
-var S1;
-function nm() {
-  return S1 || (S1 = 1, function(e, c) {
+var v1;
+function sm() {
+  return v1 || (v1 = 1, function(e, c) {
     (function(l) {
       e.exports = l();
     })(function() {
@@ -1393,8 +1396,8 @@ function nm() {
                 var kt = function() {
                   for (var On = function(Qp) {
                     return function() {
-                      var em = new Error("Method " + Qp + " is not implemented by the current driver"), v1 = b.reject(em);
-                      return g(v1, arguments[arguments.length - 1]), v1;
+                      var em = new Error("Method " + Qp + " is not implemented by the current driver"), y1 = b.reject(em);
+                      return g(y1, arguments[arguments.length - 1]), y1;
                     };
                   }, Mo = 0, Zp = at.length; Mo < Zp; Mo++) {
                     var No = at[Mo];
@@ -1484,14 +1487,14 @@ function nm() {
     });
   }(qo)), qo.exports;
 }
-var sm = nm();
-const E1 = /* @__PURE__ */ Nr(sm), Ds = globalThis || void 0 || self;
+var om = sm();
+const S1 = /* @__PURE__ */ Nr(om), Ds = globalThis || void 0 || self;
 var S8 = {}, Ks = {};
-Ks.byteLength = fm;
-Ks.toByteArray = um;
-Ks.fromByteArray = dm;
-var Hr = [], Sr = [], om = typeof Uint8Array < "u" ? Uint8Array : Array, To = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-for (var Wi = 0, am = To.length; Wi < am; ++Wi)
+Ks.byteLength = cm;
+Ks.toByteArray = hm;
+Ks.fromByteArray = bm;
+var Hr = [], Sr = [], am = typeof Uint8Array < "u" ? Uint8Array : Array, To = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+for (var Wi = 0, fm = To.length; Wi < fm; ++Wi)
   Hr[Wi] = To[Wi], Sr[To.charCodeAt(Wi)] = Wi;
 Sr[45] = 62;
 Sr[95] = 63;
@@ -1504,39 +1507,39 @@ function E8(e) {
   var w = l === c ? 0 : 4 - l % 4;
   return [l, w];
 }
-function fm(e) {
+function cm(e) {
   var c = E8(e), l = c[0], w = c[1];
   return (l + w) * 3 / 4 - w;
 }
-function cm(e, c, l) {
+function um(e, c, l) {
   return (c + l) * 3 / 4 - l;
 }
-function um(e) {
-  var c, l = E8(e), w = l[0], m = l[1], f = new om(cm(e, w, m)), n = 0, u = m > 0 ? w - 4 : w, a;
+function hm(e) {
+  var c, l = E8(e), w = l[0], m = l[1], f = new am(um(e, w, m)), n = 0, u = m > 0 ? w - 4 : w, a;
   for (a = 0; a < u; a += 4)
     c = Sr[e.charCodeAt(a)] << 18 | Sr[e.charCodeAt(a + 1)] << 12 | Sr[e.charCodeAt(a + 2)] << 6 | Sr[e.charCodeAt(a + 3)], f[n++] = c >> 16 & 255, f[n++] = c >> 8 & 255, f[n++] = c & 255;
   return m === 2 && (c = Sr[e.charCodeAt(a)] << 2 | Sr[e.charCodeAt(a + 1)] >> 4, f[n++] = c & 255), m === 1 && (c = Sr[e.charCodeAt(a)] << 10 | Sr[e.charCodeAt(a + 1)] << 4 | Sr[e.charCodeAt(a + 2)] >> 2, f[n++] = c >> 8 & 255, f[n++] = c & 255), f;
 }
-function hm(e) {
+function lm(e) {
   return Hr[e >> 18 & 63] + Hr[e >> 12 & 63] + Hr[e >> 6 & 63] + Hr[e & 63];
 }
-function lm(e, c, l) {
+function dm(e, c, l) {
   for (var w, m = [], f = c; f < l; f += 3)
-    w = (e[f] << 16 & 16711680) + (e[f + 1] << 8 & 65280) + (e[f + 2] & 255), m.push(hm(w));
+    w = (e[f] << 16 & 16711680) + (e[f + 1] << 8 & 65280) + (e[f + 2] & 255), m.push(lm(w));
   return m.join("");
 }
-function dm(e) {
+function bm(e) {
   for (var c, l = e.length, w = l % 3, m = [], f = 16383, n = 0, u = l - w; n < u; n += f)
-    m.push(lm(e, n, n + f > u ? u : n + f));
+    m.push(dm(e, n, n + f > u ? u : n + f));
   return w === 1 ? (c = e[l - 1], m.push(
     Hr[c >> 2] + Hr[c << 4 & 63] + "=="
   )) : w === 2 && (c = (e[l - 2] << 8) + e[l - 1], m.push(
     Hr[c >> 10] + Hr[c >> 4 & 63] + Hr[c << 2 & 63] + "="
   )), m.join("");
 }
-var fl = {};
+var al = {};
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-fl.read = function(e, c, l, w, m) {
+al.read = function(e, c, l, w, m) {
   var f, n, u = m * 8 - w - 1, a = (1 << u) - 1, s = a >> 1, i = -7, b = l ? m - 1 : 0, g = l ? -1 : 1, S = e[c + b];
   for (b += g, f = S & (1 << -i) - 1, S >>= -i, i += u; i > 0; f = f * 256 + e[c + b], b += g, i -= 8)
     ;
@@ -1551,7 +1554,7 @@ fl.read = function(e, c, l, w, m) {
   }
   return (S ? -1 : 1) * n * Math.pow(2, f - w);
 };
-fl.write = function(e, c, l, w, m, f) {
+al.write = function(e, c, l, w, m, f) {
   var n, u, a, s = f * 8 - m - 1, i = (1 << s) - 1, b = i >> 1, g = m === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, S = w ? 0 : f - 1, y = w ? 1 : -1, p = c < 0 || c === 0 && 1 / c < 0 ? 1 : 0;
   for (c = Math.abs(c), isNaN(c) || c === 1 / 0 ? (u = isNaN(c) ? 1 : 0, n = i) : (n = Math.floor(Math.log(c) / Math.LN2), c * (a = Math.pow(2, -n)) < 1 && (n--, a *= 2), n + b >= 1 ? c += g / a : c += g * Math.pow(2, 1 - b), c * a >= 2 && (n++, a /= 2), n + b >= i ? (u = 0, n = i) : n + b >= 1 ? (u = (c * a - 1) * Math.pow(2, m), n = n + b) : (u = c * Math.pow(2, b - 1) * Math.pow(2, m), n = 0)); m >= 8; e[l + S] = u & 255, S += y, u /= 256, m -= 8)
     ;
@@ -1566,7 +1569,7 @@ fl.write = function(e, c, l, w, m, f) {
  * @license  MIT
  */
 (function(e) {
-  const c = Ks, l = fl, w = typeof Symbol == "function" && typeof Symbol.for == "function" ? Symbol.for("nodejs.util.inspect.custom") : null;
+  const c = Ks, l = al, w = typeof Symbol == "function" && typeof Symbol.for == "function" ? Symbol.for("nodejs.util.inspect.custom") : null;
   e.Buffer = i, e.SlowBuffer = G, e.INSPECT_MAX_BYTES = 50;
   const m = 2147483647;
   e.kMaxLength = m;
@@ -2506,7 +2509,7 @@ fl.write = function(e, c, l, w, m, f) {
   }
 })(S8);
 const k = S8.Buffer;
-function bm(e) {
+function pm(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
 var I8 = { exports: {} }, Ht = I8.exports = {}, Ur, Fr;
@@ -2543,7 +2546,7 @@ function A8(e) {
     }
   }
 }
-function pm(e) {
+function mm(e) {
   if (Fr === clearTimeout)
     return clearTimeout(e);
   if ((Fr === rl || !Fr) && clearTimeout)
@@ -2559,19 +2562,19 @@ function pm(e) {
   }
 }
 var ei = [], cn = !1, Bi, zs = -1;
-function mm() {
+function gm() {
   !cn || !Bi || (cn = !1, Bi.length ? ei = Bi.concat(ei) : zs = -1, ei.length && O8());
 }
 function O8() {
   if (!cn) {
-    var e = A8(mm);
+    var e = A8(gm);
     cn = !0;
     for (var c = ei.length; c; ) {
       for (Bi = ei, ei = []; ++zs < c; )
         Bi && Bi[zs].run();
       zs = -1, c = ei.length;
     }
-    Bi = null, cn = !1, pm(e);
+    Bi = null, cn = !1, mm(e);
   }
 }
 Ht.nextTick = function(e) {
@@ -2619,17 +2622,17 @@ Ht.chdir = function(e) {
 Ht.umask = function() {
   return 0;
 };
-var gm = I8.exports;
-const St = /* @__PURE__ */ bm(gm);
+var xm = I8.exports;
+const St = /* @__PURE__ */ pm(xm);
 /*!
  * assert.js - assertions for javascript
  * Copyright (c) 2018, Christopher Jeffrey (MIT License).
  * https://github.com/chjj/bsert
  */
-var zo, I1;
+var zo, E1;
 function Xe() {
-  if (I1) return zo;
-  I1 = 1;
+  if (E1) return zo;
+  E1 = 1;
   class e extends Error {
     constructor(I) {
       typeof I == "string" && (I = { message: I }), (I === null || typeof I != "object") && (I = {});
@@ -3162,11 +3165,11 @@ ${E(z)}
   }
   return c.AssertionError = e, c.assert = c, c.strict = c, c.ok = c, c.equal = l, c.notEqual = w, c.strictEqual = l, c.notStrictEqual = w, c.fail = m, c.throws = f, c.doesNotThrow = n, c.rejects = u, c.doesNotReject = a, c.ifError = s, c.match = i, c.doesNotMatch = b, c.deepEqual = g, c.notDeepEqual = S, c.deepStrictEqual = g, c.notDeepStrictEqual = S, c.bufferEqual = y, c.notBufferEqual = p, c.enforce = h, c.range = o, zo = c, zo;
 }
-var xm = Xe();
-const dt = /* @__PURE__ */ Nr(xm);
-var ze = {}, Co = {}, A1;
+var wm = Xe();
+const dt = /* @__PURE__ */ Nr(wm);
+var ze = {}, Co = {}, I1;
 function R8() {
-  return A1 || (A1 = 1, Co.custom = "inspect"), Co;
+  return I1 || (I1 = 1, Co.custom = "inspect"), Co;
 }
 var He = {};
 /*!
@@ -3174,10 +3177,10 @@ var He = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Do, O1;
+var Do, A1;
 function gn() {
-  if (O1) return Do;
-  O1 = 1;
+  if (A1) return Do;
+  A1 = 1;
   function e(c, l, w) {
     if (!c) {
       const m = new TypeError(`'${l}' must be a(n) ${w}.`);
@@ -3192,10 +3195,10 @@ function gn() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Uo, _1;
+var Uo, O1;
 function Jn() {
-  if (_1) return Uo;
-  _1 = 1;
+  if (O1) return Uo;
+  O1 = 1;
   class e extends Error {
     /**
      * Create an encoding error.
@@ -3209,10 +3212,10 @@ function Jn() {
   }
   return Uo = e, Uo;
 }
-var R1;
+var _1;
 function Vs() {
-  if (R1) return He;
-  R1 = 1;
+  if (_1) return He;
+  _1 = 1;
   const e = gn(), c = Jn(), l = 1 / 4294967296, { MAX_SAFE_INTEGER: w } = Number, m = new Float32Array(1), f = new Uint8Array(m.buffer), n = new Float64Array(1), u = new Uint8Array(n.buffer);
   m[0] = -1;
   const a = f[3] === 0;
@@ -3763,10 +3766,10 @@ function Vs() {
   }
   return He.readU = s, He.readU64 = i, He.readU56 = b, He.readU48 = g, He.readU40 = S, He.readU32 = y, He.readU24 = p, He.readU16 = h, He.readU8 = o, He.readUBE = E, He.readU64BE = F, He.readU56BE = j, He.readU48BE = G, He.readU40BE = N, He.readU32BE = T, He.readU24BE = A, He.readU16BE = q, He.readI = _, He.readI64 = H, He.readI56 = R, He.readI48 = V, He.readI40 = fe, He.readI32 = ue, He.readI24 = se, He.readI16 = D, He.readI8 = Q, He.readIBE = W, He.readI64BE = ae, He.readI56BE = v, He.readI48BE = Y, He.readI40BE = he, He.readI32BE = le, He.readI24BE = ge, He.readI16BE = Ee, He.readFloat = t, He.readFloatBE = d, He.readDouble = B, He.readDoubleBE = U, He.writeU = J, He.writeU64 = C, He.writeU56 = M, He.writeU48 = $, He.writeU40 = r, He.writeU32 = x, He.writeU24 = O, He.writeU16 = L, He.writeU8 = X, He.writeUBE = P, He.writeU64BE = K, He.writeU56BE = re, He.writeU48BE = ce, He.writeU40BE = de, He.writeU32BE = pe, He.writeU24BE = oe, He.writeU16BE = Z, He.writeI = ee, He.writeI64 = me, He.writeI56 = Ae, He.writeI48 = Oe, He.writeI40 = ye, He.writeI32 = _e, He.writeI24 = ke, He.writeI16 = Me, He.writeI8 = De, He.writeIBE = Ne, He.writeI64BE = $e, He.writeI56BE = bt, He.writeI48BE = Ve, He.writeI40BE = je, He.writeI32BE = _t, He.writeI24BE = Je, He.writeI16BE = Ye, He.writeFloat = Qe, He.writeFloatBE = rt, He.writeDouble = hr, He.writeDoubleBE = nt, He.readVarint = ft, He.writeVarint = gr, He.sizeVarint = et, He.readVarint2 = ct, He.writeVarint2 = lr, He.sizeVarint2 = ut, He.sliceBytes = lt, He.readBytes = dr, He.writeBytes = tt, He.readString = it, He.writeString = _r, He.realloc = st, He.copy = gt, He.concat = Dr, He.sizeVarBytes = ot, He.sizeVarlen = pt, He.sizeVarString = sr, He;
 }
-var Fo, P1;
+var Fo, R1;
 function $s() {
-  if (P1) return Fo;
-  P1 = 1;
+  if (R1) return Fo;
+  R1 = 1;
   const e = gn(), c = Vs(), l = Jn(), w = k.alloc(0);
   class m {
     /**
@@ -4288,10 +4291,10 @@ function $s() {
   }
   return Fo = m, Fo;
 }
-var Ho, k1;
+var Ho, P1;
 function js() {
-  if (k1) return Ho;
-  k1 = 1;
+  if (P1) return Ho;
+  P1 = 1;
   const e = gn(), c = Vs(), l = Jn(), w = 0, m = 1, f = 2, n = 3, u = 4, a = 5, s = 6, i = 7, b = 8, g = 9, S = 10, y = 11, p = 12, h = 13, o = 14, E = 15, F = 16, j = 17, G = 18, N = 19, T = 20, A = 21, q = 22, _ = 23, H = 24, R = 25, V = 26, fe = 27, ue = 28, se = 29, D = 30, Q = 31, W = 32, ae = 33, v = 34, Y = 35, he = 36, le = 37, ge = 38, Ee = 39, we = 40;
   class z {
     /**
@@ -4821,10 +4824,10 @@ function js() {
   }
   return Ho = z, Ho;
 }
-var Lo, B1;
+var Lo, k1;
 function P8() {
-  if (B1) return Lo;
-  B1 = 1;
+  if (k1) return Lo;
+  k1 = 1;
   const e = gn(), c = Vs(), l = Jn(), w = k.alloc(0), m = 102400;
   let f = null;
   class n {
@@ -5238,10 +5241,10 @@ function P8() {
   }
   return Lo = n, Lo;
 }
-var Ko, M1;
-function wm() {
-  if (M1) return Ko;
-  M1 = 1;
+var Ko, B1;
+function ym() {
+  if (B1) return Ko;
+  B1 = 1;
   const e = gn(), c = $s(), l = js(), w = P8(), { custom: m } = R8();
   class f {
     constructor() {
@@ -5379,11 +5382,11 @@ function wm() {
   }
   return Ko = f, Ko;
 }
-var N1;
+var M1;
 function At() {
-  if (N1) return ze;
-  N1 = 1;
-  const e = R8(), c = Vs(), l = gn(), w = Jn(), m = $s(), f = js(), n = P8(), u = wm();
+  if (M1) return ze;
+  M1 = 1;
+  const e = R8(), c = Vs(), l = gn(), w = Jn(), m = $s(), f = js(), n = P8(), u = ym();
   ze.custom = e, ze.encoding = c, ze.EncodingError = w, ze.BufferReader = m, ze.BufferWriter = f, ze.StaticWriter = n, ze.Struct = u, ze.read = function(p, h) {
     return new m(p, h);
   }, ze.write = function(p) {
@@ -5433,12 +5436,12 @@ function At() {
   }
   return ze.readU = s(c.readU), ze.readU64 = a(c.readU64, 8), ze.readU56 = a(c.readU56, 7), ze.readU48 = a(c.readU48, 6), ze.readU40 = a(c.readU40, 5), ze.readU32 = a(c.readU32, 4), ze.readU24 = a(c.readU24, 3), ze.readU16 = a(c.readU16, 2), ze.readU8 = a(c.readU8, 1), ze.readUBE = s(c.readUBE), ze.readU64BE = a(c.readU64BE, 8), ze.readU56BE = a(c.readU56BE, 7), ze.readU48BE = a(c.readU48BE, 6), ze.readU40BE = a(c.readU40BE, 5), ze.readU32BE = a(c.readU32BE, 4), ze.readU24BE = a(c.readU24BE, 3), ze.readU16BE = a(c.readU16BE, 2), ze.readI = s(c.readI), ze.readI64 = a(c.readI64, 8), ze.readI56 = a(c.readI56, 7), ze.readI48 = a(c.readI48, 6), ze.readI40 = a(c.readI40, 5), ze.readI32 = a(c.readI32, 4), ze.readI24 = a(c.readI24, 3), ze.readI16 = a(c.readI16, 2), ze.readI8 = a(c.readI8, 1), ze.readIBE = s(c.readIBE), ze.readI64BE = a(c.readI64BE, 8), ze.readI56BE = a(c.readI56BE, 7), ze.readI48BE = a(c.readI48BE, 6), ze.readI40BE = a(c.readI40BE, 5), ze.readI32BE = a(c.readI32BE, 4), ze.readI24BE = a(c.readI24BE, 3), ze.readI16BE = a(c.readI16BE, 2), ze.readFloat = a(c.readFloat, 4), ze.readFloatBE = a(c.readFloatBE, 4), ze.readDouble = a(c.readDouble, 8), ze.readDoubleBE = a(c.readDoubleBE, 8), ze.writeU = g(c.writeU), ze.writeU64 = b(c.writeU64, 8), ze.writeU56 = b(c.writeU56, 7), ze.writeU48 = b(c.writeU48, 6), ze.writeU40 = b(c.writeU40, 5), ze.writeU32 = b(c.writeU32, 4), ze.writeU24 = b(c.writeU24, 3), ze.writeU16 = b(c.writeU16, 2), ze.writeU8 = b(c.writeU8, 1), ze.writeUBE = g(c.writeUBE), ze.writeU64BE = b(c.writeU64BE, 8), ze.writeU56BE = b(c.writeU56BE, 7), ze.writeU48BE = b(c.writeU48BE, 6), ze.writeU40BE = b(c.writeU40BE, 5), ze.writeU32BE = b(c.writeU32BE, 4), ze.writeU24BE = b(c.writeU24BE, 3), ze.writeU16BE = b(c.writeU16BE, 2), ze.writeI = g(c.writeI), ze.writeI64 = b(c.writeI64, 8), ze.writeI56 = b(c.writeI56, 7), ze.writeI48 = b(c.writeI48, 6), ze.writeI40 = b(c.writeI40, 5), ze.writeI32 = b(c.writeI32, 4), ze.writeI24 = b(c.writeI24, 3), ze.writeI16 = b(c.writeI16, 2), ze.writeI8 = b(c.writeI8, 1), ze.writeIBE = g(c.writeIBE), ze.writeI64BE = b(c.writeI64BE, 8), ze.writeI56BE = b(c.writeI56BE, 7), ze.writeI48BE = b(c.writeI48BE, 6), ze.writeI40BE = b(c.writeI40BE, 5), ze.writeI32BE = b(c.writeI32BE, 4), ze.writeI24BE = b(c.writeI24BE, 3), ze.writeI16BE = b(c.writeI16BE, 2), ze.writeFloat = b(c.writeFloat, 4), ze.writeFloatBE = b(c.writeFloatBE, 4), ze.writeDouble = b(c.writeDouble, 8), ze.writeDoubleBE = b(c.writeDoubleBE, 8), ze.readVarint = i(c.readVarint), ze.writeVarint = S(c.writeVarint, c.sizeVarint), ze.sizeVarint = c.sizeVarint, ze.readVarint2 = i(c.readVarint2), ze.writeVarint2 = S(c.writeVarint2, c.sizeVarint2), ze.sizeVarint2 = c.sizeVarint2, ze.sliceBytes = c.sliceBytes, ze.readBytes = c.readBytes, ze.writeBytes = c.writeBytes, ze.readString = c.readString, ze.writeString = c.writeString, ze.realloc = c.realloc, ze.copy = c.copy, ze.concat = c.concat, ze.sizeVarBytes = c.sizeVarBytes, ze.sizeVarlen = c.sizeVarlen, ze.sizeVarString = c.sizeVarString, ze;
 }
-var ym = At();
-const Bt = /* @__PURE__ */ Nr(ym);
-var _n = {}, Rn = {}, q1;
-function vm() {
-  if (q1) return Rn;
-  q1 = 1;
+var vm = At();
+const Bt = /* @__PURE__ */ Nr(vm);
+var _n = {}, Rn = {}, N1;
+function Sm() {
+  if (N1) return Rn;
+  N1 = 1;
   const e = Xe(), c = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz", l = [
     -1,
     -1,
@@ -5628,10 +5631,10 @@ function vm() {
     return !0;
   }, Rn;
 }
-var Jr = {}, T1;
-function Sm() {
-  if (T1) return Jr;
-  T1 = 1;
+var Jr = {}, q1;
+function Em() {
+  if (q1) return Jr;
+  q1 = 1;
   const e = Xe(), c = k.allocUnsafe(66), l = "qpzry9x8gf2tvdw0s3jn54khce6mua7l", w = [
     -1,
     -1,
@@ -5909,10 +5912,10 @@ function Sm() {
   }
   return Jr.serialize = f, Jr.deserialize = n, Jr.is = u, Jr.convertBits = i, Jr.encode = b, Jr.decode = g, Jr.test = S, Jr;
 }
-var Pn = {}, z1;
-function Em() {
-  if (z1) return Pn;
-  z1 = 1;
+var Pn = {}, T1;
+function Im() {
+  if (T1) return Pn;
+  T1 = 1;
   const e = Xe();
   class c {
     constructor(o, E) {
@@ -6234,16 +6237,16 @@ function Em() {
  * Copyright (c) 2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bstring
  */
-var C1;
+var z1;
 function xn() {
-  return C1 || (C1 = 1, _n.base58 = vm(), _n.bech32 = Sm(), _n.cashaddr = Em()), _n;
+  return z1 || (z1 = 1, _n.base58 = Sm(), _n.bech32 = Em(), _n.cashaddr = Im()), _n;
 }
-var Im = xn();
-const Ys = /* @__PURE__ */ Nr(Im);
-var kn = {}, ds = {}, D1;
-function cl() {
-  if (D1) return ds;
-  D1 = 1;
+var Am = xn();
+const Ys = /* @__PURE__ */ Nr(Am);
+var kn = {}, ds = {}, C1;
+function fl() {
+  if (C1) return ds;
+  C1 = 1;
   /**
    * @license
    * https://reviews.bitcoinabc.org
@@ -6267,9 +6270,9 @@ function cl() {
     validate: c
   }, ds;
 }
-var U1;
-function Am() {
-  return U1 || (U1 = 1, function(e) {
+var D1;
+function Om() {
+  return D1 || (D1 = 1, function(e) {
     /**
      * @license
      * https://reviews.bitcoinabc.org
@@ -6282,7 +6285,7 @@ function Am() {
       return u && u.__esModule ? u : { default: u };
     };
     Object.defineProperty(e, "__esModule", { value: !0 }), e.CHARSET = void 0;
-    const l = c(cl()), { validate: w } = l.default;
+    const l = c(fl()), { validate: w } = l.default;
     e.CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
     const m = {
       q: 0,
@@ -6342,15 +6345,15 @@ function Am() {
     };
   }(kn)), kn;
 }
-var Zi = {}, F1;
-function Om() {
-  if (F1) return Zi;
-  F1 = 1;
+var Zi = {}, U1;
+function _m() {
+  if (U1) return Zi;
+  U1 = 1;
   var e = Zi && Zi.__importDefault || function(m) {
     return m && m.__esModule ? m : { default: m };
   };
   Object.defineProperty(Zi, "__esModule", { value: !0 }), Zi.default = w;
-  const c = e(cl()), { validate: l } = c.default;
+  const c = e(fl()), { validate: l } = c.default;
   function w(m, f, n, u = !1) {
     const a = u ? Math.floor(m.length * f / n) : Math.ceil(m.length * f / n), s = (1 << n) - 1, i = new Uint8Array(a);
     let b = 0, g = 0, S = 0;
@@ -6363,9 +6366,9 @@ function Om() {
   }
   return Zi;
 }
-var Vo = { exports: {} }, H1;
-function _m() {
-  return H1 || (H1 = 1, function(e) {
+var Vo = { exports: {} }, F1;
+function Rm() {
+  return F1 || (F1 = 1, function(e) {
     var c = function(l) {
       var w = 1e7, m = 7, f = 9007199254740992, n = g(f), u = Math.log(f);
       function a(P, K) {
@@ -7017,16 +7020,16 @@ function _m() {
     e.hasOwnProperty("exports") && (e.exports = c);
   }(Vo)), Vo.exports;
 }
-var Rr = {}, qt = {}, Wt = {}, $o = {}, Bn = {}, L1;
-function Rm() {
-  return L1 || (L1 = 1, Object.defineProperty(Bn, "__esModule", { value: !0 }), Bn.crypto = void 0, Bn.crypto = typeof globalThis == "object" && "crypto" in globalThis ? globalThis.crypto : void 0), Bn;
+var Rr = {}, qt = {}, Wt = {}, $o = {}, Bn = {}, H1;
+function Pm() {
+  return H1 || (H1 = 1, Object.defineProperty(Bn, "__esModule", { value: !0 }), Bn.crypto = void 0, Bn.crypto = typeof globalThis == "object" && "crypto" in globalThis ? globalThis.crypto : void 0), Bn;
 }
-var K1;
+var L1;
 function k8() {
-  return K1 || (K1 = 1, function(e) {
+  return L1 || (L1 = 1, function(e) {
     /*! noble-hashes - MIT License (c) 2022 Paul Miller (paulmillr.com) */
     Object.defineProperty(e, "__esModule", { value: !0 }), e.wrapXOFConstructorWithOpts = e.wrapConstructorWithOpts = e.wrapConstructor = e.Hash = e.nextTick = e.swap32IfBE = e.byteSwapIfBE = e.swap8IfBE = e.isLE = void 0, e.isBytes = l, e.anumber = w, e.abytes = m, e.ahash = f, e.aexists = n, e.aoutput = u, e.u8 = a, e.u32 = s, e.clean = i, e.createView = b, e.rotr = g, e.rotl = S, e.byteSwap = y, e.byteSwap32 = p, e.bytesToHex = E, e.hexToBytes = G, e.asyncLoop = T, e.utf8ToBytes = A, e.bytesToUtf8 = q, e.toBytes = _, e.kdfInputToBytes = H, e.concatBytes = R, e.checkOpts = V, e.createHasher = ue, e.createOptHasher = se, e.createXOFer = D, e.randomBytes = Q;
-    const c = /* @__PURE__ */ Rm();
+    const c = /* @__PURE__ */ Pm();
     function l(W) {
       return W instanceof Uint8Array || ArrayBuffer.isView(W) && W.constructor.name === "Uint8Array";
     }
@@ -7192,10 +7195,10 @@ function k8() {
     }
   }($o)), $o;
 }
-var V1;
-function Pm() {
-  if (V1) return Wt;
-  V1 = 1, Object.defineProperty(Wt, "__esModule", { value: !0 }), Wt.SHA512_IV = Wt.SHA384_IV = Wt.SHA224_IV = Wt.SHA256_IV = Wt.HashMD = void 0, Wt.setBigUint64 = c, Wt.Chi = l, Wt.Maj = w;
+var K1;
+function km() {
+  if (K1) return Wt;
+  K1 = 1, Object.defineProperty(Wt, "__esModule", { value: !0 }), Wt.SHA512_IV = Wt.SHA384_IV = Wt.SHA224_IV = Wt.SHA256_IV = Wt.HashMD = void 0, Wt.setBigUint64 = c, Wt.Chi = l, Wt.Maj = w;
   const e = /* @__PURE__ */ k8();
   function c(f, n, u, a) {
     if (typeof f.setBigUint64 == "function")
@@ -7314,10 +7317,10 @@ function Pm() {
     327033209
   ]), Wt;
 }
-var xt = {}, $1;
-function km() {
-  if ($1) return xt;
-  $1 = 1, Object.defineProperty(xt, "__esModule", { value: !0 }), xt.toBig = xt.shrSL = xt.shrSH = xt.rotrSL = xt.rotrSH = xt.rotrBL = xt.rotrBH = xt.rotr32L = xt.rotr32H = xt.rotlSL = xt.rotlSH = xt.rotlBL = xt.rotlBH = xt.add5L = xt.add5H = xt.add4L = xt.add4H = xt.add3L = xt.add3H = void 0, xt.add = o, xt.fromBig = l, xt.split = w;
+var xt = {}, V1;
+function Bm() {
+  if (V1) return xt;
+  V1 = 1, Object.defineProperty(xt, "__esModule", { value: !0 }), xt.toBig = xt.shrSL = xt.shrSH = xt.rotrSL = xt.rotrSH = xt.rotrBL = xt.rotrBH = xt.rotr32L = xt.rotr32H = xt.rotlSL = xt.rotlSH = xt.rotlBL = xt.rotlBH = xt.add5L = xt.add5H = xt.add4L = xt.add4H = xt.add3L = xt.add3H = void 0, xt.add = o, xt.fromBig = l, xt.split = w;
   const e = /* @__PURE__ */ BigInt(2 ** 32 - 1), c = /* @__PURE__ */ BigInt(32);
   function l(q, _ = !1) {
     return _ ? { h: Number(q & e), l: Number(q >> c & e) } : { h: Number(q >> c & e) | 0, l: Number(q & e) | 0 };
@@ -7399,11 +7402,11 @@ function km() {
   };
   return xt.default = A, xt;
 }
-var j1;
-function Bm() {
-  if (j1) return qt;
-  j1 = 1, Object.defineProperty(qt, "__esModule", { value: !0 }), qt.sha512_224 = qt.sha512_256 = qt.sha384 = qt.sha512 = qt.sha224 = qt.sha256 = qt.SHA512_256 = qt.SHA512_224 = qt.SHA384 = qt.SHA512 = qt.SHA224 = qt.SHA256 = void 0;
-  const e = /* @__PURE__ */ Pm(), c = /* @__PURE__ */ km(), l = /* @__PURE__ */ k8(), w = /* @__PURE__ */ Uint32Array.from([
+var $1;
+function Mm() {
+  if ($1) return qt;
+  $1 = 1, Object.defineProperty(qt, "__esModule", { value: !0 }), qt.sha512_224 = qt.sha512_256 = qt.sha384 = qt.sha512 = qt.sha224 = qt.sha256 = qt.SHA512_256 = qt.SHA512_224 = qt.SHA384 = qt.SHA512 = qt.SHA224 = qt.SHA256 = void 0;
+  const e = /* @__PURE__ */ km(), c = /* @__PURE__ */ Bm(), l = /* @__PURE__ */ k8(), w = /* @__PURE__ */ Uint32Array.from([
     1116352408,
     1899447441,
     3049323471,
@@ -7682,17 +7685,17 @@ function Bm() {
   }
   return qt.SHA512_256 = o, qt.sha256 = (0, l.createHasher)(() => new f()), qt.sha224 = (0, l.createHasher)(() => new n()), qt.sha512 = (0, l.createHasher)(() => new g()), qt.sha384 = (0, l.createHasher)(() => new S()), qt.sha512_256 = (0, l.createHasher)(() => new o()), qt.sha512_224 = (0, l.createHasher)(() => new h()), qt;
 }
-var Y1;
-function Mm() {
-  if (Y1) return Rr;
-  Y1 = 1, Object.defineProperty(Rr, "__esModule", { value: !0 }), Rr.sha224 = Rr.SHA224 = Rr.sha256 = Rr.SHA256 = void 0;
-  const e = /* @__PURE__ */ Bm();
+var j1;
+function Nm() {
+  if (j1) return Rr;
+  j1 = 1, Object.defineProperty(Rr, "__esModule", { value: !0 }), Rr.sha224 = Rr.SHA224 = Rr.sha256 = Rr.SHA256 = void 0;
+  const e = /* @__PURE__ */ Mm();
   return Rr.SHA256 = e.SHA256, Rr.sha256 = e.sha256, Rr.SHA224 = e.SHA224, Rr.sha224 = e.sha224, Rr;
 }
-var jo, X1;
-function Nm() {
-  if (X1) return jo;
-  X1 = 1;
+var jo, Y1;
+function qm() {
+  if (Y1) return jo;
+  Y1 = 1;
   function e(c) {
     if (c.length >= 255)
       throw new TypeError("Alphabet too long");
@@ -7765,15 +7768,15 @@ function Nm() {
   }
   return jo = e, jo;
 }
-var Yo, G1;
-function qm() {
-  return G1 || (G1 = 1, Yo = Nm()("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")), Yo;
-}
-var Xo, J1;
+var Yo, X1;
 function Tm() {
-  if (J1) return Xo;
-  J1 = 1;
-  var e = qm();
+  return X1 || (X1 = 1, Yo = qm()("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")), Yo;
+}
+var Xo, G1;
+function zm() {
+  if (G1) return Xo;
+  G1 = 1;
+  var e = Tm();
   return Xo = function(c) {
     function l(n) {
       var u = Uint8Array.from(n), a = c(u), s = u.length + 4, i = new Uint8Array(s);
@@ -7801,20 +7804,20 @@ function Tm() {
     };
   }, Xo;
 }
-var Go, W1;
-function zm() {
-  if (W1) return Go;
-  W1 = 1;
-  var { sha256: e } = /* @__PURE__ */ Mm(), c = Tm();
+var Go, J1;
+function Cm() {
+  if (J1) return Go;
+  J1 = 1;
+  var { sha256: e } = /* @__PURE__ */ Nm(), c = zm();
   function l(w) {
     return e(e(w));
   }
   return Go = c(l), Go;
 }
-var Mn, Z1;
+var Mn, W1;
 function B8() {
-  if (Z1) return Mn;
-  Z1 = 1;
+  if (W1) return Mn;
+  W1 = 1;
   /**
    * @license
    * https://reviews.bitcoinabc.org
@@ -7826,7 +7829,7 @@ function B8() {
   var e = Mn && Mn.__importDefault || function(D) {
     return D && D.__esModule ? D : { default: D };
   };
-  const c = e(Am()), l = e(Om()), w = e(_m()), m = e(zm()), f = e(cl()), { validate: n, ValidationError: u } = f.default;
+  const c = e(Om()), l = e(_m()), w = e(Rm()), m = e(Cm()), f = e(fl()), { validate: n, ValidationError: u } = f.default;
   function a(D, Q, W) {
     n(typeof D == "string" && g(D), "Invalid prefix: " + D + "."), n(typeof Q == "string", "Invalid type: " + Q + "."), n(W instanceof Uint8Array || typeof W == "string", "Invalid hash: " + W + ". Must be string or Uint8Array."), typeof W == "string" && (W = q(W));
     const ae = G(S(D), new Uint8Array(1)), v = p(Q) + o(W), Y = F(G(new Uint8Array([v]), W)), he = G(G(ae, Y), new Uint8Array(8)), le = G(Y, y(N(he)));
@@ -8058,18 +8061,18 @@ function B8() {
     getOutputScriptFromAddress: ue
   }, Mn;
 }
-var Cm = B8();
-const Mi = /* @__PURE__ */ Nr(Cm);
+var Dm = B8();
+const Mi = /* @__PURE__ */ Nr(Dm);
 var Nn = {};
 /*!
  * int64.js - int64 object for javascript.
  * Copyright (c) 2017, Christopher Jeffrey (MIT License).
  * https://github.com/chjj/n64
  */
-var Q1;
-function ul() {
-  if (Q1) return Nn;
-  Q1 = 1;
+var Z1;
+function cl() {
+  if (Z1) return Nn;
+  Z1 = 1;
   function e(p) {
     n(this instanceof e, "this", "N64"), n(p === 0 || p === 1, "sign", "bit"), this.hi = 0, this.lo = 0, this.sign = p;
   }
@@ -8585,17 +8588,17 @@ function ul() {
   }
   return Nn.N64 = e, Nn.U64 = c, Nn.I64 = l, Nn;
 }
-var M8 = ul();
+var M8 = cl();
 const N8 = /* @__PURE__ */ Nr(M8);
-var bs = {}, Jo = {}, ed;
-function Dm() {
-  return ed || (ed = 1, Jo.custom = "inspect"), Jo;
+var bs = {}, Jo = {}, Q1;
+function Um() {
+  return Q1 || (Q1 = 1, Jo.custom = "inspect"), Jo;
 }
-var td;
+var ed;
 function $r() {
-  if (td) return bs;
-  td = 1;
-  const { custom: e } = Dm();
+  if (ed) return bs;
+  ed = 1;
+  const { custom: e } = Um();
   class c {
     /**
      * @constructor
@@ -8792,17 +8795,17 @@ function $r() {
   }
   return bs.BufferMap = c, bs.BufferSet = l, bs;
 }
-var Um = $r();
-const wn = /* @__PURE__ */ Nr(Um);
+var Fm = $r();
+const wn = /* @__PURE__ */ Nr(Fm);
 /*!
  * lru.js - LRU cache for bcoin
  * Copyright (c) 2014-2018, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Wo, rd;
-function Fm() {
-  if (rd) return Wo;
-  rd = 1;
+var Wo, td;
+function Hm() {
+  if (td) return Wo;
+  td = 1;
   const e = Xe();
   class c {
     /**
@@ -9079,21 +9082,21 @@ function Fm() {
   }
   return Wo = c, Wo;
 }
-var Zo, id;
+var Zo, rd;
 function q8() {
-  return id || (id = 1, Zo = Fm()), Zo;
+  return rd || (rd = 1, Zo = Hm()), Zo;
 }
-var Hm = q8();
-const Lm = /* @__PURE__ */ Nr(Hm);
-var Km = $s();
-const Vm = /* @__PURE__ */ Nr(Km);
-var $m = js();
-const jm = /* @__PURE__ */ Nr($m);
+var Lm = q8();
+const Km = /* @__PURE__ */ Nr(Lm);
+var Vm = $s();
+const $m = /* @__PURE__ */ Nr(Vm);
+var jm = js();
+const Ym = /* @__PURE__ */ Nr(jm);
 var bn = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof Ds < "u" ? Ds : typeof self < "u" ? self : {};
-function Ym(e) {
+function Xm(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
-function hl(e) {
+function ul(e) {
   if (Object.prototype.hasOwnProperty.call(e, "__esModule")) return e;
   var c = e.default;
   if (typeof c == "function") {
@@ -9118,9 +9121,9 @@ var ps = { exports: {} }, ms = {}, Qo = {};
  * Copyright (c) 2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var nd;
+var id;
 function T8() {
-  return nd || (nd = 1, function(e) {
+  return id || (id = 1, function(e) {
     const c = dt;
     e.encode = function(n, u) {
       c(Number.isSafeInteger(n), "Invalid integer value.");
@@ -9235,10 +9238,10 @@ function T8() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var ea, sd;
+var ea, nd;
 function Ui() {
-  if (sd) return ea;
-  sd = 1;
+  if (nd) return ea;
+  nd = 1;
   const e = dt, c = T8();
   class l {
     /**
@@ -9509,10 +9512,10 @@ function Ui() {
  * Copyright (c) 2020, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var ta, od;
+var ta, sd;
 function Mt() {
-  if (od) return ta;
-  od = 1;
+  if (sd) return ta;
+  sd = 1;
   function e(c, l) {
     if (!c) {
       const w = new Error(l || "Assertion failed");
@@ -9535,10 +9538,10 @@ function Mt() {
  *   https://tools.ietf.org/html/rfc2104
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/hmac.js
  */
-var ra, ad;
+var ra, od;
 function ni() {
-  if (ad) return ra;
-  ad = 1;
+  if (od) return ra;
+  od = 1;
   const e = Mt();
   class c {
     /**
@@ -9603,10 +9606,10 @@ function ni() {
  *   https://tools.ietf.org/html/rfc4634
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/sha/256.js
  */
-var ia, fd;
+var ia, ad;
 function br() {
-  if (fd) return ia;
-  fd = 1;
+  if (ad) return ia;
+  ad = 1;
   const e = Mt(), c = ni(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -9787,10 +9790,10 @@ function br() {
  *   https://homes.esat.kuleuven.be/~bosselae/ripemd160/pdf/AB-9601/AB-9601.pdf
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/ripemd.js
  */
-var na, cd;
-function ll() {
-  if (cd) return na;
-  cd = 1;
+var na, fd;
+function hl() {
+  if (fd) return na;
+  fd = 1;
   const e = Mt(), c = ni(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint8Array([
@@ -10217,11 +10220,11 @@ function ll() {
  * Resources:
  *   https://github.com/bitcoin/bitcoin/blob/master/src/hash.h
  */
-var sa, ud;
+var sa, cd;
 function yn() {
-  if (ud) return sa;
-  ud = 1;
-  const e = Mt(), c = br(), l = ll(), w = ni(), m = new l();
+  if (cd) return sa;
+  cd = 1;
+  const e = Mt(), c = br(), l = hl(), w = ni(), m = new l();
   class f {
     constructor() {
       this.ctx = new c();
@@ -10266,10 +10269,10 @@ function yn() {
  * Resources:
  *   https://github.com/bitcoin/bitcoin/blob/master/src/hash.h
  */
-var oa, hd;
+var oa, ud;
 function qr() {
-  if (hd) return oa;
-  hd = 1;
+  if (ud) return oa;
+  ud = 1;
   const e = Mt(), c = br(), l = ni();
   class w {
     constructor() {
@@ -10314,9 +10317,9 @@ var aa = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var ld;
-function dl() {
-  return ld || (ld = 1, function(e) {
+var hd;
+function ll() {
+  return hd || (hd = 1, function(e) {
     e.search = function(w, m, f, n) {
       let u = 0, a = w.length - 1;
       for (; u <= a; ) {
@@ -10345,36 +10348,36 @@ function dl() {
     }
   }(aa)), aa;
 }
-var fa = {}, ca = {}, Ci = typeof Ds < "u" ? Ds : typeof self < "u" ? self : typeof window < "u" ? window : {}, Lr = [], Er = [], Xm = typeof Uint8Array < "u" ? Uint8Array : Array, bl = !1;
+var fa = {}, ca = {}, Ci = typeof Ds < "u" ? Ds : typeof self < "u" ? self : typeof window < "u" ? window : {}, Lr = [], Er = [], Gm = typeof Uint8Array < "u" ? Uint8Array : Array, dl = !1;
 function z8() {
-  bl = !0;
+  dl = !0;
   for (var e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", c = 0, l = e.length; c < l; ++c)
     Lr[c] = e[c], Er[e.charCodeAt(c)] = c;
   Er[45] = 62, Er[95] = 63;
 }
-function Gm(e) {
-  bl || z8();
+function Jm(e) {
+  dl || z8();
   var c, l, w, m, f, n, u = e.length;
   if (u % 4 > 0)
     throw new Error("Invalid string. Length must be a multiple of 4");
-  f = e[u - 2] === "=" ? 2 : e[u - 1] === "=" ? 1 : 0, n = new Xm(u * 3 / 4 - f), w = f > 0 ? u - 4 : u;
+  f = e[u - 2] === "=" ? 2 : e[u - 1] === "=" ? 1 : 0, n = new Gm(u * 3 / 4 - f), w = f > 0 ? u - 4 : u;
   var a = 0;
   for (c = 0, l = 0; c < w; c += 4, l += 3)
     m = Er[e.charCodeAt(c)] << 18 | Er[e.charCodeAt(c + 1)] << 12 | Er[e.charCodeAt(c + 2)] << 6 | Er[e.charCodeAt(c + 3)], n[a++] = m >> 16 & 255, n[a++] = m >> 8 & 255, n[a++] = m & 255;
   return f === 2 ? (m = Er[e.charCodeAt(c)] << 2 | Er[e.charCodeAt(c + 1)] >> 4, n[a++] = m & 255) : f === 1 && (m = Er[e.charCodeAt(c)] << 10 | Er[e.charCodeAt(c + 1)] << 4 | Er[e.charCodeAt(c + 2)] >> 2, n[a++] = m >> 8 & 255, n[a++] = m & 255), n;
 }
-function Jm(e) {
+function Wm(e) {
   return Lr[e >> 18 & 63] + Lr[e >> 12 & 63] + Lr[e >> 6 & 63] + Lr[e & 63];
 }
-function Wm(e, c, l) {
+function Zm(e, c, l) {
   for (var w, m = [], f = c; f < l; f += 3)
-    w = (e[f] << 16) + (e[f + 1] << 8) + e[f + 2], m.push(Jm(w));
+    w = (e[f] << 16) + (e[f + 1] << 8) + e[f + 2], m.push(Wm(w));
   return m.join("");
 }
-function dd(e) {
-  bl || z8();
+function ld(e) {
+  dl || z8();
   for (var c, l = e.length, w = l % 3, m = "", f = [], n = 16383, u = 0, a = l - w; u < a; u += n)
-    f.push(Wm(e, u, u + n > a ? a : u + n));
+    f.push(Zm(e, u, u + n > a ? a : u + n));
   return w === 1 ? (c = e[l - 1], m += Lr[c >> 2], m += Lr[c << 4 & 63], m += "==") : w === 2 && (c = (e[l - 2] << 8) + e[l - 1], m += Lr[c >> 10], m += Lr[c >> 4 & 63], m += Lr[c << 2 & 63], m += "="), f.push(m), f.join("");
 }
 function Xs(e, c, l, w, m) {
@@ -10400,8 +10403,8 @@ function C8(e, c, l, w, m, f) {
     ;
   e[l + S - y] |= p * 128;
 }
-var Zm = {}.toString, D8 = Array.isArray || function(e) {
-  return Zm.call(e) == "[object Array]";
+var Qm = {}.toString, D8 = Array.isArray || function(e) {
+  return Qm.call(e) == "[object Array]";
 };
 /*!
  * The buffer module from node.js, for the browser.
@@ -10409,7 +10412,7 @@ var Zm = {}.toString, D8 = Array.isArray || function(e) {
  * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
  * @license  MIT
  */
-var Qm = 50;
+var e9 = 50;
 Ce.TYPED_ARRAY_SUPPORT = Ci.TYPED_ARRAY_SUPPORT !== void 0 ? Ci.TYPED_ARRAY_SUPPORT : !0;
 Us();
 function Us() {
@@ -10428,7 +10431,7 @@ function Ce(e, c, l) {
       throw new Error(
         "If encoding is specified then the first argument must be a string"
       );
-    return pl(this, e);
+    return bl(this, e);
   }
   return U8(this, e, c, l);
 }
@@ -10439,7 +10442,7 @@ Ce._augment = function(e) {
 function U8(e, c, l, w) {
   if (typeof c == "number")
     throw new TypeError('"value" argument must not be a number');
-  return typeof ArrayBuffer < "u" && c instanceof ArrayBuffer ? r9(e, c, l, w) : typeof c == "string" ? t9(e, c, l) : i9(e, c);
+  return typeof ArrayBuffer < "u" && c instanceof ArrayBuffer ? i9(e, c, l, w) : typeof c == "string" ? r9(e, c, l) : n9(e, c);
 }
 Ce.from = function(e, c, l) {
   return U8(null, e, c, l);
@@ -10451,25 +10454,25 @@ function F8(e) {
   if (e < 0)
     throw new RangeError('"size" argument must not be negative');
 }
-function e9(e, c, l, w) {
+function t9(e, c, l, w) {
   return F8(c), c <= 0 ? ti(e, c) : l !== void 0 ? typeof w == "string" ? ti(e, c).fill(l, w) : ti(e, c).fill(l) : ti(e, c);
 }
 Ce.alloc = function(e, c, l) {
-  return e9(null, e, c, l);
+  return t9(null, e, c, l);
 };
-function pl(e, c) {
-  if (F8(c), e = ti(e, c < 0 ? 0 : ml(c) | 0), !Ce.TYPED_ARRAY_SUPPORT)
+function bl(e, c) {
+  if (F8(c), e = ti(e, c < 0 ? 0 : pl(c) | 0), !Ce.TYPED_ARRAY_SUPPORT)
     for (var l = 0; l < c; ++l)
       e[l] = 0;
   return e;
 }
 Ce.allocUnsafe = function(e) {
-  return pl(null, e);
+  return bl(null, e);
 };
 Ce.allocUnsafeSlow = function(e) {
-  return pl(null, e);
+  return bl(null, e);
 };
-function t9(e, c, l) {
+function r9(e, c, l) {
   if ((typeof l != "string" || l === "") && (l = "utf8"), !Ce.isEncoding(l))
     throw new TypeError('"encoding" must be a valid string encoding');
   var w = H8(c, l) | 0;
@@ -10478,33 +10481,33 @@ function t9(e, c, l) {
   return m !== w && (e = e.slice(0, m)), e;
 }
 function il(e, c) {
-  var l = c.length < 0 ? 0 : ml(c.length) | 0;
+  var l = c.length < 0 ? 0 : pl(c.length) | 0;
   e = ti(e, l);
   for (var w = 0; w < l; w += 1)
     e[w] = c[w] & 255;
   return e;
 }
-function r9(e, c, l, w) {
+function i9(e, c, l, w) {
   if (c.byteLength, l < 0 || c.byteLength < l)
     throw new RangeError("'offset' is out of bounds");
   if (c.byteLength < l + (w || 0))
     throw new RangeError("'length' is out of bounds");
   return l === void 0 && w === void 0 ? c = new Uint8Array(c) : w === void 0 ? c = new Uint8Array(c, l) : c = new Uint8Array(c, l, w), Ce.TYPED_ARRAY_SUPPORT ? (e = c, e.__proto__ = Ce.prototype) : e = il(e, c), e;
 }
-function i9(e, c) {
+function n9(e, c) {
   if (Vr(c)) {
-    var l = ml(c.length) | 0;
+    var l = pl(c.length) | 0;
     return e = ti(e, l), e.length === 0 || c.copy(e, 0, 0, l), e;
   }
   if (c) {
     if (typeof ArrayBuffer < "u" && c.buffer instanceof ArrayBuffer || "length" in c)
-      return typeof c.length != "number" || S9(c.length) ? ti(e, 0) : il(e, c);
+      return typeof c.length != "number" || E9(c.length) ? ti(e, 0) : il(e, c);
     if (c.type === "Buffer" && D8(c.data))
       return il(e, c.data);
   }
   throw new TypeError("First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.");
 }
-function ml(e) {
+function pl(e) {
   if (e >= Us())
     throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + Us().toString(16) + " bytes");
   return e | 0;
@@ -10593,29 +10596,29 @@ function H8(e, c) {
     }
 }
 Ce.byteLength = H8;
-function n9(e, c, l) {
+function s9(e, c, l) {
   var w = !1;
   if ((c === void 0 || c < 0) && (c = 0), c > this.length || ((l === void 0 || l > this.length) && (l = this.length), l <= 0) || (l >>>= 0, c >>>= 0, l <= c))
     return "";
   for (e || (e = "utf8"); ; )
     switch (e) {
       case "hex":
-        return b9(this, c, l);
+        return p9(this, c, l);
       case "utf8":
       case "utf-8":
         return V8(this, c, l);
       case "ascii":
-        return l9(this, c, l);
+        return d9(this, c, l);
       case "latin1":
       case "binary":
-        return d9(this, c, l);
+        return b9(this, c, l);
       case "base64":
-        return u9(this, c, l);
+        return h9(this, c, l);
       case "ucs2":
       case "ucs-2":
       case "utf16le":
       case "utf-16le":
-        return p9(this, c, l);
+        return m9(this, c, l);
       default:
         if (w) throw new TypeError("Unknown encoding: " + e);
         e = (e + "").toLowerCase(), w = !0;
@@ -10652,14 +10655,14 @@ Ce.prototype.swap64 = function() {
 };
 Ce.prototype.toString = function() {
   var c = this.length | 0;
-  return c === 0 ? "" : arguments.length === 0 ? V8(this, 0, c) : n9.apply(this, arguments);
+  return c === 0 ? "" : arguments.length === 0 ? V8(this, 0, c) : s9.apply(this, arguments);
 };
 Ce.prototype.equals = function(c) {
   if (!Vr(c)) throw new TypeError("Argument must be a Buffer");
   return this === c ? !0 : Ce.compare(this, c) === 0;
 };
 Ce.prototype.inspect = function() {
-  var c = "", l = Qm;
+  var c = "", l = e9;
   return this.length > 0 && (c = this.toString("hex", 0, l).match(/.{2}/g).join(" "), this.length > l && (c += " ... ")), "<Buffer " + c + ">";
 };
 Ce.prototype.compare = function(c, l, w, m, f) {
@@ -10690,12 +10693,12 @@ function L8(e, c, l, w, m) {
     if (m) l = 0;
     else return -1;
   if (typeof c == "string" && (c = Ce.from(c, w)), Vr(c))
-    return c.length === 0 ? -1 : bd(e, c, l, w, m);
+    return c.length === 0 ? -1 : dd(e, c, l, w, m);
   if (typeof c == "number")
-    return c = c & 255, Ce.TYPED_ARRAY_SUPPORT && typeof Uint8Array.prototype.indexOf == "function" ? m ? Uint8Array.prototype.indexOf.call(e, c, l) : Uint8Array.prototype.lastIndexOf.call(e, c, l) : bd(e, [c], l, w, m);
+    return c = c & 255, Ce.TYPED_ARRAY_SUPPORT && typeof Uint8Array.prototype.indexOf == "function" ? m ? Uint8Array.prototype.indexOf.call(e, c, l) : Uint8Array.prototype.lastIndexOf.call(e, c, l) : dd(e, [c], l, w, m);
   throw new TypeError("val must be string, number or Buffer");
 }
-function bd(e, c, l, w, m) {
+function dd(e, c, l, w, m) {
   var f = 1, n = e.length, u = c.length;
   if (w !== void 0 && (w = String(w).toLowerCase(), w === "ucs2" || w === "ucs-2" || w === "utf16le" || w === "utf-16le")) {
     if (e.length < 2 || c.length < 2)
@@ -10733,7 +10736,7 @@ Ce.prototype.indexOf = function(c, l, w) {
 Ce.prototype.lastIndexOf = function(c, l, w) {
   return L8(this, c, l, w, !1);
 };
-function s9(e, c, l, w) {
+function o9(e, c, l, w) {
   l = Number(l) || 0;
   var m = e.length - l;
   w ? (w = Number(w), w > m && (w = m)) : w = m;
@@ -10747,20 +10750,20 @@ function s9(e, c, l, w) {
   }
   return n;
 }
-function o9(e, c, l, w) {
+function a9(e, c, l, w) {
   return Ws(Fs(c, e.length - l), e, l, w);
 }
 function K8(e, c, l, w) {
-  return Ws(y9(c), e, l, w);
-}
-function a9(e, c, l, w) {
-  return K8(e, c, l, w);
+  return Ws(v9(c), e, l, w);
 }
 function f9(e, c, l, w) {
-  return Ws(X8(c), e, l, w);
+  return K8(e, c, l, w);
 }
 function c9(e, c, l, w) {
-  return Ws(v9(c, e.length - l), e, l, w);
+  return Ws(X8(c), e, l, w);
+}
+function u9(e, c, l, w) {
+  return Ws(S9(c, e.length - l), e, l, w);
 }
 Ce.prototype.write = function(c, l, w, m) {
   if (l === void 0)
@@ -10780,22 +10783,22 @@ Ce.prototype.write = function(c, l, w, m) {
   for (var n = !1; ; )
     switch (m) {
       case "hex":
-        return s9(this, c, l, w);
+        return o9(this, c, l, w);
       case "utf8":
       case "utf-8":
-        return o9(this, c, l, w);
+        return a9(this, c, l, w);
       case "ascii":
         return K8(this, c, l, w);
       case "latin1":
       case "binary":
-        return a9(this, c, l, w);
-      case "base64":
         return f9(this, c, l, w);
+      case "base64":
+        return c9(this, c, l, w);
       case "ucs2":
       case "ucs-2":
       case "utf16le":
       case "utf-16le":
-        return c9(this, c, l, w);
+        return u9(this, c, l, w);
       default:
         if (n) throw new TypeError("Unknown encoding: " + m);
         m = ("" + m).toLowerCase(), n = !0;
@@ -10807,8 +10810,8 @@ Ce.prototype.toJSON = function() {
     data: Array.prototype.slice.call(this._arr || this, 0)
   };
 };
-function u9(e, c, l) {
-  return c === 0 && l === e.length ? dd(e) : dd(e.slice(c, l));
+function h9(e, c, l) {
+  return c === 0 && l === e.length ? ld(e) : ld(e.slice(c, l));
 }
 function V8(e, c, l) {
   l = Math.min(e.length, l);
@@ -10832,42 +10835,42 @@ function V8(e, c, l) {
     }
     n === null ? (n = 65533, u = 1) : n > 65535 && (n -= 65536, w.push(n >>> 10 & 1023 | 55296), n = 56320 | n & 1023), w.push(n), m += u;
   }
-  return h9(w);
+  return l9(w);
 }
-var pd = 4096;
-function h9(e) {
+var bd = 4096;
+function l9(e) {
   var c = e.length;
-  if (c <= pd)
+  if (c <= bd)
     return String.fromCharCode.apply(String, e);
   for (var l = "", w = 0; w < c; )
     l += String.fromCharCode.apply(
       String,
-      e.slice(w, w += pd)
+      e.slice(w, w += bd)
     );
   return l;
 }
-function l9(e, c, l) {
+function d9(e, c, l) {
   var w = "";
   l = Math.min(e.length, l);
   for (var m = c; m < l; ++m)
     w += String.fromCharCode(e[m] & 127);
   return w;
 }
-function d9(e, c, l) {
+function b9(e, c, l) {
   var w = "";
   l = Math.min(e.length, l);
   for (var m = c; m < l; ++m)
     w += String.fromCharCode(e[m]);
   return w;
 }
-function b9(e, c, l) {
+function p9(e, c, l) {
   var w = e.length;
   (!c || c < 0) && (c = 0), (!l || l < 0 || l > w) && (l = w);
   for (var m = "", f = c; f < l; ++f)
-    m += w9(e[f]);
+    m += y9(e[f]);
   return m;
 }
-function p9(e, c, l) {
+function m9(e, c, l) {
   for (var w = e.slice(c, l), m = "", f = 0; f < w.length; f += 2)
     m += String.fromCharCode(w[f] + w[f + 1] * 256);
   return m;
@@ -11116,17 +11119,17 @@ Ce.prototype.fill = function(c, l, w, m) {
   }
   return this;
 };
-var m9 = /[^+\/0-9A-Za-z-_]/g;
-function g9(e) {
-  if (e = x9(e).replace(m9, ""), e.length < 2) return "";
+var g9 = /[^+\/0-9A-Za-z-_]/g;
+function x9(e) {
+  if (e = w9(e).replace(g9, ""), e.length < 2) return "";
   for (; e.length % 4 !== 0; )
     e = e + "=";
   return e;
 }
-function x9(e) {
+function w9(e) {
   return e.trim ? e.trim() : e.replace(/^\s+|\s+$/g, "");
 }
-function w9(e) {
+function y9(e) {
   return e < 16 ? "0" + e.toString(16) : e.toString(16);
 }
 function Fs(e, c) {
@@ -11179,34 +11182,34 @@ function Fs(e, c) {
   }
   return f;
 }
-function y9(e) {
+function v9(e) {
   for (var c = [], l = 0; l < e.length; ++l)
     c.push(e.charCodeAt(l) & 255);
   return c;
 }
-function v9(e, c) {
+function S9(e, c) {
   for (var l, w, m, f = [], n = 0; n < e.length && !((c -= 2) < 0); ++n)
     l = e.charCodeAt(n), w = l >> 8, m = l % 256, f.push(m), f.push(w);
   return f;
 }
 function X8(e) {
-  return Gm(g9(e));
+  return Jm(x9(e));
 }
 function Ws(e, c, l, w) {
   for (var m = 0; m < w && !(m + l >= c.length || m >= e.length); ++m)
     c[m + l] = e[m];
   return m;
 }
-function S9(e) {
+function E9(e) {
   return e !== e;
 }
 function an(e) {
-  return e != null && (!!e._isBuffer || G8(e) || E9(e));
+  return e != null && (!!e._isBuffer || G8(e) || I9(e));
 }
 function G8(e) {
   return !!e.constructor && typeof e.constructor.isBuffer == "function" && e.constructor.isBuffer(e);
 }
-function E9(e) {
+function I9(e) {
   return typeof e.readFloatLE == "function" && typeof e.slice == "function" && G8(e.slice(0, 0));
 }
 function J8() {
@@ -11233,7 +11236,7 @@ function Z8(e) {
     }
   }
 }
-function I9(e) {
+function A9(e) {
   if (mi === clearTimeout)
     return clearTimeout(e);
   if ((mi === W8 || !mi) && clearTimeout)
@@ -11249,22 +11252,22 @@ function I9(e) {
   }
 }
 var ri = [], un = !1, qi, Cs = -1;
-function A9() {
+function O9() {
   !un || !qi || (un = !1, qi.length ? ri = qi.concat(ri) : Cs = -1, ri.length && Q8());
 }
 function Q8() {
   if (!un) {
-    var e = Z8(A9);
+    var e = Z8(O9);
     un = !0;
     for (var c = ri.length; c; ) {
       for (qi = ri, ri = []; ++Cs < c; )
         qi && qi[Cs].run();
       Cs = -1, c = ri.length;
     }
-    qi = null, un = !1, I9(e);
+    qi = null, un = !1, A9(e);
   }
 }
-function O9(e) {
+function _9(e) {
   var c = new Array(arguments.length - 1);
   if (arguments.length > 1)
     for (var l = 1; l < arguments.length; l++)
@@ -11277,58 +11280,58 @@ function e7(e, c) {
 e7.prototype.run = function() {
   this.fun.apply(null, this.array);
 };
-var _9 = "browser", R9 = "browser", P9 = !0, k9 = {}, B9 = [], M9 = "", N9 = {}, q9 = {}, T9 = {};
+var R9 = "browser", P9 = "browser", k9 = !0, B9 = {}, M9 = [], N9 = "", q9 = {}, T9 = {}, z9 = {};
 function Fi() {
 }
-var z9 = Fi, C9 = Fi, D9 = Fi, U9 = Fi, F9 = Fi, H9 = Fi, L9 = Fi;
-function K9(e) {
+var C9 = Fi, D9 = Fi, U9 = Fi, F9 = Fi, H9 = Fi, L9 = Fi, K9 = Fi;
+function V9(e) {
   throw new Error("process.binding is not supported");
 }
-function V9() {
+function $9() {
   return "/";
 }
-function $9(e) {
+function j9(e) {
   throw new Error("process.chdir is not supported");
 }
-function j9() {
+function Y9() {
   return 0;
 }
-var on = Ci.performance || {}, Y9 = on.now || on.mozNow || on.msNow || on.oNow || on.webkitNow || function() {
+var on = Ci.performance || {}, X9 = on.now || on.mozNow || on.msNow || on.oNow || on.webkitNow || function() {
   return (/* @__PURE__ */ new Date()).getTime();
 };
-function X9(e) {
-  var c = Y9.call(on) * 1e-3, l = Math.floor(c), w = Math.floor(c % 1 * 1e9);
+function G9(e) {
+  var c = X9.call(on) * 1e-3, l = Math.floor(c), w = Math.floor(c % 1 * 1e9);
   return e && (l = l - e[0], w = w - e[1], w < 0 && (l--, w += 1e9)), [l, w];
 }
-var G9 = /* @__PURE__ */ new Date();
-function J9() {
-  var e = /* @__PURE__ */ new Date(), c = e - G9;
+var J9 = /* @__PURE__ */ new Date();
+function W9() {
+  var e = /* @__PURE__ */ new Date(), c = e - J9;
   return c / 1e3;
 }
 var hn = {
-  nextTick: O9,
-  title: _9,
-  browser: P9,
-  env: k9,
-  argv: B9,
-  version: M9,
-  versions: N9,
-  on: z9,
-  addListener: C9,
-  once: D9,
-  off: U9,
-  removeListener: F9,
-  removeAllListeners: H9,
-  emit: L9,
-  binding: K9,
-  cwd: V9,
-  chdir: $9,
-  umask: j9,
-  hrtime: X9,
-  platform: R9,
-  release: q9,
-  config: T9,
-  uptime: J9
+  nextTick: _9,
+  title: R9,
+  browser: k9,
+  env: B9,
+  argv: M9,
+  version: N9,
+  versions: q9,
+  on: C9,
+  addListener: D9,
+  once: U9,
+  off: F9,
+  removeListener: H9,
+  removeAllListeners: L9,
+  emit: K9,
+  binding: V9,
+  cwd: $9,
+  chdir: j9,
+  umask: Y9,
+  hrtime: G9,
+  platform: P9,
+  release: T9,
+  config: z9,
+  uptime: W9
 }, Xn;
 typeof Object.create == "function" ? Xn = function(c, l) {
   c.super_ = l, c.prototype = Object.create(l.prototype, {
@@ -11349,14 +11352,14 @@ var t7 = Object.getOwnPropertyDescriptors || function(c) {
   for (var l = Object.keys(c), w = {}, m = 0; m < l.length; m++)
     w[l[m]] = Object.getOwnPropertyDescriptor(c, l[m]);
   return w;
-}, W9 = /%[sdj%]/g;
+}, Z9 = /%[sdj%]/g;
 function Zs(e) {
   if (!Zn(e)) {
     for (var c = [], l = 0; l < arguments.length; l++)
       c.push(Mr(arguments[l]));
     return c.join(" ");
   }
-  for (var l = 1, w = arguments, m = w.length, f = String(e).replace(W9, function(u) {
+  for (var l = 1, w = arguments, m = w.length, f = String(e).replace(Z9, function(u) {
     if (u === "%%") return "%";
     if (l >= m) return u;
     switch (u) {
@@ -11377,10 +11380,10 @@ function Zs(e) {
     Wn(n) || !Hi(n) ? f += " " + n : f += " " + Mr(n);
   return f;
 }
-function gl(e, c) {
+function ml(e, c) {
   if (Kr(Ci.process))
     return function() {
-      return gl(e, c).apply(this, arguments);
+      return ml(e, c).apply(this, arguments);
     };
   if (hn.noDeprecation === !0)
     return e;
@@ -11412,9 +11415,9 @@ function r7(e) {
 function Mr(e, c) {
   var l = {
     seen: [],
-    stylize: Q9
+    stylize: eg
   };
-  return arguments.length >= 3 && (l.depth = arguments[2]), arguments.length >= 4 && (l.colors = arguments[3]), Qs(c) ? l.showHidden = c : c && vl(l, c), Kr(l.showHidden) && (l.showHidden = !1), Kr(l.depth) && (l.depth = 2), Kr(l.colors) && (l.colors = !1), Kr(l.customInspect) && (l.customInspect = !0), l.colors && (l.stylize = Z9), Hs(l, e, l.depth);
+  return arguments.length >= 3 && (l.depth = arguments[2]), arguments.length >= 4 && (l.colors = arguments[3]), Qs(c) ? l.showHidden = c : c && yl(l, c), Kr(l.showHidden) && (l.showHidden = !1), Kr(l.depth) && (l.depth = 2), Kr(l.colors) && (l.colors = !1), Kr(l.customInspect) && (l.customInspect = !0), l.colors && (l.stylize = Q9), Hs(l, e, l.depth);
 }
 Mr.colors = {
   bold: [1, 22],
@@ -11442,14 +11445,14 @@ Mr.styles = {
   // "name": intentionally not styling
   regexp: "red"
 };
-function Z9(e, c) {
+function Q9(e, c) {
   var l = Mr.styles[c];
   return l ? "\x1B[" + Mr.colors[l][0] + "m" + e + "\x1B[" + Mr.colors[l][1] + "m" : e;
 }
-function Q9(e, c) {
+function eg(e, c) {
   return e;
 }
-function eg(e) {
+function tg(e) {
   var c = {};
   return e.forEach(function(l, w) {
     c[l] = !0;
@@ -11462,10 +11465,10 @@ function Hs(e, c, l) {
     var w = c.inspect(l, e);
     return Zn(w) || (w = Hs(e, w, l)), w;
   }
-  var m = tg(e, c);
+  var m = rg(e, c);
   if (m)
     return m;
-  var f = Object.keys(c), n = eg(f);
+  var f = Object.keys(c), n = tg(f);
   if (e.showHidden && (f = Object.getOwnPropertyNames(c)), ln(c) && (f.indexOf("message") >= 0 || f.indexOf("description") >= 0))
     return ha(c);
   if (f.length === 0) {
@@ -11481,7 +11484,7 @@ function Hs(e, c, l) {
       return ha(c);
   }
   var a = "", s = !1, i = ["{", "}"];
-  if (xl(c) && (s = !0, i = ["[", "]"]), zi(c)) {
+  if (gl(c) && (s = !0, i = ["[", "]"]), zi(c)) {
     var b = c.name ? ": " + c.name : "";
     a = " [Function" + b + "]";
   }
@@ -11491,18 +11494,18 @@ function Hs(e, c, l) {
     return Ti(c) ? e.stylize(RegExp.prototype.toString.call(c), "regexp") : e.stylize("[Object]", "special");
   e.seen.push(c);
   var g;
-  return s ? g = rg(e, c, l, n, f) : g = f.map(function(S) {
+  return s ? g = ig(e, c, l, n, f) : g = f.map(function(S) {
     return nl(e, c, l, n, S, s);
-  }), e.seen.pop(), ig(g, a, i);
+  }), e.seen.pop(), ng(g, a, i);
 }
-function tg(e, c) {
+function rg(e, c) {
   if (Kr(c))
     return e.stylize("undefined", "undefined");
   if (Zn(c)) {
     var l = "'" + JSON.stringify(c).replace(/^"|"$/g, "").replace(/'/g, "\\'").replace(/\\"/g, '"') + "'";
     return e.stylize(l, "string");
   }
-  if (wl(c))
+  if (xl(c))
     return e.stylize("" + c, "number");
   if (Qs(c))
     return e.stylize("" + c, "boolean");
@@ -11512,7 +11515,7 @@ function tg(e, c) {
 function ha(e) {
   return "[" + Error.prototype.toString.call(e) + "]";
 }
-function rg(e, c, l, w, m) {
+function ig(e, c, l, w, m) {
   for (var f = [], n = 0, u = c.length; n < u; ++n)
     a7(c, String(n)) ? f.push(nl(
       e,
@@ -11552,7 +11555,7 @@ function nl(e, c, l, w, m, f) {
   }
   return n + ": " + u;
 }
-function ig(e, c, l) {
+function ng(e, c, l) {
   var w = e.reduce(function(m, f) {
     return f.indexOf(`
 `) >= 0, m + f.replace(/\u001b\[\d\d?m/g, "").length + 1;
@@ -11561,7 +11564,7 @@ function ig(e, c, l) {
  `) + " " + e.join(`,
   `) + " " + l[1] : l[0] + c + " " + e.join(", ") + " " + l[1];
 }
-function xl(e) {
+function gl(e) {
   return Array.isArray(e);
 }
 function Qs(e) {
@@ -11573,7 +11576,7 @@ function Wn(e) {
 function i7(e) {
   return e == null;
 }
-function wl(e) {
+function xl(e) {
   return typeof e == "number";
 }
 function Zn(e) {
@@ -11586,16 +11589,16 @@ function Kr(e) {
   return e === void 0;
 }
 function Ti(e) {
-  return Hi(e) && yl(e) === "[object RegExp]";
+  return Hi(e) && wl(e) === "[object RegExp]";
 }
 function Hi(e) {
   return typeof e == "object" && e !== null;
 }
 function pn(e) {
-  return Hi(e) && yl(e) === "[object Date]";
+  return Hi(e) && wl(e) === "[object Date]";
 }
 function ln(e) {
-  return Hi(e) && (yl(e) === "[object Error]" || e instanceof Error);
+  return Hi(e) && (wl(e) === "[object Error]" || e instanceof Error);
 }
 function zi(e) {
   return typeof e == "function";
@@ -11607,13 +11610,13 @@ function Ls(e) {
 function s7(e) {
   return Ce.isBuffer(e);
 }
-function yl(e) {
+function wl(e) {
   return Object.prototype.toString.call(e);
 }
 function la(e) {
   return e < 10 ? "0" + e.toString(10) : e.toString(10);
 }
-var ng = [
+var sg = [
   "Jan",
   "Feb",
   "Mar",
@@ -11627,18 +11630,18 @@ var ng = [
   "Nov",
   "Dec"
 ];
-function sg() {
+function og() {
   var e = /* @__PURE__ */ new Date(), c = [
     la(e.getHours()),
     la(e.getMinutes()),
     la(e.getSeconds())
   ].join(":");
-  return [e.getDate(), ng[e.getMonth()], c].join(" ");
+  return [e.getDate(), sg[e.getMonth()], c].join(" ");
 }
 function o7() {
-  console.log("%s - %s", sg(), Zs.apply(null, arguments));
+  console.log("%s - %s", og(), Zs.apply(null, arguments));
 }
-function vl(e, c) {
+function yl(e, c) {
   if (!c || !Hi(c)) return e;
   for (var l = Object.keys(c), w = l.length; w--; )
     e[l[w]] = c[l[w]];
@@ -11648,7 +11651,7 @@ function a7(e, c) {
   return Object.prototype.hasOwnProperty.call(e, c);
 }
 var Pi = typeof Symbol < "u" ? Symbol("util.promisify.custom") : void 0;
-function Sl(e) {
+function vl(e) {
   if (typeof e != "function")
     throw new TypeError('The "original" argument must be of type Function');
   if (Pi && e[Pi]) {
@@ -11687,8 +11690,8 @@ function Sl(e) {
     t7(e)
   );
 }
-Sl.custom = Pi;
-function og(e, c) {
+vl.custom = Pi;
+function ag(e, c) {
   if (!e) {
     var l = new Error("Promise was rejected with a falsy value");
     l.reason = e, e = l;
@@ -11712,15 +11715,15 @@ function f7(e) {
         hn.nextTick(n.bind(null, null, u));
       },
       function(u) {
-        hn.nextTick(og.bind(null, u, n));
+        hn.nextTick(ag.bind(null, u, n));
       }
     );
   }
   return Object.setPrototypeOf(c, Object.getPrototypeOf(e)), Object.defineProperties(c, t7(e)), c;
 }
-var ag = {
+var fg = {
   inherits: Xn,
-  _extend: vl,
+  _extend: yl,
   log: o7,
   isBuffer: s7,
   isPrimitive: Ls,
@@ -11732,28 +11735,28 @@ var ag = {
   isUndefined: Kr,
   isSymbol: n7,
   isString: Zn,
-  isNumber: wl,
+  isNumber: xl,
   isNullOrUndefined: i7,
   isNull: Wn,
   isBoolean: Qs,
-  isArray: xl,
+  isArray: gl,
   inspect: Mr,
-  deprecate: gl,
+  deprecate: ml,
   format: Zs,
   debuglog: r7,
-  promisify: Sl,
+  promisify: vl,
   callbackify: f7
-}, fg = /* @__PURE__ */ Object.freeze({
+}, cg = /* @__PURE__ */ Object.freeze({
   __proto__: null,
-  _extend: vl,
+  _extend: yl,
   callbackify: f7,
   debuglog: r7,
-  default: ag,
-  deprecate: gl,
+  default: fg,
+  deprecate: ml,
   format: Zs,
   inherits: Xn,
   inspect: Mr,
-  isArray: xl,
+  isArray: gl,
   isBoolean: Qs,
   isBuffer: s7,
   isDate: pn,
@@ -11761,7 +11764,7 @@ var ag = {
   isFunction: zi,
   isNull: Wn,
   isNullOrUndefined: i7,
-  isNumber: wl,
+  isNumber: xl,
   isObject: Hi,
   isPrimitive: Ls,
   isRegExp: Ti,
@@ -11769,17 +11772,17 @@ var ag = {
   isSymbol: n7,
   isUndefined: Kr,
   log: o7,
-  promisify: Sl
-}), c7 = /* @__PURE__ */ hl(fg);
+  promisify: vl
+}), c7 = /* @__PURE__ */ ul(cg);
 /*!
  * custom.js - custom inspect symbol for bcrypto
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var md;
+var pd;
 function u7() {
-  if (md) return ca;
-  md = 1;
+  if (pd) return ca;
+  pd = 1;
   const { inspect: e } = c7;
   return ca.custom = e.custom || "inspect", ca;
 }
@@ -11820,10 +11823,10 @@ function u7() {
  *   https://github.com/gnutls/nettle/blob/master/mini-gmp.c
  *   https://github.com/v8/v8/blob/master/src/objects/bigint.cc
  */
-var da, gd;
+var da, md;
 function jr() {
-  if (gd) return da;
-  gd = 1;
+  if (md) return da;
+  md = 1;
   const { custom: e } = u7(), c = [
     "",
     "0",
@@ -14655,9 +14658,9 @@ function jr() {
  * Copyright (c) 2019-2020, Jonathan Gonzalez (MIT License).
  * https://github.com/cash-org/cashnode
  */
-var xd;
-function El() {
-  return xd || (xd = 1, function(e) {
+var gd;
+function Sl() {
+  return gd || (gd = 1, function(e) {
     const c = jr(), l = e;
     function w(a) {
       return k.from(a, "hex");
@@ -15363,9 +15366,9 @@ var ba = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var wd;
+var xd;
 function Gt() {
-  return wd || (wd = 1, function(e) {
+  return xd || (xd = 1, function(e) {
     const c = dt, l = jr();
     e.COIN = 1e8, e.MAX_MONEY = 21e6 * e.COIN, e.BASE_REWARD = 50 * e.COIN, e.HALF_REWARD = Math.floor(e.BASE_REWARD / 2), e.MAX_BLOCK_SIZE = 1e6, e.MAX_FORK_BLOCK_SIZE = 32e6, e.MAX_TX_VERSION = 2, e.MAX_TX_SIZE = 1e6, e.MAX_TX_SIGCHECKS = 3e3, e.MAX_BLOCK_SIGCHECKS_RATIO = 141, e.MIN_TX_SIZE = 100, e.MAX_RAW_BLOCK_SIZE = 32e6, e.MAX_BLOCK_SIGOPS_PER_MB = 2e4, e.MAX_TX_SIGOPS = 2e4, e.MAX_BLOCK_SIGOPS_COST = 8e4, e.MAX_COINBASE_SCRIPTSIG_SIZE = 100, e.COINBASE_RULE_ADDR = [
       "ecash:pqnqv9lt7e5vjyp0w88zf2af0l92l8rxdg2jj94l5j",
@@ -15427,35 +15430,35 @@ function h7(e) {
 Pt.prototype.getMaxListeners = function() {
   return h7(this);
 };
-function cg(e, c, l) {
+function ug(e, c, l) {
   if (c)
     e.call(l);
   else
     for (var w = e.length, m = Qn(e, w), f = 0; f < w; ++f)
       m[f].call(l);
 }
-function ug(e, c, l, w) {
+function hg(e, c, l, w) {
   if (c)
     e.call(l, w);
   else
     for (var m = e.length, f = Qn(e, m), n = 0; n < m; ++n)
       f[n].call(l, w);
 }
-function hg(e, c, l, w, m) {
+function lg(e, c, l, w, m) {
   if (c)
     e.call(l, w, m);
   else
     for (var f = e.length, n = Qn(e, f), u = 0; u < f; ++u)
       n[u].call(l, w, m);
 }
-function lg(e, c, l, w, m, f) {
+function dg(e, c, l, w, m, f) {
   if (c)
     e.call(l, w, m, f);
   else
     for (var n = e.length, u = Qn(e, n), a = 0; a < n; ++a)
       u[a].call(l, w, m, f);
 }
-function dg(e, c, l, w) {
+function bg(e, c, l, w) {
   if (c)
     e.apply(l, w);
   else
@@ -15485,22 +15488,22 @@ Pt.prototype.emit = function(c) {
   switch (m = arguments.length, m) {
     // fast cases
     case 1:
-      cg(w, b, this);
+      ug(w, b, this);
       break;
     case 2:
-      ug(w, b, this, arguments[1]);
+      hg(w, b, this, arguments[1]);
       break;
     case 3:
-      hg(w, b, this, arguments[1], arguments[2]);
+      lg(w, b, this, arguments[1], arguments[2]);
       break;
     case 4:
-      lg(w, b, this, arguments[1], arguments[2], arguments[3]);
+      dg(w, b, this, arguments[1], arguments[2], arguments[3]);
       break;
     // slower
     default:
       for (f = new Array(m - 1), n = 1; n < m; n++)
         f[n - 1] = arguments[n];
-      dg(w, b, this, f);
+      bg(w, b, this, f);
   }
   return !0;
 };
@@ -15517,11 +15520,11 @@ function l7(e, c, l, w) {
   else if (typeof n == "function" ? n = f[c] = w ? [l, n] : [n, l] : w ? n.unshift(l) : n.push(l), !n.warned && (m = h7(e), m && m > 0 && n.length > m)) {
     n.warned = !0;
     var u = new Error("Possible EventEmitter memory leak detected. " + n.length + " " + c + " listeners added. Use emitter.setMaxListeners() to increase limit");
-    u.name = "MaxListenersExceededWarning", u.emitter = e, u.type = c, u.count = n.length, bg(u);
+    u.name = "MaxListenersExceededWarning", u.emitter = e, u.type = c, u.count = n.length, pg(u);
   }
   return e;
 }
-function bg(e) {
+function pg(e) {
   typeof console.warn == "function" ? console.warn(e) : console.log(e);
 }
 Pt.prototype.addListener = function(c, l) {
@@ -15571,7 +15574,7 @@ Pt.prototype.removeListener = function(c, l) {
         return this._events = new gi(), this;
       delete m[c];
     } else
-      pg(w, f);
+      mg(w, f);
     m.removeListener && this.emit("removeListener", c, u || l);
   }
   return this;
@@ -15600,7 +15603,7 @@ Pt.prototype.removeAllListeners = function(c) {
 };
 Pt.prototype.listeners = function(c) {
   var l, w, m = this._events;
-  return m ? (l = m[c], l ? typeof l == "function" ? w = [l.listener || l] : w = mg(l) : w = []) : w = [], w;
+  return m ? (l = m[c], l ? typeof l == "function" ? w = [l.listener || l] : w = gg(l) : w = []) : w = [], w;
 };
 Pt.listenerCount = function(e, c) {
   return typeof e.listenerCount == "function" ? e.listenerCount(c) : b7.call(e, c);
@@ -15620,7 +15623,7 @@ function b7(e) {
 Pt.prototype.eventNames = function() {
   return this._eventsCount > 0 ? Reflect.ownKeys(this._events) : [];
 };
-function pg(e, c) {
+function mg(e, c) {
   for (var l = c, w = l + 1, m = e.length; w < m; l += 1, w += 1)
     e[l] = e[w];
   e.pop();
@@ -15630,25 +15633,25 @@ function Qn(e, c) {
     l[c] = e[c];
   return l;
 }
-function mg(e) {
+function gg(e) {
   for (var c = new Array(e.length), l = 0; l < c.length; ++l)
     c[l] = e[l].listener || e[l];
   return c;
 }
-var gg = /* @__PURE__ */ Object.freeze({
+var xg = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   EventEmitter: Pt,
   default: Pt
-}), xg = /* @__PURE__ */ hl(gg), ma = {};
+}), wg = /* @__PURE__ */ ul(xg), ma = {};
 /*!
  * util.js - utils for bcoin
  * Copyright (c) 2014-2015, Fedor Indutny (MIT License)
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var yd;
+var wd;
 function pr() {
-  return yd || (yd = 1, function(e) {
+  return wd || (wd = 1, function(e) {
     const c = dt, l = e;
     l.bench = function(m) {
       if (!St.hrtime) {
@@ -15686,11 +15689,11 @@ function pr() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var ga, vd;
+var ga, yd;
 function p7() {
-  if (vd) return ga;
-  vd = 1;
-  const e = xg, c = pr(), l = dl();
+  if (yd) return ga;
+  yd = 1;
+  const e = wg, c = pr(), l = ll();
   class w extends e {
     /**
      * Create time data.
@@ -15768,11 +15771,11 @@ function p7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var xa, Sd;
+var xa, vd;
 function Tr() {
-  if (Sd) return xa;
-  Sd = 1;
-  const e = dt, c = dl(), l = El(), w = Gt(), m = p7();
+  if (vd) return xa;
+  vd = 1;
+  const e = dt, c = ll(), l = Sl(), w = Gt(), m = p7();
   class f {
     /**
      * Create a network.
@@ -16030,10 +16033,10 @@ var Ii = {}, wa = {}, Ai = {};
  *   http://www.pcg-random.org/posts/bounded-rands.html
  *   https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
  */
-var Ed;
+var Sd;
 function Li() {
-  if (Ed) return Ai;
-  Ed = 1;
+  if (Sd) return Ai;
+  Sd = 1;
   const e = Mt(), c = bn.crypto || bn.msCrypto, l = c && typeof c.getRandomValues == "function", w = l ? c.getRandomValues.bind(c) : null, m = new Uint32Array(16), f = 65536;
   let n = 0;
   function u(S) {
@@ -16079,7 +16082,7 @@ function Li() {
   return Ai.native = 0, Ai.randomBytes = u, Ai.randomFill = a, Ai.randomInt = s, Ai.randomRange = i, Ai;
 }
 var or = {};
-function Id(e, c) {
+function Ed(e, c) {
   if (e === c)
     return 0;
   for (var l = e.length, w = c.length, m = 0, f = Math.min(l, w); m < f; ++m)
@@ -16089,39 +16092,39 @@ function Id(e, c) {
     }
   return l < w ? -1 : w < l ? 1 : 0;
 }
-var wg = Object.prototype.hasOwnProperty, Ad = Object.keys || function(e) {
+var yg = Object.prototype.hasOwnProperty, Id = Object.keys || function(e) {
   var c = [];
   for (var l in e)
-    wg.call(e, l) && c.push(l);
+    yg.call(e, l) && c.push(l);
   return c;
-}, Od = Array.prototype.slice, ya;
+}, Ad = Array.prototype.slice, ya;
 function m7() {
   return typeof ya < "u" ? ya : ya = function() {
     return (function() {
     }).name === "foo";
   }();
 }
-function _d(e) {
+function Od(e) {
   return Object.prototype.toString.call(e);
 }
-function Rd(e) {
+function _d(e) {
   return an(e) || typeof Ci.ArrayBuffer != "function" ? !1 : typeof ArrayBuffer.isView == "function" ? ArrayBuffer.isView(e) : e ? !!(e instanceof DataView || e.buffer && e.buffer instanceof ArrayBuffer) : !1;
 }
 function nr(e, c) {
   e || ir(e, !0, c, "==", Gn);
 }
-var yg = /\s*function\s+([^\(\s]*)\s*/;
+var vg = /\s*function\s+([^\(\s]*)\s*/;
 function g7(e) {
   if (zi(e)) {
     if (m7())
       return e.name;
-    var c = e.toString(), l = c.match(yg);
+    var c = e.toString(), l = c.match(vg);
     return l && l[1];
   }
 }
 nr.AssertionError = eo;
 function eo(e) {
-  this.name = "AssertionError", this.actual = e.actual, this.expected = e.expected, this.operator = e.operator, e.message ? (this.message = e.message, this.generatedMessage = !1) : (this.message = vg(this), this.generatedMessage = !0);
+  this.name = "AssertionError", this.actual = e.actual, this.expected = e.expected, this.operator = e.operator, e.message ? (this.message = e.message, this.generatedMessage = !1) : (this.message = Sg(this), this.generatedMessage = !0);
   var c = e.stackStartFunction || ir;
   if (Error.captureStackTrace)
     Error.captureStackTrace(this, c);
@@ -16140,17 +16143,17 @@ function eo(e) {
   }
 }
 Xn(eo, Error);
-function Pd(e, c) {
+function Rd(e, c) {
   return typeof e == "string" ? e.length < c ? e : e.slice(0, c) : e;
 }
-function kd(e) {
+function Pd(e) {
   if (m7() || !zi(e))
     return Mr(e);
   var c = g7(e), l = c ? ": " + c : "";
   return "[Function" + l + "]";
 }
-function vg(e) {
-  return Pd(kd(e.actual), 128) + " " + e.operator + " " + Pd(kd(e.expected), 128);
+function Sg(e) {
+  return Rd(Pd(e.actual), 128) + " " + e.operator + " " + Rd(Pd(e.expected), 128);
 }
 function ir(e, c, l, w, m) {
   throw new eo({
@@ -16166,35 +16169,35 @@ function Gn(e, c) {
   e || ir(e, !0, c, "==", Gn);
 }
 nr.ok = Gn;
-nr.equal = Il;
+nr.equal = El;
+function El(e, c, l) {
+  e != c && ir(e, c, l, "==", El);
+}
+nr.notEqual = Il;
 function Il(e, c, l) {
-  e != c && ir(e, c, l, "==", Il);
+  e == c && ir(e, c, l, "!=", Il);
 }
-nr.notEqual = Al;
+nr.deepEqual = Al;
 function Al(e, c, l) {
-  e == c && ir(e, c, l, "!=", Al);
+  mn(e, c, !1) || ir(e, c, l, "deepEqual", Al);
 }
-nr.deepEqual = Ol;
+nr.deepStrictEqual = Ol;
 function Ol(e, c, l) {
-  mn(e, c, !1) || ir(e, c, l, "deepEqual", Ol);
-}
-nr.deepStrictEqual = _l;
-function _l(e, c, l) {
-  mn(e, c, !0) || ir(e, c, l, "deepStrictEqual", _l);
+  mn(e, c, !0) || ir(e, c, l, "deepStrictEqual", Ol);
 }
 function mn(e, c, l, w) {
   if (e === c)
     return !0;
   if (an(e) && an(c))
-    return Id(e, c) === 0;
+    return Ed(e, c) === 0;
   if (pn(e) && pn(c))
     return e.getTime() === c.getTime();
   if (Ti(e) && Ti(c))
     return e.source === c.source && e.global === c.global && e.multiline === c.multiline && e.lastIndex === c.lastIndex && e.ignoreCase === c.ignoreCase;
   if ((e === null || typeof e != "object") && (c === null || typeof c != "object"))
     return l ? e === c : e == c;
-  if (Rd(e) && Rd(c) && _d(e) === _d(c) && !(e instanceof Float32Array || e instanceof Float64Array))
-    return Id(
+  if (_d(e) && _d(c) && Od(e) === Od(c) && !(e instanceof Float32Array || e instanceof Float64Array))
+    return Ed(
       new Uint8Array(e.buffer),
       new Uint8Array(c.buffer)
     ) === 0;
@@ -16202,24 +16205,24 @@ function mn(e, c, l, w) {
     return !1;
   w = w || { actual: [], expected: [] };
   var m = w.actual.indexOf(e);
-  return m !== -1 && m === w.expected.indexOf(c) ? !0 : (w.actual.push(e), w.expected.push(c), Sg(e, c, l, w));
+  return m !== -1 && m === w.expected.indexOf(c) ? !0 : (w.actual.push(e), w.expected.push(c), Eg(e, c, l, w));
 }
-function Bd(e) {
+function kd(e) {
   return Object.prototype.toString.call(e) == "[object Arguments]";
 }
-function Sg(e, c, l, w) {
+function Eg(e, c, l, w) {
   if (e == null || c === null || c === void 0)
     return !1;
   if (Ls(e) || Ls(c))
     return e === c;
   if (l && Object.getPrototypeOf(e) !== Object.getPrototypeOf(c))
     return !1;
-  var m = Bd(e), f = Bd(c);
+  var m = kd(e), f = kd(c);
   if (m && !f || !m && f)
     return !1;
   if (m)
-    return e = Od.call(e), c = Od.call(c), mn(e, c, l);
-  var n = Ad(e), u = Ad(c), a, s;
+    return e = Ad.call(e), c = Ad.call(c), mn(e, c, l);
+  var n = Id(e), u = Id(c), a, s;
   if (n.length !== u.length)
     return !1;
   for (n.sort(), u.sort(), s = n.length - 1; s >= 0; s--)
@@ -16230,23 +16233,23 @@ function Sg(e, c, l, w) {
       return !1;
   return !0;
 }
-nr.notDeepEqual = Rl;
+nr.notDeepEqual = _l;
+function _l(e, c, l) {
+  mn(e, c, !1) && ir(e, c, l, "notDeepEqual", _l);
+}
+nr.notDeepStrictEqual = Rl;
 function Rl(e, c, l) {
-  mn(e, c, !1) && ir(e, c, l, "notDeepEqual", Rl);
+  mn(e, c, !0) && ir(e, c, l, "notDeepStrictEqual", Rl);
 }
-nr.notDeepStrictEqual = Pl;
+nr.strictEqual = Pl;
 function Pl(e, c, l) {
-  mn(e, c, !0) && ir(e, c, l, "notDeepStrictEqual", Pl);
+  e !== c && ir(e, c, l, "===", Pl);
 }
-nr.strictEqual = kl;
+nr.notStrictEqual = kl;
 function kl(e, c, l) {
-  e !== c && ir(e, c, l, "===", kl);
+  e === c && ir(e, c, l, "!==", kl);
 }
-nr.notStrictEqual = Bl;
-function Bl(e, c, l) {
-  e === c && ir(e, c, l, "!==", Bl);
-}
-function Md(e, c) {
+function Bd(e, c) {
   if (!e || !c)
     return !1;
   if (Object.prototype.toString.call(c) == "[object RegExp]")
@@ -16258,7 +16261,7 @@ function Md(e, c) {
   }
   return Error.isPrototypeOf(c) ? !1 : c.call({}, e) === !0;
 }
-function Eg(e) {
+function Ig(e) {
   var c;
   try {
     e();
@@ -16271,9 +16274,9 @@ function x7(e, c, l, w) {
   var m;
   if (typeof c != "function")
     throw new TypeError('"block" argument must be a function');
-  typeof l == "string" && (w = l, l = null), m = Eg(c), w = (l && l.name ? " (" + l.name + ")." : ".") + (w ? " " + w : "."), e && !m && ir(m, l, "Missing expected exception" + w);
+  typeof l == "string" && (w = l, l = null), m = Ig(c), w = (l && l.name ? " (" + l.name + ")." : ".") + (w ? " " + w : "."), e && !m && ir(m, l, "Missing expected exception" + w);
   var f = typeof w == "string", n = !e && ln(m), u = !e && m && !l;
-  if ((n && f && Md(m, l) || u) && ir(m, l, "Got unwanted exception" + w), e && m && l && !Md(m, l) || !e && m)
+  if ((n && f && Bd(m, l) || u) && ir(m, l, "Got unwanted exception" + w), e && m && l && !Bd(m, l) || !e && m)
     throw m;
 }
 nr.throws = w7;
@@ -16288,35 +16291,35 @@ nr.ifError = v7;
 function v7(e) {
   if (e) throw e;
 }
-var Ig = /* @__PURE__ */ Object.freeze({
+var Ag = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   AssertionError: eo,
   assert: Gn,
-  deepEqual: Ol,
-  deepStrictEqual: _l,
+  deepEqual: Al,
+  deepStrictEqual: Ol,
   default: nr,
   doesNotThrow: y7,
-  equal: Il,
+  equal: El,
   fail: ir,
   ifError: v7,
-  notDeepEqual: Rl,
-  notDeepStrictEqual: Pl,
-  notEqual: Al,
-  notStrictEqual: Bl,
+  notDeepEqual: _l,
+  notDeepStrictEqual: Rl,
+  notEqual: Il,
+  notStrictEqual: kl,
   ok: Gn,
-  strictEqual: kl,
+  strictEqual: Pl,
   throws: w7
-}), Ag = /* @__PURE__ */ hl(Ig);
+}), Og = /* @__PURE__ */ ul(Ag);
 /*!
  * asn1.js - asn1 parsing for bcrypto
  * Copyright (c) 2020, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Nd;
+var Md;
 function S7() {
-  if (Nd) return or;
-  Nd = 1;
-  const e = Ag, c = jr();
+  if (Md) return or;
+  Md = 1;
+  const e = Og, c = jr();
   function l(y, p, h) {
     if (e(k.isBuffer(y)), e(p >>> 0 === p), e(typeof h == "boolean"), p >= y.length)
       throw new Error("Invalid size.");
@@ -16418,10 +16421,10 @@ function S7() {
  *   https://tools.ietf.org/html/rfc7539#section-2
  *   https://cr.yp.to/chacha.html
  */
-var va, qd;
+var va, Nd;
 function E7() {
-  if (qd) return va;
-  qd = 1;
+  if (Nd) return va;
+  Nd = 1;
   const e = Mt(), c = new Int8Array(new Int16Array([1]).buffer)[0] === 0;
   class l {
     /**
@@ -16536,10 +16539,10 @@ function E7() {
  *   https://github.com/ElementsProject/secp256k1-zkp/blob/11af701/src/scalar_4x64_impl.h#L972
  *   https://github.com/ElementsProject/secp256k1-zkp/blob/11af701/src/scalar_8x32_impl.h#L747
  */
-var Sa, Td;
-function Og() {
-  if (Td) return Sa;
-  Td = 1;
+var Sa, qd;
+function _g() {
+  if (qd) return Sa;
+  qd = 1;
   const e = Mt(), c = jr(), l = E7(), w = br();
   class m {
     constructor(n, u = (a) => a) {
@@ -16605,11 +16608,11 @@ function Og() {
  *     Mark B. Lundeberg
  *     https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/2019-05-15-schnorr.md
  */
-var Ea, zd;
-function _g() {
-  if (zd) return Ea;
-  zd = 1;
-  const e = Mt(), c = Og(), l = jr();
+var Ea, Td;
+function Rg() {
+  if (Td) return Ea;
+  Td = 1;
+  const e = Mt(), c = _g(), l = jr();
   class w {
     constructor(f, n) {
       this.curve = f, this.hash = n, this.rng = new c(this.curve, this.encode.bind(this));
@@ -16718,10 +16721,10 @@ function _g() {
  *   https://csrc.nist.gov/publications/detail/sp/800-90a/archive/2012-01-23
  *   https://github.com/indutny/hmac-drbg/blob/master/lib/hmac-drbg.js
  */
-var Ia, Cd;
+var Ia, zd;
 function I7() {
-  if (Cd) return Ia;
-  Cd = 1;
+  if (zd) return Ia;
+  zd = 1;
   const e = Mt(), c = 281474976710656, l = k.from([0]), w = k.from([1]);
   class m {
     constructor(n, u, a, s) {
@@ -16936,10 +16939,10 @@ var tr = {};
  *   [ECPM] Elliptic Curve Point Multiplication (wikipedia)
  *     https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication
  */
-var Dd;
-function Rg() {
-  if (Dd) return tr;
-  Dd = 1;
+var Cd;
+function Pg() {
+  if (Cd) return tr;
+  Cd = 1;
   const { custom: e } = u7(), c = jr(), l = {
     AFFINE: 0,
     JACOBIAN: 1,
@@ -20885,11 +20888,11 @@ function Rg() {
  *     T. Pornin
  *     https://tools.ietf.org/html/rfc6979
  */
-var Aa, Ud;
+var Aa, Dd;
 function es() {
-  if (Ud) return Aa;
-  Ud = 1;
-  const e = Mt(), c = jr(), l = Li(), w = S7(), m = _g(), f = I7(), n = Rg();
+  if (Dd) return Aa;
+  Dd = 1;
+  const e = Mt(), c = jr(), l = Li(), w = S7(), m = Rg(), f = I7(), n = Pg();
   class u {
     constructor(s, i, b, g) {
       e(typeof s == "string"), e(i), e(b), this.id = s, this.type = "ecdsa", this.hash = i, this.xof = b, this.native = 0, this._pre = g || null, this._curve = null, this._schnorr = null;
@@ -21282,7 +21285,7 @@ function es() {
   }
   return Aa = u, Aa;
 }
-var Pg = {
+var kg = {
   width: 9,
   points: [
     [
@@ -21794,7 +21797,7 @@ var Pg = {
       "4036edc931a60ae889353f77fd53de4a2708b26b6f5da72ad3394119daf408f9"
     ]
   ]
-}, kg = {
+}, Bg = {
   step: 4,
   points: [
     [
@@ -22058,9 +22061,9 @@ var Pg = {
       "ea98e67232d3b3295d3b535532115ccac8612c721851617526ae47a9c77bfc82"
     ]
   ]
-}, Bg = {
-  naf: Pg,
-  doubles: kg
+}, Mg = {
+  naf: kg,
+  doubles: Bg
 };
 /*!
  * secp256k1.js - secp256k1 for bcrypto
@@ -22068,20 +22071,20 @@ var Pg = {
  * Copyright (c) 2014-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Oa, Fd;
+var Oa, Ud;
 function Yr() {
-  if (Fd) return Oa;
-  Fd = 1;
-  const e = es(), c = br(), l = Bg;
+  if (Ud) return Oa;
+  Ud = 1;
+  const e = es(), c = br(), l = Mg;
   return Oa = new e("SECP256K1", c, c, l), Oa;
 }
 /*!
  * message.js - message signing utilities.
  * Copyright (c) 2019, The Bcoin Developers (MIT License).
  */
-var Hd;
-function Mg() {
-  return Hd || (Hd = 1, function(e) {
+var Fd;
+function Ng() {
+  return Fd || (Fd = 1, function(e) {
     const c = dt, l = Bt, w = qr(), m = Yr(), f = e;
     f.MAGIC_STRING = `eCash Signed Message:
 `, f.magicHash = (n, u = f.MAGIC_STRING) => {
@@ -22118,10 +22121,10 @@ function Mg() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ld;
+var Hd;
 function ur() {
-  if (Ld) return Ii;
-  Ld = 1, Ii.binary = dl(), Ii.fixed = T8(), Ii.util = pr(), Ii.message = Mg();
+  if (Hd) return Ii;
+  Hd = 1, Ii.binary = ll(), Ii.fixed = T8(), Ii.util = pr(), Ii.message = Ng();
   const { inspect: { custom: e } } = c7;
   return Ii.inspectSymbol = e || "inspect", Ii;
 }
@@ -22131,10 +22134,10 @@ function ur() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var _a, Kd;
+var _a, Ld;
 function Ki() {
-  if (Kd) return _a;
-  Kd = 1;
+  if (Ld) return _a;
+  Ld = 1;
   const e = dt, c = Bt, { base58: l, cashaddr: w } = Ys, m = Mi, f = yn(), n = qr(), u = Tr(), a = Gt(), { inspectSymbol: s } = ur(), i = k.alloc(20, 0);
   class b {
     /**
@@ -22541,10 +22544,10 @@ function Ki() {
   }
   return _a = b, _a;
 }
-var Ra, Vd;
+var Ra, Kd;
 function A7() {
-  if (Vd) return Ra;
-  Vd = 1;
+  if (Kd) return Ra;
+  Kd = 1;
   const e = dt, c = Ki(), l = Ui();
   class w {
     /**
@@ -22677,9 +22680,9 @@ function A7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var $d;
-function Ng() {
-  return $d || ($d = 1, ms.Amount = Ui(), ms.URI = A7()), ms;
+var Vd;
+function qg() {
+  return Vd || (Vd = 1, ms.Amount = Ui(), ms.URI = A7()), ms;
 }
 var Qi = {};
 /*!
@@ -22697,10 +22700,10 @@ var Qi = {};
  *   http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/sha/1.js
  */
-var Pa, jd;
+var Pa, $d;
 function O7() {
-  if (jd) return Pa;
-  jd = 1;
+  if ($d) return Pa;
+  $d = 1;
   const e = Mt(), c = ni(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -22811,9 +22814,9 @@ var ka = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Yd;
+var jd;
 function vn() {
-  return Yd || (Yd = 1, function(e) {
+  return jd || (jd = 1, function(e) {
     const c = dt, l = Gt();
     e.MAX_TX_VERSION = l.MAX_TX_VERSION, e.MAX_TX_SIZE = l.MAX_TX_SIZE / 10, e.MAX_TX_SIGOPS = l.MAX_TX_SIGOPS / 5, e.BYTES_PER_SIGOP = 20, e.MIN_RELAY = 1e3, e.BARE_MULTISIG = !0, e.FREE_THRESHOLD = l.COIN * 144 / 250, e.MAX_P2SH_SIGOPS = 15, e.MAX_OP_RETURN_BYTES = 223, e.MAX_OP_RETURN = 220, e.MAX_P2WSH_STACK = 100, e.MAX_P2WSH_PUSH = 80, e.MAX_P2WSH_SIZE = 3600, e.MEMPOOL_MAX_ANCESTORS = 50, e.MEMPOOL_MAX_SIZE = 100 * 1e6, e.MEMPOOL_EXPIRY_TIME = 4320 * 60, e.MEMPOOL_MAX_ORPHANS = 100, e.MIN_BLOCK_SIZE = 0, e.MAX_BLOCK_SIZE = l.MAX_FORK_BLOCK_SIZE, e.BLOCK_PRIORITY_SIZE = 0, e.BLOCK_PRIORITY_THRESHOLD = e.FREE_THRESHOLD, e.getMinFee = function(m, f) {
       if (f == null && (f = e.MIN_RELAY), c(m >= 0), c(f >= 0), m === 0)
@@ -22835,10 +22838,10 @@ function vn() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ba, Xd;
+var Ba, Yd;
 function to() {
-  if (Xd) return Ba;
-  Xd = 1;
+  if (Yd) return Ba;
+  Yd = 1;
   class e extends Error {
     /**
      * Create an error.
@@ -22858,10 +22861,10 @@ function to() {
  * Copyright (c) 2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ma, Gd;
+var Ma, Xd;
 function Vi() {
-  if (Gd) return Ma;
-  Gd = 1;
+  if (Xd) return Ma;
+  Xd = 1;
   const e = dt, { I64: c } = N8, l = to(), w = k.alloc(0);
   class m extends c {
     /**
@@ -23028,9 +23031,9 @@ var Na = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Jd;
+var Gd;
 function ts() {
-  return Jd || (Jd = 1, function(e) {
+  return Gd || (Gd = 1, function(e) {
     const c = dt, l = Yr(), w = Vi();
     e.opcodes = {
       // Push
@@ -23425,10 +23428,10 @@ function ts() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var qa, Wd;
-function Ml() {
-  if (Wd) return qa;
-  Wd = 1;
+var qa, Jd;
+function Bl() {
+  if (Jd) return qa;
+  Jd = 1;
   const e = dt, c = Bt, l = Vi(), w = ts(), m = w.opcodes, f = [];
   let n = null;
   class u {
@@ -23831,10 +23834,10 @@ function Ml() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ta, Zd;
+var Ta, Wd;
 function ro() {
-  if (Zd) return Ta;
-  Zd = 1;
+  if (Wd) return Ta;
+  Wd = 1;
   const e = dt, c = ts(), l = Vi();
   class w {
     /**
@@ -24215,10 +24218,10 @@ function ro() {
   }
   return Ta = w, Ta;
 }
-var za, Qd;
+var za, Zd;
 function _7() {
-  if (Qd) return za;
-  Qd = 1;
+  if (Zd) return za;
+  Zd = 1;
   class e {
     constructor(l) {
       this.sigchecks = l || 0, this.init();
@@ -24235,11 +24238,11 @@ function _7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ca, e2;
+var Ca, Qd;
 function si() {
-  if (e2) return Ca;
-  e2 = 1;
-  const e = dt, c = Bt, l = ll(), w = O7(), m = br(), f = yn(), n = qr(), u = Yr(), a = Gt(), s = vn(), i = Ml(), b = ro(), g = to(), S = Vi(), y = ts(), p = Ki(), h = _7(), o = y.opcodes, E = y.types, F = y.countBits, { encoding: j } = c, G = k.alloc(0), N = new h();
+  if (Qd) return Ca;
+  Qd = 1;
+  const e = dt, c = Bt, l = hl(), w = O7(), m = br(), f = yn(), n = qr(), u = Yr(), a = Gt(), s = vn(), i = Bl(), b = ro(), g = to(), S = Vi(), y = ts(), p = Ki(), h = _7(), o = y.opcodes, E = y.types, F = y.countBits, { encoding: j } = c, G = k.alloc(0), N = new h();
   class T {
     /**
      * Create a script.
@@ -26391,10 +26394,10 @@ function si() {
  * Copyright (c) 2021, Vin Armani (MIT License).
  * https://github.com/badger-cash/bcash
  */
-var Da, t2;
+var Da, e2;
 function io() {
-  if (t2) return Da;
-  t2 = 1;
+  if (e2) return Da;
+  e2 = 1;
   const e = dt, c = Bt, { U64: l } = N8;
   Gt();
   const w = si();
@@ -26903,10 +26906,10 @@ function io() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ua, r2;
+var Ua, t2;
 function $i() {
-  if (r2) return Ua;
-  r2 = 1;
+  if (t2) return Ua;
+  t2 = 1;
   const e = dt, c = Bt, l = Ui(), w = Tr(), m = Ki(), f = si(), n = io(), u = vn(), { inspectSymbol: a } = ur();
   class s {
     /**
@@ -27161,10 +27164,10 @@ function $i() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Fa, i2;
+var Fa, r2;
 function Sn() {
-  if (i2) return Fa;
-  i2 = 1;
+  if (r2) return Fa;
+  r2 = 1;
   const e = dt, c = Bt, l = pr(), w = Gt(), { inspectSymbol: m } = ur();
   class f {
     /**
@@ -27409,10 +27412,10 @@ function Sn() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ha, n2;
+var Ha, i2;
 function no() {
-  if (n2) return Ha;
-  n2 = 1;
+  if (i2) return Ha;
+  i2 = 1;
   const e = dt, c = Bt, l = pr(), w = Ui(), m = $i(), f = Tr(), n = Gt(), u = Sn(), a = io(), { inspectSymbol: s } = ur();
   class i extends m {
     /**
@@ -27679,10 +27682,10 @@ var qn = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var s2;
+var n2;
 function R7() {
-  if (s2) return qn;
-  s2 = 1;
+  if (n2) return qn;
+  n2 = 1;
   const e = dt, { encoding: c } = Bt, l = Yr(), w = Gt(), m = 6, f = k.alloc(0);
   function n(p, h) {
     const o = p.getPubkeyhash(!0);
@@ -27805,10 +27808,10 @@ function R7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var La, o2;
+var La, s2;
 function so() {
-  if (o2) return La;
-  o2 = 1;
+  if (s2) return La;
+  s2 = 1;
   const e = dt, c = Bt, l = no(), w = $i(), m = R7(), { encoding: f } = c, n = 1, u = (1 << 32 - n >>> 0) - 1;
   class a {
     /**
@@ -27957,10 +27960,10 @@ function so() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ka, a2;
-function Nl() {
-  if (a2) return Ka;
-  a2 = 1;
+var Ka, o2;
+function Ml() {
+  if (o2) return Ka;
+  o2 = 1;
   const e = dt, c = so();
   class l {
     /**
@@ -28108,10 +28111,10 @@ function Nl() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Va, f2;
+var Va, a2;
 function P7() {
-  if (f2) return Va;
-  f2 = 1;
+  if (a2) return Va;
+  a2 = 1;
   const e = dt, c = Bt, l = so();
   class w {
     /**
@@ -28203,11 +28206,11 @@ function P7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var $a, c2;
-function ql() {
-  if (c2) return $a;
-  c2 = 1;
-  const { BufferMap: e } = wn, c = Nl(), l = P7(), w = so();
+var $a, f2;
+function Nl() {
+  if (f2) return $a;
+  f2 = 1;
+  const { BufferMap: e } = wn, c = Ml(), l = P7(), w = so();
   class m {
     /**
      * Create a coin view.
@@ -28575,9 +28578,9 @@ function ql() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var u2;
-function qg() {
-  return u2 || (u2 = 1, Qi.Coins = Nl(), Qi.CoinView = ql(), Qi.compress = R7(), Qi.UndoCoins = P7()), Qi;
+var c2;
+function Tg() {
+  return c2 || (c2 = 1, Qi.Coins = Ml(), Qi.CoinView = Nl(), Qi.compress = R7(), Qi.UndoCoins = P7()), Qi;
 }
 var ja = {}, Ya = {};
 /*!
@@ -28585,10 +28588,10 @@ var ja = {}, Ya = {};
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var h2;
+var u2;
 function oo() {
-  return h2 || (h2 = 1, function(e) {
-    const c = dt, l = Lm, w = e;
+  return u2 || (u2 = 1, function(e) {
+    const c = dt, l = Km, w = e;
     w.HARDENED = 2147483648, w.MIN_ENTROPY = 128, w.MAX_ENTROPY = 512, w.cache = new l(500), w.parsePath = function(f, n) {
       c(typeof f == "string"), c(typeof n == "boolean"), c(f.length >= 1), c(f.length <= 3062);
       const u = f.split("/"), a = u[0];
@@ -28627,10 +28630,10 @@ function oo() {
  * Copyright (c) 2016-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Xa, l2;
+var Xa, h2;
 function ao() {
-  if (l2) return Xa;
-  l2 = 1;
+  if (h2) return Xa;
+  h2 = 1;
   const e = Mt(), c = Li();
   function l(w) {
     e(k.isBuffer(w)), c.randomFill(w, 0, w.length);
@@ -28651,10 +28654,10 @@ var Tn = {};
  *   https://www.emc.com/collateral/white-papers/h11302-pkcs5v2-1-password-based-cryptography-standard-wp.pdf
  *   http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf
  */
-var d2;
-function Tl() {
-  if (d2) return Tn;
-  d2 = 1;
+var l2;
+function ql() {
+  if (l2) return Tn;
+  l2 = 1;
   const e = Mt(), l = (bn.crypto || bn.msCrypto || {}).subtle || {};
   function w(n, u, a, s, i) {
     typeof u == "string" && (u = k.from(u, "utf8")), typeof a == "string" && (a = k.from(a, "utf8")), a == null && (a = k.alloc(0)), e(n && typeof n.id == "string"), e(k.isBuffer(u)), e(k.isBuffer(a)), e(s >>> 0 === s), e(i >>> 0 === i);
@@ -28717,10 +28720,10 @@ function Tl() {
  *   https://tools.ietf.org/html/rfc4634
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/sha/512.js
  */
-var Ga, b2;
+var Ga, d2;
 function ji() {
-  if (b2) return Ga;
-  b2 = 1;
+  if (d2) return Ga;
+  d2 = 1;
   const e = Mt(), c = ni(), l = -1, w = k.alloc(16, 0), m = k.alloc(128, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -29101,9 +29104,9 @@ function ji() {
   }
   return Ga = n, Ga;
 }
-var Ja = {}, Wa, p2;
-function Tg() {
-  return p2 || (p2 = 1, Wa = [
+var Ja = {}, Wa, b2;
+function zg() {
+  return b2 || (b2 = 1, Wa = [
     "的",
     "一",
     "是",
@@ -31154,9 +31157,9 @@ function Tg() {
     "歇"
   ]), Wa;
 }
-var Za, m2;
-function zg() {
-  return m2 || (m2 = 1, Za = [
+var Za, p2;
+function Cg() {
+  return p2 || (p2 = 1, Za = [
     "的",
     "一",
     "是",
@@ -33207,9 +33210,9 @@ function zg() {
     "歇"
   ]), Za;
 }
-var Qa, g2;
-function Cg() {
-  return g2 || (g2 = 1, Qa = [
+var Qa, m2;
+function Dg() {
+  return m2 || (m2 = 1, Qa = [
     "abandon",
     "ability",
     "able",
@@ -35260,9 +35263,9 @@ function Cg() {
     "zoo"
   ]), Qa;
 }
-var e0, x2;
-function Dg() {
-  return x2 || (x2 = 1, e0 = [
+var e0, g2;
+function Ug() {
+  return g2 || (g2 = 1, e0 = [
     "abaisser",
     "abandon",
     "abdiquer",
@@ -37313,9 +37316,9 @@ function Dg() {
     "zoologie"
   ]), e0;
 }
-var t0, w2;
-function Ug() {
-  return w2 || (w2 = 1, t0 = [
+var t0, x2;
+function Fg() {
+  return x2 || (x2 = 1, t0 = [
     "abaco",
     "abbaglio",
     "abbinato",
@@ -39366,9 +39369,9 @@ function Ug() {
     "zuppa"
   ]), t0;
 }
-var r0, y2;
-function Fg() {
-  return y2 || (y2 = 1, r0 = [
+var r0, w2;
+function Hg() {
+  return w2 || (w2 = 1, r0 = [
     "あいこくしん",
     "あいさつ",
     "あいだ",
@@ -41419,9 +41422,9 @@ function Fg() {
     "われる"
   ]), r0;
 }
-var i0, v2;
-function Hg() {
-  return v2 || (v2 = 1, i0 = [
+var i0, y2;
+function Lg() {
+  return y2 || (y2 = 1, i0 = [
     "ábaco",
     "abdomen",
     "abeja",
@@ -43477,24 +43480,24 @@ function Hg() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var S2;
+var v2;
 function k7() {
-  return S2 || (S2 = 1, Ja.get = function(c) {
+  return v2 || (v2 = 1, Ja.get = function(c) {
     switch (c) {
       case "simplified chinese":
-        return Tg();
-      case "traditional chinese":
         return zg();
-      case "english":
+      case "traditional chinese":
         return Cg();
-      case "french":
+      case "english":
         return Dg();
-      case "italian":
+      case "french":
         return Ug();
-      case "japanese":
+      case "italian":
         return Fg();
-      case "spanish":
+      case "japanese":
         return Hg();
+      case "spanish":
+        return Lg();
       default:
         throw new Error(`Unknown language: ${c}.`);
     }
@@ -43505,10 +43508,10 @@ function k7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var n0, E2;
-function Lg() {
-  if (E2) return n0;
-  E2 = 1;
+var n0, S2;
+function Kg() {
+  if (S2) return n0;
+  S2 = 1;
   function e(c) {
     return c.normalize("NFKD");
   }
@@ -43519,11 +43522,11 @@ function Lg() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var s0, I2;
-function zl() {
-  if (I2) return s0;
-  I2 = 1;
-  const e = dt, c = Bt, l = br(), w = ao(), m = Li(), f = Tl(), n = ji(), u = k7(), a = oo(), s = Lg(), { inspectSymbol: i } = ur(), b = /* @__PURE__ */ Object.create(null);
+var s0, E2;
+function Tl() {
+  if (E2) return s0;
+  E2 = 1;
+  const e = dt, c = Bt, l = br(), w = ao(), m = Li(), f = ql(), n = ji(), u = k7(), a = oo(), s = Kg(), { inspectSymbol: i } = ur(), b = /* @__PURE__ */ Object.create(null);
   class g {
     /**
      * Create a mnemonic.
@@ -43830,10 +43833,10 @@ function zl() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var o0, A2;
-function Cl() {
-  if (A2) return o0;
-  A2 = 1;
+var o0, I2;
+function zl() {
+  if (I2) return o0;
+  I2 = 1;
   const e = dt, c = Bt, { base58: l } = Ys, w = ji(), m = yn(), f = qr(), n = ao(), u = Yr(), a = Tr(), s = Gt(), i = oo();
   class b {
     /**
@@ -44171,11 +44174,11 @@ function Cl() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var a0, O2;
+var a0, A2;
 function B7() {
-  if (O2) return a0;
-  O2 = 1;
-  const e = dt, c = Bt, { base58: l } = Ys, w = ji(), m = yn(), f = qr(), n = ao(), u = Li(), a = Yr(), s = Tr(), i = Gt(), b = oo(), g = zl(), S = Cl(), y = k.from("Bitcoin seed", "ascii");
+  if (A2) return a0;
+  A2 = 1;
+  const e = dt, c = Bt, { base58: l } = Ys, w = ji(), m = yn(), f = qr(), n = ao(), u = Li(), a = Yr(), s = Tr(), i = Gt(), b = oo(), g = Tl(), S = zl(), y = k.from("Bitcoin seed", "ascii");
   class p {
     /**
      * Create an hd private key.
@@ -44587,10 +44590,10 @@ function B7() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var _2;
-function Kg() {
-  return _2 || (_2 = 1, function(e) {
-    const c = dt, l = oo(), w = zl(), m = B7(), f = Cl(), n = k7(), u = e;
+var O2;
+function Vg() {
+  return O2 || (O2 = 1, function(e) {
+    const c = dt, l = oo(), w = Tl(), m = B7(), f = zl(), n = k7(), u = e;
     u.fromBase58 = function(s, i) {
       return m.isBase58(s) ? m.fromBase58(s, i) : f.fromBase58(s, i);
     }, u.generate = function() {
@@ -44631,9 +44634,9 @@ function Kg() {
  * Copyright (c) 2014-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var f0, R2;
-function Vg() {
-  return R2 || (R2 = 1, f0 = Kg()), f0;
+var f0, _2;
+function $g() {
+  return _2 || (_2 = 1, f0 = Vg()), f0;
 }
 var Yt = {};
 /*!
@@ -44642,10 +44645,10 @@ var Yt = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var c0, P2;
+var c0, R2;
 function fo() {
-  if (P2) return c0;
-  P2 = 1;
+  if (R2) return c0;
+  R2 = 1;
   const e = Bt, c = pr();
   class l {
     /**
@@ -44762,10 +44765,10 @@ function fo() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var u0, k2;
+var u0, P2;
 function rs() {
-  if (k2) return u0;
-  k2 = 1;
+  if (P2) return u0;
+  P2 = 1;
   const e = dt, c = qr(), l = Bt, w = pr(), m = fo(), f = Gt();
   class n {
     /**
@@ -44902,10 +44905,10 @@ var en = {};
  *   Copyright (c) 2009-2019, The Bitcoin Developers (MIT License).
  *   https://github.com/bitcoin/bitcoin
  */
-var B2;
+var k2;
 function M7() {
-  if (B2) return en;
-  B2 = 1;
+  if (k2) return en;
+  k2 = 1;
   const e = Mt();
   function c(f, n) {
     e(f && typeof f.root == "function"), e(Array.isArray(n));
@@ -44960,10 +44963,10 @@ function M7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var h0, M2;
+var h0, B2;
 function co() {
-  if (M2) return h0;
-  M2 = 1;
+  if (B2) return h0;
+  B2 = 1;
   const e = dt, c = Bt, l = Tr(), w = si(), m = Sn(), { inspectSymbol: f } = ur();
   class n {
     /**
@@ -45293,10 +45296,10 @@ function co() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var l0, N2;
+var l0, M2;
 function is() {
-  if (N2) return l0;
-  N2 = 1;
+  if (M2) return l0;
+  M2 = 1;
   const e = dt, c = Bt, l = qr(), w = Yr(), { BufferSet: m } = wn, f = pr(), n = Ui(), u = Tr(), a = si(), s = io(), i = co(), b = $i(), g = Sn(), S = fo(), y = Gt(), p = vn(), h = to(), { encoding: o } = c, { hashType: E } = a, F = ts(), { inspectSymbol: j } = ur();
   class G {
     /**
@@ -46605,10 +46608,10 @@ function is() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var d0, q2;
+var d0, N2;
 function ns() {
-  if (q2) return d0;
-  q2 = 1;
+  if (N2) return d0;
+  N2 = 1;
   const e = Bt, c = pr(), l = rs(), { inspectSymbol: w } = ur();
   class m extends l {
     /**
@@ -46807,10 +46810,10 @@ function ns() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var b0, T2;
-function Dl() {
-  if (T2) return b0;
-  T2 = 1;
+var b0, q2;
+function Cl() {
+  if (q2) return b0;
+  q2 = 1;
   const e = dt, c = Bt, { BufferMap: l, BufferSet: w } = wn, m = pr(), f = qr(), n = Gt(), u = rs(), a = ns(), s = k.from([0]), { encoding: i } = c, { inspectSymbol: b } = ur();
   class g extends u {
     /**
@@ -47194,11 +47197,11 @@ function Dl() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var p0, z2;
-function Ul() {
-  if (z2) return p0;
-  z2 = 1;
-  const e = dt, c = Bt, { BufferSet: l } = wn, w = qr(), m = M7(), f = Gt(), n = rs(), u = is(), a = Dl(), s = ns(), i = Tr(), b = pr(), { encoding: g } = c, { inspectSymbol: S } = ur();
+var p0, T2;
+function Dl() {
+  if (T2) return p0;
+  T2 = 1;
+  const e = dt, c = Bt, { BufferSet: l } = wn, w = qr(), m = M7(), f = Gt(), n = rs(), u = is(), a = Cl(), s = ns(), i = Tr(), b = pr(), { encoding: g } = c, { inspectSymbol: S } = ur();
   class y extends n {
     /**
      * Create a block.
@@ -47605,10 +47608,10 @@ function Ul() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var m0, C2;
+var m0, z2;
 function N7() {
-  if (C2) return m0;
-  C2 = 1;
+  if (z2) return m0;
+  z2 = 1;
   const e = dt, { base58: c } = Ys, l = Bt, w = yn(), m = qr(), f = Tr(), n = si(), u = Ki(), a = $i(), s = Yr(), { encoding: i } = l, { inspectSymbol: b } = ur(), g = k.alloc(33, 0);
   class S {
     /**
@@ -48078,11 +48081,11 @@ function N7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var g0, D2;
-function $g() {
-  if (D2) return g0;
-  D2 = 1;
-  const e = Bt, c = rs(), l = Ul(), w = ns(), m = si(), f = k.alloc(0);
+var g0, C2;
+function jg() {
+  if (C2) return g0;
+  C2 = 1;
+  const e = Bt, c = rs(), l = Dl(), w = ns(), m = si(), f = k.alloc(0);
   class n extends c {
     /**
      * Create a mem block.
@@ -48210,10 +48213,10 @@ var xs = { exports: {} };
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var U2;
+var D2;
 function q7() {
-  return U2 || (U2 = 1, function(e, c) {
-    const l = dt, { encoding: w } = Bt, { BufferMap: m } = wn, f = si(), n = is(), u = co(), a = $i(), s = no(), i = Sn(), b = ql(), g = Ki(), S = Gt(), y = vn(), p = Ui(), h = ro(), o = pr(), { inspectSymbol: E } = ur();
+  return D2 || (D2 = 1, function(e, c) {
+    const l = dt, { encoding: w } = Bt, { BufferMap: m } = wn, f = si(), n = is(), u = co(), a = $i(), s = no(), i = Sn(), b = Nl(), g = Ki(), S = Gt(), y = vn(), p = Ui(), h = ro(), o = pr(), { inspectSymbol: E } = ur();
     class F extends n {
       /**
        * Create a mutable transaction.
@@ -49205,10 +49208,10 @@ function q7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var x0, F2;
-function jg() {
-  if (F2) return x0;
-  F2 = 1;
+var x0, U2;
+function Yg() {
+  if (U2) return x0;
+  U2 = 1;
   const e = dt, c = Bt, l = pr(), w = is(), { inspectSymbol: m } = ur();
   class f {
     /**
@@ -49356,9 +49359,9 @@ function jg() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var H2;
-function Yg() {
-  return H2 || (H2 = 1, Yt.AbstractBlock = rs(), Yt.Address = Ki(), Yt.Block = Ul(), Yt.Coin = no(), Yt.Headers = ns(), Yt.Input = co(), Yt.InvItem = fo(), Yt.KeyRing = N7(), Yt.MemBlock = $g(), Yt.MerkleBlock = Dl(), Yt.MTX = q7(), Yt.Outpoint = Sn(), Yt.Output = $i(), Yt.TX = is(), Yt.TXMeta = jg()), Yt;
+var F2;
+function Xg() {
+  return F2 || (F2 = 1, Yt.AbstractBlock = rs(), Yt.Address = Ki(), Yt.Block = Dl(), Yt.Coin = no(), Yt.Headers = ns(), Yt.Input = co(), Yt.InvItem = fo(), Yt.KeyRing = N7(), Yt.MemBlock = jg(), Yt.MerkleBlock = Cl(), Yt.MTX = q7(), Yt.Outpoint = Sn(), Yt.Output = $i(), Yt.TX = is(), Yt.TXMeta = Yg()), Yt;
 }
 var ci = {}, w0 = {};
 /*!
@@ -49367,10 +49370,10 @@ var ci = {}, w0 = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var L2;
-function Xg() {
-  if (L2) return w0;
-  L2 = 1;
+var H2;
+function Gg() {
+  if (H2) return w0;
+  H2 = 1;
   const e = dt;
   class c extends Error {
     /**
@@ -49394,9 +49397,9 @@ function Xg() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var K2;
-function Gg() {
-  return K2 || (K2 = 1, ci.consensus = Gt(), ci.errors = Xg(), ci.Network = Tr(), ci.networks = El(), ci.policy = vn(), ci.timedata = p7()), ci;
+var L2;
+function Jg() {
+  return L2 || (L2 = 1, ci.consensus = Gt(), ci.errors = Gg(), ci.Network = Tr(), ci.networks = Sl(), ci.policy = vn(), ci.timedata = p7()), ci;
 }
 var Pr = {};
 /*!
@@ -49404,10 +49407,10 @@ var Pr = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var y0, V2;
+var y0, K2;
 function T7() {
-  if (V2) return y0;
-  V2 = 1;
+  if (K2) return y0;
+  K2 = 1;
   const e = dt, { BufferMap: c } = wn, l = Yr();
   class w {
     /**
@@ -49501,9 +49504,9 @@ function T7() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var $2;
-function Jg() {
-  return $2 || ($2 = 1, Pr.common = ts(), Pr.Opcode = Ml(), Pr.Script = si(), Pr.ScriptError = to(), Pr.ScriptNum = Vi(), Pr.sigcache = T7(), Pr.Stack = ro(), Pr.Metrics = _7(), Pr.SLP = io()), Pr;
+var V2;
+function Wg() {
+  return V2 || (V2 = 1, Pr.common = ts(), Pr.Opcode = Bl(), Pr.Script = si(), Pr.ScriptError = to(), Pr.ScriptNum = Vi(), Pr.sigcache = T7(), Pr.Stack = ro(), Pr.Metrics = _7(), Pr.SLP = io()), Pr;
 }
 var v0 = {}, zn = {};
 /*!
@@ -49520,10 +49523,10 @@ var v0 = {}, zn = {};
  *   http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf
  *   https://github.com/openssl/openssl/blob/master/crypto/aes/aes_core.c
  */
-var S0, j2;
-function Wg() {
-  if (j2) return S0;
-  j2 = 1;
+var S0, $2;
+function Zg() {
+  if ($2) return S0;
+  $2 = 1;
   const e = Mt(), c = new Uint32Array([
     3328402341,
     4168907908,
@@ -51980,10 +51983,10 @@ var yt = {};
  *   https://github.com/golang/go/blob/master/src/crypto/cipher/gcm_test.go
  *   https://github.com/DaGenix/rust-crypto/blob/master/src/ghash.rs
  */
-var E0, Y2;
-function Zg() {
-  if (Y2) return E0;
-  Y2 = 1;
+var E0, j2;
+function Qg() {
+  if (j2) return E0;
+  j2 = 1;
   const e = Mt(), c = k.alloc(16, 0), l = -1, w = new Uint16Array([
     0,
     7200,
@@ -52126,11 +52129,11 @@ function Zg() {
  * Resources:
  *   https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation
  */
-var X2;
-function Qg() {
-  if (X2) return yt;
-  X2 = 1;
-  const e = Mt(), c = Zg(), l = k.alloc(0), w = new Uint32Array([
+var Y2;
+function ex() {
+  if (Y2) return yt;
+  Y2 = 1;
+  const e = Mt(), c = Qg(), l = k.alloc(0), w = new Uint32Array([
     27,
     // 8
     135,
@@ -53083,11 +53086,11 @@ function Qg() {
  * Copyright (c) 2016-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var G2;
-function ex() {
-  if (G2) return zn;
-  G2 = 1;
-  const e = Wg(), { CBCCipher: c, CBCDecipher: l } = Qg();
+var X2;
+function tx() {
+  if (X2) return zn;
+  X2 = 1;
+  const e = Zg(), { CBCCipher: c, CBCDecipher: l } = ex();
   function w(f, n, u) {
     const a = new c(new e(256));
     return a.init(n, u), k.concat([a.update(f), a.final()]);
@@ -53119,10 +53122,10 @@ function ex() {
  *   https://github.com/rhash/RHash/blob/master/librhash/sha3.c
  *   https://github.com/emn178/js-sha3/blob/master/src/sha3.js
  */
-var I0, J2;
+var I0, G2;
 function z7() {
-  if (J2) return I0;
-  J2 = 1;
+  if (G2) return I0;
+  G2 = 1;
   const e = Mt(), c = ni(), l = 2147483648, w = new Uint32Array([
     1,
     0,
@@ -53256,10 +53259,10 @@ var Cn = {};
  *   https://en.wikipedia.org/wiki/MurmurHash
  *   https://github.com/aappleby/smhasher
  */
-var W2;
-function Fl() {
-  if (W2) return Cn;
-  W2 = 1;
+var J2;
+function Ul() {
+  if (J2) return Cn;
+  J2 = 1;
   const e = Mt();
   function c(n, u) {
     e(k.isBuffer(n)), e(typeof u == "number");
@@ -53302,10 +53305,10 @@ function Fl() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var A0, Z2;
+var A0, W2;
 function C7() {
-  if (Z2) return A0;
-  Z2 = 1;
+  if (W2) return A0;
+  W2 = 1;
   const e = es(), c = br();
   return A0 = new e("P224", c, c), A0;
 }
@@ -53314,10 +53317,10 @@ function C7() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var O0, Q2;
+var O0, Z2;
 function D7() {
-  if (Q2) return O0;
-  Q2 = 1;
+  if (Z2) return O0;
+  Z2 = 1;
   const e = es(), c = br();
   return O0 = new e("P256", c, c), O0;
 }
@@ -53335,10 +53338,10 @@ function D7() {
  *   https://tools.ietf.org/html/rfc4634
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/sha/384.js
  */
-var _0, e6;
-function Hl() {
-  if (e6) return _0;
-  e6 = 1;
+var _0, Q2;
+function Fl() {
+  if (Q2) return _0;
+  Q2 = 1;
   const e = Mt(), c = ji(), l = ni();
   class w extends c {
     constructor() {
@@ -53377,11 +53380,11 @@ function Hl() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var R0, t6;
+var R0, e6;
 function U7() {
-  if (t6) return R0;
-  t6 = 1;
-  const e = es(), c = Hl();
+  if (e6) return R0;
+  e6 = 1;
+  const e = es(), c = Fl();
   return R0 = new e("P384", c, c), R0;
 }
 /*!
@@ -53395,10 +53398,10 @@ function U7() {
  *   https://csrc.nist.gov/projects/hash-functions/sha-3-project/sha-3-standardization
  *   http://dx.doi.org/10.6028/NIST.FIPS.202
  */
-var P0, r6;
+var P0, t6;
 function F7() {
-  if (r6) return P0;
-  r6 = 1;
+  if (t6) return P0;
+  t6 = 1;
   const e = z7();
   class c extends e {
     /**
@@ -53437,10 +53440,10 @@ function F7() {
  * Copyright (c) 2017-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var k0, i6;
+var k0, r6;
 function H7() {
-  if (i6) return k0;
-  i6 = 1;
+  if (r6) return k0;
+  r6 = 1;
   const e = F7();
   class c extends e {
     constructor() {
@@ -53475,10 +53478,10 @@ function H7() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var B0, n6;
+var B0, i6;
 function L7() {
-  if (n6) return B0;
-  n6 = 1;
+  if (i6) return B0;
+  i6 = 1;
   const e = es(), c = ji(), l = H7();
   return B0 = new e("P521", c, l), B0;
 }
@@ -53504,10 +53507,10 @@ var zt = {}, Dn = {};
  *   https://github.com/golang/go/blob/master/src/crypto/rand/util.go
  *   https://github.com/indutny/miller-rabin/blob/master/lib/mr.js
  */
-var s6;
-function tx() {
-  if (s6) return Dn;
-  s6 = 1;
+var n6;
+function rx() {
+  if (n6) return Dn;
+  n6 = 1;
   const e = Mt(), c = jr(), l = Li(), w = new Uint8Array([
     3,
     5,
@@ -53576,10 +53579,10 @@ var Wr = {};
  * Resources:
  *   https://tools.ietf.org/html/rfc4648
  */
-var o6;
-function rx() {
-  if (o6) return Wr;
-  o6 = 1;
+var s6;
+function ix() {
+  if (s6) return Wr;
+  s6 = 1;
   const e = Mt(), c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", l = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_", w = [
     -1,
     -1,
@@ -53983,10 +53986,10 @@ var Zt = {};
  * Resources:
  *   https://github.com/golang/go/blob/master/src/crypto/subtle/constant_time.go
  */
-var a6;
+var o6;
 function K7() {
-  if (a6) return Zt;
-  a6 = 1;
+  if (o6) return Zt;
+  o6 = 1;
   const e = Mt();
   function c(p, h) {
     if (e(k.isBuffer(p)), e(k.isBuffer(h)), m(p.length, 0))
@@ -54083,11 +54086,11 @@ function K7() {
  *     National Institute of Standards and Technology
  *     https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf
  */
-var f6;
+var a6;
 function V7() {
-  if (f6) return zt;
-  f6 = 1;
-  const e = Mt(), c = jr(), l = Li(), { randomPrime: w } = tx(), m = rx(), f = S7(), n = K7(), {
+  if (a6) return zt;
+  a6 = 1;
+  const e = Mt(), c = jr(), l = Li(), { randomPrime: w } = rx(), m = ix(), f = S7(), n = K7(), {
     safeEqual: u,
     safeEqualByte: a,
     safeSelect: s,
@@ -54702,11 +54705,11 @@ var Un = {};
  *   http://www.tarsnap.com/scrypt/scrypt.pdf
  *   https://github.com/Tarsnap/scrypt/blob/master/lib/crypto/crypto_scrypt-ref.c
  */
-var c6;
-function ix() {
-  if (c6) return Un;
-  c6 = 1;
-  const e = Mt(), c = Tl(), l = br(), w = k.alloc(64), m = new Uint32Array(16), f = new Uint32Array(16);
+var f6;
+function nx() {
+  if (f6) return Un;
+  f6 = 1;
+  const e = Mt(), c = ql(), l = br(), w = k.alloc(64), m = new Uint32Array(16), f = new Uint32Array(16);
   function n(j, G, N, T, A, q) {
     if (typeof j == "string" && (j = k.from(j, "utf8")), typeof G == "string" && (G = k.from(G, "utf8")), G == null && (G = k.alloc(0)), e(k.isBuffer(j)), e(k.isBuffer(G)), e(N >>> 0 === N), e(T >>> 0 === T), e(A >>> 0 === A), e(q >>> 0 === q), T * A >= 1 << 30)
       throw new Error("EFBIG");
@@ -54820,10 +54823,10 @@ function ix() {
  *   https://tools.ietf.org/html/rfc4634
  *   https://github.com/indutny/hash.js/blob/master/lib/hash/sha/224.js
  */
-var M0, u6;
+var M0, c6;
 function $7() {
-  if (u6) return M0;
-  u6 = 1;
+  if (c6) return M0;
+  c6 = 1;
   const e = Mt(), c = br(), l = ni();
   class w extends c {
     constructor() {
@@ -54862,10 +54865,10 @@ function $7() {
  * Copyright (c) 2014-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var h6;
-function nx() {
-  return h6 || (h6 = 1, function(e) {
-    e.aes = ex(), e.BN = jr(), e.ChaCha20 = E7(), e.cleanse = ao(), e.Hash160 = yn(), e.Hash256 = qr(), e.HmacDRBG = I7(), e.Keccak = z7(), e.merkle = M7(), e.murmur3 = Fl(), e.p224 = C7(), e.p256 = D7(), e.p384 = U7(), e.p521 = L7(), e.pbkdf2 = Tl(), e.random = Li(), e.RIPEMD160 = ll(), e.rsa = V7(), e.safe = K7(), e.scrypt = ix(), e.secp256k1 = Yr(), e.SHA1 = O7(), e.SHA224 = $7(), e.SHA256 = br(), e.SHA384 = Hl(), e.SHA512 = ji(), e.SHAKE = F7(), e.SHAKE256 = H7(), e.version = "5.5.1", e.native = e.SHA256.native;
+var u6;
+function sx() {
+  return u6 || (u6 = 1, function(e) {
+    e.aes = tx(), e.BN = jr(), e.ChaCha20 = E7(), e.cleanse = ao(), e.Hash160 = yn(), e.Hash256 = qr(), e.HmacDRBG = I7(), e.Keccak = z7(), e.merkle = M7(), e.murmur3 = Ul(), e.p224 = C7(), e.p256 = D7(), e.p384 = U7(), e.p521 = L7(), e.pbkdf2 = ql(), e.random = Li(), e.RIPEMD160 = hl(), e.rsa = V7(), e.safe = K7(), e.scrypt = nx(), e.secp256k1 = Yr(), e.SHA1 = O7(), e.SHA224 = $7(), e.SHA256 = br(), e.SHA384 = Fl(), e.SHA512 = ji(), e.SHAKE = F7(), e.SHAKE256 = H7(), e.version = "5.5.1", e.native = e.SHA256.native;
   }(v0)), v0;
 }
 var ws = {};
@@ -54875,11 +54878,11 @@ var ws = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var N0, l6;
-function sx() {
-  if (l6) return N0;
-  l6 = 1;
-  const { enforce: e } = dt, c = Bt, l = Fl(), w = k.alloc(0), m = 0.48045301391820144, f = 0.6931471805599453;
+var N0, h6;
+function ox() {
+  if (h6) return N0;
+  h6 = 1;
+  const { enforce: e } = dt, c = Bt, l = Ul(), w = k.alloc(0), m = 0.48045301391820144, f = 0.6931471805599453;
   class n extends c.Struct {
     /**
      * Create a bloom filter.
@@ -55059,11 +55062,11 @@ function sx() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var q0, d6;
-function ox() {
-  if (d6) return q0;
-  d6 = 1;
-  const { enforce: e } = dt, { encoding: c } = Bt, l = Fl(), w = k.alloc(0);
+var q0, l6;
+function ax() {
+  if (l6) return q0;
+  l6 = 1;
+  const { enforce: e } = dt, { encoding: c } = Bt, l = Ul(), w = k.alloc(0);
   class m {
     /**
      * Create a rolling bloom filter.
@@ -55185,16 +55188,16 @@ function ox() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var b6;
-function ax() {
-  if (b6) return ws;
-  b6 = 1;
-  const e = sx(), c = ox();
+var d6;
+function fx() {
+  if (d6) return ws;
+  d6 = 1;
+  const e = ox(), c = ax();
   return ws.BloomFilter = e, ws.RollingFilter = c, ws;
 }
-var ui = {}, T0, p6;
+var ui = {}, T0, b6;
 function j7() {
-  return p6 || (p6 = 1, T0 = [
+  return b6 || (b6 = 1, T0 = [
     k.from(
       "ebd41040e4bb3ec742c9e381d31ef2a41a48b6685c96e7cef3c1df6cd4331c99",
       "hex"
@@ -55744,11 +55747,11 @@ function j7() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var z0, m6;
+var z0, p6;
 function uo() {
-  if (m6) return z0;
-  m6 = 1;
-  const e = dt, c = Vm, l = {
+  if (p6) return z0;
+  p6 = 1;
+  const e = dt, c = $m, l = {
     VARINT: 0,
     FIXED64: 1,
     DELIMITED: 2,
@@ -55871,11 +55874,11 @@ function uo() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var C0, g6;
+var C0, m6;
 function ho() {
-  if (g6) return C0;
-  g6 = 1;
-  const e = dt, c = jm, l = {
+  if (m6) return C0;
+  m6 = 1;
+  const e = dt, c = Ym, l = {
     VARINT: 0,
     DELIMITED: 2
   };
@@ -55979,10 +55982,10 @@ function ho() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var D0, x6;
-function Ll() {
-  if (x6) return D0;
-  x6 = 1;
+var D0, g6;
+function Hl() {
+  if (g6) return D0;
+  g6 = 1;
   const e = dt, c = uo(), l = ho();
   class w {
     /**
@@ -56113,11 +56116,11 @@ function Ll() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var U0, w6;
+var U0, x6;
 function Y7() {
-  if (w6) return U0;
-  w6 = 1;
-  const e = dt, c = uo(), l = ho(), { setData: w, getData: m } = Ll().prototype;
+  if (x6) return U0;
+  x6 = 1;
+  const e = dt, c = uo(), l = ho(), { setData: w, getData: m } = Hl().prototype;
   class f {
     /**
      * Create a payment.
@@ -56226,10 +56229,10 @@ function Y7() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var F0, y6;
-function fx() {
-  if (y6) return F0;
-  y6 = 1;
+var F0, w6;
+function cx() {
+  if (w6) return F0;
+  w6 = 1;
   const e = dt, c = uo(), l = ho(), w = Y7();
   class m {
     /**
@@ -56317,9 +56320,9 @@ var H0 = {}, L0 = {};
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-var v6;
-function cx() {
-  return v6 || (v6 = 1, function(e) {
+var y6;
+function ux() {
+  return y6 || (y6 = 1, function(e) {
     const c = Bt, l = e;
     l.readTag = function(m) {
       let f = m.readU8();
@@ -56525,11 +56528,11 @@ var ys = {};
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var S6;
-function ux() {
-  if (S6) return ys;
-  S6 = 1;
-  const e = dt, c = $7(), l = br(), w = Hl(), m = ji(), f = V7(), n = C7(), u = D7(), a = U7(), s = L7();
+var v6;
+function hx() {
+  if (v6) return ys;
+  v6 = 1;
+  const e = dt, c = $7(), l = br(), w = Fl(), m = ji(), f = V7(), n = C7(), u = D7(), a = U7(), s = L7();
   ys.verify = function(S, y, p, h) {
     const o = i(S);
     if (!o)
@@ -56596,10 +56599,10 @@ function ux() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var E6;
+var S6;
 function X7() {
-  return E6 || (E6 = 1, function(e) {
-    const c = dt, l = br(), w = cx(), m = ux(), f = j7(), n = e;
+  return S6 || (S6 = 1, function(e) {
+    const c = dt, l = br(), w = ux(), m = hx(), f = j7(), n = e;
     n.trusted = /* @__PURE__ */ new Set(), n.allowUntrusted = !1, n.oid = {
       "1.2.840.10040.4.1": { key: "dsa", hash: null },
       "1.2.840.10040.4.2": { key: "dsa", hash: null },
@@ -56755,11 +56758,11 @@ function X7() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var K0, I6;
-function hx() {
-  if (I6) return K0;
-  I6 = 1;
-  const e = dt, c = uo(), l = ho(), w = Ll(), m = X7();
+var K0, E6;
+function lx() {
+  if (E6) return K0;
+  E6 = 1;
+  const e = dt, c = uo(), l = ho(), w = Hl(), m = X7();
   class f {
     /**
      * Create a payment request.
@@ -56951,13 +56954,13 @@ function hx() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var A6;
-function lx() {
-  return A6 || (A6 = 1, ui.certs = j7(), ui.PaymentACK = fx(), ui.PaymentDetails = Ll(), ui.Payment = Y7(), ui.PaymentRequest = hx(), ui.x509 = X7()), ui;
+var I6;
+function dx() {
+  return I6 || (I6 = 1, ui.certs = j7(), ui.PaymentACK = cx(), ui.PaymentDetails = Hl(), ui.Payment = Y7(), ui.PaymentRequest = lx(), ui.x509 = X7()), ui;
 }
-var V0 = {}, dx = "@hansekontor/checkout-components", bx = "1.3.0", O6 = {
-  name: dx,
-  version: bx
+var V0 = {}, bx = "@hansekontor/checkout-components", px = "1.3.0", A6 = {
+  name: bx,
+  version: px
 };
 /*!
  * pkg.js - package constants
@@ -56966,11 +56969,11 @@ var V0 = {}, dx = "@hansekontor/checkout-components", bx = "1.3.0", O6 = {
  * Copyright (c) 2018, bcash developers.
  * https://github.com/bcoin-org/bcash
  */
-var _6;
-function px() {
-  return _6 || (_6 = 1, function(e) {
+var O6;
+function mx() {
+  return O6 || (O6 = 1, function(e) {
     const c = e;
-    c.name = O6.name, c.core = "bcash", c.organization = "badger-cash", c.currency = "bitcoin cash", c.unit = "bch", c.base = "satoshi", c.cfg = `${c.core}.conf`, c.url = `https://github.com/${c.organization}/${c.name}`, c.version = O6.version;
+    c.name = A6.name, c.core = "bcash", c.organization = "badger-cash", c.currency = "bitcoin cash", c.unit = "bch", c.base = "satoshi", c.cfg = `${c.core}.conf`, c.url = `https://github.com/${c.organization}/${c.name}`, c.version = A6.version;
   }(V0)), V0;
 }
 /*!
@@ -56979,18 +56982,19 @@ function px() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var R6;
-function mx() {
-  return R6 || (R6 = 1, function(e, c) {
+var _6;
+function gx() {
+  return _6 || (_6 = 1, function(e, c) {
     const l = c;
     l.set = function(m) {
       return l.Network.set(m), l;
-    }, l.btc = Ng(), l.Amount = Ui(), l.URI = A7(), l.coins = qg(), l.Coins = Nl(), l.CoinEntry = so(), l.CoinView = ql(), l.hd = Vg(), l.HDPrivateKey = B7(), l.HDPublicKey = Cl(), e.exports.Mnemonic = zl(), l.primitives = Yg(), l.Address = Ki(), l.Block = Ul(), l.Coin = no(), l.Headers = ns(), l.Input = co(), l.InvItem = fo(), l.KeyRing = N7(), l.MerkleBlock = Dl(), l.MTX = q7(), l.Outpoint = Sn(), l.Output = $i(), l.TX = is(), l.protocol = Gg(), l.consensus = Gt(), l.Network = Tr(), l.networks = El(), l.policy = vn(), l.script = Jg(), l.Opcode = Ml(), l.Script = si(), l.ScriptNum = Vi(), l.SigCache = T7(), l.Stack = ro(), l.utils = ur(), l.util = pr(), l.bcrypto = nx(), l.bfilter = ax(), l.b70 = lx(), l.pkg = px();
+    }, l.btc = qg(), l.Amount = Ui(), l.URI = A7(), l.coins = Tg(), l.Coins = Ml(), l.CoinEntry = so(), l.CoinView = Nl(), l.hd = $g(), l.HDPrivateKey = B7(), l.HDPublicKey = zl(), e.exports.Mnemonic = Tl(), l.primitives = Xg(), l.Address = Ki(), l.Block = Dl(), l.Coin = no(), l.Headers = ns(), l.Input = co(), l.InvItem = fo(), l.KeyRing = N7(), l.MerkleBlock = Cl(), l.MTX = q7(), l.Outpoint = Sn(), l.Output = $i(), l.TX = is(), l.protocol = Jg(), l.consensus = Gt(), l.Network = Tr(), l.networks = Sl(), l.policy = vn(), l.script = Wg(), l.Opcode = Bl(), l.Script = si(), l.ScriptNum = Vi(), l.SigCache = T7(), l.Stack = ro(), l.utils = ur(), l.util = pr(), l.bcrypto = sx(), l.bfilter = fx(), l.b70 = dx(), l.pkg = mx();
   }(ps, ps.exports)), ps.exports;
 }
-var gx = mx(), ss = /* @__PURE__ */ Ym(gx);
+var xx = gx(), ss = /* @__PURE__ */ Xm(xx);
 class G7 {
   supported;
+  supportedMap;
   prod;
   sandbox;
   constructor() {
@@ -57027,10 +57031,10 @@ class G7 {
         tokenId: "4075459e0ac841f234bc73fc4fe46fe5490be4ed98bc8ca3f9b898443a5a381a",
         hasBaton: !1
       }
-    ], this.prod = this.supported[0], this.sandbox = this.supported[1];
+    ], this.prod = this.supported[0], this.sandbox = this.supported[1], this.supportedMap = this.supported.reduce((c, l) => ({ ...c, [l.tokenId]: l }), {});
   }
 }
-class xx {
+class wx {
   balances;
   utxos;
   slp;
@@ -57046,10 +57050,10 @@ class xx {
     };
   }
 }
-const { Mnemonic: wx, HDPrivateKey: yx, KeyRing: vx } = ss, Sx = () => new wx({
+const { Mnemonic: yx, HDPrivateKey: vx, KeyRing: Sx } = ss, Ex = () => new yx({
   language: "english"
-}), Ex = (e, c) => {
-  const l = e.derivePath(c), w = l.toPublic().publicKey.toString("hex"), m = vx.fromPrivate(l.privateKey, null), f = m.getAddress("string"), n = Mi.decode(f), u = Mi.encode(
+}), Ix = (e, c) => {
+  const l = e.derivePath(c), w = l.toPublic().publicKey.toString("hex"), m = Sx.fromPrivate(l.privateKey, null), f = m.getAddress("string"), n = Mi.decode(f), u = Mi.encode(
     "etoken",
     n.type,
     n.hash
@@ -57061,27 +57065,27 @@ const { Mnemonic: wx, HDPrivateKey: yx, KeyRing: vx } = ss, Sx = () => new wx({
     fundingWif: a,
     legacyAddress: s
   };
-}, Ix = (e) => {
-  const c = yx.fromPhrase(e.getPhrase()), w = Ex(c, "m/44'/1899'/0'/0/0"), m = w.cashAddress.slice(12, 17);
+}, Ax = (e) => {
+  const c = vx.fromPhrase(e.getPhrase()), w = Ix(c, "m/44'/1899'/0'/0/0"), m = w.cashAddress.slice(12, 17);
   return {
     mnemonic: e,
     name: m,
     Path1899: w,
-    state: new xx()
+    state: new wx()
   };
-}, Ax = (e, c) => c ? !c.find((m) => m.mnemonic.toString() === e.toString()) : !0, Ox = (e, c) => {
+}, Ox = (e, c) => c ? !c.find((m) => m.mnemonic.toString() === e.toString()) : !0, _x = (e, c) => {
   const l = [e];
   for (let w = 0; w < c.length; w++)
     c[w].name === e.name || l.push(c[w]);
   return l;
 };
-class _x {
+class Rx {
   wallets;
   constructor(c = []) {
     this.wallets = c;
   }
 }
-var Rx = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, $0 = Math.ceil, yr = Math.floor, fr = "[BigNumber Error] ", P6 = fr + "Number primitive has more than 15 significant digits: ", kr = 1e14, wt = 14, j0 = 9007199254740991, Y0 = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], hi = 1e7, $t = 1e9;
+var Px = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, $0 = Math.ceil, yr = Math.floor, fr = "[BigNumber Error] ", R6 = fr + "Number primitive has more than 15 significant digits: ", kr = 1e14, wt = 14, j0 = 9007199254740991, Y0 = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], hi = 1e7, $t = 1e9;
 function J7(e) {
   var c, l, w, m = E.prototype = { constructor: E, toString: null, valueOf: null }, f = new E(1), n = 20, u = 4, a = -7, s = 21, i = -1e7, b = 1e7, g = !1, S = 1, y = 0, p = {
     prefix: "",
@@ -57110,7 +57114,7 @@ function J7(e) {
         }
         D = String(A);
       } else {
-        if (!Rx.test(D = String(A))) return w(Q, D, ue);
+        if (!Px.test(D = String(A))) return w(Q, D, ue);
         Q.s = D.charCodeAt(0) == 45 ? (D = D.slice(1), -1) : 1;
       }
       (V = D.indexOf(".")) > -1 && (D = D.replace(".", "")), (fe = D.search(/e/i)) > 0 ? (V < 0 && (V = fe), V += +D.slice(fe + 1), D = D.substring(0, fe)) : V < 0 && (V = D.length);
@@ -57120,7 +57124,7 @@ function J7(e) {
       if (D = String(A), ue = typeof A == "number") {
         if (A * 0 != 0) return w(Q, D, ue, q);
         if (Q.s = 1 / A < 0 ? (D = D.slice(1), -1) : 1, E.DEBUG && D.replace(/^0\.0*|\./, "").length > 15)
-          throw Error(P6 + A);
+          throw Error(R6 + A);
       } else
         Q.s = D.charCodeAt(0) === 45 ? (D = D.slice(1), -1) : 1;
       for (_ = h.slice(0, q), V = fe = 0, se = D.length; fe < se; fe++)
@@ -57142,7 +57146,7 @@ function J7(e) {
     for (se = D.length; D.charCodeAt(--se) === 48; ) ;
     if (D = D.slice(fe, ++se)) {
       if (se -= fe, ue && E.DEBUG && se > 15 && (A > j0 || A !== yr(A)))
-        throw Error(P6 + Q.s * A);
+        throw Error(R6 + Q.s * A);
       if ((V = V - fe - 1) > b)
         Q.c = Q.e = null;
       else if (V < i)
@@ -57699,16 +57703,16 @@ function Zr(e, c, l) {
   return e;
 }
 var Kt = J7();
-const W7 = "https://ecash.badger.cash:8332", Px = async (e) => await (await fetch(`${W7}/coin/address/${e}?slp=true`)).json(), kx = (e) => {
+const W7 = "https://ecash.badger.cash:8332", kx = async (e) => await (await fetch(`${W7}/coin/address/${e}?slp=true`)).json(), Bx = (e) => {
   const c = e.nonSlpUtxos.reduce(
     (m, f) => m + f.value,
     0
   );
   return {
-    totalBalance: Tx(c),
+    totalBalance: zx(c),
     totalBalanceInSatoshis: c
   };
-}, Bx = (e) => {
+}, Mx = (e) => {
   const c = e.filter(
     (a) => !a.slp || a.slp && a.slp.value == "0"
   ), l = e.filter(
@@ -57737,22 +57741,22 @@ const W7 = "https://ecash.badger.cash:8332", Px = async (e) => await (await fetc
     nonSlpUtxos: c,
     slpUtxos: l
   };
-}, Mx = async (e) => {
+}, Nx = async (e) => {
   const c = `${W7}/tx/address/${e}?slp=true`;
   return await (await fetch(c)).json();
-}, Nx = (e, c) => {
+}, qx = (e, c) => {
   const l = [];
   for (let w = 0; w < e.length; w++) {
     const m = e[w];
     if (!new G7().supported.find((a) => a.tokenId === m.slpToken?.tokenId))
       continue;
-    const u = qx(m, c);
+    const u = Tx(m, c);
     l.push(u);
   }
   return l;
-}, qx = (e, c) => {
+}, Tx = (e, c) => {
   const l = {};
-  l.txid = e.hash, l.height = e.height, l.blocktime = e.time, l.confirmations = e.confirmations, l.amountSent = 0, l.amountReceived = 0, l.sender = e.inputs[0].coin.address;
+  l.txid = e.hash, l.height = e.height, l.blocktime = e.time, l.confirmations = e.confirmations, l.amountSent = 0, l.amountReceived = 0, l.tokenId = e.slpToken.tokenId, l.sender = e.inputs[0].coin.address;
   let w = !1;
   for (const i of e.inputs)
     if (c === i.coin.address) {
@@ -57779,11 +57783,11 @@ const W7 = "https://ecash.badger.cash:8332", Px = async (e) => await (await fetc
     l.amountReceived = b.toNumber();
   }
   return l;
-}, Tx = (e) => {
+}, zx = (e) => {
   const l = new Kt(e), w = new Kt(10 ** -2);
   return l.times(w).toNumber();
 };
-class zx {
+class Cx {
   listeners;
   constructor() {
     this.listeners = {};
@@ -57800,9 +57804,9 @@ class zx {
     !!this.listeners[c] && this.listeners[c].forEach((m) => m(c, l));
   }
 }
-const Yn = new zx();
-function Cx(e, c) {
-  const l = tm(e);
+const Yn = new Cx();
+function Dx(e, c) {
+  const l = rm(e);
   dn(() => {
     l.current = e;
   }, [e]), dn(() => {
@@ -57818,20 +57822,20 @@ function Cx(e, c) {
     m();
   }, [c]);
 }
-var X0, k6;
+var X0, P6;
 function Z7() {
-  if (k6) return X0;
-  k6 = 1;
+  if (P6) return X0;
+  P6 = 1;
   var e = Object.prototype.toString;
   return X0 = function(l) {
     var w = e.call(l), m = w === "[object Arguments]";
     return m || (m = w !== "[object Array]" && l !== null && typeof l == "object" && typeof l.length == "number" && l.length >= 0 && e.call(l.callee) === "[object Function]"), m;
   }, X0;
 }
-var G0, B6;
-function Dx() {
-  if (B6) return G0;
-  B6 = 1;
+var G0, k6;
+function Ux() {
+  if (k6) return G0;
+  k6 = 1;
   var e;
   if (!Object.keys) {
     var c = Object.prototype.hasOwnProperty, l = Object.prototype.toString, w = Z7(), m = Object.prototype.propertyIsEnumerable, f = !m.call({ toString: null }, "toString"), n = m.call(function() {
@@ -57916,13 +57920,13 @@ function Dx() {
   }
   return G0 = e, G0;
 }
-var J0, M6;
-function Kl() {
-  if (M6) return J0;
-  M6 = 1;
+var J0, B6;
+function Ll() {
+  if (B6) return J0;
+  B6 = 1;
   var e = Array.prototype.slice, c = Z7(), l = Object.keys, w = l ? function(n) {
     return l(n);
-  } : Dx(), m = Object.keys;
+  } : Ux(), m = Object.keys;
   return w.shim = function() {
     if (Object.keys) {
       var n = function() {
@@ -57937,10 +57941,10 @@ function Kl() {
     return Object.keys || w;
   }, J0 = w, J0;
 }
-var W0, N6;
+var W0, M6;
 function lo() {
-  if (N6) return W0;
-  N6 = 1;
+  if (M6) return W0;
+  M6 = 1;
   var e = Object.defineProperty || !1;
   if (e)
     try {
@@ -57950,23 +57954,23 @@ function lo() {
     }
   return W0 = e, W0;
 }
-var Z0, q6;
-function Vl() {
-  return q6 || (q6 = 1, Z0 = SyntaxError), Z0;
+var Z0, N6;
+function Kl() {
+  return N6 || (N6 = 1, Z0 = SyntaxError), Z0;
 }
-var Q0, T6;
+var Q0, q6;
 function Ir() {
-  return T6 || (T6 = 1, Q0 = TypeError), Q0;
+  return q6 || (q6 = 1, Q0 = TypeError), Q0;
 }
-var ef, z6;
-function Ux() {
-  return z6 || (z6 = 1, ef = Object.getOwnPropertyDescriptor), ef;
+var ef, T6;
+function Fx() {
+  return T6 || (T6 = 1, ef = Object.getOwnPropertyDescriptor), ef;
 }
-var tf, C6;
+var tf, z6;
 function Yi() {
-  if (C6) return tf;
-  C6 = 1;
-  var e = /* @__PURE__ */ Ux();
+  if (z6) return tf;
+  z6 = 1;
+  var e = /* @__PURE__ */ Fx();
   if (e)
     try {
       e([], "length");
@@ -57975,11 +57979,11 @@ function Yi() {
     }
   return tf = e, tf;
 }
-var rf, D6;
-function $l() {
-  if (D6) return rf;
-  D6 = 1;
-  var e = /* @__PURE__ */ lo(), c = /* @__PURE__ */ Vl(), l = /* @__PURE__ */ Ir(), w = /* @__PURE__ */ Yi();
+var rf, C6;
+function Vl() {
+  if (C6) return rf;
+  C6 = 1;
+  var e = /* @__PURE__ */ lo(), c = /* @__PURE__ */ Kl(), l = /* @__PURE__ */ Ir(), w = /* @__PURE__ */ Yi();
   return rf = function(f, n, u) {
     if (!f || typeof f != "object" && typeof f != "function")
       throw new l("`obj` must be an object or a function`");
@@ -58007,10 +58011,10 @@ function $l() {
       throw new c("This environment does not support defining a property as non-configurable, non-writable, or non-enumerable.");
   }, rf;
 }
-var nf, U6;
-function jl() {
-  if (U6) return nf;
-  U6 = 1;
+var nf, D6;
+function $l() {
+  if (D6) return nf;
+  D6 = 1;
   var e = /* @__PURE__ */ lo(), c = function() {
     return !!e;
   };
@@ -58024,13 +58028,13 @@ function jl() {
     }
   }, nf = c, nf;
 }
-var sf, F6;
+var sf, U6;
 function oi() {
-  if (F6) return sf;
-  F6 = 1;
-  var e = Kl(), c = typeof Symbol == "function" && typeof Symbol("foo") == "symbol", l = Object.prototype.toString, w = Array.prototype.concat, m = /* @__PURE__ */ $l(), f = function(s) {
+  if (U6) return sf;
+  U6 = 1;
+  var e = Ll(), c = typeof Symbol == "function" && typeof Symbol("foo") == "symbol", l = Object.prototype.toString, w = Array.prototype.concat, m = /* @__PURE__ */ Vl(), f = function(s) {
     return typeof s == "function" && l.call(s) === "[object Function]";
-  }, n = /* @__PURE__ */ jl()(), u = function(s, i, b, g) {
+  }, n = /* @__PURE__ */ $l()(), u = function(s, i, b, g) {
     if (i in s) {
       if (g === !0) {
         if (s[i] === b)
@@ -58047,72 +58051,72 @@ function oi() {
   };
   return a.supportsDescriptors = !!n, sf = a, sf;
 }
-var of = { exports: {} }, af, H6;
-function Yl() {
-  return H6 || (H6 = 1, af = Object), af;
+var of = { exports: {} }, af, F6;
+function jl() {
+  return F6 || (F6 = 1, af = Object), af;
 }
-var ff, L6;
+var ff, H6;
 function Q7() {
-  return L6 || (L6 = 1, ff = Error), ff;
+  return H6 || (H6 = 1, ff = Error), ff;
 }
-var cf, K6;
-function Fx() {
-  return K6 || (K6 = 1, cf = EvalError), cf;
-}
-var uf, V6;
+var cf, L6;
 function Hx() {
-  return V6 || (V6 = 1, uf = RangeError), uf;
+  return L6 || (L6 = 1, cf = EvalError), cf;
 }
-var hf, $6;
+var uf, K6;
 function Lx() {
-  return $6 || ($6 = 1, hf = ReferenceError), hf;
+  return K6 || (K6 = 1, uf = RangeError), uf;
 }
-var lf, j6;
+var hf, V6;
 function Kx() {
-  return j6 || (j6 = 1, lf = URIError), lf;
+  return V6 || (V6 = 1, hf = ReferenceError), hf;
 }
-var df, Y6;
+var lf, $6;
 function Vx() {
-  return Y6 || (Y6 = 1, df = Math.abs), df;
+  return $6 || ($6 = 1, lf = URIError), lf;
 }
-var bf, X6;
+var df, j6;
 function $x() {
-  return X6 || (X6 = 1, bf = Math.floor), bf;
+  return j6 || (j6 = 1, df = Math.abs), df;
 }
-var pf, G6;
+var bf, Y6;
 function jx() {
-  return G6 || (G6 = 1, pf = Math.max), pf;
+  return Y6 || (Y6 = 1, bf = Math.floor), bf;
 }
-var mf, J6;
+var pf, X6;
 function Yx() {
-  return J6 || (J6 = 1, mf = Math.min), mf;
+  return X6 || (X6 = 1, pf = Math.max), pf;
 }
-var gf, W6;
+var mf, G6;
 function Xx() {
-  return W6 || (W6 = 1, gf = Math.pow), gf;
+  return G6 || (G6 = 1, mf = Math.min), mf;
 }
-var xf, Z6;
+var gf, J6;
 function Gx() {
-  return Z6 || (Z6 = 1, xf = Math.round), xf;
+  return J6 || (J6 = 1, gf = Math.pow), gf;
 }
-var wf, Q6;
+var xf, W6;
 function Jx() {
-  return Q6 || (Q6 = 1, wf = Number.isNaN || function(c) {
+  return W6 || (W6 = 1, xf = Math.round), xf;
+}
+var wf, Z6;
+function Wx() {
+  return Z6 || (Z6 = 1, wf = Number.isNaN || function(c) {
     return c !== c;
   }), wf;
 }
-var yf, e5;
-function Wx() {
-  if (e5) return yf;
-  e5 = 1;
-  var e = /* @__PURE__ */ Jx();
+var yf, Q6;
+function Zx() {
+  if (Q6) return yf;
+  Q6 = 1;
+  var e = /* @__PURE__ */ Wx();
   return yf = function(l) {
     return e(l) || l === 0 ? l : l < 0 ? -1 : 1;
   }, yf;
 }
-var vf, t5;
+var vf, e5;
 function bo() {
-  return t5 || (t5 = 1, vf = function() {
+  return e5 || (e5 = 1, vf = function() {
     if (typeof Symbol != "function" || typeof Object.getOwnPropertySymbols != "function")
       return !1;
     if (typeof Symbol.iterator == "symbol")
@@ -58140,30 +58144,30 @@ function bo() {
     return !0;
   }), vf;
 }
-var Sf, r5;
-function Xl() {
-  if (r5) return Sf;
-  r5 = 1;
+var Sf, t5;
+function Yl() {
+  if (t5) return Sf;
+  t5 = 1;
   var e = typeof Symbol < "u" && Symbol, c = bo();
   return Sf = function() {
     return typeof e != "function" || typeof Symbol != "function" || typeof e("foo") != "symbol" || typeof Symbol("bar") != "symbol" ? !1 : c();
   }, Sf;
 }
-var Ef, i5;
+var Ef, r5;
 function ep() {
-  return i5 || (i5 = 1, Ef = typeof Reflect < "u" && Reflect.getPrototypeOf || null), Ef;
+  return r5 || (r5 = 1, Ef = typeof Reflect < "u" && Reflect.getPrototypeOf || null), Ef;
 }
-var If, n5;
+var If, i5;
 function tp() {
-  if (n5) return If;
-  n5 = 1;
-  var e = /* @__PURE__ */ Yl();
+  if (i5) return If;
+  i5 = 1;
+  var e = /* @__PURE__ */ jl();
   return If = e.getPrototypeOf || null, If;
 }
-var Af, s5;
-function Zx() {
-  if (s5) return Af;
-  s5 = 1;
+var Af, n5;
+function Qx() {
+  if (n5) return Af;
+  n5 = 1;
   var e = "Function.prototype.bind called on incompatible ", c = Object.prototype.toString, l = Math.max, w = "[object Function]", m = function(a, s) {
     for (var i = [], b = 0; b < a.length; b += 1)
       i[b] = a[b];
@@ -58205,48 +58209,48 @@ function Zx() {
     return b;
   }, Af;
 }
-var Of, o5;
+var Of, s5;
 function os() {
-  if (o5) return Of;
-  o5 = 1;
-  var e = Zx();
+  if (s5) return Of;
+  s5 = 1;
+  var e = Qx();
   return Of = Function.prototype.bind || e, Of;
 }
-var _f, a5;
+var _f, o5;
+function Xl() {
+  return o5 || (o5 = 1, _f = Function.prototype.call), _f;
+}
+var Rf, a5;
 function Gl() {
-  return a5 || (a5 = 1, _f = Function.prototype.call), _f;
+  return a5 || (a5 = 1, Rf = Function.prototype.apply), Rf;
 }
-var Rf, f5;
-function Jl() {
-  return f5 || (f5 = 1, Rf = Function.prototype.apply), Rf;
+var Pf, f5;
+function ew() {
+  return f5 || (f5 = 1, Pf = typeof Reflect < "u" && Reflect && Reflect.apply), Pf;
 }
-var Pf, c5;
-function Qx() {
-  return c5 || (c5 = 1, Pf = typeof Reflect < "u" && Reflect && Reflect.apply), Pf;
-}
-var kf, u5;
+var kf, c5;
 function rp() {
-  if (u5) return kf;
-  u5 = 1;
-  var e = os(), c = Jl(), l = Gl(), w = Qx();
+  if (c5) return kf;
+  c5 = 1;
+  var e = os(), c = Gl(), l = Xl(), w = ew();
   return kf = w || e.call(l, c), kf;
 }
-var Bf, h5;
-function Wl() {
-  if (h5) return Bf;
-  h5 = 1;
-  var e = os(), c = /* @__PURE__ */ Ir(), l = Gl(), w = rp();
+var Bf, u5;
+function Jl() {
+  if (u5) return Bf;
+  u5 = 1;
+  var e = os(), c = /* @__PURE__ */ Ir(), l = Xl(), w = rp();
   return Bf = function(f) {
     if (f.length < 1 || typeof f[0] != "function")
       throw new c("a function is required");
     return w(e, l, f);
   }, Bf;
 }
-var Mf, l5;
-function ew() {
-  if (l5) return Mf;
-  l5 = 1;
-  var e = Wl(), c = /* @__PURE__ */ Yi(), l;
+var Mf, h5;
+function tw() {
+  if (h5) return Mf;
+  h5 = 1;
+  var e = Jl(), c = /* @__PURE__ */ Yi(), l;
   try {
     l = /** @type {{ __proto__?: typeof Array.prototype }} */
     [].__proto__ === Array.prototype;
@@ -58266,11 +58270,11 @@ function ew() {
     }
   ) : !1, Mf;
 }
-var Nf, d5;
+var Nf, l5;
 function po() {
-  if (d5) return Nf;
-  d5 = 1;
-  var e = ep(), c = tp(), l = /* @__PURE__ */ ew();
+  if (l5) return Nf;
+  l5 = 1;
+  var e = ep(), c = tp(), l = /* @__PURE__ */ tw();
   return Nf = e ? function(m) {
     return e(m);
   } : c ? function(m) {
@@ -58281,18 +58285,18 @@ function po() {
     return l(m);
   } : null, Nf;
 }
-var qf, b5;
-function Zl() {
-  if (b5) return qf;
-  b5 = 1;
+var qf, d5;
+function Wl() {
+  if (d5) return qf;
+  d5 = 1;
   var e = Function.prototype.call, c = Object.prototype.hasOwnProperty, l = os();
   return qf = l.call(e, c), qf;
 }
-var Tf, p5;
+var Tf, b5;
 function ai() {
-  if (p5) return Tf;
-  p5 = 1;
-  var e, c = /* @__PURE__ */ Yl(), l = /* @__PURE__ */ Q7(), w = /* @__PURE__ */ Fx(), m = /* @__PURE__ */ Hx(), f = /* @__PURE__ */ Lx(), n = /* @__PURE__ */ Vl(), u = /* @__PURE__ */ Ir(), a = /* @__PURE__ */ Kx(), s = /* @__PURE__ */ Vx(), i = /* @__PURE__ */ $x(), b = /* @__PURE__ */ jx(), g = /* @__PURE__ */ Yx(), S = /* @__PURE__ */ Xx(), y = /* @__PURE__ */ Gx(), p = /* @__PURE__ */ Wx(), h = Function, o = function(I) {
+  if (b5) return Tf;
+  b5 = 1;
+  var e, c = /* @__PURE__ */ jl(), l = /* @__PURE__ */ Q7(), w = /* @__PURE__ */ Hx(), m = /* @__PURE__ */ Lx(), f = /* @__PURE__ */ Kx(), n = /* @__PURE__ */ Kl(), u = /* @__PURE__ */ Ir(), a = /* @__PURE__ */ Vx(), s = /* @__PURE__ */ $x(), i = /* @__PURE__ */ jx(), b = /* @__PURE__ */ Yx(), g = /* @__PURE__ */ Xx(), S = /* @__PURE__ */ Gx(), y = /* @__PURE__ */ Jx(), p = /* @__PURE__ */ Zx(), h = Function, o = function(I) {
     try {
       return h('"use strict"; return (' + I + ").constructor;")();
     } catch {
@@ -58309,7 +58313,7 @@ function ai() {
         return j;
       }
     }
-  }() : j, N = Xl()(), T = po(), A = tp(), q = ep(), _ = Jl(), H = Gl(), R = {}, V = typeof Uint8Array > "u" || !T ? e : T(Uint8Array), fe = {
+  }() : j, N = Yl()(), T = po(), A = tp(), q = ep(), _ = Gl(), H = Xl(), R = {}, V = typeof Uint8Array > "u" || !T ? e : T(Uint8Array), fe = {
     __proto__: null,
     "%AggregateError%": typeof AggregateError > "u" ? e : AggregateError,
     "%Array%": Array,
@@ -58469,7 +58473,7 @@ function ai() {
     "%URIErrorPrototype%": ["URIError", "prototype"],
     "%WeakMapPrototype%": ["WeakMap", "prototype"],
     "%WeakSetPrototype%": ["WeakSet", "prototype"]
-  }, Q = os(), W = /* @__PURE__ */ Zl(), ae = Q.call(H, Array.prototype.concat), v = Q.call(_, Array.prototype.splice), Y = Q.call(H, String.prototype.replace), he = Q.call(H, String.prototype.slice), le = Q.call(H, RegExp.prototype.exec), ge = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g, Ee = /\\(\\)?/g, we = function(ie) {
+  }, Q = os(), W = /* @__PURE__ */ Wl(), ae = Q.call(H, Array.prototype.concat), v = Q.call(_, Array.prototype.splice), Y = Q.call(H, String.prototype.replace), he = Q.call(H, String.prototype.slice), le = Q.call(H, RegExp.prototype.exec), ge = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g, Ee = /\\(\\)?/g, we = function(ie) {
     var t = he(ie, 0, 1), d = he(ie, -1);
     if (t === "%" && d !== "%")
       throw new n("invalid intrinsic syntax, expected closing `%`");
@@ -58525,11 +58529,11 @@ function ai() {
     return C;
   }, Tf;
 }
-var zf, m5;
-function tw() {
-  if (m5) return zf;
-  m5 = 1;
-  var e = /* @__PURE__ */ ai(), c = /* @__PURE__ */ $l(), l = /* @__PURE__ */ jl()(), w = /* @__PURE__ */ Yi(), m = /* @__PURE__ */ Ir(), f = e("%Math.floor%");
+var zf, p5;
+function rw() {
+  if (p5) return zf;
+  p5 = 1;
+  var e = /* @__PURE__ */ ai(), c = /* @__PURE__ */ Vl(), l = /* @__PURE__ */ $l()(), w = /* @__PURE__ */ Yi(), m = /* @__PURE__ */ Ir(), f = e("%Math.floor%");
   return zf = function(u, a) {
     if (typeof u != "function")
       throw new m("`fn` is not a function");
@@ -58555,19 +58559,19 @@ function tw() {
     )), u;
   }, zf;
 }
-var Cf, g5;
-function rw() {
-  if (g5) return Cf;
-  g5 = 1;
-  var e = os(), c = Jl(), l = rp();
+var Cf, m5;
+function iw() {
+  if (m5) return Cf;
+  m5 = 1;
+  var e = os(), c = Gl(), l = rp();
   return Cf = function() {
     return l(e, c, arguments);
   }, Cf;
 }
-var x5;
+var g5;
 function Xi() {
-  return x5 || (x5 = 1, function(e) {
-    var c = /* @__PURE__ */ tw(), l = /* @__PURE__ */ lo(), w = Wl(), m = rw();
+  return g5 || (g5 = 1, function(e) {
+    var c = /* @__PURE__ */ rw(), l = /* @__PURE__ */ lo(), w = Jl(), m = iw();
     e.exports = function(n) {
       var u = w(arguments), a = n.length - (arguments.length - 1);
       return c(
@@ -58578,11 +58582,11 @@ function Xi() {
     }, l ? l(e.exports, "apply", { value: m }) : e.exports.apply = m;
   }(of)), of.exports;
 }
-var Df, w5;
+var Df, x5;
 function Jt() {
-  if (w5) return Df;
-  w5 = 1;
-  var e = /* @__PURE__ */ ai(), c = Wl(), l = c([e("%String.prototype.indexOf%")]);
+  if (x5) return Df;
+  x5 = 1;
+  var e = /* @__PURE__ */ ai(), c = Jl(), l = c([e("%String.prototype.indexOf%")]);
   return Df = function(m, f) {
     var n = (
       /** @type {(this: unknown, ...args: unknown[]) => unknown} */
@@ -58594,11 +58598,11 @@ function Jt() {
     ) : n;
   }, Df;
 }
-var Uf, y5;
+var Uf, w5;
 function ip() {
-  if (y5) return Uf;
-  y5 = 1;
-  var e = Kl(), c = bo()(), l = /* @__PURE__ */ Jt(), w = /* @__PURE__ */ Yl(), m = l("Array.prototype.push"), f = l("Object.prototype.propertyIsEnumerable"), n = c ? w.getOwnPropertySymbols : null;
+  if (w5) return Uf;
+  w5 = 1;
+  var e = Ll(), c = bo()(), l = /* @__PURE__ */ Jt(), w = /* @__PURE__ */ jl(), m = l("Array.prototype.push"), f = l("Object.prototype.propertyIsEnumerable"), n = c ? w.getOwnPropertySymbols : null;
   return Uf = function(a, s) {
     if (a == null)
       throw new TypeError("target must be an object");
@@ -58623,10 +58627,10 @@ function ip() {
     return i;
   }, Uf;
 }
-var Ff, v5;
-function Ql() {
-  if (v5) return Ff;
-  v5 = 1;
+var Ff, y5;
+function Zl() {
+  if (y5) return Ff;
+  y5 = 1;
   var e = ip(), c = function() {
     if (!Object.assign)
       return !1;
@@ -58651,11 +58655,11 @@ function Ql() {
     return !Object.assign || c() || l() ? e : Object.assign;
   }, Ff;
 }
-var Hf, S5;
-function iw() {
-  if (S5) return Hf;
-  S5 = 1;
-  var e = oi(), c = Ql();
+var Hf, v5;
+function nw() {
+  if (v5) return Hf;
+  v5 = 1;
+  var e = oi(), c = Zl();
   return Hf = function() {
     var w = c();
     return e(
@@ -58667,11 +58671,11 @@ function iw() {
     ), w;
   }, Hf;
 }
-var Lf, E5;
-function nw() {
-  if (E5) return Lf;
-  E5 = 1;
-  var e = oi(), c = Xi(), l = ip(), w = Ql(), m = iw(), f = c.apply(w()), n = function(a, s) {
+var Lf, S5;
+function sw() {
+  if (S5) return Lf;
+  S5 = 1;
+  var e = oi(), c = Xi(), l = ip(), w = Zl(), m = nw(), f = c.apply(w()), n = function(a, s) {
     return f(Object, arguments);
   };
   return e(n, {
@@ -58680,20 +58684,20 @@ function nw() {
     shim: m
   }), Lf = n, Lf;
 }
-var Kf, I5;
-function e1() {
-  if (I5) return Kf;
-  I5 = 1;
+var Kf, E5;
+function Ql() {
+  if (E5) return Kf;
+  E5 = 1;
   var e = /* @__PURE__ */ ai(), c = Xi(), l = c(e("String.prototype.indexOf"));
   return Kf = function(m, f) {
     var n = e(m, !!f);
     return typeof n == "function" && l(m, ".prototype.") > -1 ? c(n) : n;
   }, Kf;
 }
-var Vf, A5;
-function sw() {
-  if (A5) return Vf;
-  A5 = 1;
+var Vf, I5;
+function ow() {
+  if (I5) return Vf;
+  I5 = 1;
   var e = function() {
     return typeof (function() {
     }).name == "string";
@@ -58717,11 +58721,11 @@ function sw() {
     }).bind().name !== "";
   }, Vf = e, Vf;
 }
-var $f, O5;
-function ow() {
-  if (O5) return $f;
-  O5 = 1;
-  var e = /* @__PURE__ */ $l(), c = /* @__PURE__ */ jl()(), l = sw().functionsHaveConfigurableNames(), w = /* @__PURE__ */ Ir();
+var $f, A5;
+function aw() {
+  if (A5) return $f;
+  A5 = 1;
+  var e = /* @__PURE__ */ Vl(), c = /* @__PURE__ */ $l()(), l = ow().functionsHaveConfigurableNames(), w = /* @__PURE__ */ Ir();
   return $f = function(f, n) {
     if (typeof f != "function")
       throw new w("`fn` is not a function");
@@ -58741,11 +58745,11 @@ function ow() {
     )), f;
   }, $f;
 }
-var jf, _5;
+var jf, O5;
 function np() {
-  if (_5) return jf;
-  _5 = 1;
-  var e = ow(), c = /* @__PURE__ */ Ir(), l = Object;
+  if (O5) return jf;
+  O5 = 1;
+  var e = aw(), c = /* @__PURE__ */ Ir(), l = Object;
   return jf = e(function() {
     if (this == null || this !== l(this))
       throw new c("RegExp.prototype.flags getter called on non-object");
@@ -58753,10 +58757,10 @@ function np() {
     return this.hasIndices && (m += "d"), this.global && (m += "g"), this.ignoreCase && (m += "i"), this.multiline && (m += "m"), this.dotAll && (m += "s"), this.unicode && (m += "u"), this.unicodeSets && (m += "v"), this.sticky && (m += "y"), m;
   }, "get flags", !0), jf;
 }
-var Yf, R5;
+var Yf, _5;
 function sp() {
-  if (R5) return Yf;
-  R5 = 1;
+  if (_5) return Yf;
+  _5 = 1;
   var e = np(), c = oi().supportsDescriptors, l = Object.getOwnPropertyDescriptor;
   return Yf = function() {
     if (c && /a/mig.flags === "gim") {
@@ -58778,10 +58782,10 @@ function sp() {
     return e;
   }, Yf;
 }
-var Xf, P5;
-function aw() {
-  if (P5) return Xf;
-  P5 = 1;
+var Xf, R5;
+function fw() {
+  if (R5) return Xf;
+  R5 = 1;
   var e = oi().supportsDescriptors, c = sp(), l = /* @__PURE__ */ Yi(), w = Object.defineProperty, m = /* @__PURE__ */ Q7(), f = po(), n = /a/;
   return Xf = function() {
     if (!e || !f)
@@ -58794,30 +58798,30 @@ function aw() {
     }), a;
   }, Xf;
 }
-var Gf, k5;
-function fw() {
-  if (k5) return Gf;
-  k5 = 1;
-  var e = oi(), c = Xi(), l = np(), w = sp(), m = aw(), f = c(w());
+var Gf, P5;
+function cw() {
+  if (P5) return Gf;
+  P5 = 1;
+  var e = oi(), c = Xi(), l = np(), w = sp(), m = fw(), f = c(w());
   return e(f, {
     getPolyfill: w,
     implementation: l,
     shim: m
   }), Gf = f, Gf;
 }
-var Fn = { exports: {} }, Jf, B5;
+var Fn = { exports: {} }, Jf, k5;
 function xi() {
-  if (B5) return Jf;
-  B5 = 1;
+  if (k5) return Jf;
+  k5 = 1;
   var e = bo();
   return Jf = function() {
     return e() && !!Symbol.toStringTag;
   }, Jf;
 }
-var Wf, M5;
-function t1() {
-  if (M5) return Wf;
-  M5 = 1;
+var Wf, B5;
+function e1() {
+  if (B5) return Wf;
+  B5 = 1;
   var e = xi()(), c = /* @__PURE__ */ Jt(), l = c("Object.prototype.toString"), w = function(u) {
     return e && u && typeof u == "object" && Symbol.toStringTag in u ? !1 : l(u) === "[object Arguments]";
   }, m = function(u) {
@@ -58827,14 +58831,14 @@ function t1() {
   }();
   return w.isLegacyArguments = m, Wf = f ? w : m, Wf;
 }
-const cw = {}, uw = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const uw = {}, hw = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: cw
-}, Symbol.toStringTag, { value: "Module" })), hw = /* @__PURE__ */ im(uw);
-var Zf, N5;
+  default: uw
+}, Symbol.toStringTag, { value: "Module" })), lw = /* @__PURE__ */ nm(hw);
+var Zf, M5;
 function mo() {
-  if (N5) return Zf;
-  N5 = 1;
+  if (M5) return Zf;
+  M5 = 1;
   var e = typeof Map == "function" && Map.prototype, c = Object.getOwnPropertyDescriptor && e ? Object.getOwnPropertyDescriptor(Map.prototype, "size") : null, l = e && c && typeof c.get == "function" ? c.get : null, w = e && Map.prototype.forEach, m = typeof Set == "function" && Set.prototype, f = Object.getOwnPropertyDescriptor && m ? Object.getOwnPropertyDescriptor(Set.prototype, "size") : null, n = m && f && typeof f.get == "function" ? f.get : null, u = m && Set.prototype.forEach, a = typeof WeakMap == "function" && WeakMap.prototype, s = a ? WeakMap.prototype.has : null, i = typeof WeakSet == "function" && WeakSet.prototype, b = i ? WeakSet.prototype.has : null, g = typeof WeakRef == "function" && WeakRef.prototype, S = g ? WeakRef.prototype.deref : null, y = Boolean.prototype.valueOf, p = Object.prototype.toString, h = Function.prototype.toString, o = String.prototype.match, E = String.prototype.slice, F = String.prototype.replace, j = String.prototype.toUpperCase, G = String.prototype.toLowerCase, N = RegExp.prototype.test, T = Array.prototype.concat, A = Array.prototype.join, q = Array.prototype.slice, _ = Math.floor, H = typeof BigInt == "function" ? BigInt.prototype.valueOf : null, R = Object.getOwnPropertySymbols, V = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? Symbol.prototype.toString : null, fe = typeof Symbol == "function" && typeof Symbol.iterator == "object", ue = typeof Symbol == "function" && Symbol.toStringTag && (typeof Symbol.toStringTag === fe || !0) ? Symbol.toStringTag : null, se = Object.prototype.propertyIsEnumerable, D = (typeof Reflect == "function" ? Reflect.getPrototypeOf : Object.getPrototypeOf) || ([].__proto__ === Array.prototype ? function(ye) {
     return ye.__proto__;
   } : null);
@@ -58851,7 +58855,7 @@ function mo() {
     }
     return F.call(_e, ke, "$&_");
   }
-  var W = hw, ae = W.custom, v = U(ae) ? ae : null, Y = {
+  var W = lw, ae = W.custom, v = U(ae) ? ae : null, Y = {
     __proto__: null,
     double: '"',
     single: "'"
@@ -59202,10 +59206,10 @@ function mo() {
   }
   return Zf;
 }
-var Qf, q5;
-function lw() {
-  if (q5) return Qf;
-  q5 = 1;
+var Qf, N5;
+function dw() {
+  if (N5) return Qf;
+  N5 = 1;
   var e = /* @__PURE__ */ mo(), c = /* @__PURE__ */ Ir(), l = function(u, a, s) {
     for (var i = u, b; (b = i.next) != null; i = b)
       if (b.key === a)
@@ -59261,10 +59265,10 @@ function lw() {
     return s;
   }, Qf;
 }
-var ec, T5;
+var ec, q5;
 function op() {
-  if (T5) return ec;
-  T5 = 1;
+  if (q5) return ec;
+  q5 = 1;
   var e = /* @__PURE__ */ ai(), c = /* @__PURE__ */ Jt(), l = /* @__PURE__ */ mo(), w = /* @__PURE__ */ Ir(), m = e("%Map%", !0), f = c("Map.prototype.get", !0), n = c("Map.prototype.set", !0), u = c("Map.prototype.has", !0), a = c("Map.prototype.delete", !0), s = c("Map.prototype.size", !0);
   return ec = !!m && /** @type {Exclude<import('.'), false>} */
   function() {
@@ -59294,10 +59298,10 @@ function op() {
     return g;
   }, ec;
 }
-var tc, z5;
-function dw() {
-  if (z5) return tc;
-  z5 = 1;
+var tc, T5;
+function bw() {
+  if (T5) return tc;
+  T5 = 1;
   var e = /* @__PURE__ */ ai(), c = /* @__PURE__ */ Jt(), l = /* @__PURE__ */ mo(), w = op(), m = /* @__PURE__ */ Ir(), f = e("%WeakMap%", !0), n = c("WeakMap.prototype.get", !0), u = c("WeakMap.prototype.set", !0), a = c("WeakMap.prototype.has", !0), s = c("WeakMap.prototype.delete", !0);
   return tc = f ? (
     /** @type {Exclude<import('.'), false>} */
@@ -59329,11 +59333,11 @@ function dw() {
     }
   ) : w, tc;
 }
-var rc, C5;
+var rc, z5;
 function ap() {
-  if (C5) return rc;
-  C5 = 1;
-  var e = /* @__PURE__ */ Ir(), c = /* @__PURE__ */ mo(), l = lw(), w = op(), m = dw(), f = m || w || l;
+  if (z5) return rc;
+  z5 = 1;
+  var e = /* @__PURE__ */ Ir(), c = /* @__PURE__ */ mo(), l = dw(), w = op(), m = bw(), f = m || w || l;
   return rc = function() {
     var u, a = {
       assert: function(s) {
@@ -59356,11 +59360,11 @@ function ap() {
     return a;
   }, rc;
 }
-var ic, D5;
-function bw() {
-  if (D5) return ic;
-  D5 = 1;
-  var e = /* @__PURE__ */ Zl(), c = ap()(), l = /* @__PURE__ */ Ir(), w = {
+var ic, C5;
+function pw() {
+  if (C5) return ic;
+  C5 = 1;
+  var e = /* @__PURE__ */ Wl(), c = ap()(), l = /* @__PURE__ */ Ir(), w = {
     assert: function(m, f) {
       if (!m || typeof m != "object" && typeof m != "function")
         throw new l("`O` is not an object");
@@ -59406,11 +59410,11 @@ function bw() {
   };
   return Object.freeze && Object.freeze(w), ic = w, ic;
 }
-var nc, U5;
-function pw() {
-  if (U5) return nc;
-  U5 = 1;
-  var e = bw(), c = /* @__PURE__ */ Vl(), l = typeof StopIteration == "object" ? StopIteration : null;
+var nc, D5;
+function mw() {
+  if (D5) return nc;
+  D5 = 1;
+  var e = pw(), c = /* @__PURE__ */ Kl(), l = typeof StopIteration == "object" ? StopIteration : null;
   return nc = function(m) {
     if (!l)
       throw new c("this environment lacks StopIteration");
@@ -59446,19 +59450,19 @@ function pw() {
     return e.set(f, "[[Iterator]]", m), f;
   }, nc;
 }
-var sc, F5;
+var sc, U5;
 function fp() {
-  if (F5) return sc;
-  F5 = 1;
+  if (U5) return sc;
+  U5 = 1;
   var e = {}.toString;
   return sc = Array.isArray || function(c) {
     return e.call(c) == "[object Array]";
   }, sc;
 }
-var oc, H5;
+var oc, F5;
 function cp() {
-  if (H5) return oc;
-  H5 = 1;
+  if (F5) return oc;
+  F5 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("String.prototype.valueOf"), l = function(u) {
     try {
       return c(u), !0;
@@ -59470,10 +59474,10 @@ function cp() {
     return typeof u == "string" ? !0 : !u || typeof u != "object" ? !1 : f ? l(u) : w(u) === m;
   }, oc;
 }
-var ac, L5;
+var ac, H5;
 function up() {
-  if (L5) return ac;
-  L5 = 1;
+  if (H5) return ac;
+  H5 = 1;
   var e = typeof Map == "function" && Map.prototype ? Map : null, c = typeof Set == "function" && Set.prototype ? Set : null, l;
   e || (l = function(n) {
     return !1;
@@ -59497,10 +59501,10 @@ function up() {
     return !1;
   }, ac;
 }
-var fc, K5;
+var fc, L5;
 function hp() {
-  if (K5) return fc;
-  K5 = 1;
+  if (L5) return fc;
+  L5 = 1;
   var e = typeof Map == "function" && Map.prototype ? Map : null, c = typeof Set == "function" && Set.prototype ? Set : null, l;
   c || (l = function(n) {
     return !1;
@@ -59524,12 +59528,12 @@ function hp() {
     return !1;
   }, fc;
 }
-var V5;
-function mw() {
-  if (V5) return Fn.exports;
-  V5 = 1;
-  var e = /* @__PURE__ */ t1(), c = /* @__PURE__ */ pw();
-  if (Xl()() || bo()()) {
+var K5;
+function gw() {
+  if (K5) return Fn.exports;
+  K5 = 1;
+  var e = /* @__PURE__ */ e1(), c = /* @__PURE__ */ mw();
+  if (Yl()() || bo()()) {
     var l = Symbol.iterator;
     Fn.exports = function(q) {
       if (q != null && typeof q[l] < "u")
@@ -59538,7 +59542,7 @@ function mw() {
         return Array.prototype[l].call(q);
     };
   } else {
-    var w = fp(), m = cp(), f = /* @__PURE__ */ ai(), n = f("%Map%", !0), u = f("%Set%", !0), a = e1(), s = a("Array.prototype.push"), i = a("String.prototype.charCodeAt"), b = a("String.prototype.slice"), g = function(q, _) {
+    var w = fp(), m = cp(), f = /* @__PURE__ */ ai(), n = f("%Map%", !0), u = f("%Set%", !0), a = Ql(), s = a("Array.prototype.push"), i = a("String.prototype.charCodeAt"), b = a("String.prototype.slice"), g = function(q, _) {
       var H = q.length;
       if (_ + 1 >= H)
         return _ + 1;
@@ -59618,10 +59622,10 @@ function mw() {
   }
   return Fn.exports;
 }
-var cc, $5;
+var cc, V5;
 function lp() {
-  if ($5) return cc;
-  $5 = 1;
+  if (V5) return cc;
+  V5 = 1;
   var e = function(c) {
     return c !== c;
   };
@@ -59629,20 +59633,20 @@ function lp() {
     return l === 0 && w === 0 ? 1 / l === 1 / w : !!(l === w || e(l) && e(w));
   }, cc;
 }
-var uc, j5;
-function r1() {
-  if (j5) return uc;
-  j5 = 1;
+var uc, $5;
+function t1() {
+  if ($5) return uc;
+  $5 = 1;
   var e = lp();
   return uc = function() {
     return typeof Object.is == "function" ? Object.is : e;
   }, uc;
 }
-var hc, Y5;
-function gw() {
-  if (Y5) return hc;
-  Y5 = 1;
-  var e = r1(), c = oi();
+var hc, j5;
+function xw() {
+  if (j5) return hc;
+  j5 = 1;
+  var e = t1(), c = oi();
   return hc = function() {
     var w = e();
     return c(Object, { is: w }, {
@@ -59652,21 +59656,21 @@ function gw() {
     }), w;
   }, hc;
 }
-var lc, X5;
+var lc, Y5;
 function dp() {
-  if (X5) return lc;
-  X5 = 1;
-  var e = oi(), c = Xi(), l = lp(), w = r1(), m = gw(), f = c(w(), Object);
+  if (Y5) return lc;
+  Y5 = 1;
+  var e = oi(), c = Xi(), l = lp(), w = t1(), m = xw(), f = c(w(), Object);
   return e(f, {
     getPolyfill: w,
     implementation: l,
     shim: m
   }), lc = f, lc;
 }
-var dc, G5;
+var dc, X5;
 function bp() {
-  if (G5) return dc;
-  G5 = 1;
+  if (X5) return dc;
+  X5 = 1;
   var e = Xi(), c = /* @__PURE__ */ Jt(), l = /* @__PURE__ */ ai(), w = l("%ArrayBuffer%", !0), m = c("ArrayBuffer.prototype.byteLength", !0), f = c("Object.prototype.toString"), n = !!w && !m && new w(0).slice, u = !!n && e(n);
   return dc = m || u ? function(s) {
     if (!s || typeof s != "object")
@@ -59682,10 +59686,10 @@ function bp() {
     return !1;
   }, dc;
 }
-var bc, J5;
-function xw() {
-  if (J5) return bc;
-  J5 = 1;
+var bc, G5;
+function ww() {
+  if (G5) return bc;
+  G5 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("Date.prototype.getDay"), l = function(u) {
     try {
       return c(u), !0;
@@ -59697,11 +59701,11 @@ function xw() {
     return typeof u != "object" || u === null ? !1 : f ? l(u) : w(u) === m;
   }, bc;
 }
-var pc, W5;
+var pc, J5;
 function pp() {
-  if (W5) return pc;
-  W5 = 1;
-  var e = /* @__PURE__ */ Jt(), c = xi()(), l = /* @__PURE__ */ Zl(), w = /* @__PURE__ */ Yi(), m;
+  if (J5) return pc;
+  J5 = 1;
+  var e = /* @__PURE__ */ Jt(), c = xi()(), l = /* @__PURE__ */ Wl(), w = /* @__PURE__ */ Yi(), m;
   if (c) {
     var f = e("RegExp.prototype.exec"), n = {}, u = function() {
       throw n;
@@ -59741,10 +59745,10 @@ function pp() {
   }
   return pc = m, pc;
 }
-var mc, Z5;
-function ww() {
-  if (Z5) return mc;
-  Z5 = 1;
+var mc, W5;
+function yw() {
+  if (W5) return mc;
+  W5 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("SharedArrayBuffer.prototype.byteLength", !0);
   return mc = c ? function(w) {
     if (!w || typeof w != "object")
@@ -59758,10 +59762,10 @@ function ww() {
     return !1;
   }, mc;
 }
-var gc, Q5;
-function yw() {
-  if (Q5) return gc;
-  Q5 = 1;
+var gc, Z5;
+function vw() {
+  if (Z5) return gc;
+  Z5 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("Number.prototype.toString"), l = function(u) {
     try {
       return c(u), !0;
@@ -59773,10 +59777,10 @@ function yw() {
     return typeof u == "number" ? !0 : !u || typeof u != "object" ? !1 : f ? l(u) : w(u) === m;
   }, gc;
 }
-var xc, e4;
-function vw() {
-  if (e4) return xc;
-  e4 = 1;
+var xc, Q5;
+function Sw() {
+  if (Q5) return xc;
+  Q5 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("Boolean.prototype.toString"), l = e("Object.prototype.toString"), w = function(u) {
     try {
       return c(u), !0;
@@ -59788,10 +59792,10 @@ function vw() {
     return typeof u == "boolean" ? !0 : u === null || typeof u != "object" ? !1 : f ? w(u) : l(u) === m;
   }, xc;
 }
-var Es = { exports: {} }, wc, t4;
+var Es = { exports: {} }, wc, e4;
 function mp() {
-  if (t4) return wc;
-  t4 = 1;
+  if (e4) return wc;
+  e4 = 1;
   var e = /* @__PURE__ */ Jt(), c = pp(), l = e("RegExp.prototype.exec"), w = /* @__PURE__ */ Ir();
   return wc = function(f) {
     if (!c(f))
@@ -59801,11 +59805,11 @@ function mp() {
     };
   }, wc;
 }
-var r4;
-function Sw() {
-  if (r4) return Es.exports;
-  r4 = 1;
-  var e = /* @__PURE__ */ Jt(), c = e("Object.prototype.toString"), l = Xl()(), w = /* @__PURE__ */ mp();
+var t4;
+function Ew() {
+  if (t4) return Es.exports;
+  t4 = 1;
+  var e = /* @__PURE__ */ Jt(), c = e("Object.prototype.toString"), l = Yl()(), w = /* @__PURE__ */ mp();
   if (l) {
     var m = e("Symbol.prototype.toString"), f = w(/^Symbol\(.*\)$/), n = function(a) {
       return typeof a.valueOf() != "symbol" ? !1 : f(m(a));
@@ -59827,20 +59831,20 @@ function Sw() {
     };
   return Es.exports;
 }
-var Is = { exports: {} }, yc, i4;
-function Ew() {
-  if (i4) return yc;
-  i4 = 1;
+var Is = { exports: {} }, yc, r4;
+function Iw() {
+  if (r4) return yc;
+  r4 = 1;
   var e = typeof BigInt < "u" && BigInt;
   return yc = function() {
     return typeof e == "function" && typeof BigInt == "function" && typeof e(42) == "bigint" && typeof BigInt(42) == "bigint";
   }, yc;
 }
-var n4;
-function Iw() {
-  if (n4) return Is.exports;
-  n4 = 1;
-  var e = Ew()();
+var i4;
+function Aw() {
+  if (i4) return Is.exports;
+  i4 = 1;
+  var e = Iw()();
   if (e) {
     var c = BigInt.prototype.valueOf, l = function(m) {
       try {
@@ -59858,11 +59862,11 @@ function Iw() {
     };
   return Is.exports;
 }
-var vc, s4;
-function Aw() {
-  if (s4) return vc;
-  s4 = 1;
-  var e = cp(), c = yw(), l = vw(), w = Sw(), m = Iw();
+var vc, n4;
+function Ow() {
+  if (n4) return vc;
+  n4 = 1;
+  var e = cp(), c = vw(), l = Sw(), w = Ew(), m = Aw();
   return vc = function(n) {
     if (n == null || typeof n != "object" && typeof n != "function")
       return null;
@@ -59878,10 +59882,10 @@ function Aw() {
       return "BigInt";
   }, vc;
 }
-var Sc, o4;
-function Ow() {
-  if (o4) return Sc;
-  o4 = 1;
+var Sc, s4;
+function _w() {
+  if (s4) return Sc;
+  s4 = 1;
   var e = typeof WeakMap == "function" && WeakMap.prototype ? WeakMap : null, c = typeof WeakSet == "function" && WeakSet.prototype ? WeakSet : null, l;
   e || (l = function(n) {
     return !1;
@@ -59905,10 +59909,10 @@ function Ow() {
     return !1;
   }, Sc;
 }
-var As = { exports: {} }, a4;
-function _w() {
-  if (a4) return As.exports;
-  a4 = 1;
+var As = { exports: {} }, o4;
+function Rw() {
+  if (o4) return As.exports;
+  o4 = 1;
   var e = /* @__PURE__ */ ai(), c = /* @__PURE__ */ Jt(), l = e("%WeakSet%", !0), w = c("WeakSet.prototype.has", !0);
   if (w) {
     var m = c("WeakMap.prototype.has", !0);
@@ -59933,11 +59937,11 @@ function _w() {
     };
   return As.exports;
 }
-var Ec, f4;
-function Rw() {
-  if (f4) return Ec;
-  f4 = 1;
-  var e = /* @__PURE__ */ up(), c = /* @__PURE__ */ hp(), l = Ow(), w = /* @__PURE__ */ _w();
+var Ec, a4;
+function Pw() {
+  if (a4) return Ec;
+  a4 = 1;
+  var e = /* @__PURE__ */ up(), c = /* @__PURE__ */ hp(), l = _w(), w = /* @__PURE__ */ Rw();
   return Ec = function(f) {
     if (f && typeof f == "object") {
       if (e(f))
@@ -59952,10 +59956,10 @@ function Rw() {
     return !1;
   }, Ec;
 }
-var Ic, c4;
-function Pw() {
-  if (c4) return Ic;
-  c4 = 1;
+var Ic, f4;
+function kw() {
+  if (f4) return Ic;
+  f4 = 1;
   var e = Function.prototype.toString, c = typeof Reflect == "object" && Reflect !== null && Reflect.apply, l, w;
   if (typeof c == "function" && typeof Object.defineProperty == "function")
     try {
@@ -60024,11 +60028,11 @@ function Pw() {
     return j !== s && j !== i && !/^\[object HTML/.test(j) ? !1 : n(F);
   }, Ic;
 }
-var Ac, u4;
-function kw() {
-  if (u4) return Ac;
-  u4 = 1;
-  var e = Pw(), c = Object.prototype.toString, l = Object.prototype.hasOwnProperty, w = function(a, s, i) {
+var Ac, c4;
+function Bw() {
+  if (c4) return Ac;
+  c4 = 1;
+  var e = kw(), c = Object.prototype.toString, l = Object.prototype.hasOwnProperty, w = function(a, s, i) {
     for (var b = 0, g = a.length; b < g; b++)
       l.call(a, b) && (i == null ? s(a[b], b, a) : s.call(i, a[b], b, a));
   }, m = function(a, s, i) {
@@ -60048,9 +60052,9 @@ function kw() {
     arguments.length >= 3 && (b = i), n(a) ? w(a, s, b) : typeof a == "string" ? m(a, s, b) : f(a, s, b);
   }, Ac;
 }
-var Oc, h4;
-function Bw() {
-  return h4 || (h4 = 1, Oc = [
+var Oc, u4;
+function Mw() {
+  return u4 || (u4 = 1, Oc = [
     "Float16Array",
     "Float32Array",
     "Float64Array",
@@ -60065,22 +60069,22 @@ function Bw() {
     "BigUint64Array"
   ]), Oc;
 }
-var _c, l4;
-function Mw() {
-  if (l4) return _c;
-  l4 = 1;
-  var e = /* @__PURE__ */ Bw(), c = typeof globalThis > "u" ? Ft : globalThis;
+var _c, h4;
+function Nw() {
+  if (h4) return _c;
+  h4 = 1;
+  var e = /* @__PURE__ */ Mw(), c = typeof globalThis > "u" ? Ft : globalThis;
   return _c = function() {
     for (var w = [], m = 0; m < e.length; m++)
       typeof c[e[m]] == "function" && (w[w.length] = e[m]);
     return w;
   }, _c;
 }
-var Rc, d4;
-function i1() {
-  if (d4) return Rc;
-  d4 = 1;
-  var e = kw(), c = /* @__PURE__ */ Mw(), l = Xi(), w = /* @__PURE__ */ Jt(), m = /* @__PURE__ */ Yi(), f = po(), n = w("Object.prototype.toString"), u = xi()(), a = typeof globalThis > "u" ? Ft : globalThis, s = c(), i = w("String.prototype.slice"), b = w("Array.prototype.indexOf", !0) || function(h, o) {
+var Rc, l4;
+function r1() {
+  if (l4) return Rc;
+  l4 = 1;
+  var e = Bw(), c = /* @__PURE__ */ Nw(), l = Xi(), w = /* @__PURE__ */ Jt(), m = /* @__PURE__ */ Yi(), f = po(), n = w("Object.prototype.toString"), u = xi()(), a = typeof globalThis > "u" ? Ft : globalThis, s = c(), i = w("String.prototype.slice"), b = w("Array.prototype.indexOf", !0) || function(h, o) {
     for (var E = 0; E < h.length; E += 1)
       if (h[E] === o)
         return E;
@@ -60146,20 +60150,20 @@ function i1() {
     return m ? S(h) : null;
   }, Rc;
 }
-var Pc, b4;
-function Nw() {
-  if (b4) return Pc;
-  b4 = 1;
+var Pc, d4;
+function qw() {
+  if (d4) return Pc;
+  d4 = 1;
   var e = /* @__PURE__ */ Jt(), c = e("ArrayBuffer.prototype.byteLength", !0), l = /* @__PURE__ */ bp();
   return Pc = function(m) {
     return l(m) ? c ? c(m) : m.byteLength : NaN;
   }, Pc;
 }
-var kc, p4;
-function qw() {
-  if (p4) return kc;
-  p4 = 1;
-  var e = nw(), c = e1(), l = fw(), w = /* @__PURE__ */ ai(), m = mw(), f = ap(), n = dp(), u = /* @__PURE__ */ t1(), a = fp(), s = /* @__PURE__ */ bp(), i = /* @__PURE__ */ xw(), b = pp(), g = /* @__PURE__ */ ww(), S = Kl(), y = Aw(), p = /* @__PURE__ */ Rw(), h = /* @__PURE__ */ i1(), o = /* @__PURE__ */ Nw(), E = c("SharedArrayBuffer.prototype.byteLength", !0), F = c("Date.prototype.getTime"), j = Object.getPrototypeOf, G = c("Object.prototype.toString"), N = w("%Set%", !0), T = c("Map.prototype.has", !0), A = c("Map.prototype.get", !0), q = c("Map.prototype.size", !0), _ = c("Set.prototype.add", !0), H = c("Set.prototype.delete", !0), R = c("Set.prototype.has", !0), V = c("Set.prototype.size", !0);
+var kc, b4;
+function Tw() {
+  if (b4) return kc;
+  b4 = 1;
+  var e = sw(), c = Ql(), l = cw(), w = /* @__PURE__ */ ai(), m = gw(), f = ap(), n = dp(), u = /* @__PURE__ */ e1(), a = fp(), s = /* @__PURE__ */ bp(), i = /* @__PURE__ */ ww(), b = pp(), g = /* @__PURE__ */ yw(), S = Ll(), y = Ow(), p = /* @__PURE__ */ Pw(), h = /* @__PURE__ */ r1(), o = /* @__PURE__ */ qw(), E = c("SharedArrayBuffer.prototype.byteLength", !0), F = c("Date.prototype.getTime"), j = Object.getPrototypeOf, G = c("Object.prototype.toString"), N = w("%Set%", !0), T = c("Map.prototype.has", !0), A = c("Map.prototype.get", !0), q = c("Map.prototype.size", !0), _ = c("Set.prototype.add", !0), H = c("Set.prototype.delete", !0), R = c("Set.prototype.has", !0), V = c("Set.prototype.size", !0);
   function fe(le, ge, Ee, we) {
     for (var z = m(le), I; (I = z.next()) && !I.done; )
       if (W(ge, I.value, Ee, we))
@@ -60320,18 +60324,18 @@ function qw() {
     return W(ge, Ee, we, f());
   }, kc;
 }
-var Tw = qw();
-const zw = /* @__PURE__ */ Nr(Tw), { Mnemonic: Cw } = ss, gp = ol({}), Dw = ({ children: e }) => {
-  const [c, l] = ki(), [w, m] = ki(new _x()), [f, n] = ki(!0), [u, a] = ki(!1), [s, i] = ki(!1);
+var zw = Tw();
+const Cw = /* @__PURE__ */ Nr(zw), { Mnemonic: Dw } = ss, gp = ol({}), Uw = ({ children: e }) => {
+  const [c, l] = ki(), [w, m] = ki(new Rx()), [f, n] = ki(!0), [u, a] = ki(!1), [s, i] = ki(!1);
   dn(() => {
     b();
   }, []), dn(() => {
     w.wallets.length > 0 ? y(w) : n(!1);
-  }, [u, s, w.wallets[0]?.name]), Cx(() => {
+  }, [u, s, w.wallets[0]?.name]), Dx(() => {
     c && y(w);
   }, 1e4);
   const b = async () => {
-    const E = await E1.getItem("wallets");
+    const E = await S1.getItem("wallets");
     if (E) {
       console.log("Loading stored wallets");
       const F = Object.assign(w, { wallets: E });
@@ -60340,21 +60344,21 @@ const zw = /* @__PURE__ */ Nr(Tw), { Mnemonic: Cw } = ss, gp = ol({}), Dw = ({ c
       console.log("No stored wallets available"), a(!0);
     i(!0);
   }, g = async (E, F) => {
-    const j = F ? Cw.fromPhrase(F) : Sx();
-    if (Ax(j, [])) {
-      const N = Ix(j);
+    const j = F ? Dw.fromPhrase(F) : Ex();
+    if (Ox(j, [])) {
+      const N = Ax(j);
       console.log("newWallet", N), E ? await S("wallets", [N, ...w.wallets]) : await S("wallets", [...w.wallets, N]), Yn.emit("WALLET_ADDED", "success");
     } else
       throw new Error("Wallet already exists");
   }, S = async (E, F) => {
-    m({ ...w, [`${E}`]: F }), n(!0), await E1.setItem(E, F), n(!1);
+    m({ ...w, [`${E}`]: F }), n(!0), await S1.setItem(E, F), n(!1);
   }, y = async (E, F = !1) => {
     const j = E.wallets[0];
     if (!j)
       throw new Error("No wallet found");
-    const G = j.Path1899.cashAddress, N = await Px(G), T = j.state.utxos;
-    if (!zw(N, T) || F) {
-      const q = Bx(N), _ = kx(q), H = await Mx(G), R = Nx(H, G), V = {
+    const G = j.Path1899.cashAddress, N = await kx(G), T = j.state.utxos;
+    if (!Cw(N, T) || F) {
+      const q = Mx(N), _ = Bx(q), H = await Nx(G), R = qx(H, G), V = {
         balances: _,
         utxos: N,
         slp: q,
@@ -60372,7 +60376,7 @@ const zw = /* @__PURE__ */ Nr(Tw), { Mnemonic: Cw } = ss, gp = ol({}), Dw = ({ c
     cashtab: w,
     createWallet: g,
     activateWallet: async (E) => {
-      const F = Ox(E, w.wallets);
+      const F = _x(E, w.wallets);
       await S("wallets", F), Yn.emit("WALLET_CHANGED", "success");
     },
     removeWallet: async (E) => {
@@ -60393,22 +60397,22 @@ const zw = /* @__PURE__ */ Nr(Tw), { Mnemonic: Cw } = ss, gp = ol({}), Dw = ({ c
     walletLoading: f,
     hasInitialized: u
   }, children: e });
-}, Uw = () => {
-  const e = al(gp);
+}, Fw = () => {
+  const e = y8(gp);
   if (!e)
     throw new Error("useWallet must be used within an WalletProvider");
   return e;
-}, { Mnemonic: Fw } = ss, m4 = (e) => {
+}, { Mnemonic: Hw } = ss, p4 = (e) => {
   let c;
   try {
-    return c = Fw.fromPhrase(e), c.toString() === e;
+    return c = Hw.fromPhrase(e), c.toString() === e;
   } catch (l) {
     return console.error(l), !1;
   }
 };
-var li = {}, Bc, g4;
+var li = {}, Bc, m4;
 function xp() {
-  return g4 || (g4 = 1, Bc = [
+  return m4 || (m4 = 1, Bc = [
     k.from(
       "ebd41040e4bb3ec742c9e381d31ef2a41a48b6685c96e7cef3c1df6cd4331c99",
       "hex"
@@ -60953,10 +60957,10 @@ function xp() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Mc, x4;
+var Mc, g4;
 function go() {
-  if (x4) return Mc;
-  x4 = 1;
+  if (g4) return Mc;
+  g4 = 1;
   const e = Xe(), c = $s(), l = {
     VARINT: 0,
     FIXED64: 1,
@@ -61075,10 +61079,10 @@ function go() {
   }
   return Mc = w, Mc;
 }
-var Nc, w4;
+var Nc, x4;
 function xo() {
-  if (w4) return Nc;
-  w4 = 1;
+  if (x4) return Nc;
+  x4 = 1;
   const e = Xe(), c = js(), l = {
     VARINT: 0,
     DELIMITED: 2
@@ -61178,10 +61182,10 @@ function xo() {
   }
   return Nc = w, Nc;
 }
-var qc, y4;
-function n1() {
-  if (y4) return qc;
-  y4 = 1;
+var qc, w4;
+function i1() {
+  if (w4) return qc;
+  w4 = 1;
   const e = Xe(), c = go(), l = xo();
   class w {
     /**
@@ -61307,11 +61311,11 @@ function n1() {
   }
   return qc = w, qc;
 }
-var Tc, v4;
+var Tc, y4;
 function wp() {
-  if (v4) return Tc;
-  v4 = 1;
-  const e = Xe(), c = go(), l = xo(), { setData: w, getData: m } = n1().prototype;
+  if (y4) return Tc;
+  y4 = 1;
+  const e = Xe(), c = go(), l = xo(), { setData: w, getData: m } = i1().prototype;
   class f {
     /**
      * Create a payment.
@@ -61415,10 +61419,10 @@ function wp() {
   }
   return Tc = f, Tc;
 }
-var zc, S4;
-function Hw() {
-  if (S4) return zc;
-  S4 = 1;
+var zc, v4;
+function Lw() {
+  if (v4) return zc;
+  v4 = 1;
   const e = Xe(), c = go(), l = xo(), w = wp();
   class m {
     /**
@@ -61483,9 +61487,9 @@ var Cc = {}, Dc = {}, Os = {}, Uc = {};
  * Copyright (c) 2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var E4;
+var S4;
 function yp() {
-  return E4 || (E4 = 1, function(e) {
+  return S4 || (S4 = 1, function(e) {
     const c = Xe();
     e.encode = function(n, u) {
       c(Number.isSafeInteger(n), "Invalid integer value.");
@@ -61600,10 +61604,10 @@ function yp() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Fc, I4;
+var Fc, E4;
 function wi() {
-  if (I4) return Fc;
-  I4 = 1;
+  if (E4) return Fc;
+  E4 = 1;
   const e = Xe(), c = yp();
   class l {
     /**
@@ -61874,10 +61878,10 @@ function wi() {
  * Copyright (c) 2020, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Hc, A4;
+var Hc, I4;
 function Nt() {
-  if (A4) return Hc;
-  A4 = 1;
+  if (I4) return Hc;
+  I4 = 1;
   function e(c, l) {
     if (!c) {
       const w = new Error(l || "Assertion failed");
@@ -61886,10 +61890,10 @@ function Nt() {
   }
   return Hc = e, Hc;
 }
-var Lc, O4;
+var Lc, A4;
 function fi() {
-  if (O4) return Lc;
-  O4 = 1;
+  if (A4) return Lc;
+  A4 = 1;
   const e = Nt();
   class c {
     /**
@@ -61940,10 +61944,10 @@ function fi() {
   }
   return Lc = c, Lc;
 }
-var Kc, _4;
+var Kc, O4;
 function Ar() {
-  if (_4) return Kc;
-  _4 = 1;
+  if (O4) return Kc;
+  O4 = 1;
   const e = Nt(), c = fi(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -62110,10 +62114,10 @@ function Ar() {
   }
   return Kc = n, Kc;
 }
-var Vc, R4;
-function s1() {
-  if (R4) return Vc;
-  R4 = 1;
+var Vc, _4;
+function n1() {
+  if (_4) return Vc;
+  _4 = 1;
   const e = Nt(), c = fi(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint8Array([
@@ -62532,11 +62536,11 @@ function s1() {
   }
   return Vc = s, Vc;
 }
-var $c, P4;
+var $c, R4;
 function Gi() {
-  if (P4) return $c;
-  P4 = 1;
-  const e = Nt(), c = Ar(), l = s1(), w = fi(), m = new l();
+  if (R4) return $c;
+  R4 = 1;
+  const e = Nt(), c = Ar(), l = n1(), w = fi(), m = new l();
   class f {
     constructor() {
       this.ctx = new c();
@@ -62573,10 +62577,10 @@ function Gi() {
   }
   return f.native = 0, f.id = "HASH160", f.size = 20, f.bits = 160, f.blockSize = 64, f.zero = k.alloc(20, 0), f.ctx = new f(), $c = f, $c;
 }
-var jc, k4;
+var jc, P4;
 function mr() {
-  if (k4) return jc;
-  k4 = 1;
+  if (P4) return jc;
+  P4 = 1;
   const e = Nt(), c = Ar(), l = fi();
   class w {
     constructor() {
@@ -62621,9 +62625,9 @@ var Yc = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var B4;
+var k4;
 function wo() {
-  return B4 || (B4 = 1, function(e) {
+  return k4 || (k4 = 1, function(e) {
     e.search = function(w, m, f, n) {
       let u = 0, a = w.length - 1;
       for (; u <= a; ) {
@@ -62652,10 +62656,10 @@ function wo() {
     }
   }(Yc)), Yc;
 }
-var Xc = {}, Gc = {}, Jc = {}, Wc = {}, Zc, M4;
-function Lw() {
-  if (M4) return Zc;
-  M4 = 1;
+var Xc = {}, Gc = {}, Jc = {}, Wc = {}, Zc, B4;
+function Kw() {
+  if (B4) return Zc;
+  B4 = 1;
   var e = /* @__PURE__ */ Jt(), c = /* @__PURE__ */ mp(), l = c(/^\s*(?:function)?\*/), w = xi()(), m = po(), f = e("Object.prototype.toString"), n = e("Function.prototype.toString"), u = function() {
     if (!w)
       return !1;
@@ -62685,19 +62689,19 @@ function Lw() {
     return m(i) === a;
   }, Zc;
 }
-var Qc, N4;
-function Kw() {
-  if (N4) return Qc;
-  N4 = 1;
-  var e = /* @__PURE__ */ i1();
+var Qc, M4;
+function Vw() {
+  if (M4) return Qc;
+  M4 = 1;
+  var e = /* @__PURE__ */ r1();
   return Qc = function(l) {
     return !!e(l);
   }, Qc;
 }
-var q4;
-function Vw() {
-  return q4 || (q4 = 1, function(e) {
-    var c = /* @__PURE__ */ t1(), l = Lw(), w = /* @__PURE__ */ i1(), m = /* @__PURE__ */ Kw();
+var N4;
+function $w() {
+  return N4 || (N4 = 1, function(e) {
+    var c = /* @__PURE__ */ e1(), l = Kw(), w = /* @__PURE__ */ r1(), m = /* @__PURE__ */ Vw();
     function f(r) {
       return r.call.bind(r);
     }
@@ -62881,15 +62885,15 @@ function Vw() {
     });
   }(Wc)), Wc;
 }
-var eu, T4;
-function $w() {
-  return T4 || (T4 = 1, eu = function(c) {
+var eu, q4;
+function jw() {
+  return q4 || (q4 = 1, eu = function(c) {
     return c && typeof c == "object" && typeof c.copy == "function" && typeof c.fill == "function" && typeof c.readUInt8 == "function";
   }), eu;
 }
-var _s = { exports: {} }, z4;
-function jw() {
-  return z4 || (z4 = 1, typeof Object.create == "function" ? _s.exports = function(c, l) {
+var _s = { exports: {} }, T4;
+function Yw() {
+  return T4 || (T4 = 1, typeof Object.create == "function" ? _s.exports = function(c, l) {
     l && (c.super_ = l, c.prototype = Object.create(l.prototype, {
       constructor: {
         value: c,
@@ -62907,9 +62911,9 @@ function jw() {
     }
   }), _s.exports;
 }
-var C4;
+var z4;
 function Di() {
-  return C4 || (C4 = 1, function(e) {
+  return z4 || (z4 = 1, function(e) {
     var c = Object.getOwnPropertyDescriptors || function(he) {
       for (var le = Object.keys(he), ge = {}, Ee = 0; Ee < le.length; Ee++)
         ge[le[Ee]] = Object.getOwnPropertyDescriptor(he, le[Ee]);
@@ -63128,7 +63132,7 @@ function Di() {
  `) + " " + Y.join(`,
   `) + " " + le[1] : le[0] + he + " " + Y.join(", ") + " " + le[1];
     }
-    e.types = Vw();
+    e.types = $w();
     function h(Y) {
       return Array.isArray(Y);
     }
@@ -63185,7 +63189,7 @@ function Di() {
       return Y === null || typeof Y == "boolean" || typeof Y == "number" || typeof Y == "string" || typeof Y == "symbol" || // ES6 symbol
       typeof Y > "u";
     }
-    e.isPrimitive = V, e.isBuffer = $w();
+    e.isPrimitive = V, e.isBuffer = jw();
     function fe(Y) {
       return Object.prototype.toString.call(Y);
     }
@@ -63216,7 +63220,7 @@ function Di() {
     }
     e.log = function() {
       console.log("%s - %s", D(), e.format.apply(e, arguments));
-    }, e.inherits = jw(), e._extend = function(Y, he) {
+    }, e.inherits = Yw(), e._extend = function(Y, he) {
       if (!he || !q(he)) return Y;
       for (var le = Object.keys(he), ge = le.length; ge--; )
         Y[le[ge]] = he[le[ge]];
@@ -63306,17 +63310,17 @@ function Di() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var D4;
+var C4;
 function vp() {
-  if (D4) return Gc;
-  D4 = 1;
+  if (C4) return Gc;
+  C4 = 1;
   const { inspect: e } = Di();
   return Gc.custom = e.custom || "inspect", Gc;
 }
-var tu, U4;
+var tu, D4;
 function Xr() {
-  if (U4) return tu;
-  U4 = 1;
+  if (D4) return tu;
+  D4 = 1;
   const { custom: e } = vp(), c = [
     "",
     "0",
@@ -66141,9 +66145,9 @@ function Xr() {
   }
   return Math.imul || (I = Ee), s.Red = G, tu = s, tu;
 }
-var F4;
-function o1() {
-  return F4 || (F4 = 1, function(e) {
+var U4;
+function s1() {
+  return U4 || (U4 = 1, function(e) {
     const c = Xr(), l = e;
     function w(a) {
       return k.from(a, "hex");
@@ -66842,9 +66846,9 @@ function o1() {
     }, u.requireStandard = !1, u.rpcPort = 18556, u.walletPort = 18558, u.minRelay = 1e3, u.feeRate = 2e4, u.maxFeeRate = 6e4, u.selfConnect = !1, u.requestMempool = !1, l.main = m, l.testnet = f, l.regtest = n, l.simnet = u;
   }(Xc)), Xc;
 }
-var ru = {}, H4;
+var ru = {}, F4;
 function Lt() {
-  return H4 || (H4 = 1, function(e) {
+  return F4 || (F4 = 1, function(e) {
     const c = Xe(), l = Xr();
     e.COIN = 1e8, e.MAX_MONEY = 21e6 * e.COIN, e.BASE_REWARD = 50 * e.COIN, e.HALF_REWARD = Math.floor(e.BASE_REWARD / 2), e.MAX_BLOCK_SIZE = 1e6, e.MAX_FORK_BLOCK_SIZE = 32e6, e.MAX_TX_VERSION = 2, e.MAX_TX_SIZE = 1e6, e.MAX_TX_SIGCHECKS = 3e3, e.MAX_BLOCK_SIGCHECKS_RATIO = 141, e.MIN_TX_SIZE = 100, e.MAX_RAW_BLOCK_SIZE = 32e6, e.MAX_BLOCK_SIGOPS_PER_MB = 2e4, e.MAX_TX_SIGOPS = 2e4, e.MAX_BLOCK_SIGOPS_COST = 8e4, e.MAX_COINBASE_SCRIPTSIG_SIZE = 100, e.COINBASE_RULE_ADDR = [
       "ecash:pqnqv9lt7e5vjyp0w88zf2af0l92l8rxdg2jj94l5j",
@@ -66879,10 +66883,10 @@ function Lt() {
     };
   }(ru)), ru;
 }
-var Rs = { exports: {} }, L4;
+var Rs = { exports: {} }, H4;
 function yo() {
-  if (L4) return Rs.exports;
-  L4 = 1;
+  if (H4) return Rs.exports;
+  H4 = 1;
   var e = typeof Reflect == "object" ? Reflect : null, c = e && typeof e.apply == "function" ? e.apply : function(G, N, T) {
     return Function.prototype.apply.call(G, N, T);
   }, l;
@@ -67091,9 +67095,9 @@ function yo() {
   }
   return Rs.exports;
 }
-var iu = {}, K4;
+var iu = {}, L4;
 function er() {
-  return K4 || (K4 = 1, function(e) {
+  return L4 || (L4 = 1, function(e) {
     const c = Xe(), l = e;
     l.bench = function(m) {
       if (!St.hrtime) {
@@ -67131,10 +67135,10 @@ function er() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var nu, V4;
+var nu, K4;
 function Sp() {
-  if (V4) return nu;
-  V4 = 1;
+  if (K4) return nu;
+  K4 = 1;
   const e = yo(), c = er(), l = wo();
   class w extends e {
     /**
@@ -67207,11 +67211,11 @@ function Sp() {
   }
   return nu = w, nu;
 }
-var su, $4;
+var su, V4;
 function Or() {
-  if ($4) return su;
-  $4 = 1;
-  const e = Xe(), c = wo(), l = o1(), w = Lt(), m = Sp();
+  if (V4) return su;
+  V4 = 1;
+  const e = Xe(), c = wo(), l = s1(), w = Lt(), m = Sp();
   class f {
     /**
      * Create a network.
@@ -67457,10 +67461,10 @@ function Or() {
   }
   return su = f, su;
 }
-var _i = {}, ou = {}, Ri = {}, j4;
+var _i = {}, ou = {}, Ri = {}, $4;
 function yi() {
-  if (j4) return Ri;
-  j4 = 1;
+  if ($4) return Ri;
+  $4 = 1;
   const e = Nt(), c = Ft.crypto || Ft.msCrypto, l = c && typeof c.getRandomValues == "function", w = l ? c.getRandomValues.bind(c) : null, m = new Uint32Array(16), f = 65536;
   let n = 0;
   function u(S) {
@@ -67505,10 +67509,10 @@ function yi() {
   }
   return Ri.native = 0, Ri.randomBytes = u, Ri.randomFill = a, Ri.randomInt = s, Ri.randomRange = i, Ri;
 }
-var ar = {}, au = { exports: {} }, fu = {}, Y4;
+var ar = {}, au = { exports: {} }, fu = {}, j4;
 function Ep() {
-  if (Y4) return fu;
-  Y4 = 1;
+  if (j4) return fu;
+  j4 = 1;
   function e(E) {
     "@babel/helpers - typeof";
     return e = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(F) {
@@ -67649,10 +67653,10 @@ function Ep() {
     return "".concat(G, " must be specified");
   }, TypeError), fu.codes = i, fu;
 }
-var cu, X4;
-function Yw() {
-  if (X4) return cu;
-  X4 = 1;
+var cu, Y4;
+function Xw() {
+  if (Y4) return cu;
+  Y4 = 1;
   function e(W, ae) {
     var v = Object.keys(W);
     if (Object.getOwnPropertySymbols) {
@@ -67976,25 +67980,25 @@ should equal
   }(/* @__PURE__ */ g(Error), j.custom);
   return cu = Q, cu;
 }
-var uu, G4;
+var uu, X4;
 function Ip() {
-  return G4 || (G4 = 1, uu = function(c) {
+  return X4 || (X4 = 1, uu = function(c) {
     return c !== c;
   }), uu;
 }
-var hu, J4;
+var hu, G4;
 function Ap() {
-  if (J4) return hu;
-  J4 = 1;
+  if (G4) return hu;
+  G4 = 1;
   var e = Ip();
   return hu = function() {
     return Number.isNaN && Number.isNaN(NaN) && !Number.isNaN("a") ? Number.isNaN : e;
   }, hu;
 }
-var lu, W4;
-function Xw() {
-  if (W4) return lu;
-  W4 = 1;
+var lu, J4;
+function Gw() {
+  if (J4) return lu;
+  J4 = 1;
   var e = oi(), c = Ap();
   return lu = function() {
     var w = c();
@@ -68005,21 +68009,21 @@ function Xw() {
     }), w;
   }, lu;
 }
-var du, Z4;
-function Gw() {
-  if (Z4) return du;
-  Z4 = 1;
-  var e = Xi(), c = oi(), l = Ip(), w = Ap(), m = Xw(), f = e(w(), Number);
+var du, W4;
+function Jw() {
+  if (W4) return du;
+  W4 = 1;
+  var e = Xi(), c = oi(), l = Ip(), w = Ap(), m = Gw(), f = e(w(), Number);
   return c(f, {
     getPolyfill: w,
     implementation: l,
     shim: m
   }), du = f, du;
 }
-var bu, Q4;
-function Jw() {
-  if (Q4) return bu;
-  Q4 = 1;
+var bu, Z4;
+function Ww() {
+  if (Z4) return bu;
+  Z4 = 1;
   function e(P, K) {
     return f(P) || m(P, K) || l(P, K) || c();
   }
@@ -68081,7 +68085,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }), re;
   }, i = Object.is ? Object.is : dp(), b = Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols : function() {
     return [];
-  }, g = Number.isNaN ? Number.isNaN : Gw();
+  }, g = Number.isNaN ? Number.isNaN : Jw();
   function S(P) {
     return P.call.bind(P);
   }
@@ -68382,10 +68386,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     isDeepStrictEqual: X
   }, bu;
 }
-var e3;
+var Q4;
 function sl() {
-  if (e3) return au.exports;
-  e3 = 1;
+  if (Q4) return au.exports;
+  Q4 = 1;
   function e(le) {
     "@babel/helpers - typeof";
     return e = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(ge) {
@@ -68401,9 +68405,9 @@ function sl() {
     if (!(le instanceof ge))
       throw new TypeError("Cannot call a class as a function");
   }
-  var w = Ep(), m = w.codes, f = m.ERR_AMBIGUOUS_ARGUMENT, n = m.ERR_INVALID_ARG_TYPE, u = m.ERR_INVALID_ARG_VALUE, a = m.ERR_INVALID_RETURN_VALUE, s = m.ERR_MISSING_ARGS, i = Yw(), b = Di(), g = b.inspect, S = Di().types, y = S.isPromise, p = S.isRegExp, h = Ql()(), o = r1()(), E = e1()("RegExp.prototype.test"), F, j;
+  var w = Ep(), m = w.codes, f = m.ERR_AMBIGUOUS_ARGUMENT, n = m.ERR_INVALID_ARG_TYPE, u = m.ERR_INVALID_ARG_VALUE, a = m.ERR_INVALID_RETURN_VALUE, s = m.ERR_MISSING_ARGS, i = Xw(), b = Di(), g = b.inspect, S = Di().types, y = S.isPromise, p = S.isRegExp, h = Zl()(), o = t1()(), E = Ql()("RegExp.prototype.test"), F, j;
   function G() {
-    var le = Jw();
+    var le = Ww();
     F = le.isDeepEqual, j = le.isDeepStrictEqual;
   }
   var N = !1, T = au.exports = R, A = {};
@@ -68758,10 +68762,10 @@ function sl() {
     notDeepEqual: T.notDeepStrictEqual
   }), T.strict.strict = T.strict, au.exports;
 }
-var t3;
+var e3;
 function Op() {
-  if (t3) return ar;
-  t3 = 1;
+  if (e3) return ar;
+  e3 = 1;
   const e = sl(), c = Xr();
   function l(y, p, h) {
     if (e(k.isBuffer(y)), e(p >>> 0 === p), e(typeof h == "boolean"), p >= y.length)
@@ -68854,10 +68858,10 @@ function Op() {
   }
   return ar.readSize = l, ar.readSeq = w, ar.readInt = m, ar.readVersion = f, ar.sizeSize = n, ar.sizeSeq = u, ar.sizeInt = a, ar.sizeVersion = s, ar.writeSize = i, ar.writeSeq = b, ar.writeInt = g, ar.writeVersion = S, ar;
 }
-var pu, r3;
+var pu, t3;
 function _p() {
-  if (r3) return pu;
-  r3 = 1;
+  if (t3) return pu;
+  t3 = 1;
   const e = Nt(), c = new Int8Array(new Int16Array([1]).buffer)[0] === 0;
   class l {
     /**
@@ -68958,10 +68962,10 @@ function _p() {
   }
   return pu = l, pu;
 }
-var mu, i3;
-function Ww() {
-  if (i3) return mu;
-  i3 = 1;
+var mu, r3;
+function Zw() {
+  if (r3) return mu;
+  r3 = 1;
   const e = Nt(), c = Xr(), l = _p(), w = Ar();
   class m {
     constructor(n, u = (a) => a) {
@@ -68997,11 +69001,11 @@ function Ww() {
   }
   return mu = m, mu;
 }
-var gu, n3;
-function Zw() {
-  if (n3) return gu;
-  n3 = 1;
-  const e = Nt(), c = Ww(), l = Xr();
+var gu, i3;
+function Qw() {
+  if (i3) return gu;
+  i3 = 1;
+  const e = Nt(), c = Zw(), l = Xr();
   class w {
     constructor(f, n) {
       this.curve = f, this.hash = n, this.rng = new c(this.curve, this.encode.bind(this));
@@ -69096,10 +69100,10 @@ function Zw() {
   }
   return gu = w, gu;
 }
-var xu, s3;
+var xu, n3;
 function Rp() {
-  if (s3) return xu;
-  s3 = 1;
+  if (n3) return xu;
+  n3 = 1;
   const e = Nt(), c = 281474976710656, l = k.from([0]), w = k.from([1]);
   class m {
     constructor(n, u, a, s) {
@@ -69157,10 +69161,10 @@ function Rp() {
   }
   return m.native = 0, xu = m, xu;
 }
-var rr = {}, o3;
-function Qw() {
-  if (o3) return rr;
-  o3 = 1;
+var rr = {}, s3;
+function ey() {
+  if (s3) return rr;
+  s3 = 1;
   const { custom: e } = vp(), c = Xr(), l = {
     AFFINE: 0,
     JACOBIAN: 1,
@@ -73078,11 +73082,11 @@ function Qw() {
   }
   return rr.Curve = f, rr.Point = n, rr.ShortCurve = u, rr.ShortPoint = a, rr.JPoint = s, rr.MontCurve = i, rr.MontPoint = b, rr.XPoint = g, rr.EdwardsCurve = S, rr.EdwardsPoint = y, rr.curves = v, rr.curve = he, rr.register = le, rr;
 }
-var wu, a3;
+var wu, o3;
 function as() {
-  if (a3) return wu;
-  a3 = 1;
-  const e = Nt(), c = Xr(), l = yi(), w = Op(), m = Zw(), f = Rp(), n = Qw();
+  if (o3) return wu;
+  o3 = 1;
+  const e = Nt(), c = Xr(), l = yi(), w = Op(), m = Qw(), f = Rp(), n = ey();
   class u {
     constructor(s, i, b, g) {
       e(typeof s == "string"), e(i), e(b), this.id = s, this.type = "ecdsa", this.hash = i, this.xof = b, this.native = 0, this._pre = g || null, this._curve = null, this._schnorr = null;
@@ -73475,9 +73479,9 @@ function as() {
   }
   return wu = u, wu;
 }
-const ey = /* @__PURE__ */ JSON.parse('{"width":9,"points":[["f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9","388f7b0f632de8140fe337e62a37f3566500a99934c2231b6cb9fd7584b8e672"],["2f8bde4d1a07209355b4a7250a5c5128e88b84bddc619ab7cba8d569b240efe4","d8ac222636e5e3d6d4dba9dda6c9c426f788271bab0d6840dca87d3aa6ac62d6"],["5cbdf0646e5db4eaa398f365f2ea7a0e3d419b7e0330e39ce92bddedcac4f9bc","6aebca40ba255960a3178d6d861a54dba813d0b813fde7b5a5082628087264da"],["acd484e2f0c7f65309ad178a9f559abde09796974c57e714c35f110dfc27ccbe","cc338921b0a7d9fd64380971763b61e9add888a4375f8e0f05cc262ac64f9c37"],["774ae7f858a9411e5ef4246b70c65aac5649980be5c17891bbec17895da008cb","d984a032eb6b5e190243dd56d7b7b365372db1e2dff9d6a8301d74c9c953c61b"],["f28773c2d975288bc7d1d205c3748651b075fbc6610e58cddeeddf8f19405aa8","0ab0902e8d880a89758212eb65cdaf473a1a06da521fa91f29b5cb52db03ed81"],["d7924d4f7d43ea965a465ae3095ff41131e5946f3c85f79e44adbcf8e27e080e","581e2872a86c72a683842ec228cc6defea40af2bd896d3a5c504dc9ff6a26b58"],["defdea4cdb677750a420fee807eacf21eb9898ae79b9768766e4faa04a2d4a34","4211ab0694635168e997b0ead2a93daeced1f4a04a95c0f6cfb199f69e56eb77"],["2b4ea0a797a443d293ef5cff444f4979f06acfebd7e86d277475656138385b6c","85e89bc037945d93b343083b5a1c86131a01f60c50269763b570c854e5c09b7a"],["352bbf4a4cdd12564f93fa332ce333301d9ad40271f8107181340aef25be59d5","321eb4075348f534d59c18259dda3e1f4a1b3b2e71b1039c67bd3d8bcf81998c"],["2fa2104d6b38d11b0230010559879124e42ab8dfeff5ff29dc9cdadd4ecacc3f","02de1068295dd865b64569335bd5dd80181d70ecfc882648423ba76b532b7d67"],["9248279b09b4d68dab21a9b066edda83263c3d84e09572e269ca0cd7f5453714","73016f7bf234aade5d1aa71bdea2b1ff3fc0de2a887912ffe54a32ce97cb3402"],["daed4f2be3a8bf278e70132fb0beb7522f570e144bf615c07e996d443dee8729","a69dce4a7d6c98e8d4a1aca87ef8d7003f83c230f3afa726ab40e52290be1c55"],["c44d12c7065d812e8acf28d7cbb19f9011ecd9e9fdf281b0e6a3b5e87d22e7db","2119a460ce326cdc76c45926c982fdac0e106e861edf61c5a039063f0e0e6482"],["6a245bf6dc698504c89a20cfded60853152b695336c28063b61c65cbd269e6b4","e022cf42c2bd4a708b3f5126f16a24ad8b33ba48d0423b6efd5e6348100d8a82"],["1697ffa6fd9de627c077e3d2fe541084ce13300b0bec1146f95ae57f0d0bd6a5","b9c398f186806f5d27561506e4557433a2cf15009e498ae7adee9d63d01b2396"],["605bdb019981718b986d0f07e834cb0d9deb8360ffb7f61df982345ef27a7479","02972d2de4f8d20681a78d93ec96fe23c26bfae84fb14db43b01e1e9056b8c49"],["62d14dab4150bf497402fdc45a215e10dcb01c354959b10cfe31c7e9d87ff33d","80fc06bd8cc5b01098088a1950eed0db01aa132967ab472235f5642483b25eaf"],["80c60ad0040f27dade5b4b06c408e56b2c50e9f56b9b8b425e555c2f86308b6f","1c38303f1cc5c30f26e66bad7fe72f70a65eed4cbe7024eb1aa01f56430bd57a"],["7a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb","0d0e3fa9eca8726909559e0d79269046bdc59ea10c70ce2b02d499ec224dc7f7"],["d528ecd9b696b54c907a9ed045447a79bb408ec39b68df504bb51f459bc3ffc9","eecf41253136e5f99966f21881fd656ebc4345405c520dbc063465b521409933"],["049370a4b5f43412ea25f514e8ecdad05266115e4a7ecb1387231808f8b45963","758f3f41afd6ed428b3081b0512fd62a54c3f3afbb5b6764b653052a12949c9a"],["77f230936ee88cbbd73df930d64702ef881d811e0e1498e2f1c13eb1fc345d74","958ef42a7886b6400a08266e9ba1b37896c95330d97077cbbe8eb3c7671c60d6"],["f2dac991cc4ce4b9ea44887e5c7c0bce58c80074ab9d4dbaeb28531b7739f530","e0dedc9b3b2f8dad4da1f32dec2531df9eb5fbeb0598e4fd1a117dba703a3c37"],["463b3d9f662621fb1b4be8fbbe2520125a216cdfc9dae3debcba4850c690d45b","5ed430d78c296c3543114306dd8622d7c622e27c970a1de31cb377b01af7307e"],["f16f804244e46e2a09232d4aff3b59976b98fac14328a2d1a32496b49998f247","cedabd9b82203f7e13d206fcdf4e33d92a6c53c26e5cce26d6579962c4e31df6"],["caf754272dc84563b0352b7a14311af55d245315ace27c65369e15f7151d41d1","cb474660ef35f5f2a41b643fa5e460575f4fa9b7962232a5c32f908318a04476"],["2600ca4b282cb986f85d0f1709979d8b44a09c07cb86d7c124497bc86f082120","4119b88753c15bd6a693b03fcddbb45d5ac6be74ab5f0ef44b0be9475a7e4b40"],["7635ca72d7e8432c338ec53cd12220bc01c48685e24f7dc8c602a7746998e435","091b649609489d613d1d5e590f78e6d74ecfc061d57048bad9e76f302c5b9c61"],["754e3239f325570cdbbf4a87deee8a66b7f2b33479d468fbc1a50743bf56cc18","0673fb86e5bda30fb3cd0ed304ea49a023ee33d0197a695d0c5d98093c536683"],["e3e6bd1071a1e96aff57859c82d570f0330800661d1c952f9fe2694691d9b9e8","59c9e0bba394e76f40c0aa58379a3cb6a5a2283993e90c4167002af4920e37f5"],["186b483d056a033826ae73d88f732985c4ccb1f32ba35f4b4cc47fdcf04aa6eb","3b952d32c67cf77e2e17446e204180ab21fb8090895138b4a4a797f86e80888b"],["df9d70a6b9876ce544c98561f4be4f725442e6d2b737d9c91a8321724ce0963f","55eb2dafd84d6ccd5f862b785dc39d4ab157222720ef9da217b8c45cf2ba2417"],["5edd5cc23c51e87a497ca815d5dce0f8ab52554f849ed8995de64c5f34ce7143","efae9c8dbc14130661e8cec030c89ad0c13c66c0d17a2905cdc706ab7399a868"],["290798c2b6476830da12fe02287e9e777aa3fba1c355b17a722d362f84614fba","e38da76dcd440621988d00bcf79af25d5b29c094db2a23146d003afd41943e7a"],["af3c423a95d9f5b3054754efa150ac39cd29552fe360257362dfdecef4053b45","f98a3fd831eb2b749a93b0e6f35cfb40c8cd5aa667a15581bc2feded498fd9c6"],["766dbb24d134e745cccaa28c99bf274906bb66b26dcf98df8d2fed50d884249a","744b1152eacbe5e38dcc887980da38b897584a65fa06cedd2c924f97cbac5996"],["59dbf46f8c94759ba21277c33784f41645f7b44f6c596a58ce92e666191abe3e","c534ad44175fbc300f4ea6ce648309a042ce739a7919798cd85e216c4a307f6e"],["f13ada95103c4537305e691e74e9a4a8dd647e711a95e73cb62dc6018cfd87b8","e13817b44ee14de663bf4bc808341f326949e21a6a75c2570778419bdaf5733d"],["7754b4fa0e8aced06d4167a2c59cca4cda1869c06ebadfb6488550015a88522c","30e93e864e669d82224b967c3020b8fa8d1e4e350b6cbcc537a48b57841163a2"],["948dcadf5990e048aa3874d46abef9d701858f95de8041d2a6828c99e2262519","e491a42537f6e597d5d28a3224b1bc25df9154efbd2ef1d2cbba2cae5347d57e"],["7962414450c76c1689c7b48f8202ec37fb224cf5ac0bfa1570328a8a3d7c77ab","100b610ec4ffb4760d5c1fc133ef6f6b12507a051f04ac5760afa5b29db83437"],["3514087834964b54b15b160644d915485a16977225b8847bb0dd085137ec47ca","ef0afbb2056205448e1652c48e8127fc6039e77c15c2378b7e7d15a0de293311"],["d3cc30ad6b483e4bc79ce2c9dd8bc54993e947eb8df787b442943d3f7b527eaf","8b378a22d827278d89c5e9be8f9508ae3c2ad46290358630afb34db04eede0a4"],["1624d84780732860ce1c78fcbfefe08b2b29823db913f6493975ba0ff4847610","68651cf9b6da903e0914448c6cd9d4ca896878f5282be4c8cc06e2a404078575"],["733ce80da955a8a26902c95633e62a985192474b5af207da6df7b4fd5fc61cd4","f5435a2bd2badf7d485a4d8b8db9fcce3e1ef8e0201e4578c54673bc1dc5ea1d"],["15d9441254945064cf1a1c33bbd3b49f8966c5092171e699ef258dfab81c045c","d56eb30b69463e7234f5137b73b84177434800bacebfc685fc37bbe9efe4070d"],["a1d0fcf2ec9de675b612136e5ce70d271c21417c9d2b8aaaac138599d0717940","edd77f50bcb5a3cab2e90737309667f2641462a54070f3d519212d39c197a629"],["e22fbe15c0af8ccc5780c0735f84dbe9a790badee8245c06c7ca37331cb36980","0a855babad5cd60c88b430a69f53a1a7a38289154964799be43d06d77d31da06"],["311091dd9860e8e20ee13473c1155f5f69635e394704eaa74009452246cfa9b3","66db656f87d1f04fffd1f04788c06830871ec5a64feee685bd80f0b1286d8374"],["34c1fd04d301be89b31c0442d3e6ac24883928b45a9340781867d4232ec2dbdf","09414685e97b1b5954bd46f730174136d57f1ceeb487443dc5321857ba73abee"],["f219ea5d6b54701c1c14de5b557eb42a8d13f3abbcd08affcc2a5e6b049b8d63","4cb95957e83d40b0f73af4544cccf6b1f4b08d3c07b27fb8d8c2962a400766d1"],["d7b8740f74a8fbaab1f683db8f45de26543a5490bca627087236912469a0b448","fa77968128d9c92ee1010f337ad4717eff15db5ed3c049b3411e0315eaa4593b"],["32d31c222f8f6f0ef86f7c98d3a3335ead5bcd32abdd94289fe4d3091aa824bf","5f3032f5892156e39ccd3d7915b9e1da2e6dac9e6f26e961118d14b8462e1661"],["7461f371914ab32671045a155d9831ea8793d77cd59592c4340f86cbc18347b5","8ec0ba238b96bec0cbdddcae0aa442542eee1ff50c986ea6b39847b3cc092ff6"],["ee079adb1df1860074356a25aa38206a6d716b2c3e67453d287698bad7b2b2d6","8dc2412aafe3be5c4c5f37e0ecc5f9f6a446989af04c4e25ebaac479ec1c8c1e"],["16ec93e447ec83f0467b18302ee620f7e65de331874c9dc72bfd8616ba9da6b5","5e4631150e62fb40d0e8c2a7ca5804a39d58186a50e497139626778e25b0674d"],["eaa5f980c245f6f038978290afa70b6bd8855897f98b6aa485b96065d537bd99","f65f5d3e292c2e0819a528391c994624d784869d7e6ea67fb18041024edc07dc"],["078c9407544ac132692ee1910a02439958ae04877151342ea96c4b6b35a49f51","f3e0319169eb9b85d5404795539a5e68fa1fbd583c064d2462b675f194a3ddb4"],["494f4be219a1a77016dcd838431aea0001cdc8ae7a6fc688726578d9702857a5","42242a969283a5f339ba7f075e36ba2af925ce30d767ed6e55f4b031880d562c"],["a598a8030da6d86c6bc7f2f5144ea549d28211ea58faa70ebf4c1e665c1fe9b5","204b5d6f84822c307e4b4a7140737aec23fc63b65b35f86a10026dbd2d864e6b"],["c41916365abb2b5d09192f5f2dbeafec208f020f12570a184dbadc3e58595997","04f14351d0087efa49d245b328984989d5caf9450f34bfc0ed16e96b58fa9913"],["841d6063a586fa475a724604da03bc5b92a2e0d2e0a36acfe4c73a5514742881","073867f59c0659e81904f9a1c7543698e62562d6744c169ce7a36de01a8d6154"],["5e95bb399a6971d376026947f89bde2f282b33810928be4ded112ac4d70e20d5","39f23f366809085beebfc71181313775a99c9aed7d8ba38b161384c746012865"],["36e4641a53948fd476c39f8a99fd974e5ec07564b5315d8bf99471bca0ef2f66","d2424b1b1abe4eb8164227b085c9aa9456ea13493fd563e06fd51cf5694c78fc"],["0336581ea7bfbbb290c191a2f507a41cf5643842170e914faeab27c2c579f726","ead12168595fe1be99252129b6e56b3391f7ab1410cd1e0ef3dcdcabd2fda224"],["8ab89816dadfd6b6a1f2634fcf00ec8403781025ed6890c4849742706bd43ede","6fdcef09f2f6d0a044e654aef624136f503d459c3e89845858a47a9129cdd24e"],["1e33f1a746c9c5778133344d9299fcaa20b0938e8acff2544bb40284b8c5fb94","060660257dd11b3aa9c8ed618d24edff2306d320f1d03010e33a7d2057f3b3b6"],["85b7c1dcb3cec1b7ee7f30ded79dd20a0ed1f4cc18cbcfcfa410361fd8f08f31","3d98a9cdd026dd43f39048f25a8847f4fcafad1895d7a633c6fed3c35e999511"],["29df9fbd8d9e46509275f4b125d6d45d7fbe9a3b878a7af872a2800661ac5f51","0b4c4fe99c775a606e2d8862179139ffda61dc861c019e55cd2876eb2a27d84b"],["a0b1cae06b0a847a3fea6e671aaf8adfdfe58ca2f768105c8082b2e449fce252","ae434102edde0958ec4b19d917a6a28e6b72da1834aff0e650f049503a296cf2"],["04e8ceafb9b3e9a136dc7ff67e840295b499dfb3b2133e4ba113f2e4c0e121e5","cf2174118c8b6d7a4b48f6d534ce5c79422c086a63460502b827ce62a326683c"],["d24a44e047e19b6f5afb81c7ca2f69080a5076689a010919f42725c2b789a33b","6fb8d5591b466f8fc63db50f1c0f1c69013f996887b8244d2cdec417afea8fa3"],["ea01606a7a6c9cdd249fdfcfacb99584001edd28abbab77b5104e98e8e3b35d4","322af4908c7312b0cfbfe369f7a7b3cdb7d4494bc2823700cfd652188a3ea98d"],["af8addbf2b661c8a6c6328655eb96651252007d8c5ea31be4ad196de8ce2131f","6749e67c029b85f52a034eafd096836b2520818680e26ac8f3dfbcdb71749700"],["e3ae1974566ca06cc516d47e0fb165a674a3dabcfca15e722f0e3450f45889","2aeabe7e4531510116217f07bf4d07300de97e4874f81f533420a72eeb0bd6a4"],["591ee355313d99721cf6993ffed1e3e301993ff3ed258802075ea8ced397e246","b0ea558a113c30bea60fc4775460c7901ff0b053d25ca2bdeee98f1a4be5d196"],["11396d55fda54c49f19aa97318d8da61fa8584e47b084945077cf03255b52984","998c74a8cd45ac01289d5833a7beb4744ff536b01b257be4c5767bea93ea57a4"],["3c5d2a1ba39c5a1790000738c9e0c40b8dcdfd5468754b6405540157e017aa7a","b2284279995a34e2f9d4de7396fc18b80f9b8b9fdd270f6661f79ca4c81bd257"],["cc8704b8a60a0defa3a99a7299f2e9c3fbc395afb04ac078425ef8a1793cc030","bdd46039feed17881d1e0862db347f8cf395b74fc4bcdc4e940b74e3ac1f1b13"],["c533e4f7ea8555aacd9777ac5cad29b97dd4defccc53ee7ea204119b2889b197","6f0a256bc5efdf429a2fb6242f1a43a2d9b925bb4a4b3a26bb8e0f45eb596096"],["0c14f8f2ccb27d6f109f6d08d03cc96a69ba8c34eec07bbcf566d48e33da6593","c359d6923bb398f7fd4473e16fe1c28475b740dd098075e6c0e8649113dc3a38"],["a6cbc3046bc6a450bac24789fa17115a4c9739ed75f8f21ce441f72e0b90e6ef","021ae7f4680e889bb130619e2c0f95a360ceb573c70603139862afd617fa9b9f"],["347d6d9a02c48927ebfb86c1359b1caf130a3c0267d11ce6344b39f99d43cc38","60ea7f61a353524d1c987f6ecec92f086d565ab687870cb12689ff1e31c74448"],["da6545d2181db8d983f7dcb375ef5866d47c67b1bf31c8cf855ef7437b72656a","49b96715ab6878a79e78f07ce5680c5d6673051b4935bd897fea824b77dc208a"],["c40747cc9d012cb1a13b8148309c6de7ec25d6945d657146b9d5994b8feb1111","5ca560753be2a12fc6de6caf2cb489565db936156b9514e1bb5e83037e0fa2d4"],["4e42c8ec82c99798ccf3a610be870e78338c7f713348bd34c8203ef4037f3502","7571d74ee5e0fb92a7a8b33a07783341a5492144cc54bcc40a94473693606437"],["3775ab7089bc6af823aba2e1af70b236d251cadb0c86743287522a1b3b0dedea","be52d107bcfa09d8bcb9736a828cfa7fac8db17bf7a76a2c42ad961409018cf7"],["cee31cbf7e34ec379d94fb814d3d775ad954595d1314ba8846959e3e82f74e26","8fd64a14c06b589c26b947ae2bcf6bfa0149ef0be14ed4d80f448a01c43b1c6d"],["b4f9eaea09b6917619f6ea6a4eb5464efddb58fd45b1ebefcdc1a01d08b47986","39e5c9925b5a54b07433a4f18c61726f8bb131c012ca542eb24a8ac07200682a"],["d4263dfc3d2df923a0179a48966d30ce84e2515afc3dccc1b77907792ebcc60e","62dfaf07a0f78feb30e30d6295853ce189e127760ad6cf7fae164e122a208d54"],["48457524820fa65a4f8d35eb6930857c0032acc0a4a2de422233eeda897612c4","25a748ab367979d98733c38a1fa1c2e7dc6cc07db2d60a9ae7a76aaa49bd0f77"],["dfeeef1881101f2cb11644f3a2afdfc2045e19919152923f367a1767c11cceda","ecfb7056cf1de042f9420bab396793c0c390bde74b4bbdff16a83ae09a9a7517"],["6d7ef6b17543f8373c573f44e1f389835d89bcbc6062ced36c82df83b8fae859","cd450ec335438986dfefa10c57fea9bcc521a0959b2d80bbf74b190dca712d10"],["e75605d59102a5a2684500d3b991f2e3f3c88b93225547035af25af66e04541f","f5c54754a8f71ee540b9b48728473e314f729ac5308b06938360990e2bfad125"],["eb98660f4c4dfaa06a2be453d5020bc99a0c2e60abe388457dd43fefb1ed620c","6cb9a8876d9cb8520609af3add26cd20a0a7cd8a9411131ce85f44100099223e"],["13e87b027d8514d35939f2e6892b19922154596941888336dc3563e3b8dba942","fef5a3c68059a6dec5d624114bf1e91aac2b9da568d6abeb2570d55646b8adf1"],["ee163026e9fd6fe017c38f06a5be6fc125424b371ce2708e7bf4491691e5764a","1acb250f255dd61c43d94ccc670d0f58f49ae3fa15b96623e5430da0ad6c62b2"],["b268f5ef9ad51e4d78de3a750c2dc89b1e626d43505867999932e5db33af3d80","5f310d4b3c99b9ebb19f77d41c1dee018cf0d34fd4191614003e945a1216e423"],["ff07f3118a9df035e9fad85eb6c7bfe42b02f01ca99ceea3bf7ffdba93c4750d","438136d603e858a3a5c440c38eccbaddc1d2942114e2eddd4740d098ced1f0d8"],["8d8b9855c7c052a34146fd20ffb658bea4b9f69e0d825ebec16e8c3ce2b526a1","cdb559eedc2d79f926baf44fb84ea4d44bcf50fee51d7ceb30e2e7f463036758"],["52db0b5384dfbf05bfa9d472d7ae26dfe4b851ceca91b1eba54263180da32b63","0c3b997d050ee5d423ebaf66a6db9f57b3180c902875679de924b69d84a7b375"],["e62f9490d3d51da6395efd24e80919cc7d0f29c3f3fa48c6fff543becbd43352","6d89ad7ba4876b0b22c2ca280c682862f342c8591f1daf5170e07bfd9ccafa7d"],["7f30ea2476b399b4957509c88f77d0191afa2ff5cb7b14fd6d8e7d65aaab1193","ca5ef7d4b231c94c3b15389a5f6311e9daff7bb67b103e9880ef4bff637acaec"],["5098ff1e1d9f14fb46a210fada6c903fef0fb7b4a1dd1d9ac60a0361800b7a00","09731141d81fc8f8084d37c6e7542006b3ee1b40d60dfe5362a5b132fd17ddc0"],["32b78c7de9ee512a72895be6b9cbefa6e2f3c4ccce445c96b9f2c81e2778ad58","ee1849f513df71e32efc3896ee28260c73bb80547ae2275ba497237794c8753c"],["e2cb74fddc8e9fbcd076eef2a7c72b0ce37d50f08269dfc074b581550547a4f7","d3aa2ed71c9dd2247a62df062736eb0baddea9e36122d2be8641abcb005cc4a4"],["8438447566d4d7bedadc299496ab357426009a35f235cb141be0d99cd10ae3a8","c4e1020916980a4da5d01ac5e6ad330734ef0d7906631c4f2390426b2edd791f"],["4162d488b89402039b584c6fc6c308870587d9c46f660b878ab65c82c711d67e","67163e903236289f776f22c25fb8a3afc1732f2b84b4e95dbda47ae5a0852649"],["3fad3fa84caf0f34f0f89bfd2dcf54fc175d767aec3e50684f3ba4a4bf5f683d","0cd1bc7cb6cc407bb2f0ca647c718a730cf71872e7d0d2a53fa20efcdfe61826"],["674f2600a3007a00568c1a7ce05d0816c1fb84bf1370798f1c69532faeb1a86b","299d21f9413f33b3edf43b257004580b70db57da0b182259e09eecc69e0d38a5"],["d32f4da54ade74abb81b815ad1fb3b263d82d6c692714bcff87d29bd5ee9f08f","f9429e738b8e53b968e99016c059707782e14f4535359d582fc416910b3eea87"],["30e4e670435385556e593657135845d36fbb6931f72b08cb1ed954f1e3ce3ff6","462f9bce619898638499350113bbc9b10a878d35da70740dc695a559eb88db7b"],["be2062003c51cc3004682904330e4dee7f3dcd10b01e580bf1971b04d4cad297","62188bc49d61e5428573d48a74e1c655b1c61090905682a0d5558ed72dccb9bc"],["93144423ace3451ed29e0fb9ac2af211cb6e84a601df5993c419859fff5df04a","7c10dfb164c3425f5c71a3f9d7992038f1065224f72bb9d1d902a6d13037b47c"],["b015f8044f5fcbdcf21ca26d6c34fb8197829205c7b7d2a7cb66418c157b112c","ab8c1e086d04e813744a655b2df8d5f83b3cdc6faa3088c1d3aea1454e3a1d5f"],["d5e9e1da649d97d89e4868117a465a3a4f8a18de57a140d36b3f2af341a21b52","4cb04437f391ed73111a13cc1d4dd0db1693465c2240480d8955e8592f27447a"],["d3ae41047dd7ca065dbf8ed77b992439983005cd72e16d6f996a5316d36966bb","bd1aeb21ad22ebb22a10f0303417c6d964f8cdd7df0aca614b10dc14d125ac46"],["463e2763d885f958fc66cdd22800f0a487197d0a82e377b49f80af87c897b065","bfefacdb0e5d0fd7df3a311a94de062b26b80c61fbc97508b79992671ef7ca7f"],["7985fdfd127c0567c6f53ec1bb63ec3158e597c40bfe747c83cddfc910641917","603c12daf3d9862ef2b25fe1de289aed24ed291e0ec6708703a5bd567f32ed03"],["74a1ad6b5f76e39db2dd249410eac7f99e74c59cb83d2d0ed5ff1543da7703e9","cc6157ef18c9c63cd6193d83631bbea0093e0968942e8c33d5737fd790e0db08"],["30682a50703375f602d416664ba19b7fc9bab42c72747463a71d0896b22f6da3","553e04f6b018b4fa6c8f39e7f311d3176290d0e0f19ca73f17714d9977a22ff8"],["9e2158f0d7c0d5f26c3791efefa79597654e7a2b2464f52b1ee6c1347769ef57","0712fcdd1b9053f09003a3481fa7762e9ffd7c8ef35a38509e2fbf2629008373"],["176e26989a43c9cfeba4029c202538c28172e566e3c4fce7322857f3be327d66","ed8cc9d04b29eb877d270b4878dc43c19aefd31f4eee09ee7b47834c1fa4b1c3"],["75d46efea3771e6e68abb89a13ad747ecf1892393dfc4f1b7004788c50374da8","9852390a99507679fd0b86fd2b39a868d7efc22151346e1a3ca4726586a6bed8"],["809a20c67d64900ffb698c4c825f6d5f2310fb0451c869345b7319f645605721","9e994980d9917e22b76b061927fa04143d096ccc54963e6a5ebfa5f3f8e286c1"],["1b38903a43f7f114ed4500b4eac7083fdefece1cf29c63528d563446f972c180","4036edc931a60ae889353f77fd53de4a2708b26b6f5da72ad3394119daf408f9"]]}'), ty = { step: 4, points: [["e60fce93b59e9ec53011aabc21c23e97b2a31369b87a5ae9c44ee89e2a6dec0a", "f7e3507399e595929db99f34f57937101296891e44d23f0be1f32cce69616821"], ["8282263212c609d9ea2a6e3e172de238d8c39cabd5ac1ca10646e23fd5f51508", "11f8a8098557dfe45e8256e830b60ace62d613ac2f7b17bed31b6eaff6e26caf"], ["175e159f728b865a72f99cc6c6fc846de0b93833fd2222ed73fce5b551e5b739", "d3506e0d9e3c79eba4ef97a51ff71f5eacb5955add24345c6efa6ffee9fed695"], ["363d90d447b00c9c99ceac05b6262ee053441c7e55552ffe526bad8f83ff4640", "04e273adfc732221953b445397f3363145b9a89008199ecb62003c7f3bee9de9"], ["8b4b5f165df3c2be8c6244b5b745638843e4a781a15bcd1b69f79a55dffdf80c", "4aad0a6f68d308b4b3fbd7813ab0da04f9e336546162ee56b3eff0c65fd4fd36"], ["723cbaa6e5db996d6bf771c00bd548c7b700dbffa6c0e77bcb6115925232fcda", "96e867b5595cc498a921137488824d6e2660a0653779494801dc069d9eb39f5f"], ["eebfa4d493bebf98ba5feec812c2d3b50947961237a919839a533eca0e7dd7fa", "5d9a8ca3970ef0f269ee7edaf178089d9ae4cdc3a711f712ddfd4fdae1de8999"], ["100f44da696e71672791d0a09b7bde459f1215a29b3c03bfefd7835b39a48db0", "cdd9e13192a00b772ec8f3300c090666b7ff4a18ff5195ac0fbd5cd62bc65a09"], ["e1031be262c7ed1b1dc9227a4a04c017a77f8d4464f3b3852c8acde6e534fd2d", "9d7061928940405e6bb6a4176597535af292dd419e1ced79a44f18f29456a00d"], ["feea6cae46d55b530ac2839f143bd7ec5cf8b266a41d6af52d5e688d9094696d", "e57c6b6c97dce1bab06e4e12bf3ecd5c981c8957cc41442d3155debf18090088"], ["da67a91d91049cdcb367be4be6ffca3cfeed657d808583de33fa978bc1ec6cb1", "9bacaa35481642bc41f463f7ec9780e5dec7adc508f740a17e9ea8e27a68be1d"], ["53904faa0b334cdda6e000935ef22151ec08d0f7bb11069f57545ccc1a37b7c0", "5bc087d0bc80106d88c9eccac20d3c1c13999981e14434699dcb096b022771c8"], ["8e7bcd0bd35983a7719cca7764ca906779b53a043a9b8bcaeff959f43ad86047", "10b7770b2a3da4b3940310420ca9514579e88e2e47fd68b3ea10047e8460372a"], ["385eed34c1cdff21e6d0818689b81bde71a7f4f18397e6690a841e1599c43862", "283bebc3e8ea23f56701de19e9ebf4576b304eec2086dc8cc0458fe5542e5453"], ["06f9d9b803ecf191637c73a4413dfa180fddf84a5947fbc9c606ed86c3fac3a7", "7c80c68e603059ba69b8e2a30e45c4d47ea4dd2f5c281002d86890603a842160"], ["3322d401243c4e2582a2147c104d6ecbf774d163db0f5e5313b7e0e742d0e6bd", "56e70797e9664ef5bfb019bc4ddaf9b72805f63ea2873af624f3a2e96c28b2a0"], ["85672c7d2de0b7da2bd1770d89665868741b3f9af7643397721d74d28134ab83", "7c481b9b5b43b2eb6374049bfa62c2e5e77f17fcc5298f44c8e3094f790313a6"], ["0948bf809b1988a46b06c9f1919413b10f9226c60f668832ffd959af60c82a0a", "53a562856dcb6646dc6b74c5d1c3418c6d4dff08c97cd2bed4cb7f88d8c8e589"], ["6260ce7f461801c34f067ce0f02873a8f1b0e44dfc69752accecd819f38fd8e8", "bc2da82b6fa5b571a7f09049776a1ef7ecd292238051c198c1a84e95b2b4ae17"], ["e5037de0afc1d8d43d8348414bbf4103043ec8f575bfdc432953cc8d2037fa2d", "4571534baa94d3b5f9f98d09fb990bddbd5f5b03ec481f10e0e5dc841d755bda"], ["e06372b0f4a207adf5ea905e8f1771b4e7e8dbd1c6a6c5b725866a0ae4fce725", "7a908974bce18cfe12a27bb2ad5a488cd7484a7787104870b27034f94eee31dd"], ["213c7a715cd5d45358d0bbf9dc0ce02204b10bdde2a3f58540ad6908d0559754", "4b6dad0b5ae462507013ad06245ba190bb4850f5f36a7eeddff2c27534b458f2"], ["4e7c272a7af4b34e8dbb9352a5419a87e2838c70adc62cddf0cc3a3b08fbd53c", "17749c766c9d0b18e16fd09f6def681b530b9614bff7dd33e0b3941817dcaae6"], ["fea74e3dbe778b1b10f238ad61686aa5c76e3db2be43057632427e2840fb27b6", "6e0568db9b0b13297cf674deccb6af93126b596b973f7b77701d3db7f23cb96f"], ["76e64113f677cf0e10a2570d599968d31544e179b760432952c02a4417bdde39", "c90ddf8dee4e95cf577066d70681f0d35e2a33d2b56d2032b4b1752d1901ac01"], ["c738c56b03b2abe1e8281baa743f8f9a8f7cc643df26cbee3ab150242bcbb891", "893fb578951ad2537f718f2eacbfbbbb82314eef7880cfe917e735d9699a84c3"], ["d895626548b65b81e264c7637c972877d1d72e5f3a925014372e9f6588f6c14b", "febfaa38f2bc7eae728ec60818c340eb03428d632bb067e179363ed75d7d991f"], ["b8da94032a957518eb0f6433571e8761ceffc73693e84edd49150a564f676e03", "2804dfa44805a1e4d7c99cc9762808b092cc584d95ff3b511488e4e74efdf6e7"], ["e80fea14441fb33a7d8adab9475d7fab2019effb5156a792f1a11778e3c0df5d", "eed1de7f638e00771e89768ca3ca94472d155e80af322ea9fcb4291b6ac9ec78"], ["a301697bdfcd704313ba48e51d567543f2a182031efd6915ddc07bbcc4e16070", "7370f91cfb67e4f5081809fa25d40f9b1735dbf7c0a11a130c0d1a041e177ea1"], ["90ad85b389d6b936463f9d0512678de208cc330b11307fffab7ac63e3fb04ed4", "0e507a3620a38261affdcbd9427222b839aefabe1582894d991d4d48cb6ef150"], ["8f68b9d2f63b5f339239c1ad981f162ee88c5678723ea3351b7b444c9ec4c0da", "662a9f2dba063986de1d90c2b6be215dbbea2cfe95510bfdf23cbf79501fff82"], ["e4f3fb0176af85d65ff99ff9198c36091f48e86503681e3e6686fd5053231e11", "1e63633ad0ef4f1c1661a6d0ea02b7286cc7e74ec951d1c9822c38576feb73bc"], ["8c00fa9b18ebf331eb961537a45a4266c7034f2f0d4e1d0716fb6eae20eae29e", "efa47267fea521a1a9dc343a3736c974c2fadafa81e36c54e7d2a4c66702414b"], ["e7a26ce69dd4829f3e10cec0a9e98ed3143d084f308b92c0997fddfc60cb3e41", "2a758e300fa7984b471b006a1aafbb18d0a6b2c0420e83e20e8a9421cf2cfd51"], ["b6459e0ee3662ec8d23540c223bcbdc571cbcb967d79424f3cf29eb3de6b80ef", "067c876d06f3e06de1dadf16e5661db3c4b3ae6d48e35b2ff30bf0b61a71ba45"], ["d68a80c8280bb840793234aa118f06231d6f1fc67e73c5a5deda0f5b496943e8", "db8ba9fff4b586d00c4b1f9177b0e28b5b0e7b8f7845295a294c84266b133120"], ["324aed7df65c804252dc0270907a30b09612aeb973449cea4095980fc28d3d5d", "648a365774b61f2ff130c0c35aec1f4f19213b0c7e332843967224af96ab7c84"], ["4df9c14919cde61f6d51dfdbe5fee5dceec4143ba8d1ca888e8bd373fd054c96", "35ec51092d8728050974c23a1d85d4b5d506cdc288490192ebac06cad10d5d"], ["9c3919a84a474870faed8a9c1cc66021523489054d7f0308cbfc99c8ac1f98cd", "ddb84f0f4a4ddd57584f044bf260e641905326f76c64c8e6be7e5e03d4fc599d"], ["6057170b1dd12fdf8de05f281d8e06bb91e1493a8b91d4cc5a21382120a959e5", "9a1af0b26a6a4807add9a2daf71df262465152bc3ee24c65e899be932385a2a8"], ["a576df8e23a08411421439a4518da31880cef0fba7d4df12b1a6973eecb94266", "40a6bf20e76640b2c92b97afe58cd82c432e10a7f514d9f3ee8be11ae1b28ec8"], ["7778a78c28dec3e30a05fe9629de8c38bb30d1f5cf9a3a208f763889be58ad71", "34626d9ab5a5b22ff7098e12f2ff580087b38411ff24ac563b513fc1fd9f43ac"], ["0928955ee637a84463729fd30e7afd2ed5f96274e5ad7e5cb09eda9c06d903ac", "c25621003d3f42a827b78a13093a95eeac3d26efa8a8d83fc5180e935bcd091f"], ["85d0fef3ec6db109399064f3a0e3b2855645b4a907ad354527aae75163d82751", "1f03648413a38c0be29d496e582cf5663e8751e96877331582c237a24eb1f962"], ["ff2b0dce97eece97c1c9b6041798b85dfdfb6d8882da20308f5404824526087e", "493d13fef524ba188af4c4dc54d07936c7b7ed6fb90e2ceb2c951e01f0c29907"], ["827fbbe4b1e880ea9ed2b2e6301b212b57f1ee148cd6dd28780e5e2cf856e241", "c60f9c923c727b0b71bef2c67d1d12687ff7a63186903166d605b68baec293ec"], ["eaa649f21f51bdbae7be4ae34ce6e5217a58fdce7f47f9aa7f3b58fa2120e2b3", "be3279ed5bbbb03ac69a80f89879aa5a01a6b965f13f7e59d47a5305ba5ad93d"], ["e4a42d43c5cf169d9391df6decf42ee541b6d8f0c9a137401e23632dda34d24f", "4d9f92e716d1c73526fc99ccfb8ad34ce886eedfa8d8e4f13a7f7131deba9414"], ["1ec80fef360cbdd954160fadab352b6b92b53576a88fea4947173b9d4300bf19", "aeefe93756b5340d2f3a4958a7abbf5e0146e77f6295a07b671cdc1cc107cefd"], ["146a778c04670c2f91b00af4680dfa8bce3490717d58ba889ddb5928366642be", "b318e0ec3354028add669827f9d4b2870aaa971d2f7e5ed1d0b297483d83efd0"], ["fa50c0f61d22e5f07e3acebb1aa07b128d0012209a28b9776d76a8793180eef9", "6b84c6922397eba9b72cd2872281a68a5e683293a57a213b38cd8d7d3f4f2811"], ["da1d61d0ca721a11b1a5bf6b7d88e8421a288ab5d5bba5220e53d32b5f067ec2", "8157f55a7c99306c79c0766161c91e2966a73899d279b48a655fba0f1ad836f1"], ["a8e282ff0c9706907215ff98e8fd416615311de0446f1e062a73b0610d064e13", "7f97355b8db81c09abfb7f3c5b2515888b679a3e50dd6bd6cef7c73111f4cc0c"], ["174a53b9c9a285872d39e56e6913cab15d59b1fa512508c022f382de8319497c", "ccc9dc37abfc9c1657b4155f2c47f9e6646b3a1d8cb9854383da13ac079afa73"], ["959396981943785c3d3e57edf5018cdbe039e730e4918b3d884fdff09475b7ba", "2e7e552888c331dd8ba0386a4b9cd6849c653f64c8709385e9b8abf87524f2fd"], ["d2a63a50ae401e56d645a1153b109a8fcca0a43d561fba2dbb51340c9d82b151", "e82d86fb6443fcb7565aee58b2948220a70f750af484ca52d4142174dcf89405"], ["64587e2335471eb890ee7896d7cfdc866bacbdbd3839317b3436f9b45617e073", "d99fcdd5bf6902e2ae96dd6447c299a185b90a39133aeab358299e5e9faf6589"], ["8481bde0e4e4d885b3a546d3e549de042f0aa6cea250e7fd358d6c86dd45e458", "38ee7b8cba5404dd84a25bf39cecb2ca900a79c42b262e556d64b1b59779057e"], ["13464a57a78102aa62b6979ae817f4637ffcfed3c4b1ce30bcd6303f6caf666b", "69be159004614580ef7e433453ccb0ca48f300a81d0942e13f495a907f6ecc27"], ["bc4a9df5b713fe2e9aef430bcc1dc97a0cd9ccede2f28588cada3a0d2d83f366", "0d3a81ca6e785c06383937adf4b798caa6e8a9fbfa547b16d758d666581f33c1"], ["8c28a97bf8298bc0d23d8c749452a32e694b65e30a9472a3954ab30fe5324caa", "40a30463a3305193378fedf31f7cc0eb7ae784f0451cb9459e71dc73cbef9482"], ["08ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0", "620efabbc8ee2782e24e7c0cfb95c5d735b783be9cf0f8e955af34a30e62b945"], ["dd3625faef5ba06074669716bbd3788d89bdde815959968092f76cc4eb9a9787", "7a188fa3520e30d461da2501045731ca941461982883395937f68d00c644a573"], ["f710d79d9eb962297e4f6232b40e8f7feb2bc63814614d692c12de752408221e", "ea98e67232d3b3295d3b535532115ccac8612c721851617526ae47a9c77bfc82"]] }, ry = {
-  naf: ey,
-  doubles: ty
+const ty = /* @__PURE__ */ JSON.parse('{"width":9,"points":[["f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9","388f7b0f632de8140fe337e62a37f3566500a99934c2231b6cb9fd7584b8e672"],["2f8bde4d1a07209355b4a7250a5c5128e88b84bddc619ab7cba8d569b240efe4","d8ac222636e5e3d6d4dba9dda6c9c426f788271bab0d6840dca87d3aa6ac62d6"],["5cbdf0646e5db4eaa398f365f2ea7a0e3d419b7e0330e39ce92bddedcac4f9bc","6aebca40ba255960a3178d6d861a54dba813d0b813fde7b5a5082628087264da"],["acd484e2f0c7f65309ad178a9f559abde09796974c57e714c35f110dfc27ccbe","cc338921b0a7d9fd64380971763b61e9add888a4375f8e0f05cc262ac64f9c37"],["774ae7f858a9411e5ef4246b70c65aac5649980be5c17891bbec17895da008cb","d984a032eb6b5e190243dd56d7b7b365372db1e2dff9d6a8301d74c9c953c61b"],["f28773c2d975288bc7d1d205c3748651b075fbc6610e58cddeeddf8f19405aa8","0ab0902e8d880a89758212eb65cdaf473a1a06da521fa91f29b5cb52db03ed81"],["d7924d4f7d43ea965a465ae3095ff41131e5946f3c85f79e44adbcf8e27e080e","581e2872a86c72a683842ec228cc6defea40af2bd896d3a5c504dc9ff6a26b58"],["defdea4cdb677750a420fee807eacf21eb9898ae79b9768766e4faa04a2d4a34","4211ab0694635168e997b0ead2a93daeced1f4a04a95c0f6cfb199f69e56eb77"],["2b4ea0a797a443d293ef5cff444f4979f06acfebd7e86d277475656138385b6c","85e89bc037945d93b343083b5a1c86131a01f60c50269763b570c854e5c09b7a"],["352bbf4a4cdd12564f93fa332ce333301d9ad40271f8107181340aef25be59d5","321eb4075348f534d59c18259dda3e1f4a1b3b2e71b1039c67bd3d8bcf81998c"],["2fa2104d6b38d11b0230010559879124e42ab8dfeff5ff29dc9cdadd4ecacc3f","02de1068295dd865b64569335bd5dd80181d70ecfc882648423ba76b532b7d67"],["9248279b09b4d68dab21a9b066edda83263c3d84e09572e269ca0cd7f5453714","73016f7bf234aade5d1aa71bdea2b1ff3fc0de2a887912ffe54a32ce97cb3402"],["daed4f2be3a8bf278e70132fb0beb7522f570e144bf615c07e996d443dee8729","a69dce4a7d6c98e8d4a1aca87ef8d7003f83c230f3afa726ab40e52290be1c55"],["c44d12c7065d812e8acf28d7cbb19f9011ecd9e9fdf281b0e6a3b5e87d22e7db","2119a460ce326cdc76c45926c982fdac0e106e861edf61c5a039063f0e0e6482"],["6a245bf6dc698504c89a20cfded60853152b695336c28063b61c65cbd269e6b4","e022cf42c2bd4a708b3f5126f16a24ad8b33ba48d0423b6efd5e6348100d8a82"],["1697ffa6fd9de627c077e3d2fe541084ce13300b0bec1146f95ae57f0d0bd6a5","b9c398f186806f5d27561506e4557433a2cf15009e498ae7adee9d63d01b2396"],["605bdb019981718b986d0f07e834cb0d9deb8360ffb7f61df982345ef27a7479","02972d2de4f8d20681a78d93ec96fe23c26bfae84fb14db43b01e1e9056b8c49"],["62d14dab4150bf497402fdc45a215e10dcb01c354959b10cfe31c7e9d87ff33d","80fc06bd8cc5b01098088a1950eed0db01aa132967ab472235f5642483b25eaf"],["80c60ad0040f27dade5b4b06c408e56b2c50e9f56b9b8b425e555c2f86308b6f","1c38303f1cc5c30f26e66bad7fe72f70a65eed4cbe7024eb1aa01f56430bd57a"],["7a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb","0d0e3fa9eca8726909559e0d79269046bdc59ea10c70ce2b02d499ec224dc7f7"],["d528ecd9b696b54c907a9ed045447a79bb408ec39b68df504bb51f459bc3ffc9","eecf41253136e5f99966f21881fd656ebc4345405c520dbc063465b521409933"],["049370a4b5f43412ea25f514e8ecdad05266115e4a7ecb1387231808f8b45963","758f3f41afd6ed428b3081b0512fd62a54c3f3afbb5b6764b653052a12949c9a"],["77f230936ee88cbbd73df930d64702ef881d811e0e1498e2f1c13eb1fc345d74","958ef42a7886b6400a08266e9ba1b37896c95330d97077cbbe8eb3c7671c60d6"],["f2dac991cc4ce4b9ea44887e5c7c0bce58c80074ab9d4dbaeb28531b7739f530","e0dedc9b3b2f8dad4da1f32dec2531df9eb5fbeb0598e4fd1a117dba703a3c37"],["463b3d9f662621fb1b4be8fbbe2520125a216cdfc9dae3debcba4850c690d45b","5ed430d78c296c3543114306dd8622d7c622e27c970a1de31cb377b01af7307e"],["f16f804244e46e2a09232d4aff3b59976b98fac14328a2d1a32496b49998f247","cedabd9b82203f7e13d206fcdf4e33d92a6c53c26e5cce26d6579962c4e31df6"],["caf754272dc84563b0352b7a14311af55d245315ace27c65369e15f7151d41d1","cb474660ef35f5f2a41b643fa5e460575f4fa9b7962232a5c32f908318a04476"],["2600ca4b282cb986f85d0f1709979d8b44a09c07cb86d7c124497bc86f082120","4119b88753c15bd6a693b03fcddbb45d5ac6be74ab5f0ef44b0be9475a7e4b40"],["7635ca72d7e8432c338ec53cd12220bc01c48685e24f7dc8c602a7746998e435","091b649609489d613d1d5e590f78e6d74ecfc061d57048bad9e76f302c5b9c61"],["754e3239f325570cdbbf4a87deee8a66b7f2b33479d468fbc1a50743bf56cc18","0673fb86e5bda30fb3cd0ed304ea49a023ee33d0197a695d0c5d98093c536683"],["e3e6bd1071a1e96aff57859c82d570f0330800661d1c952f9fe2694691d9b9e8","59c9e0bba394e76f40c0aa58379a3cb6a5a2283993e90c4167002af4920e37f5"],["186b483d056a033826ae73d88f732985c4ccb1f32ba35f4b4cc47fdcf04aa6eb","3b952d32c67cf77e2e17446e204180ab21fb8090895138b4a4a797f86e80888b"],["df9d70a6b9876ce544c98561f4be4f725442e6d2b737d9c91a8321724ce0963f","55eb2dafd84d6ccd5f862b785dc39d4ab157222720ef9da217b8c45cf2ba2417"],["5edd5cc23c51e87a497ca815d5dce0f8ab52554f849ed8995de64c5f34ce7143","efae9c8dbc14130661e8cec030c89ad0c13c66c0d17a2905cdc706ab7399a868"],["290798c2b6476830da12fe02287e9e777aa3fba1c355b17a722d362f84614fba","e38da76dcd440621988d00bcf79af25d5b29c094db2a23146d003afd41943e7a"],["af3c423a95d9f5b3054754efa150ac39cd29552fe360257362dfdecef4053b45","f98a3fd831eb2b749a93b0e6f35cfb40c8cd5aa667a15581bc2feded498fd9c6"],["766dbb24d134e745cccaa28c99bf274906bb66b26dcf98df8d2fed50d884249a","744b1152eacbe5e38dcc887980da38b897584a65fa06cedd2c924f97cbac5996"],["59dbf46f8c94759ba21277c33784f41645f7b44f6c596a58ce92e666191abe3e","c534ad44175fbc300f4ea6ce648309a042ce739a7919798cd85e216c4a307f6e"],["f13ada95103c4537305e691e74e9a4a8dd647e711a95e73cb62dc6018cfd87b8","e13817b44ee14de663bf4bc808341f326949e21a6a75c2570778419bdaf5733d"],["7754b4fa0e8aced06d4167a2c59cca4cda1869c06ebadfb6488550015a88522c","30e93e864e669d82224b967c3020b8fa8d1e4e350b6cbcc537a48b57841163a2"],["948dcadf5990e048aa3874d46abef9d701858f95de8041d2a6828c99e2262519","e491a42537f6e597d5d28a3224b1bc25df9154efbd2ef1d2cbba2cae5347d57e"],["7962414450c76c1689c7b48f8202ec37fb224cf5ac0bfa1570328a8a3d7c77ab","100b610ec4ffb4760d5c1fc133ef6f6b12507a051f04ac5760afa5b29db83437"],["3514087834964b54b15b160644d915485a16977225b8847bb0dd085137ec47ca","ef0afbb2056205448e1652c48e8127fc6039e77c15c2378b7e7d15a0de293311"],["d3cc30ad6b483e4bc79ce2c9dd8bc54993e947eb8df787b442943d3f7b527eaf","8b378a22d827278d89c5e9be8f9508ae3c2ad46290358630afb34db04eede0a4"],["1624d84780732860ce1c78fcbfefe08b2b29823db913f6493975ba0ff4847610","68651cf9b6da903e0914448c6cd9d4ca896878f5282be4c8cc06e2a404078575"],["733ce80da955a8a26902c95633e62a985192474b5af207da6df7b4fd5fc61cd4","f5435a2bd2badf7d485a4d8b8db9fcce3e1ef8e0201e4578c54673bc1dc5ea1d"],["15d9441254945064cf1a1c33bbd3b49f8966c5092171e699ef258dfab81c045c","d56eb30b69463e7234f5137b73b84177434800bacebfc685fc37bbe9efe4070d"],["a1d0fcf2ec9de675b612136e5ce70d271c21417c9d2b8aaaac138599d0717940","edd77f50bcb5a3cab2e90737309667f2641462a54070f3d519212d39c197a629"],["e22fbe15c0af8ccc5780c0735f84dbe9a790badee8245c06c7ca37331cb36980","0a855babad5cd60c88b430a69f53a1a7a38289154964799be43d06d77d31da06"],["311091dd9860e8e20ee13473c1155f5f69635e394704eaa74009452246cfa9b3","66db656f87d1f04fffd1f04788c06830871ec5a64feee685bd80f0b1286d8374"],["34c1fd04d301be89b31c0442d3e6ac24883928b45a9340781867d4232ec2dbdf","09414685e97b1b5954bd46f730174136d57f1ceeb487443dc5321857ba73abee"],["f219ea5d6b54701c1c14de5b557eb42a8d13f3abbcd08affcc2a5e6b049b8d63","4cb95957e83d40b0f73af4544cccf6b1f4b08d3c07b27fb8d8c2962a400766d1"],["d7b8740f74a8fbaab1f683db8f45de26543a5490bca627087236912469a0b448","fa77968128d9c92ee1010f337ad4717eff15db5ed3c049b3411e0315eaa4593b"],["32d31c222f8f6f0ef86f7c98d3a3335ead5bcd32abdd94289fe4d3091aa824bf","5f3032f5892156e39ccd3d7915b9e1da2e6dac9e6f26e961118d14b8462e1661"],["7461f371914ab32671045a155d9831ea8793d77cd59592c4340f86cbc18347b5","8ec0ba238b96bec0cbdddcae0aa442542eee1ff50c986ea6b39847b3cc092ff6"],["ee079adb1df1860074356a25aa38206a6d716b2c3e67453d287698bad7b2b2d6","8dc2412aafe3be5c4c5f37e0ecc5f9f6a446989af04c4e25ebaac479ec1c8c1e"],["16ec93e447ec83f0467b18302ee620f7e65de331874c9dc72bfd8616ba9da6b5","5e4631150e62fb40d0e8c2a7ca5804a39d58186a50e497139626778e25b0674d"],["eaa5f980c245f6f038978290afa70b6bd8855897f98b6aa485b96065d537bd99","f65f5d3e292c2e0819a528391c994624d784869d7e6ea67fb18041024edc07dc"],["078c9407544ac132692ee1910a02439958ae04877151342ea96c4b6b35a49f51","f3e0319169eb9b85d5404795539a5e68fa1fbd583c064d2462b675f194a3ddb4"],["494f4be219a1a77016dcd838431aea0001cdc8ae7a6fc688726578d9702857a5","42242a969283a5f339ba7f075e36ba2af925ce30d767ed6e55f4b031880d562c"],["a598a8030da6d86c6bc7f2f5144ea549d28211ea58faa70ebf4c1e665c1fe9b5","204b5d6f84822c307e4b4a7140737aec23fc63b65b35f86a10026dbd2d864e6b"],["c41916365abb2b5d09192f5f2dbeafec208f020f12570a184dbadc3e58595997","04f14351d0087efa49d245b328984989d5caf9450f34bfc0ed16e96b58fa9913"],["841d6063a586fa475a724604da03bc5b92a2e0d2e0a36acfe4c73a5514742881","073867f59c0659e81904f9a1c7543698e62562d6744c169ce7a36de01a8d6154"],["5e95bb399a6971d376026947f89bde2f282b33810928be4ded112ac4d70e20d5","39f23f366809085beebfc71181313775a99c9aed7d8ba38b161384c746012865"],["36e4641a53948fd476c39f8a99fd974e5ec07564b5315d8bf99471bca0ef2f66","d2424b1b1abe4eb8164227b085c9aa9456ea13493fd563e06fd51cf5694c78fc"],["0336581ea7bfbbb290c191a2f507a41cf5643842170e914faeab27c2c579f726","ead12168595fe1be99252129b6e56b3391f7ab1410cd1e0ef3dcdcabd2fda224"],["8ab89816dadfd6b6a1f2634fcf00ec8403781025ed6890c4849742706bd43ede","6fdcef09f2f6d0a044e654aef624136f503d459c3e89845858a47a9129cdd24e"],["1e33f1a746c9c5778133344d9299fcaa20b0938e8acff2544bb40284b8c5fb94","060660257dd11b3aa9c8ed618d24edff2306d320f1d03010e33a7d2057f3b3b6"],["85b7c1dcb3cec1b7ee7f30ded79dd20a0ed1f4cc18cbcfcfa410361fd8f08f31","3d98a9cdd026dd43f39048f25a8847f4fcafad1895d7a633c6fed3c35e999511"],["29df9fbd8d9e46509275f4b125d6d45d7fbe9a3b878a7af872a2800661ac5f51","0b4c4fe99c775a606e2d8862179139ffda61dc861c019e55cd2876eb2a27d84b"],["a0b1cae06b0a847a3fea6e671aaf8adfdfe58ca2f768105c8082b2e449fce252","ae434102edde0958ec4b19d917a6a28e6b72da1834aff0e650f049503a296cf2"],["04e8ceafb9b3e9a136dc7ff67e840295b499dfb3b2133e4ba113f2e4c0e121e5","cf2174118c8b6d7a4b48f6d534ce5c79422c086a63460502b827ce62a326683c"],["d24a44e047e19b6f5afb81c7ca2f69080a5076689a010919f42725c2b789a33b","6fb8d5591b466f8fc63db50f1c0f1c69013f996887b8244d2cdec417afea8fa3"],["ea01606a7a6c9cdd249fdfcfacb99584001edd28abbab77b5104e98e8e3b35d4","322af4908c7312b0cfbfe369f7a7b3cdb7d4494bc2823700cfd652188a3ea98d"],["af8addbf2b661c8a6c6328655eb96651252007d8c5ea31be4ad196de8ce2131f","6749e67c029b85f52a034eafd096836b2520818680e26ac8f3dfbcdb71749700"],["e3ae1974566ca06cc516d47e0fb165a674a3dabcfca15e722f0e3450f45889","2aeabe7e4531510116217f07bf4d07300de97e4874f81f533420a72eeb0bd6a4"],["591ee355313d99721cf6993ffed1e3e301993ff3ed258802075ea8ced397e246","b0ea558a113c30bea60fc4775460c7901ff0b053d25ca2bdeee98f1a4be5d196"],["11396d55fda54c49f19aa97318d8da61fa8584e47b084945077cf03255b52984","998c74a8cd45ac01289d5833a7beb4744ff536b01b257be4c5767bea93ea57a4"],["3c5d2a1ba39c5a1790000738c9e0c40b8dcdfd5468754b6405540157e017aa7a","b2284279995a34e2f9d4de7396fc18b80f9b8b9fdd270f6661f79ca4c81bd257"],["cc8704b8a60a0defa3a99a7299f2e9c3fbc395afb04ac078425ef8a1793cc030","bdd46039feed17881d1e0862db347f8cf395b74fc4bcdc4e940b74e3ac1f1b13"],["c533e4f7ea8555aacd9777ac5cad29b97dd4defccc53ee7ea204119b2889b197","6f0a256bc5efdf429a2fb6242f1a43a2d9b925bb4a4b3a26bb8e0f45eb596096"],["0c14f8f2ccb27d6f109f6d08d03cc96a69ba8c34eec07bbcf566d48e33da6593","c359d6923bb398f7fd4473e16fe1c28475b740dd098075e6c0e8649113dc3a38"],["a6cbc3046bc6a450bac24789fa17115a4c9739ed75f8f21ce441f72e0b90e6ef","021ae7f4680e889bb130619e2c0f95a360ceb573c70603139862afd617fa9b9f"],["347d6d9a02c48927ebfb86c1359b1caf130a3c0267d11ce6344b39f99d43cc38","60ea7f61a353524d1c987f6ecec92f086d565ab687870cb12689ff1e31c74448"],["da6545d2181db8d983f7dcb375ef5866d47c67b1bf31c8cf855ef7437b72656a","49b96715ab6878a79e78f07ce5680c5d6673051b4935bd897fea824b77dc208a"],["c40747cc9d012cb1a13b8148309c6de7ec25d6945d657146b9d5994b8feb1111","5ca560753be2a12fc6de6caf2cb489565db936156b9514e1bb5e83037e0fa2d4"],["4e42c8ec82c99798ccf3a610be870e78338c7f713348bd34c8203ef4037f3502","7571d74ee5e0fb92a7a8b33a07783341a5492144cc54bcc40a94473693606437"],["3775ab7089bc6af823aba2e1af70b236d251cadb0c86743287522a1b3b0dedea","be52d107bcfa09d8bcb9736a828cfa7fac8db17bf7a76a2c42ad961409018cf7"],["cee31cbf7e34ec379d94fb814d3d775ad954595d1314ba8846959e3e82f74e26","8fd64a14c06b589c26b947ae2bcf6bfa0149ef0be14ed4d80f448a01c43b1c6d"],["b4f9eaea09b6917619f6ea6a4eb5464efddb58fd45b1ebefcdc1a01d08b47986","39e5c9925b5a54b07433a4f18c61726f8bb131c012ca542eb24a8ac07200682a"],["d4263dfc3d2df923a0179a48966d30ce84e2515afc3dccc1b77907792ebcc60e","62dfaf07a0f78feb30e30d6295853ce189e127760ad6cf7fae164e122a208d54"],["48457524820fa65a4f8d35eb6930857c0032acc0a4a2de422233eeda897612c4","25a748ab367979d98733c38a1fa1c2e7dc6cc07db2d60a9ae7a76aaa49bd0f77"],["dfeeef1881101f2cb11644f3a2afdfc2045e19919152923f367a1767c11cceda","ecfb7056cf1de042f9420bab396793c0c390bde74b4bbdff16a83ae09a9a7517"],["6d7ef6b17543f8373c573f44e1f389835d89bcbc6062ced36c82df83b8fae859","cd450ec335438986dfefa10c57fea9bcc521a0959b2d80bbf74b190dca712d10"],["e75605d59102a5a2684500d3b991f2e3f3c88b93225547035af25af66e04541f","f5c54754a8f71ee540b9b48728473e314f729ac5308b06938360990e2bfad125"],["eb98660f4c4dfaa06a2be453d5020bc99a0c2e60abe388457dd43fefb1ed620c","6cb9a8876d9cb8520609af3add26cd20a0a7cd8a9411131ce85f44100099223e"],["13e87b027d8514d35939f2e6892b19922154596941888336dc3563e3b8dba942","fef5a3c68059a6dec5d624114bf1e91aac2b9da568d6abeb2570d55646b8adf1"],["ee163026e9fd6fe017c38f06a5be6fc125424b371ce2708e7bf4491691e5764a","1acb250f255dd61c43d94ccc670d0f58f49ae3fa15b96623e5430da0ad6c62b2"],["b268f5ef9ad51e4d78de3a750c2dc89b1e626d43505867999932e5db33af3d80","5f310d4b3c99b9ebb19f77d41c1dee018cf0d34fd4191614003e945a1216e423"],["ff07f3118a9df035e9fad85eb6c7bfe42b02f01ca99ceea3bf7ffdba93c4750d","438136d603e858a3a5c440c38eccbaddc1d2942114e2eddd4740d098ced1f0d8"],["8d8b9855c7c052a34146fd20ffb658bea4b9f69e0d825ebec16e8c3ce2b526a1","cdb559eedc2d79f926baf44fb84ea4d44bcf50fee51d7ceb30e2e7f463036758"],["52db0b5384dfbf05bfa9d472d7ae26dfe4b851ceca91b1eba54263180da32b63","0c3b997d050ee5d423ebaf66a6db9f57b3180c902875679de924b69d84a7b375"],["e62f9490d3d51da6395efd24e80919cc7d0f29c3f3fa48c6fff543becbd43352","6d89ad7ba4876b0b22c2ca280c682862f342c8591f1daf5170e07bfd9ccafa7d"],["7f30ea2476b399b4957509c88f77d0191afa2ff5cb7b14fd6d8e7d65aaab1193","ca5ef7d4b231c94c3b15389a5f6311e9daff7bb67b103e9880ef4bff637acaec"],["5098ff1e1d9f14fb46a210fada6c903fef0fb7b4a1dd1d9ac60a0361800b7a00","09731141d81fc8f8084d37c6e7542006b3ee1b40d60dfe5362a5b132fd17ddc0"],["32b78c7de9ee512a72895be6b9cbefa6e2f3c4ccce445c96b9f2c81e2778ad58","ee1849f513df71e32efc3896ee28260c73bb80547ae2275ba497237794c8753c"],["e2cb74fddc8e9fbcd076eef2a7c72b0ce37d50f08269dfc074b581550547a4f7","d3aa2ed71c9dd2247a62df062736eb0baddea9e36122d2be8641abcb005cc4a4"],["8438447566d4d7bedadc299496ab357426009a35f235cb141be0d99cd10ae3a8","c4e1020916980a4da5d01ac5e6ad330734ef0d7906631c4f2390426b2edd791f"],["4162d488b89402039b584c6fc6c308870587d9c46f660b878ab65c82c711d67e","67163e903236289f776f22c25fb8a3afc1732f2b84b4e95dbda47ae5a0852649"],["3fad3fa84caf0f34f0f89bfd2dcf54fc175d767aec3e50684f3ba4a4bf5f683d","0cd1bc7cb6cc407bb2f0ca647c718a730cf71872e7d0d2a53fa20efcdfe61826"],["674f2600a3007a00568c1a7ce05d0816c1fb84bf1370798f1c69532faeb1a86b","299d21f9413f33b3edf43b257004580b70db57da0b182259e09eecc69e0d38a5"],["d32f4da54ade74abb81b815ad1fb3b263d82d6c692714bcff87d29bd5ee9f08f","f9429e738b8e53b968e99016c059707782e14f4535359d582fc416910b3eea87"],["30e4e670435385556e593657135845d36fbb6931f72b08cb1ed954f1e3ce3ff6","462f9bce619898638499350113bbc9b10a878d35da70740dc695a559eb88db7b"],["be2062003c51cc3004682904330e4dee7f3dcd10b01e580bf1971b04d4cad297","62188bc49d61e5428573d48a74e1c655b1c61090905682a0d5558ed72dccb9bc"],["93144423ace3451ed29e0fb9ac2af211cb6e84a601df5993c419859fff5df04a","7c10dfb164c3425f5c71a3f9d7992038f1065224f72bb9d1d902a6d13037b47c"],["b015f8044f5fcbdcf21ca26d6c34fb8197829205c7b7d2a7cb66418c157b112c","ab8c1e086d04e813744a655b2df8d5f83b3cdc6faa3088c1d3aea1454e3a1d5f"],["d5e9e1da649d97d89e4868117a465a3a4f8a18de57a140d36b3f2af341a21b52","4cb04437f391ed73111a13cc1d4dd0db1693465c2240480d8955e8592f27447a"],["d3ae41047dd7ca065dbf8ed77b992439983005cd72e16d6f996a5316d36966bb","bd1aeb21ad22ebb22a10f0303417c6d964f8cdd7df0aca614b10dc14d125ac46"],["463e2763d885f958fc66cdd22800f0a487197d0a82e377b49f80af87c897b065","bfefacdb0e5d0fd7df3a311a94de062b26b80c61fbc97508b79992671ef7ca7f"],["7985fdfd127c0567c6f53ec1bb63ec3158e597c40bfe747c83cddfc910641917","603c12daf3d9862ef2b25fe1de289aed24ed291e0ec6708703a5bd567f32ed03"],["74a1ad6b5f76e39db2dd249410eac7f99e74c59cb83d2d0ed5ff1543da7703e9","cc6157ef18c9c63cd6193d83631bbea0093e0968942e8c33d5737fd790e0db08"],["30682a50703375f602d416664ba19b7fc9bab42c72747463a71d0896b22f6da3","553e04f6b018b4fa6c8f39e7f311d3176290d0e0f19ca73f17714d9977a22ff8"],["9e2158f0d7c0d5f26c3791efefa79597654e7a2b2464f52b1ee6c1347769ef57","0712fcdd1b9053f09003a3481fa7762e9ffd7c8ef35a38509e2fbf2629008373"],["176e26989a43c9cfeba4029c202538c28172e566e3c4fce7322857f3be327d66","ed8cc9d04b29eb877d270b4878dc43c19aefd31f4eee09ee7b47834c1fa4b1c3"],["75d46efea3771e6e68abb89a13ad747ecf1892393dfc4f1b7004788c50374da8","9852390a99507679fd0b86fd2b39a868d7efc22151346e1a3ca4726586a6bed8"],["809a20c67d64900ffb698c4c825f6d5f2310fb0451c869345b7319f645605721","9e994980d9917e22b76b061927fa04143d096ccc54963e6a5ebfa5f3f8e286c1"],["1b38903a43f7f114ed4500b4eac7083fdefece1cf29c63528d563446f972c180","4036edc931a60ae889353f77fd53de4a2708b26b6f5da72ad3394119daf408f9"]]}'), ry = { step: 4, points: [["e60fce93b59e9ec53011aabc21c23e97b2a31369b87a5ae9c44ee89e2a6dec0a", "f7e3507399e595929db99f34f57937101296891e44d23f0be1f32cce69616821"], ["8282263212c609d9ea2a6e3e172de238d8c39cabd5ac1ca10646e23fd5f51508", "11f8a8098557dfe45e8256e830b60ace62d613ac2f7b17bed31b6eaff6e26caf"], ["175e159f728b865a72f99cc6c6fc846de0b93833fd2222ed73fce5b551e5b739", "d3506e0d9e3c79eba4ef97a51ff71f5eacb5955add24345c6efa6ffee9fed695"], ["363d90d447b00c9c99ceac05b6262ee053441c7e55552ffe526bad8f83ff4640", "04e273adfc732221953b445397f3363145b9a89008199ecb62003c7f3bee9de9"], ["8b4b5f165df3c2be8c6244b5b745638843e4a781a15bcd1b69f79a55dffdf80c", "4aad0a6f68d308b4b3fbd7813ab0da04f9e336546162ee56b3eff0c65fd4fd36"], ["723cbaa6e5db996d6bf771c00bd548c7b700dbffa6c0e77bcb6115925232fcda", "96e867b5595cc498a921137488824d6e2660a0653779494801dc069d9eb39f5f"], ["eebfa4d493bebf98ba5feec812c2d3b50947961237a919839a533eca0e7dd7fa", "5d9a8ca3970ef0f269ee7edaf178089d9ae4cdc3a711f712ddfd4fdae1de8999"], ["100f44da696e71672791d0a09b7bde459f1215a29b3c03bfefd7835b39a48db0", "cdd9e13192a00b772ec8f3300c090666b7ff4a18ff5195ac0fbd5cd62bc65a09"], ["e1031be262c7ed1b1dc9227a4a04c017a77f8d4464f3b3852c8acde6e534fd2d", "9d7061928940405e6bb6a4176597535af292dd419e1ced79a44f18f29456a00d"], ["feea6cae46d55b530ac2839f143bd7ec5cf8b266a41d6af52d5e688d9094696d", "e57c6b6c97dce1bab06e4e12bf3ecd5c981c8957cc41442d3155debf18090088"], ["da67a91d91049cdcb367be4be6ffca3cfeed657d808583de33fa978bc1ec6cb1", "9bacaa35481642bc41f463f7ec9780e5dec7adc508f740a17e9ea8e27a68be1d"], ["53904faa0b334cdda6e000935ef22151ec08d0f7bb11069f57545ccc1a37b7c0", "5bc087d0bc80106d88c9eccac20d3c1c13999981e14434699dcb096b022771c8"], ["8e7bcd0bd35983a7719cca7764ca906779b53a043a9b8bcaeff959f43ad86047", "10b7770b2a3da4b3940310420ca9514579e88e2e47fd68b3ea10047e8460372a"], ["385eed34c1cdff21e6d0818689b81bde71a7f4f18397e6690a841e1599c43862", "283bebc3e8ea23f56701de19e9ebf4576b304eec2086dc8cc0458fe5542e5453"], ["06f9d9b803ecf191637c73a4413dfa180fddf84a5947fbc9c606ed86c3fac3a7", "7c80c68e603059ba69b8e2a30e45c4d47ea4dd2f5c281002d86890603a842160"], ["3322d401243c4e2582a2147c104d6ecbf774d163db0f5e5313b7e0e742d0e6bd", "56e70797e9664ef5bfb019bc4ddaf9b72805f63ea2873af624f3a2e96c28b2a0"], ["85672c7d2de0b7da2bd1770d89665868741b3f9af7643397721d74d28134ab83", "7c481b9b5b43b2eb6374049bfa62c2e5e77f17fcc5298f44c8e3094f790313a6"], ["0948bf809b1988a46b06c9f1919413b10f9226c60f668832ffd959af60c82a0a", "53a562856dcb6646dc6b74c5d1c3418c6d4dff08c97cd2bed4cb7f88d8c8e589"], ["6260ce7f461801c34f067ce0f02873a8f1b0e44dfc69752accecd819f38fd8e8", "bc2da82b6fa5b571a7f09049776a1ef7ecd292238051c198c1a84e95b2b4ae17"], ["e5037de0afc1d8d43d8348414bbf4103043ec8f575bfdc432953cc8d2037fa2d", "4571534baa94d3b5f9f98d09fb990bddbd5f5b03ec481f10e0e5dc841d755bda"], ["e06372b0f4a207adf5ea905e8f1771b4e7e8dbd1c6a6c5b725866a0ae4fce725", "7a908974bce18cfe12a27bb2ad5a488cd7484a7787104870b27034f94eee31dd"], ["213c7a715cd5d45358d0bbf9dc0ce02204b10bdde2a3f58540ad6908d0559754", "4b6dad0b5ae462507013ad06245ba190bb4850f5f36a7eeddff2c27534b458f2"], ["4e7c272a7af4b34e8dbb9352a5419a87e2838c70adc62cddf0cc3a3b08fbd53c", "17749c766c9d0b18e16fd09f6def681b530b9614bff7dd33e0b3941817dcaae6"], ["fea74e3dbe778b1b10f238ad61686aa5c76e3db2be43057632427e2840fb27b6", "6e0568db9b0b13297cf674deccb6af93126b596b973f7b77701d3db7f23cb96f"], ["76e64113f677cf0e10a2570d599968d31544e179b760432952c02a4417bdde39", "c90ddf8dee4e95cf577066d70681f0d35e2a33d2b56d2032b4b1752d1901ac01"], ["c738c56b03b2abe1e8281baa743f8f9a8f7cc643df26cbee3ab150242bcbb891", "893fb578951ad2537f718f2eacbfbbbb82314eef7880cfe917e735d9699a84c3"], ["d895626548b65b81e264c7637c972877d1d72e5f3a925014372e9f6588f6c14b", "febfaa38f2bc7eae728ec60818c340eb03428d632bb067e179363ed75d7d991f"], ["b8da94032a957518eb0f6433571e8761ceffc73693e84edd49150a564f676e03", "2804dfa44805a1e4d7c99cc9762808b092cc584d95ff3b511488e4e74efdf6e7"], ["e80fea14441fb33a7d8adab9475d7fab2019effb5156a792f1a11778e3c0df5d", "eed1de7f638e00771e89768ca3ca94472d155e80af322ea9fcb4291b6ac9ec78"], ["a301697bdfcd704313ba48e51d567543f2a182031efd6915ddc07bbcc4e16070", "7370f91cfb67e4f5081809fa25d40f9b1735dbf7c0a11a130c0d1a041e177ea1"], ["90ad85b389d6b936463f9d0512678de208cc330b11307fffab7ac63e3fb04ed4", "0e507a3620a38261affdcbd9427222b839aefabe1582894d991d4d48cb6ef150"], ["8f68b9d2f63b5f339239c1ad981f162ee88c5678723ea3351b7b444c9ec4c0da", "662a9f2dba063986de1d90c2b6be215dbbea2cfe95510bfdf23cbf79501fff82"], ["e4f3fb0176af85d65ff99ff9198c36091f48e86503681e3e6686fd5053231e11", "1e63633ad0ef4f1c1661a6d0ea02b7286cc7e74ec951d1c9822c38576feb73bc"], ["8c00fa9b18ebf331eb961537a45a4266c7034f2f0d4e1d0716fb6eae20eae29e", "efa47267fea521a1a9dc343a3736c974c2fadafa81e36c54e7d2a4c66702414b"], ["e7a26ce69dd4829f3e10cec0a9e98ed3143d084f308b92c0997fddfc60cb3e41", "2a758e300fa7984b471b006a1aafbb18d0a6b2c0420e83e20e8a9421cf2cfd51"], ["b6459e0ee3662ec8d23540c223bcbdc571cbcb967d79424f3cf29eb3de6b80ef", "067c876d06f3e06de1dadf16e5661db3c4b3ae6d48e35b2ff30bf0b61a71ba45"], ["d68a80c8280bb840793234aa118f06231d6f1fc67e73c5a5deda0f5b496943e8", "db8ba9fff4b586d00c4b1f9177b0e28b5b0e7b8f7845295a294c84266b133120"], ["324aed7df65c804252dc0270907a30b09612aeb973449cea4095980fc28d3d5d", "648a365774b61f2ff130c0c35aec1f4f19213b0c7e332843967224af96ab7c84"], ["4df9c14919cde61f6d51dfdbe5fee5dceec4143ba8d1ca888e8bd373fd054c96", "35ec51092d8728050974c23a1d85d4b5d506cdc288490192ebac06cad10d5d"], ["9c3919a84a474870faed8a9c1cc66021523489054d7f0308cbfc99c8ac1f98cd", "ddb84f0f4a4ddd57584f044bf260e641905326f76c64c8e6be7e5e03d4fc599d"], ["6057170b1dd12fdf8de05f281d8e06bb91e1493a8b91d4cc5a21382120a959e5", "9a1af0b26a6a4807add9a2daf71df262465152bc3ee24c65e899be932385a2a8"], ["a576df8e23a08411421439a4518da31880cef0fba7d4df12b1a6973eecb94266", "40a6bf20e76640b2c92b97afe58cd82c432e10a7f514d9f3ee8be11ae1b28ec8"], ["7778a78c28dec3e30a05fe9629de8c38bb30d1f5cf9a3a208f763889be58ad71", "34626d9ab5a5b22ff7098e12f2ff580087b38411ff24ac563b513fc1fd9f43ac"], ["0928955ee637a84463729fd30e7afd2ed5f96274e5ad7e5cb09eda9c06d903ac", "c25621003d3f42a827b78a13093a95eeac3d26efa8a8d83fc5180e935bcd091f"], ["85d0fef3ec6db109399064f3a0e3b2855645b4a907ad354527aae75163d82751", "1f03648413a38c0be29d496e582cf5663e8751e96877331582c237a24eb1f962"], ["ff2b0dce97eece97c1c9b6041798b85dfdfb6d8882da20308f5404824526087e", "493d13fef524ba188af4c4dc54d07936c7b7ed6fb90e2ceb2c951e01f0c29907"], ["827fbbe4b1e880ea9ed2b2e6301b212b57f1ee148cd6dd28780e5e2cf856e241", "c60f9c923c727b0b71bef2c67d1d12687ff7a63186903166d605b68baec293ec"], ["eaa649f21f51bdbae7be4ae34ce6e5217a58fdce7f47f9aa7f3b58fa2120e2b3", "be3279ed5bbbb03ac69a80f89879aa5a01a6b965f13f7e59d47a5305ba5ad93d"], ["e4a42d43c5cf169d9391df6decf42ee541b6d8f0c9a137401e23632dda34d24f", "4d9f92e716d1c73526fc99ccfb8ad34ce886eedfa8d8e4f13a7f7131deba9414"], ["1ec80fef360cbdd954160fadab352b6b92b53576a88fea4947173b9d4300bf19", "aeefe93756b5340d2f3a4958a7abbf5e0146e77f6295a07b671cdc1cc107cefd"], ["146a778c04670c2f91b00af4680dfa8bce3490717d58ba889ddb5928366642be", "b318e0ec3354028add669827f9d4b2870aaa971d2f7e5ed1d0b297483d83efd0"], ["fa50c0f61d22e5f07e3acebb1aa07b128d0012209a28b9776d76a8793180eef9", "6b84c6922397eba9b72cd2872281a68a5e683293a57a213b38cd8d7d3f4f2811"], ["da1d61d0ca721a11b1a5bf6b7d88e8421a288ab5d5bba5220e53d32b5f067ec2", "8157f55a7c99306c79c0766161c91e2966a73899d279b48a655fba0f1ad836f1"], ["a8e282ff0c9706907215ff98e8fd416615311de0446f1e062a73b0610d064e13", "7f97355b8db81c09abfb7f3c5b2515888b679a3e50dd6bd6cef7c73111f4cc0c"], ["174a53b9c9a285872d39e56e6913cab15d59b1fa512508c022f382de8319497c", "ccc9dc37abfc9c1657b4155f2c47f9e6646b3a1d8cb9854383da13ac079afa73"], ["959396981943785c3d3e57edf5018cdbe039e730e4918b3d884fdff09475b7ba", "2e7e552888c331dd8ba0386a4b9cd6849c653f64c8709385e9b8abf87524f2fd"], ["d2a63a50ae401e56d645a1153b109a8fcca0a43d561fba2dbb51340c9d82b151", "e82d86fb6443fcb7565aee58b2948220a70f750af484ca52d4142174dcf89405"], ["64587e2335471eb890ee7896d7cfdc866bacbdbd3839317b3436f9b45617e073", "d99fcdd5bf6902e2ae96dd6447c299a185b90a39133aeab358299e5e9faf6589"], ["8481bde0e4e4d885b3a546d3e549de042f0aa6cea250e7fd358d6c86dd45e458", "38ee7b8cba5404dd84a25bf39cecb2ca900a79c42b262e556d64b1b59779057e"], ["13464a57a78102aa62b6979ae817f4637ffcfed3c4b1ce30bcd6303f6caf666b", "69be159004614580ef7e433453ccb0ca48f300a81d0942e13f495a907f6ecc27"], ["bc4a9df5b713fe2e9aef430bcc1dc97a0cd9ccede2f28588cada3a0d2d83f366", "0d3a81ca6e785c06383937adf4b798caa6e8a9fbfa547b16d758d666581f33c1"], ["8c28a97bf8298bc0d23d8c749452a32e694b65e30a9472a3954ab30fe5324caa", "40a30463a3305193378fedf31f7cc0eb7ae784f0451cb9459e71dc73cbef9482"], ["08ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0", "620efabbc8ee2782e24e7c0cfb95c5d735b783be9cf0f8e955af34a30e62b945"], ["dd3625faef5ba06074669716bbd3788d89bdde815959968092f76cc4eb9a9787", "7a188fa3520e30d461da2501045731ca941461982883395937f68d00c644a573"], ["f710d79d9eb962297e4f6232b40e8f7feb2bc63814614d692c12de752408221e", "ea98e67232d3b3295d3b535532115ccac8612c721851617526ae47a9c77bfc82"]] }, iy = {
+  naf: ty,
+  doubles: ry
 };
 /*!
  * secp256k1.js - secp256k1 for bcrypto
@@ -73485,16 +73489,16 @@ const ey = /* @__PURE__ */ JSON.parse('{"width":9,"points":[["f9308a019258c31049
  * Copyright (c) 2014-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var yu, f3;
+var yu, a3;
 function zr() {
-  if (f3) return yu;
-  f3 = 1;
-  const e = as(), c = Ar(), l = ry;
+  if (a3) return yu;
+  a3 = 1;
+  const e = as(), c = Ar(), l = iy;
   return yu = new e("SECP256K1", c, c, l), yu;
 }
-var c3;
-function iy() {
-  return c3 || (c3 = 1, function(e) {
+var f3;
+function ny() {
+  return f3 || (f3 = 1, function(e) {
     const c = Xe(), l = At(), w = mr(), m = zr(), f = e;
     f.MAGIC_STRING = `eCash Signed Message:
 `, f.magicHash = (n, u = f.MAGIC_STRING) => {
@@ -73531,17 +73535,17 @@ function iy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var u3;
+var c3;
 function Vt() {
-  if (u3) return _i;
-  u3 = 1, _i.binary = wo(), _i.fixed = yp(), _i.util = er(), _i.message = iy();
+  if (c3) return _i;
+  c3 = 1, _i.binary = wo(), _i.fixed = yp(), _i.util = er(), _i.message = ny();
   const { inspect: { custom: e } } = Di();
   return _i.inspectSymbol = e || "inspect", _i;
 }
-var vu, h3;
+var vu, u3;
 function Gr() {
-  if (h3) return vu;
-  h3 = 1;
+  if (u3) return vu;
+  u3 = 1;
   const e = Xe(), c = At(), { base58: l, cashaddr: w } = xn(), m = B8(), f = Gi(), n = mr(), u = Or(), a = Lt(), { inspectSymbol: s } = Vt(), i = k.alloc(20, 0);
   class b {
     /**
@@ -73948,10 +73952,10 @@ function Gr() {
   }
   return vu = b, vu;
 }
-var Su, l3;
+var Su, h3;
 function Pp() {
-  if (l3) return Su;
-  l3 = 1;
+  if (h3) return Su;
+  h3 = 1;
   const e = Xe(), c = Gr(), l = wi();
   class w {
     /**
@@ -74084,14 +74088,14 @@ function Pp() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var d3;
-function ny() {
-  return d3 || (d3 = 1, Os.Amount = wi(), Os.URI = Pp()), Os;
+var l3;
+function sy() {
+  return l3 || (l3 = 1, Os.Amount = wi(), Os.URI = Pp()), Os;
 }
-var tn = {}, Eu, b3;
+var tn = {}, Eu, d3;
 function kp() {
-  if (b3) return Eu;
-  b3 = 1;
+  if (d3) return Eu;
+  d3 = 1;
   const e = Nt(), c = fi(), l = -1, w = k.alloc(8, 0), m = k.alloc(64, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -74202,9 +74206,9 @@ var Iu = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var p3;
+var b3;
 function vi() {
-  return p3 || (p3 = 1, function(e) {
+  return b3 || (b3 = 1, function(e) {
     const c = Xe(), l = Lt();
     e.MAX_TX_VERSION = l.MAX_TX_VERSION, e.MAX_TX_SIZE = l.MAX_TX_SIZE / 10, e.MAX_TX_SIGOPS = l.MAX_TX_SIGOPS / 5, e.BYTES_PER_SIGOP = 20, e.MIN_RELAY = 1e3, e.BARE_MULTISIG = !0, e.FREE_THRESHOLD = l.COIN * 144 / 250, e.MAX_P2SH_SIGOPS = 15, e.MAX_OP_RETURN_BYTES = 223, e.MAX_OP_RETURN = 220, e.MAX_P2WSH_STACK = 100, e.MAX_P2WSH_PUSH = 80, e.MAX_P2WSH_SIZE = 3600, e.MEMPOOL_MAX_ANCESTORS = 50, e.MEMPOOL_MAX_SIZE = 100 * 1e6, e.MEMPOOL_EXPIRY_TIME = 4320 * 60, e.MEMPOOL_MAX_ORPHANS = 100, e.MIN_BLOCK_SIZE = 0, e.MAX_BLOCK_SIZE = l.MAX_FORK_BLOCK_SIZE, e.BLOCK_PRIORITY_SIZE = 0, e.BLOCK_PRIORITY_THRESHOLD = e.FREE_THRESHOLD, e.getMinFee = function(m, f) {
       if (f == null && (f = e.MIN_RELAY), c(m >= 0), c(f >= 0), m === 0)
@@ -74226,10 +74230,10 @@ function vi() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Au, m3;
+var Au, p3;
 function vo() {
-  if (m3) return Au;
-  m3 = 1;
+  if (p3) return Au;
+  p3 = 1;
   class e extends Error {
     /**
      * Create an error.
@@ -74244,11 +74248,11 @@ function vo() {
   }
   return Au = e, Au;
 }
-var Ou, g3;
+var Ou, m3;
 function Ji() {
-  if (g3) return Ou;
-  g3 = 1;
-  const e = Xe(), { I64: c } = ul(), l = vo(), w = k.alloc(0);
+  if (m3) return Ou;
+  m3 = 1;
+  const e = Xe(), { I64: c } = cl(), l = vo(), w = k.alloc(0);
   class m extends c {
     /**
      * Create a script number.
@@ -74407,9 +74411,9 @@ function Ji() {
   }
   return Ou = m, Ou;
 }
-var _u = {}, x3;
+var _u = {}, g3;
 function fs() {
-  return x3 || (x3 = 1, function(e) {
+  return g3 || (g3 = 1, function(e) {
     const c = Xe(), l = zr(), w = Ji();
     e.opcodes = {
       // Push
@@ -74798,10 +74802,10 @@ function fs() {
     };
   }(_u)), _u;
 }
-var Ru, w3;
-function a1() {
-  if (w3) return Ru;
-  w3 = 1;
+var Ru, x3;
+function o1() {
+  if (x3) return Ru;
+  x3 = 1;
   const e = Xe(), c = At(), l = Ji(), w = fs(), m = w.opcodes, f = [];
   let n = null;
   class u {
@@ -75198,10 +75202,10 @@ function a1() {
   }
   return Ru = u, Ru;
 }
-var Pu, y3;
+var Pu, w3;
 function So() {
-  if (y3) return Pu;
-  y3 = 1;
+  if (w3) return Pu;
+  w3 = 1;
   const e = Xe(), c = fs(), l = Ji();
   class w {
     /**
@@ -75582,10 +75586,10 @@ function So() {
   }
   return Pu = w, Pu;
 }
-var ku, v3;
+var ku, y3;
 function Bp() {
-  if (v3) return ku;
-  v3 = 1, Xe();
+  if (y3) return ku;
+  y3 = 1, Xe();
   class e {
     constructor(l) {
       this.sigchecks = l || 0, this.init();
@@ -75596,11 +75600,11 @@ function Bp() {
   }
   return ku = e, ku;
 }
-var Bu, S3;
+var Bu, v3;
 function Cr() {
-  if (S3) return Bu;
-  S3 = 1;
-  const e = Xe(), c = At(), l = s1(), w = kp(), m = Ar(), f = Gi(), n = mr(), u = zr(), a = Lt(), s = vi(), i = a1(), b = So(), g = vo(), S = Ji(), y = fs(), p = Gr(), h = Bp(), o = y.opcodes, E = y.types, F = y.countBits, { encoding: j } = c, G = k.alloc(0), N = new h();
+  if (v3) return Bu;
+  v3 = 1;
+  const e = Xe(), c = At(), l = n1(), w = kp(), m = Ar(), f = Gi(), n = mr(), u = zr(), a = Lt(), s = vi(), i = o1(), b = So(), g = vo(), S = Ji(), y = fs(), p = Gr(), h = Bp(), o = y.opcodes, E = y.types, F = y.countBits, { encoding: j } = c, G = k.alloc(0), N = new h();
   class T {
     /**
      * Create a script.
@@ -77747,11 +77751,11 @@ function Cr() {
   }
   return Bu = T, Bu;
 }
-var Mu, E3;
+var Mu, S3;
 function Eo() {
-  if (E3) return Mu;
-  E3 = 1;
-  const e = Xe(), c = At(), { U64: l } = ul();
+  if (S3) return Mu;
+  S3 = 1;
+  const e = Xe(), c = At(), { U64: l } = cl();
   Lt();
   const w = Cr();
   Ji();
@@ -78253,10 +78257,10 @@ function Eo() {
   }
   return Mu = u, Mu;
 }
-var Nu, I3;
+var Nu, E3;
 function Si() {
-  if (I3) return Nu;
-  I3 = 1;
+  if (E3) return Nu;
+  E3 = 1;
   const e = Xe(), c = At(), l = wi(), w = Or(), m = Gr(), f = Cr(), n = Eo(), u = vi(), { inspectSymbol: a } = Vt();
   class s {
     /**
@@ -78506,10 +78510,10 @@ function Si() {
   }
   return Nu = s, Nu;
 }
-var qu, A3;
+var qu, I3;
 function Ei() {
-  if (A3) return qu;
-  A3 = 1;
+  if (I3) return qu;
+  I3 = 1;
   const e = Xe(), c = At(), l = er(), w = Lt(), { inspectSymbol: m } = Vt();
   class f {
     /**
@@ -78748,10 +78752,10 @@ function Ei() {
   }
   return qu = f, qu;
 }
-var Tu, O3;
+var Tu, A3;
 function cs() {
-  if (O3) return Tu;
-  O3 = 1;
+  if (A3) return Tu;
+  A3 = 1;
   const e = Xe(), c = At(), l = er(), w = wi(), m = Si(), f = Or(), n = Lt(), u = Ei(), a = Eo(), { inspectSymbol: s } = Vt();
   class i extends m {
     /**
@@ -79012,10 +79016,10 @@ function cs() {
   }
   return Tu = i, Tu;
 }
-var Hn = {}, _3;
+var Hn = {}, O3;
 function Mp() {
-  if (_3) return Hn;
-  _3 = 1;
+  if (O3) return Hn;
+  O3 = 1;
   const e = Xe(), { encoding: c } = At(), l = zr(), w = Lt(), m = 6, f = k.alloc(0);
   function n(p, h) {
     const o = p.getPubkeyhash(!0);
@@ -79138,10 +79142,10 @@ function Mp() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var zu, R3;
+var zu, _3;
 function Io() {
-  if (R3) return zu;
-  R3 = 1;
+  if (_3) return zu;
+  _3 = 1;
   const e = Xe(), c = At(), l = cs(), w = Si(), m = Mp(), { encoding: f } = c, n = 1, u = (1 << 32 - n >>> 0) - 1;
   class a {
     /**
@@ -79290,10 +79294,10 @@ function Io() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Cu, P3;
-function f1() {
-  if (P3) return Cu;
-  P3 = 1;
+var Cu, R3;
+function a1() {
+  if (R3) return Cu;
+  R3 = 1;
   const e = Xe(), c = Io();
   class l {
     /**
@@ -79441,10 +79445,10 @@ function f1() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Du, k3;
+var Du, P3;
 function Np() {
-  if (k3) return Du;
-  k3 = 1;
+  if (P3) return Du;
+  P3 = 1;
   const e = Xe(), c = At(), l = Io();
   class w {
     /**
@@ -79536,11 +79540,11 @@ function Np() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Uu, B3;
+var Uu, k3;
 function Ao() {
-  if (B3) return Uu;
-  B3 = 1;
-  const { BufferMap: e } = $r(), c = f1(), l = Np(), w = Io();
+  if (k3) return Uu;
+  k3 = 1;
+  const { BufferMap: e } = $r(), c = a1(), l = Np(), w = Io();
   class m {
     /**
      * Create a coin view.
@@ -79908,13 +79912,13 @@ function Ao() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var M3;
-function sy() {
-  return M3 || (M3 = 1, tn.Coins = f1(), tn.CoinView = Ao(), tn.compress = Mp(), tn.UndoCoins = Np()), tn;
+var B3;
+function oy() {
+  return B3 || (B3 = 1, tn.Coins = a1(), tn.CoinView = Ao(), tn.compress = Mp(), tn.UndoCoins = Np()), tn;
 }
-var Fu = {}, Hu = {}, N3;
+var Fu = {}, Hu = {}, M3;
 function Oo() {
-  return N3 || (N3 = 1, function(e) {
+  return M3 || (M3 = 1, function(e) {
     const c = Xe(), l = q8(), w = e;
     w.HARDENED = 2147483648, w.MIN_ENTROPY = 128, w.MAX_ENTROPY = 512, w.cache = new l(500), w.parsePath = function(f, n) {
       c(typeof f == "string"), c(typeof n == "boolean"), c(f.length >= 1), c(f.length <= 3062);
@@ -79949,20 +79953,20 @@ function Oo() {
     }, w.ZERO_KEY = k.alloc(33, 0);
   }(Hu)), Hu;
 }
-var Lu, q3;
+var Lu, N3;
 function En() {
-  if (q3) return Lu;
-  q3 = 1;
+  if (N3) return Lu;
+  N3 = 1;
   const e = Nt(), c = yi();
   function l(w) {
     e(k.isBuffer(w)), c.randomFill(w, 0, w.length);
   }
   return l.native = 0, Lu = l, Lu;
 }
-var Ln = {}, T3;
+var Ln = {}, q3;
 function _o() {
-  if (T3) return Ln;
-  T3 = 1;
+  if (q3) return Ln;
+  q3 = 1;
   const e = Nt(), l = (Ft.crypto || Ft.msCrypto || {}).subtle || {};
   function w(n, u, a, s, i) {
     typeof u == "string" && (u = k.from(u, "utf8")), typeof a == "string" && (a = k.from(a, "utf8")), a == null && (a = k.alloc(0)), e(n && typeof n.id == "string"), e(k.isBuffer(u)), e(k.isBuffer(a)), e(s >>> 0 === s), e(i >>> 0 === i);
@@ -80011,10 +80015,10 @@ function _o() {
   }
   return Ln.native = 0, Ln.derive = w, Ln.deriveAsync = m, Ln;
 }
-var Ku, z3;
+var Ku, T3;
 function In() {
-  if (z3) return Ku;
-  z3 = 1;
+  if (T3) return Ku;
+  T3 = 1;
   const e = Nt(), c = fi(), l = -1, w = k.alloc(16, 0), m = k.alloc(128, 0);
   m[0] = 128;
   const f = new Uint32Array([
@@ -80395,9 +80399,9 @@ function In() {
   }
   return Ku = n, Ku;
 }
-var Vu = {}, di = {}, $u, C3;
-function oy() {
-  return C3 || (C3 = 1, $u = [
+var Vu = {}, di = {}, $u, z3;
+function ay() {
+  return z3 || (z3 = 1, $u = [
     "的",
     "一",
     "是",
@@ -82448,9 +82452,9 @@ function oy() {
     "歇"
   ]), $u;
 }
-var ju, D3;
-function ay() {
-  return D3 || (D3 = 1, ju = [
+var ju, C3;
+function fy() {
+  return C3 || (C3 = 1, ju = [
     "的",
     "一",
     "是",
@@ -84501,9 +84505,9 @@ function ay() {
     "歇"
   ]), ju;
 }
-var Yu, U3;
-function fy() {
-  return U3 || (U3 = 1, Yu = [
+var Yu, D3;
+function cy() {
+  return D3 || (D3 = 1, Yu = [
     "abandon",
     "ability",
     "able",
@@ -86554,9 +86558,9 @@ function fy() {
     "zoo"
   ]), Yu;
 }
-var Xu, F3;
-function cy() {
-  return F3 || (F3 = 1, Xu = [
+var Xu, U3;
+function uy() {
+  return U3 || (U3 = 1, Xu = [
     "abaisser",
     "abandon",
     "abdiquer",
@@ -88607,9 +88611,9 @@ function cy() {
     "zoologie"
   ]), Xu;
 }
-var Gu, H3;
-function uy() {
-  return H3 || (H3 = 1, Gu = [
+var Gu, F3;
+function hy() {
+  return F3 || (F3 = 1, Gu = [
     "abaco",
     "abbaglio",
     "abbinato",
@@ -90660,9 +90664,9 @@ function uy() {
     "zuppa"
   ]), Gu;
 }
-var Ju, L3;
-function hy() {
-  return L3 || (L3 = 1, Ju = [
+var Ju, H3;
+function ly() {
+  return H3 || (H3 = 1, Ju = [
     "あいこくしん",
     "あいさつ",
     "あいだ",
@@ -92713,9 +92717,9 @@ function hy() {
     "われる"
   ]), Ju;
 }
-var Wu, K3;
-function ly() {
-  return K3 || (K3 = 1, Wu = [
+var Wu, L3;
+function dy() {
+  return L3 || (L3 = 1, Wu = [
     "ábaco",
     "abdomen",
     "abeja",
@@ -94771,23 +94775,23 @@ function ly() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var V3;
-function dy() {
-  return V3 || (V3 = 1, di.chinese = {
-    simplified: oy(),
-    traditional: ay()
-  }, di.english = fy(), di.french = cy(), di.italian = uy(), di.japanese = hy(), di.spanish = ly()), di;
+var K3;
+function by() {
+  return K3 || (K3 = 1, di.chinese = {
+    simplified: ay(),
+    traditional: fy()
+  }, di.english = cy(), di.french = uy(), di.italian = hy(), di.japanese = ly(), di.spanish = dy()), di;
 }
 /*!
  * wordlist.js - wordlists for bcoin
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var $3;
+var V3;
 function qp() {
-  if ($3) return Vu;
-  $3 = 1;
-  const e = dy();
+  if (V3) return Vu;
+  V3 = 1;
+  const e = by();
   return Vu.get = function(l) {
     switch (l) {
       case "simplified chinese":
@@ -94810,7 +94814,7 @@ function qp() {
   }, Vu;
 }
 var rn = {};
-const by = {
+const py = {
   0: { 60: [null, null, { 824: 8814 }], 61: [null, null, { 824: 8800 }], 62: [null, null, { 824: 8815 }], 65: [null, null, { 768: 192, 769: 193, 770: 194, 771: 195, 772: 256, 774: 258, 775: 550, 776: 196, 777: 7842, 778: 197, 780: 461, 783: 512, 785: 514, 803: 7840, 805: 7680, 808: 260 }], 66: [null, null, { 775: 7682, 803: 7684, 817: 7686 }], 67: [null, null, { 769: 262, 770: 264, 775: 266, 780: 268, 807: 199 }], 68: [null, null, { 775: 7690, 780: 270, 803: 7692, 807: 7696, 813: 7698, 817: 7694 }], 69: [null, null, { 768: 200, 769: 201, 770: 202, 771: 7868, 772: 274, 774: 276, 775: 278, 776: 203, 777: 7866, 780: 282, 783: 516, 785: 518, 803: 7864, 807: 552, 808: 280, 813: 7704, 816: 7706 }], 70: [null, null, { 775: 7710 }], 71: [null, null, { 769: 500, 770: 284, 772: 7712, 774: 286, 775: 288, 780: 486, 807: 290 }], 72: [null, null, { 770: 292, 775: 7714, 776: 7718, 780: 542, 803: 7716, 807: 7720, 814: 7722 }], 73: [null, null, { 768: 204, 769: 205, 770: 206, 771: 296, 772: 298, 774: 300, 775: 304, 776: 207, 777: 7880, 780: 463, 783: 520, 785: 522, 803: 7882, 808: 302, 816: 7724 }], 74: [null, null, { 770: 308 }], 75: [null, null, { 769: 7728, 780: 488, 803: 7730, 807: 310, 817: 7732 }], 76: [null, null, { 769: 313, 780: 317, 803: 7734, 807: 315, 813: 7740, 817: 7738 }], 77: [null, null, { 769: 7742, 775: 7744, 803: 7746 }], 78: [null, null, { 768: 504, 769: 323, 771: 209, 775: 7748, 780: 327, 803: 7750, 807: 325, 813: 7754, 817: 7752 }], 79: [null, null, { 768: 210, 769: 211, 770: 212, 771: 213, 772: 332, 774: 334, 775: 558, 776: 214, 777: 7886, 779: 336, 780: 465, 783: 524, 785: 526, 795: 416, 803: 7884, 808: 490 }], 80: [null, null, { 769: 7764, 775: 7766 }], 82: [null, null, { 769: 340, 775: 7768, 780: 344, 783: 528, 785: 530, 803: 7770, 807: 342, 817: 7774 }], 83: [null, null, { 769: 346, 770: 348, 775: 7776, 780: 352, 803: 7778, 806: 536, 807: 350 }], 84: [null, null, { 775: 7786, 780: 356, 803: 7788, 806: 538, 807: 354, 813: 7792, 817: 7790 }], 85: [null, null, { 768: 217, 769: 218, 770: 219, 771: 360, 772: 362, 774: 364, 776: 220, 777: 7910, 778: 366, 779: 368, 780: 467, 783: 532, 785: 534, 795: 431, 803: 7908, 804: 7794, 808: 370, 813: 7798, 816: 7796 }], 86: [null, null, { 771: 7804, 803: 7806 }], 87: [null, null, { 768: 7808, 769: 7810, 770: 372, 775: 7814, 776: 7812, 803: 7816 }], 88: [null, null, { 775: 7818, 776: 7820 }], 89: [null, null, { 768: 7922, 769: 221, 770: 374, 771: 7928, 772: 562, 775: 7822, 776: 376, 777: 7926, 803: 7924 }], 90: [null, null, { 769: 377, 770: 7824, 775: 379, 780: 381, 803: 7826, 817: 7828 }], 97: [null, null, { 768: 224, 769: 225, 770: 226, 771: 227, 772: 257, 774: 259, 775: 551, 776: 228, 777: 7843, 778: 229, 780: 462, 783: 513, 785: 515, 803: 7841, 805: 7681, 808: 261 }], 98: [null, null, { 775: 7683, 803: 7685, 817: 7687 }], 99: [null, null, { 769: 263, 770: 265, 775: 267, 780: 269, 807: 231 }], 100: [null, null, { 775: 7691, 780: 271, 803: 7693, 807: 7697, 813: 7699, 817: 7695 }], 101: [null, null, { 768: 232, 769: 233, 770: 234, 771: 7869, 772: 275, 774: 277, 775: 279, 776: 235, 777: 7867, 780: 283, 783: 517, 785: 519, 803: 7865, 807: 553, 808: 281, 813: 7705, 816: 7707 }], 102: [null, null, { 775: 7711 }], 103: [null, null, { 769: 501, 770: 285, 772: 7713, 774: 287, 775: 289, 780: 487, 807: 291 }], 104: [null, null, { 770: 293, 775: 7715, 776: 7719, 780: 543, 803: 7717, 807: 7721, 814: 7723, 817: 7830 }], 105: [null, null, { 768: 236, 769: 237, 770: 238, 771: 297, 772: 299, 774: 301, 776: 239, 777: 7881, 780: 464, 783: 521, 785: 523, 803: 7883, 808: 303, 816: 7725 }], 106: [null, null, { 770: 309, 780: 496 }], 107: [null, null, { 769: 7729, 780: 489, 803: 7731, 807: 311, 817: 7733 }], 108: [null, null, { 769: 314, 780: 318, 803: 7735, 807: 316, 813: 7741, 817: 7739 }], 109: [null, null, { 769: 7743, 775: 7745, 803: 7747 }], 110: [null, null, { 768: 505, 769: 324, 771: 241, 775: 7749, 780: 328, 803: 7751, 807: 326, 813: 7755, 817: 7753 }], 111: [null, null, { 768: 242, 769: 243, 770: 244, 771: 245, 772: 333, 774: 335, 775: 559, 776: 246, 777: 7887, 779: 337, 780: 466, 783: 525, 785: 527, 795: 417, 803: 7885, 808: 491 }], 112: [null, null, { 769: 7765, 775: 7767 }], 114: [null, null, { 769: 341, 775: 7769, 780: 345, 783: 529, 785: 531, 803: 7771, 807: 343, 817: 7775 }], 115: [null, null, { 769: 347, 770: 349, 775: 7777, 780: 353, 803: 7779, 806: 537, 807: 351 }], 116: [null, null, { 775: 7787, 776: 7831, 780: 357, 803: 7789, 806: 539, 807: 355, 813: 7793, 817: 7791 }], 117: [null, null, { 768: 249, 769: 250, 770: 251, 771: 361, 772: 363, 774: 365, 776: 252, 777: 7911, 778: 367, 779: 369, 780: 468, 783: 533, 785: 535, 795: 432, 803: 7909, 804: 7795, 808: 371, 813: 7799, 816: 7797 }], 118: [null, null, { 771: 7805, 803: 7807 }], 119: [null, null, { 768: 7809, 769: 7811, 770: 373, 775: 7815, 776: 7813, 778: 7832, 803: 7817 }], 120: [null, null, { 775: 7819, 776: 7821 }], 121: [null, null, { 768: 7923, 769: 253, 770: 375, 771: 7929, 772: 563, 775: 7823, 776: 255, 777: 7927, 778: 7833, 803: 7925 }], 122: [null, null, { 769: 378, 770: 7825, 775: 380, 780: 382, 803: 7827, 817: 7829 }], 160: [[32], 256], 168: [[32, 776], 256, { 768: 8173, 769: 901, 834: 8129 }], 170: [[97], 256], 175: [[32, 772], 256], 178: [[50], 256], 179: [[51], 256], 180: [[32, 769], 256], 181: [[956], 256], 184: [[32, 807], 256], 185: [[49], 256], 186: [[111], 256], 188: [[49, 8260, 52], 256], 189: [[49, 8260, 50], 256], 190: [[51, 8260, 52], 256], 192: [[65, 768]], 193: [[65, 769]], 194: [[65, 770], null, { 768: 7846, 769: 7844, 771: 7850, 777: 7848 }], 195: [[65, 771]], 196: [[65, 776], null, { 772: 478 }], 197: [[65, 778], null, { 769: 506 }], 198: [null, null, { 769: 508, 772: 482 }], 199: [[67, 807], null, { 769: 7688 }], 200: [[69, 768]], 201: [[69, 769]], 202: [[69, 770], null, { 768: 7872, 769: 7870, 771: 7876, 777: 7874 }], 203: [[69, 776]], 204: [[73, 768]], 205: [[73, 769]], 206: [[73, 770]], 207: [[73, 776], null, { 769: 7726 }], 209: [[78, 771]], 210: [[79, 768]], 211: [[79, 769]], 212: [[79, 770], null, { 768: 7890, 769: 7888, 771: 7894, 777: 7892 }], 213: [[79, 771], null, { 769: 7756, 772: 556, 776: 7758 }], 214: [[79, 776], null, { 772: 554 }], 216: [null, null, { 769: 510 }], 217: [[85, 768]], 218: [[85, 769]], 219: [[85, 770]], 220: [[85, 776], null, { 768: 475, 769: 471, 772: 469, 780: 473 }], 221: [[89, 769]], 224: [[97, 768]], 225: [[97, 769]], 226: [[97, 770], null, { 768: 7847, 769: 7845, 771: 7851, 777: 7849 }], 227: [[97, 771]], 228: [[97, 776], null, { 772: 479 }], 229: [[97, 778], null, { 769: 507 }], 230: [null, null, { 769: 509, 772: 483 }], 231: [[99, 807], null, { 769: 7689 }], 232: [[101, 768]], 233: [[101, 769]], 234: [[101, 770], null, { 768: 7873, 769: 7871, 771: 7877, 777: 7875 }], 235: [[101, 776]], 236: [[105, 768]], 237: [[105, 769]], 238: [[105, 770]], 239: [[105, 776], null, { 769: 7727 }], 241: [[110, 771]], 242: [[111, 768]], 243: [[111, 769]], 244: [[111, 770], null, { 768: 7891, 769: 7889, 771: 7895, 777: 7893 }], 245: [[111, 771], null, { 769: 7757, 772: 557, 776: 7759 }], 246: [[111, 776], null, { 772: 555 }], 248: [null, null, { 769: 511 }], 249: [[117, 768]], 250: [[117, 769]], 251: [[117, 770]], 252: [[117, 776], null, { 768: 476, 769: 472, 772: 470, 780: 474 }], 253: [[121, 769]], 255: [[121, 776]] },
   256: { 256: [[65, 772]], 257: [[97, 772]], 258: [[65, 774], null, { 768: 7856, 769: 7854, 771: 7860, 777: 7858 }], 259: [[97, 774], null, { 768: 7857, 769: 7855, 771: 7861, 777: 7859 }], 260: [[65, 808]], 261: [[97, 808]], 262: [[67, 769]], 263: [[99, 769]], 264: [[67, 770]], 265: [[99, 770]], 266: [[67, 775]], 267: [[99, 775]], 268: [[67, 780]], 269: [[99, 780]], 270: [[68, 780]], 271: [[100, 780]], 274: [[69, 772], null, { 768: 7700, 769: 7702 }], 275: [[101, 772], null, { 768: 7701, 769: 7703 }], 276: [[69, 774]], 277: [[101, 774]], 278: [[69, 775]], 279: [[101, 775]], 280: [[69, 808]], 281: [[101, 808]], 282: [[69, 780]], 283: [[101, 780]], 284: [[71, 770]], 285: [[103, 770]], 286: [[71, 774]], 287: [[103, 774]], 288: [[71, 775]], 289: [[103, 775]], 290: [[71, 807]], 291: [[103, 807]], 292: [[72, 770]], 293: [[104, 770]], 296: [[73, 771]], 297: [[105, 771]], 298: [[73, 772]], 299: [[105, 772]], 300: [[73, 774]], 301: [[105, 774]], 302: [[73, 808]], 303: [[105, 808]], 304: [[73, 775]], 306: [[73, 74], 256], 307: [[105, 106], 256], 308: [[74, 770]], 309: [[106, 770]], 310: [[75, 807]], 311: [[107, 807]], 313: [[76, 769]], 314: [[108, 769]], 315: [[76, 807]], 316: [[108, 807]], 317: [[76, 780]], 318: [[108, 780]], 319: [[76, 183], 256], 320: [[108, 183], 256], 323: [[78, 769]], 324: [[110, 769]], 325: [[78, 807]], 326: [[110, 807]], 327: [[78, 780]], 328: [[110, 780]], 329: [[700, 110], 256], 332: [[79, 772], null, { 768: 7760, 769: 7762 }], 333: [[111, 772], null, { 768: 7761, 769: 7763 }], 334: [[79, 774]], 335: [[111, 774]], 336: [[79, 779]], 337: [[111, 779]], 340: [[82, 769]], 341: [[114, 769]], 342: [[82, 807]], 343: [[114, 807]], 344: [[82, 780]], 345: [[114, 780]], 346: [[83, 769], null, { 775: 7780 }], 347: [[115, 769], null, { 775: 7781 }], 348: [[83, 770]], 349: [[115, 770]], 350: [[83, 807]], 351: [[115, 807]], 352: [[83, 780], null, { 775: 7782 }], 353: [[115, 780], null, { 775: 7783 }], 354: [[84, 807]], 355: [[116, 807]], 356: [[84, 780]], 357: [[116, 780]], 360: [[85, 771], null, { 769: 7800 }], 361: [[117, 771], null, { 769: 7801 }], 362: [[85, 772], null, { 776: 7802 }], 363: [[117, 772], null, { 776: 7803 }], 364: [[85, 774]], 365: [[117, 774]], 366: [[85, 778]], 367: [[117, 778]], 368: [[85, 779]], 369: [[117, 779]], 370: [[85, 808]], 371: [[117, 808]], 372: [[87, 770]], 373: [[119, 770]], 374: [[89, 770]], 375: [[121, 770]], 376: [[89, 776]], 377: [[90, 769]], 378: [[122, 769]], 379: [[90, 775]], 380: [[122, 775]], 381: [[90, 780]], 382: [[122, 780]], 383: [[115], 256, { 775: 7835 }], 416: [[79, 795], null, { 768: 7900, 769: 7898, 771: 7904, 777: 7902, 803: 7906 }], 417: [[111, 795], null, { 768: 7901, 769: 7899, 771: 7905, 777: 7903, 803: 7907 }], 431: [[85, 795], null, { 768: 7914, 769: 7912, 771: 7918, 777: 7916, 803: 7920 }], 432: [[117, 795], null, { 768: 7915, 769: 7913, 771: 7919, 777: 7917, 803: 7921 }], 439: [null, null, { 780: 494 }], 452: [[68, 381], 256], 453: [[68, 382], 256], 454: [[100, 382], 256], 455: [[76, 74], 256], 456: [[76, 106], 256], 457: [[108, 106], 256], 458: [[78, 74], 256], 459: [[78, 106], 256], 460: [[110, 106], 256], 461: [[65, 780]], 462: [[97, 780]], 463: [[73, 780]], 464: [[105, 780]], 465: [[79, 780]], 466: [[111, 780]], 467: [[85, 780]], 468: [[117, 780]], 469: [[220, 772]], 470: [[252, 772]], 471: [[220, 769]], 472: [[252, 769]], 473: [[220, 780]], 474: [[252, 780]], 475: [[220, 768]], 476: [[252, 768]], 478: [[196, 772]], 479: [[228, 772]], 480: [[550, 772]], 481: [[551, 772]], 482: [[198, 772]], 483: [[230, 772]], 486: [[71, 780]], 487: [[103, 780]], 488: [[75, 780]], 489: [[107, 780]], 490: [[79, 808], null, { 772: 492 }], 491: [[111, 808], null, { 772: 493 }], 492: [[490, 772]], 493: [[491, 772]], 494: [[439, 780]], 495: [[658, 780]], 496: [[106, 780]], 497: [[68, 90], 256], 498: [[68, 122], 256], 499: [[100, 122], 256], 500: [[71, 769]], 501: [[103, 769]], 504: [[78, 768]], 505: [[110, 768]], 506: [[197, 769]], 507: [[229, 769]], 508: [[198, 769]], 509: [[230, 769]], 510: [[216, 769]], 511: [[248, 769]], 66045: [null, 220] },
   512: { 512: [[65, 783]], 513: [[97, 783]], 514: [[65, 785]], 515: [[97, 785]], 516: [[69, 783]], 517: [[101, 783]], 518: [[69, 785]], 519: [[101, 785]], 520: [[73, 783]], 521: [[105, 783]], 522: [[73, 785]], 523: [[105, 785]], 524: [[79, 783]], 525: [[111, 783]], 526: [[79, 785]], 527: [[111, 785]], 528: [[82, 783]], 529: [[114, 783]], 530: [[82, 785]], 531: [[114, 785]], 532: [[85, 783]], 533: [[117, 783]], 534: [[85, 785]], 535: [[117, 785]], 536: [[83, 806]], 537: [[115, 806]], 538: [[84, 806]], 539: [[116, 806]], 542: [[72, 780]], 543: [[104, 780]], 550: [[65, 775], null, { 772: 480 }], 551: [[97, 775], null, { 772: 481 }], 552: [[69, 807], null, { 774: 7708 }], 553: [[101, 807], null, { 774: 7709 }], 554: [[214, 772]], 555: [[246, 772]], 556: [[213, 772]], 557: [[245, 772]], 558: [[79, 775], null, { 772: 560 }], 559: [[111, 775], null, { 772: 561 }], 560: [[558, 772]], 561: [[559, 772]], 562: [[89, 772]], 563: [[121, 772]], 658: [null, null, { 780: 495 }], 688: [[104], 256], 689: [[614], 256], 690: [[106], 256], 691: [[114], 256], 692: [[633], 256], 693: [[635], 256], 694: [[641], 256], 695: [[119], 256], 696: [[121], 256], 728: [[32, 774], 256], 729: [[32, 775], 256], 730: [[32, 778], 256], 731: [[32, 808], 256], 732: [[32, 771], 256], 733: [[32, 779], 256], 736: [[611], 256], 737: [[108], 256], 738: [[115], 256], 739: [[120], 256], 740: [[661], 256], 66272: [null, 220] },
@@ -94936,11 +94940,11 @@ const by = {
  *
  * [full GPL license]: http://www.gnu.org/licenses/gpl-2.0-standalone.html
 */
-var j3;
-function py() {
-  if (j3) return rn;
-  j3 = 1;
-  const e = by, c = [null, 0, {}], l = 10, w = 44032, m = 4352, f = 4449, n = 4519, u = 19, a = 21, s = 28, i = a * s, b = u * i, g = {}, S = [];
+var $3;
+function my() {
+  if ($3) return rn;
+  $3 = 1;
+  const e = py, c = [null, 0, {}], l = 10, w = 44032, m = 4352, f = 4449, n = 4519, u = 19, a = 21, s = 28, i = a * s, b = u * i, g = {}, S = [];
   for (let se = 0; se <= 255; se++)
     S[se] = 0;
   let y = null;
@@ -95163,21 +95167,21 @@ function py() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Zu, Y3;
-function my() {
-  if (Y3) return Zu;
-  Y3 = 1;
-  const e = py();
+var Zu, j3;
+function gy() {
+  if (j3) return Zu;
+  j3 = 1;
+  const e = my();
   function c(l) {
     return l.normalize ? l.normalize("NFKD") : e.nfkd(l);
   }
   return Zu = c, Zu;
 }
-var Qu, X3;
+var Qu, Y3;
 function Ro() {
-  if (X3) return Qu;
-  X3 = 1;
-  const e = Xe(), c = At(), l = Ar(), w = En(), m = yi(), f = _o(), n = In(), u = qp(), a = Oo(), s = my(), { inspectSymbol: i } = Vt(), b = /* @__PURE__ */ Object.create(null);
+  if (Y3) return Qu;
+  Y3 = 1;
+  const e = Xe(), c = At(), l = Ar(), w = En(), m = yi(), f = _o(), n = In(), u = qp(), a = Oo(), s = gy(), { inspectSymbol: i } = Vt(), b = /* @__PURE__ */ Object.create(null);
   class g {
     /**
      * Create a mnemonic.
@@ -95479,10 +95483,10 @@ function Ro() {
   }
   return Qu = g, Qu;
 }
-var eh, G3;
-function c1() {
-  if (G3) return eh;
-  G3 = 1;
+var eh, X3;
+function f1() {
+  if (X3) return eh;
+  X3 = 1;
   const e = Xe(), c = At(), { base58: l } = xn(), w = In(), m = Gi(), f = mr(), n = En(), u = zr(), a = Or(), s = Lt(), i = Oo();
   class b {
     /**
@@ -95815,11 +95819,11 @@ function c1() {
   }
   return eh = b, eh;
 }
-var th, J3;
-function u1() {
-  if (J3) return th;
-  J3 = 1;
-  const e = Xe(), c = At(), { base58: l } = xn(), w = In(), m = Gi(), f = mr(), n = En(), u = yi(), a = zr(), s = Or(), i = Lt(), b = Oo(), g = Ro(), S = c1(), y = k.from("Bitcoin seed", "ascii");
+var th, G3;
+function c1() {
+  if (G3) return th;
+  G3 = 1;
+  const e = Xe(), c = At(), { base58: l } = xn(), w = In(), m = Gi(), f = mr(), n = En(), u = yi(), a = zr(), s = Or(), i = Lt(), b = Oo(), g = Ro(), S = f1(), y = k.from("Bitcoin seed", "ascii");
   class p {
     /**
      * Create an hd private key.
@@ -96231,10 +96235,10 @@ function u1() {
  * Copyright (c) 2015-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var W3;
-function h1() {
-  return W3 || (W3 = 1, function(e) {
-    const c = Xe(), l = Oo(), w = Ro(), m = u1(), f = c1(), n = qp(), u = e;
+var J3;
+function u1() {
+  return J3 || (J3 = 1, function(e) {
+    const c = Xe(), l = Oo(), w = Ro(), m = c1(), f = f1(), n = qp(), u = e;
     u.fromBase58 = function(s, i) {
       return m.isBase58(s) ? m.fromBase58(s, i) : f.fromBase58(s, i);
     }, u.generate = function() {
@@ -96275,14 +96279,14 @@ function h1() {
  * Copyright (c) 2014-2016, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var rh, Z3;
-function gy() {
-  return Z3 || (Z3 = 1, rh = h1()), rh;
+var rh, W3;
+function xy() {
+  return W3 || (W3 = 1, rh = u1()), rh;
 }
-var Xt = {}, ih, Q3;
+var Xt = {}, ih, Z3;
 function Po() {
-  if (Q3) return ih;
-  Q3 = 1;
+  if (Z3) return ih;
+  Z3 = 1;
   const e = At(), c = er();
   class l {
     /**
@@ -96393,10 +96397,10 @@ function Po() {
     4: "CMPCT_BLOCK"
   }, ih = l, ih;
 }
-var nh, eb;
+var nh, Q3;
 function us() {
-  if (eb) return nh;
-  eb = 1;
+  if (Q3) return nh;
+  Q3 = 1;
   const e = Xe(), c = mr(), l = At(), w = er(), m = Po(), f = Lt();
   class n {
     /**
@@ -96521,10 +96525,10 @@ function us() {
   }
   return nh = n, nh;
 }
-var nn = {}, tb;
+var nn = {}, eb;
 function Tp() {
-  if (tb) return nn;
-  tb = 1;
+  if (eb) return nn;
+  eb = 1;
   const e = Nt();
   function c(f, n) {
     e(f && typeof f.root == "function"), e(Array.isArray(n));
@@ -96573,10 +96577,10 @@ function Tp() {
   }
   return nn.createTree = c, nn.createRoot = l, nn.createBranch = w, nn.deriveRoot = m, nn;
 }
-var sh, rb;
+var sh, tb;
 function ko() {
-  if (rb) return sh;
-  rb = 1;
+  if (tb) return sh;
+  tb = 1;
   const e = Xe(), c = At(), l = Or(), w = Cr(), m = Ei(), { inspectSymbol: f } = Vt();
   class n {
     /**
@@ -96900,10 +96904,10 @@ function ko() {
   }
   return sh = n, sh;
 }
-var oh, ib;
+var oh, rb;
 function An() {
-  if (ib) return oh;
-  ib = 1;
+  if (rb) return oh;
+  rb = 1;
   const e = Xe(), c = At(), l = mr(), w = zr(), { BufferSet: m } = $r(), f = er(), n = wi(), u = Or(), a = Cr(), s = Eo(), i = ko(), b = Si(), g = Ei(), S = Po(), y = Lt(), p = vi(), h = vo(), { encoding: o } = c, { hashType: E } = a, F = fs(), { inspectSymbol: j } = Vt();
   class G {
     /**
@@ -98206,10 +98210,10 @@ function An() {
   }
   return oh = G, oh;
 }
-var ah, nb;
+var ah, ib;
 function hs() {
-  if (nb) return ah;
-  nb = 1;
+  if (ib) return ah;
+  ib = 1;
   const e = At(), c = er(), l = us(), { inspectSymbol: w } = Vt();
   class m extends l {
     /**
@@ -98402,10 +98406,10 @@ function hs() {
   }
   return ah = m, ah;
 }
-var fh, sb;
-function l1() {
-  if (sb) return fh;
-  sb = 1;
+var fh, nb;
+function h1() {
+  if (nb) return fh;
+  nb = 1;
   const e = Xe(), c = At(), { BufferMap: l, BufferSet: w } = $r(), m = er(), f = mr(), n = Lt(), u = us(), a = hs(), s = k.from([0]), { encoding: i } = c, { inspectSymbol: b } = Vt();
   class g extends u {
     /**
@@ -98783,11 +98787,11 @@ function l1() {
   }
   return fh = g, fh;
 }
-var ch, ob;
-function d1() {
-  if (ob) return ch;
-  ob = 1;
-  const e = Xe(), c = At(), { BufferSet: l } = $r(), w = mr(), m = Tp(), f = Lt(), n = us(), u = An(), a = l1(), s = hs(), i = Or(), b = er(), { encoding: g } = c, { inspectSymbol: S } = Vt();
+var ch, sb;
+function l1() {
+  if (sb) return ch;
+  sb = 1;
+  const e = Xe(), c = At(), { BufferSet: l } = $r(), w = mr(), m = Tp(), f = Lt(), n = us(), u = An(), a = h1(), s = hs(), i = Or(), b = er(), { encoding: g } = c, { inspectSymbol: S } = Vt();
   class y extends n {
     /**
      * Create a block.
@@ -99188,10 +99192,10 @@ function d1() {
   }
   return ch = y, ch;
 }
-var uh, ab;
-function b1() {
-  if (ab) return uh;
-  ab = 1;
+var uh, ob;
+function d1() {
+  if (ob) return uh;
+  ob = 1;
   const e = Xe(), { base58: c } = xn(), l = At(), w = Gi(), m = mr(), f = Or(), n = Cr(), u = Gr(), a = Si(), s = zr(), { encoding: i } = l, { inspectSymbol: b } = Vt(), g = k.alloc(33, 0);
   class S {
     /**
@@ -99655,11 +99659,11 @@ function b1() {
   }
   return uh = S, uh;
 }
-var hh, fb;
-function xy() {
-  if (fb) return hh;
-  fb = 1;
-  const e = At(), c = us(), l = d1(), w = hs(), m = Cr(), f = k.alloc(0);
+var hh, ab;
+function wy() {
+  if (ab) return hh;
+  ab = 1;
+  const e = At(), c = us(), l = l1(), w = hs(), m = Cr(), f = k.alloc(0);
   class n extends c {
     /**
      * Create a mem block.
@@ -99780,9 +99784,9 @@ function xy() {
   }
   return hh = n, hh;
 }
-var Ps = { exports: {} }, cb;
-function p1() {
-  return cb || (cb = 1, function(e, c) {
+var Ps = { exports: {} }, fb;
+function b1() {
+  return fb || (fb = 1, function(e, c) {
     const l = Xe(), { encoding: w } = At(), { BufferMap: m } = $r(), f = Cr(), n = An(), u = ko(), a = Si(), s = cs(), i = Ei(), b = Ao(), g = Gr(), S = Lt(), y = vi(), p = wi(), h = So(), o = er(), { inspectSymbol: E } = Vt();
     class F extends n {
       /**
@@ -100770,10 +100774,10 @@ function p1() {
     c = F, c.MTX = F, c.Selector = j, c.FundingError = G, e.exports = c;
   }(Ps, Ps.exports)), Ps.exports;
 }
-var lh, ub;
-function wy() {
-  if (ub) return lh;
-  ub = 1;
+var lh, cb;
+function yy() {
+  if (cb) return lh;
+  cb = 1;
   const e = Xe(), c = At(), l = er(), w = An(), { inspectSymbol: m } = Vt();
   class f {
     /**
@@ -100921,9 +100925,9 @@ function wy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var hb;
-function yy() {
-  return hb || (hb = 1, Xt.AbstractBlock = us(), Xt.Address = Gr(), Xt.Block = d1(), Xt.Coin = cs(), Xt.Headers = hs(), Xt.Input = ko(), Xt.InvItem = Po(), Xt.KeyRing = b1(), Xt.MemBlock = xy(), Xt.MerkleBlock = l1(), Xt.MTX = p1(), Xt.Outpoint = Ei(), Xt.Output = Si(), Xt.TX = An(), Xt.TXMeta = wy()), Xt;
+var ub;
+function vy() {
+  return ub || (ub = 1, Xt.AbstractBlock = us(), Xt.Address = Gr(), Xt.Block = l1(), Xt.Coin = cs(), Xt.Headers = hs(), Xt.Input = ko(), Xt.InvItem = Po(), Xt.KeyRing = d1(), Xt.MemBlock = wy(), Xt.MerkleBlock = h1(), Xt.MTX = b1(), Xt.Outpoint = Ei(), Xt.Output = Si(), Xt.TX = An(), Xt.TXMeta = yy()), Xt;
 }
 var bi = {}, dh = {};
 /*!
@@ -100932,10 +100936,10 @@ var bi = {}, dh = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var lb;
-function vy() {
-  if (lb) return dh;
-  lb = 1;
+var hb;
+function Sy() {
+  if (hb) return dh;
+  hb = 1;
   const e = Xe();
   class c extends Error {
     /**
@@ -100959,14 +100963,14 @@ function vy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var db;
-function Sy() {
-  return db || (db = 1, bi.consensus = Lt(), bi.errors = vy(), bi.Network = Or(), bi.networks = o1(), bi.policy = vi(), bi.timedata = Sp()), bi;
+var lb;
+function Ey() {
+  return lb || (lb = 1, bi.consensus = Lt(), bi.errors = Sy(), bi.Network = Or(), bi.networks = s1(), bi.policy = vi(), bi.timedata = Sp()), bi;
 }
-var Br = {}, bh, bb;
+var Br = {}, bh, db;
 function zp() {
-  if (bb) return bh;
-  bb = 1;
+  if (db) return bh;
+  db = 1;
   const e = Xe(), { BufferMap: c } = $r(), l = zr();
   class w {
     /**
@@ -101060,14 +101064,14 @@ function zp() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var pb;
-function Ey() {
-  return pb || (pb = 1, Br.common = fs(), Br.Opcode = a1(), Br.Script = Cr(), Br.ScriptError = vo(), Br.ScriptNum = Ji(), Br.sigcache = zp(), Br.Stack = So(), Br.Metrics = Bp(), Br.SLP = Eo()), Br;
+var bb;
+function Iy() {
+  return bb || (bb = 1, Br.common = fs(), Br.Opcode = o1(), Br.Script = Cr(), Br.ScriptError = vo(), Br.ScriptNum = Ji(), Br.sigcache = zp(), Br.Stack = So(), Br.Metrics = Bp(), Br.SLP = Eo()), Br;
 }
-var ph, mb;
+var ph, pb;
 function Cp() {
-  if (mb) return ph;
-  mb = 1;
+  if (pb) return ph;
+  pb = 1;
   function e(m) {
     if (typeof m != "string")
       throw new TypeError("Path must be a string. Received " + JSON.stringify(m));
@@ -101252,10 +101256,10 @@ function Cp() {
   };
   return w.posix = w, ph = w, ph;
 }
-var ks = {}, Kn = {}, gb;
-function m1() {
-  if (gb) return Kn;
-  gb = 1;
+var ks = {}, Kn = {}, mb;
+function p1() {
+  if (mb) return Kn;
+  mb = 1;
   const e = Nt();
   function c(n, u) {
     e(k.isBuffer(n)), e(typeof u == "number");
@@ -101293,11 +101297,11 @@ function m1() {
   }
   return Kn.native = 0, Kn.sum = c, Kn.tweak = l, Kn;
 }
-var mh, xb;
-function Iy() {
-  if (xb) return mh;
-  xb = 1;
-  const { enforce: e } = Xe(), c = At(), l = m1(), w = k.alloc(0), m = 0.48045301391820144, f = 0.6931471805599453;
+var mh, gb;
+function Ay() {
+  if (gb) return mh;
+  gb = 1;
+  const { enforce: e } = Xe(), c = At(), l = p1(), w = k.alloc(0), m = 0.48045301391820144, f = 0.6931471805599453;
   class n extends c.Struct {
     /**
      * Create a bloom filter.
@@ -101471,11 +101475,11 @@ function Iy() {
   }
   return mh = n, mh;
 }
-var gh, wb;
-function Ay() {
-  if (wb) return gh;
-  wb = 1;
-  const { enforce: e } = Xe(), { encoding: c } = At(), l = m1(), w = k.alloc(0);
+var gh, xb;
+function Oy() {
+  if (xb) return gh;
+  xb = 1;
+  const { enforce: e } = Xe(), { encoding: c } = At(), l = p1(), w = k.alloc(0);
   class m {
     /**
      * Create a rolling bloom filter.
@@ -101597,17 +101601,17 @@ function Ay() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var yb;
+var wb;
 function Dp() {
-  if (yb) return ks;
-  yb = 1;
-  const e = Iy(), c = Ay();
+  if (wb) return ks;
+  wb = 1;
+  const e = Ay(), c = Oy();
   return ks.BloomFilter = e, ks.RollingFilter = c, ks;
 }
-var Bs = {}, xh, vb;
-function Oy() {
-  if (vb) return xh;
-  vb = 1;
+var Bs = {}, xh, yb;
+function _y() {
+  if (yb) return xh;
+  yb = 1;
   const e = Xe();
   class c {
     /**
@@ -101732,10 +101736,10 @@ function Oy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var wh, Sb;
-function _y() {
-  if (Sb) return wh;
-  Sb = 1;
+var wh, vb;
+function Ry() {
+  if (vb) return wh;
+  vb = 1;
   const e = Xe();
   class c {
     /**
@@ -101849,14 +101853,14 @@ function _y() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Eb;
-function g1() {
-  return Eb || (Eb = 1, Bs.Lock = Oy(), Bs.MapLock = _y()), Bs;
+var Sb;
+function m1() {
+  return Sb || (Sb = 1, Bs.Lock = _y(), Bs.MapLock = Ry()), Bs;
 }
-var sn = {}, yh, Ib;
-function Ry() {
-  if (Ib) return yh;
-  Ib = 1;
+var sn = {}, yh, Eb;
+function Py() {
+  if (Eb) return yh;
+  Eb = 1;
   const e = Xe(), c = k.alloc(1, 0), l = k.alloc(255, 255);
   class w {
     /**
@@ -102787,10 +102791,10 @@ function Ry() {
   }
   return yh = w, yh;
 }
-var vh, Ab;
-function Py() {
-  if (Ab) return vh;
-  Ab = 1;
+var vh, Ib;
+function ky() {
+  if (Ib) return vh;
+  Ib = 1;
   const e = Xe(), c = /* @__PURE__ */ Object.create(null), l = k.alloc(0), w = k.alloc(255, 255), m = {
     char: {
       min: "\0",
@@ -103156,10 +103160,10 @@ function Py() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Sh, Ob;
-function ky() {
-  if (Ob) return Sh;
-  Ob = 1;
+var Sh, Ab;
+function By() {
+  if (Ab) return Sh;
+  Ab = 1;
   const e = Xe(), c = 0, l = 1;
   let w = null;
   class m {
@@ -103612,11 +103616,11 @@ function ky() {
   }
   return Sh = m, Sh;
 }
-var Eh, _b;
-function By() {
-  if (_b) return Eh;
-  _b = 1;
-  const e = Xe(), c = ky(), l = k.alloc(0);
+var Eh, Ob;
+function My() {
+  if (Ob) return Eh;
+  Ob = 1;
+  const e = Xe(), c = By(), l = k.alloc(0);
   class w {
     /**
      * Create a memdb.
@@ -103933,10 +103937,10 @@ function By() {
   }
   return Eh = w, Eh;
 }
-var Ih, Rb;
-function My() {
-  if (Rb) return Ih;
-  Rb = 1;
+var Ih, _b;
+function Ny() {
+  if (_b) return Ih;
+  _b = 1;
   const e = Xe(), c = Ft.indexedDB || Ft.webkitIndexedDB || Ft.mozIndexedDB || Ft.shimIndexedDB, l = Ft.IDBKeyRange || Ft.webkitIDBKeyRange || Ft.mozIDBKeyRange, w = {
     READ_ONLY: "readonly",
     READ_WRITE: "readwrite",
@@ -104262,20 +104266,20 @@ function My() {
   }
   return Ih = m, Ih;
 }
-var Pb;
+var Rb;
 function Up() {
-  if (Pb) return sn;
-  Pb = 1;
-  const e = Xe(), c = Ry(), l = Py(), w = By(), m = My();
+  if (Rb) return sn;
+  Rb = 1;
+  const e = Xe(), c = Py(), l = ky(), w = My(), m = Ny();
   return sn.DB = c, sn.Key = l, sn.create = (f) => {
     f == null && (f = {}), typeof f == "string" && (f = { location: f }), e(f && typeof f == "object");
     const { memory: n, location: u } = f;
     return n ? new c(w, "memory", f) : new c(m, u, f);
   }, sn.key = (f, n) => new l(f, n), sn;
 }
-var Ah, kb;
-function Ny() {
-  return kb || (kb = 1, Ah = function(c) {
+var Ah, Pb;
+function qy() {
+  return Pb || (Pb = 1, Ah = function(c) {
     if (c === void 0)
       return "undefined";
     if (c !== c)
@@ -104287,11 +104291,11 @@ function Ny() {
     }
   }), Ah;
 }
-var Oh, Bb;
-function qy() {
-  if (Bb) return Oh;
-  Bb = 1;
-  const e = Ny(), c = {
+var Oh, kb;
+function Ty() {
+  if (kb) return Oh;
+  kb = 1;
+  const e = qy(), c = {
     showHidden: !1,
     depth: 20,
     colors: !1,
@@ -104390,15 +104394,15 @@ function qy() {
   }
   return Oh = l, Oh;
 }
-var _h = {}, Mb;
-function Ty() {
-  return Mb || (Mb = 1, _h.unsupported = !0), _h;
-}
-var Rh, Nb;
+var _h = {}, Bb;
 function zy() {
-  if (Nb) return Rh;
-  Nb = 1;
-  const e = Cp(), c = Xe(), l = qy(), w = Ty();
+  return Bb || (Bb = 1, _h.unsupported = !0), _h;
+}
+var Rh, Mb;
+function Cy() {
+  if (Mb) return Rh;
+  Mb = 1;
+  const e = Cp(), c = Xe(), l = Ty(), w = zy();
   class m {
     /**
      * Create a logger.
@@ -104983,14 +104987,14 @@ function zy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Ph, qb;
-function Cy() {
-  return qb || (qb = 1, Ph = zy()), Ph;
+var Ph, Nb;
+function Dy() {
+  return Nb || (Nb = 1, Ph = Cy()), Ph;
 }
-var Qt = {}, Tb;
-function x1() {
-  if (Tb) return Qt;
-  Tb = 1;
+var Qt = {}, qb;
+function g1() {
+  if (qb) return Qt;
+  qb = 1;
   const e = Nt();
   function c(p, h) {
     if (e(k.isBuffer(p)), e(k.isBuffer(h)), m(p.length, 0))
@@ -105049,10 +105053,10 @@ function x1() {
   }
   return Qt.safeCompare = c, Qt.safeEqual = l, Qt.safeEqualByte = w, Qt.safeEqualInt = m, Qt.safeSelect = f, Qt.safeLT = n, Qt.safeLTE = u, Qt.safeGT = a, Qt.safeGTE = s, Qt.safeMin = i, Qt.safeMax = b, Qt.safeAbs = g, Qt.safeBool = S, Qt.safeCopy = y, Qt;
 }
-var Vn = {}, kh, zb;
-function Dy() {
-  if (zb) return kh;
-  zb = 1;
+var Vn = {}, kh, Tb;
+function Uy() {
+  if (Tb) return kh;
+  Tb = 1;
   const e = Nt(), c = new Uint32Array([
     3328402341,
     4168907908,
@@ -107492,10 +107496,10 @@ function Dy() {
   }
   return kh = b, kh;
 }
-var vt = {}, Bh, Cb;
-function Uy() {
-  if (Cb) return Bh;
-  Cb = 1;
+var vt = {}, Bh, zb;
+function Fy() {
+  if (zb) return Bh;
+  zb = 1;
   const e = Nt(), c = k.alloc(16, 0), l = -1, w = new Uint16Array([
     0,
     7200,
@@ -107630,11 +107634,11 @@ function Uy() {
   }
   return Bh = m, Bh;
 }
-var Db;
-function Fy() {
-  if (Db) return vt;
-  Db = 1;
-  const e = Nt(), c = Uy(), l = k.alloc(0), w = new Uint32Array([
+var Cb;
+function Hy() {
+  if (Cb) return vt;
+  Cb = 1;
+  const e = Nt(), c = Fy(), l = k.alloc(0), w = new Uint32Array([
     27,
     // 8
     135,
@@ -108582,11 +108586,11 @@ function Fy() {
   }
   return vt.Mode = m, vt.Block = f, vt.Stream = n, vt.RawCipher = u, vt.RawDecipher = a, vt.PKCS7Cipher = s, vt.PKCS7Decipher = i, vt.ECBCipher = b, vt.ECBDecipher = g, vt.CBCCipher = S, vt.CBCDecipher = y, vt.CTSCipher = p, vt.CTSDecipher = h, vt.XTS = o, vt.XTSCipher = E, vt.XTSDecipher = F, vt.CTR = j, vt.CTRCipher = G, vt.CTRDecipher = N, vt.CFB = T, vt.CFBCipher = A, vt.CFBDecipher = q, vt.OFB = _, vt.OFBCipher = H, vt.OFBDecipher = R, vt.GCM = V, vt.GCMCipher = fe, vt.GCMDecipher = ue, vt.CBCMAC = se, vt.CCM = D, vt.CCMCipher = Q, vt.CCMDecipher = W, vt.CMAC = ae, vt.EAX = v, vt.EAXCipher = Y, vt.EAXDecipher = he, vt.get = le, vt;
 }
-var Ub;
-function w1() {
-  if (Ub) return Vn;
-  Ub = 1;
-  const e = Dy(), { CBCCipher: c, CBCDecipher: l } = Fy();
+var Db;
+function x1() {
+  if (Db) return Vn;
+  Db = 1;
+  const e = Uy(), { CBCCipher: c, CBCDecipher: l } = Hy();
   function w(f, n, u) {
     const a = new c(new e(256));
     return a.init(n, u), k.concat([a.update(f), a.final()]);
@@ -108602,10 +108606,10 @@ function w1() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Mh, Fb;
+var Mh, Ub;
 function Bo() {
-  if (Fb) return Mh;
-  Fb = 1;
+  if (Ub) return Mh;
+  Ub = 1;
   const e = Xe(), c = At(), l = Gr(), { encoding: w } = c, { inspectSymbol: m } = Vt();
   class f {
     /**
@@ -108783,9 +108787,9 @@ var Nh = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Hb;
-function y1() {
-  return Hb || (Hb = 1, function(e) {
+var Fb;
+function w1() {
+  return Fb || (Fb = 1, function(e) {
     const { BufferMap: c } = $r(), l = e;
     l.isName = function(m) {
       if (typeof m != "string" || m.length === 0 || !/^[\-\._0-9A-Za-z]+$/.test(m))
@@ -108845,9 +108849,9 @@ var Ms = { exports: {} };
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Lb;
+var Hb;
 function Fp() {
-  return Lb || (Lb = 1, function(e, c) {
+  return Hb || (Hb = 1, function(e, c) {
     const l = Xe(), w = At(), m = er(), f = An(), n = Lt();
     class u {
       /**
@@ -109132,10 +109136,10 @@ var Ns = {};
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Kb;
+var Lb;
 function Hp() {
-  if (Kb) return Ns;
-  Kb = 1;
+  if (Lb) return Ns;
+  Lb = 1;
   const e = Up();
   return Ns.wdb = {
     V: e.key("V"),
@@ -109175,10 +109179,10 @@ function Hp() {
     b: e.key("b", ["uint32"])
   }, Ns;
 }
-var qh, Vb;
-function Hy() {
-  if (Vb) return qh;
-  Vb = 1;
+var qh, Kb;
+function Ly() {
+  if (Kb) return qh;
+  Kb = 1;
   const e = Xe(), c = At(), { BufferSet: l } = $r(), w = er(), m = wi(), f = Ao(), n = cs(), u = Ei(), a = Fp(), s = Hp().txdb, i = Lt(), b = vi(), { TXRecord: g } = a, { inspectSymbol: S } = Vt();
   class y {
     /**
@@ -110745,11 +110749,11 @@ function Hy() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Th, $b;
+var Th, Vb;
 function Lp() {
-  if ($b) return Th;
-  $b = 1;
-  const e = Gr(), c = b1(), l = Bo();
+  if (Vb) return Th;
+  Vb = 1;
+  const e = Gr(), c = d1(), l = Bo();
   class w extends c {
     /**
      * Create a wallet key.
@@ -110868,11 +110872,11 @@ function Lp() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var zh, jb;
+var zh, $b;
 function Kp() {
-  if (jb) return zh;
-  jb = 1;
-  const e = Xe(), c = At(), l = wo(), w = Bo(), m = y1(), f = Cr(), n = Lp(), { HDPublicKey: u } = h1(), { inspectSymbol: a } = Vt();
+  if ($b) return zh;
+  $b = 1;
+  const e = Xe(), c = At(), l = wo(), w = Bo(), m = w1(), f = Cr(), n = Lp(), { HDPublicKey: u } = u1(), { inspectSymbol: a } = Vt();
   class s {
     /**
      * Create an account.
@@ -111350,10 +111354,10 @@ function Kp() {
   }
   return zh = s, zh;
 }
-var $n = {}, Yb;
+var $n = {}, jb;
 function Vp() {
-  if (Yb) return $n;
-  Yb = 1;
+  if (jb) return $n;
+  jb = 1;
   const e = Nt(), c = _o(), l = Ar(), w = k.alloc(64), m = new Uint32Array(16), f = new Uint32Array(16);
   function n(j, G, N, T, A, q) {
     if (typeof j == "string" && (j = k.from(j, "utf8")), typeof G == "string" && (G = k.from(G, "utf8")), G == null && (G = k.alloc(0)), e(k.isBuffer(j)), e(k.isBuffer(G)), e(N >>> 0 === N), e(T >>> 0 === T), e(A >>> 0 === A), e(q >>> 0 === q), T * A >= 1 << 30)
@@ -111454,11 +111458,11 @@ function Vp() {
   }
   return $n.native = 0, $n.derive = n, $n.deriveAsync = u, $n;
 }
-var Ch, Xb;
-function Ly() {
-  if (Xb) return Ch;
-  Xb = 1;
-  const e = Xe(), c = At(), { Lock: l } = g1(), w = yi(), m = En(), f = w1(), n = Ar(), u = mr(), a = zr(), s = _o(), i = Vp(), b = er(), g = u1(), S = Ro(), { encoding: y } = c, { inspectSymbol: p } = Vt();
+var Ch, Yb;
+function Ky() {
+  if (Yb) return Ch;
+  Yb = 1;
+  const e = Xe(), c = At(), { Lock: l } = m1(), w = yi(), m = En(), f = x1(), n = Ar(), u = mr(), a = zr(), s = _o(), i = Vp(), b = er(), g = c1(), S = Ro(), { encoding: y } = c, { inspectSymbol: p } = Vt();
   class h {
     /**
      * Create a master key.
@@ -111803,11 +111807,11 @@ function Ly() {
   }
   return Ch = h, Ch;
 }
-var Dh, Gb;
-function Ky() {
-  if (Gb) return Dh;
-  Gb = 1;
-  const e = Xe(), c = yo(), { Lock: l } = g1(), { base58: w } = xn(), m = At(), f = Gi(), n = mr(), u = En(), a = Hy(), s = Bo(), i = y1(), b = Gr(), g = p1(), S = Cr(), y = Lp(), p = h1(), h = Si(), o = Kp(), E = Ly(), F = vi(), j = Lt(), { encoding: G } = m, { Mnemonic: N } = p, { inspectSymbol: T } = Vt();
+var Dh, Xb;
+function Vy() {
+  if (Xb) return Dh;
+  Xb = 1;
+  const e = Xe(), c = yo(), { Lock: l } = m1(), { base58: w } = xn(), m = At(), f = Gi(), n = mr(), u = En(), a = Ly(), s = Bo(), i = w1(), b = Gr(), g = b1(), S = Cr(), y = Lp(), p = u1(), h = Si(), o = Kp(), E = Ky(), F = vi(), j = Lt(), { encoding: G } = m, { Mnemonic: N } = p, { inspectSymbol: T } = Vt();
   class A extends c {
     /**
      * Create a wallet.
@@ -113296,10 +113300,10 @@ function Ky() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var Uh, Jb;
-function Vy() {
-  if (Jb) return Uh;
-  Jb = 1;
+var Uh, Gb;
+function $y() {
+  if (Gb) return Uh;
+  Gb = 1;
   const e = Xe(), c = yo();
   class l extends c {
     /**
@@ -113415,11 +113419,11 @@ function Vy() {
   }
   return Uh = l, Uh;
 }
-var Fh, Wb;
-function $y() {
-  if (Wb) return Fh;
-  Wb = 1;
-  const e = Xe(), c = Cp(), l = yo(), w = At(), { BufferMap: m } = $r(), { BloomFilter: f } = Dp(), { Lock: n, MapLock: u } = g1(), a = Up(), s = Cy(), { safeEqual: i } = x1(), b = w1(), g = Or(), S = Bo(), y = y1(), p = Ky(), h = Kp(), o = Ei(), E = Hp(), F = Fp(), j = Vy(), G = E.wdb, N = E.txdb, {
+var Fh, Jb;
+function jy() {
+  if (Jb) return Fh;
+  Jb = 1;
+  const e = Xe(), c = Cp(), l = yo(), w = At(), { BufferMap: m } = $r(), { BloomFilter: f } = Dp(), { Lock: n, MapLock: u } = m1(), a = Up(), s = Dy(), { safeEqual: i } = g1(), b = x1(), g = Or(), S = Bo(), y = w1(), p = Vy(), h = Kp(), o = Ei(), E = Hp(), F = Fp(), j = $y(), G = E.wdb, N = E.txdb, {
     ChainState: T,
     BlockMeta: A,
     TXRecord: q,
@@ -114860,10 +114864,10 @@ function $y() {
   }
   return Fh = H, Fh;
 }
-var Hh = {}, Lh, Zb;
+var Hh = {}, Lh, Wb;
 function $p() {
-  if (Zb) return Lh;
-  Zb = 1;
+  if (Wb) return Lh;
+  Wb = 1;
   const e = Nt(), c = fi(), l = 2147483648, w = new Uint32Array([
     1,
     0,
@@ -114991,10 +114995,10 @@ function $p() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Kh, Qb;
-function jy() {
-  if (Qb) return Kh;
-  Qb = 1;
+var Kh, Zb;
+function Yy() {
+  if (Zb) return Kh;
+  Zb = 1;
   const e = as(), c = Ar();
   return Kh = new e("P224", c, c), Kh;
 }
@@ -115003,17 +115007,17 @@ function jy() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Vh, e8;
-function Yy() {
-  if (e8) return Vh;
-  e8 = 1;
+var Vh, Qb;
+function Xy() {
+  if (Qb) return Vh;
+  Qb = 1;
   const e = as(), c = Ar();
   return Vh = new e("P256", c, c), Vh;
 }
-var $h, t8;
+var $h, e8;
 function jp() {
-  if (t8) return $h;
-  t8 = 1;
+  if (e8) return $h;
+  e8 = 1;
   const e = Nt(), c = In(), l = fi();
   class w extends c {
     constructor() {
@@ -115052,17 +115056,17 @@ function jp() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var jh, r8;
-function Xy() {
-  if (r8) return jh;
-  r8 = 1;
+var jh, t8;
+function Gy() {
+  if (t8) return jh;
+  t8 = 1;
   const e = as(), c = jp();
   return jh = new e("P384", c, c), jh;
 }
-var Yh, i8;
+var Yh, r8;
 function Yp() {
-  if (i8) return Yh;
-  i8 = 1;
+  if (r8) return Yh;
+  r8 = 1;
   const e = $p();
   class c extends e {
     /**
@@ -115096,10 +115100,10 @@ function Yp() {
   }
   return c.native = e.native, c.id = "SHAKE256", c.size = 32, c.bits = 256, c.blockSize = 136, c.zero = k.alloc(32, 0), c.ctx = new c(), Yh = c, Yh;
 }
-var Xh, n8;
+var Xh, i8;
 function Xp() {
-  if (n8) return Xh;
-  n8 = 1;
+  if (i8) return Xh;
+  i8 = 1;
   const e = Yp();
   class c extends e {
     constructor() {
@@ -115134,10 +115138,10 @@ function Xp() {
  * Copyright (c) 2018-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var Gh, s8;
-function Gy() {
-  if (s8) return Gh;
-  s8 = 1;
+var Gh, n8;
+function Jy() {
+  if (n8) return Gh;
+  n8 = 1;
   const e = as(), c = In(), l = Xp();
   return Gh = new e("P521", c, l), Gh;
 }
@@ -115163,10 +115167,10 @@ var Ct = {}, jn = {};
  *   https://github.com/golang/go/blob/master/src/crypto/rand/util.go
  *   https://github.com/indutny/miller-rabin/blob/master/lib/mr.js
  */
-var o8;
-function Jy() {
-  if (o8) return jn;
-  o8 = 1;
+var s8;
+function Wy() {
+  if (s8) return jn;
+  s8 = 1;
   const e = Nt(), c = Xr(), l = yi(), w = new Uint8Array([
     3,
     5,
@@ -115226,10 +115230,10 @@ function Jy() {
   }
   return jn.randomPrime = s, jn.isProbablePrime = i, jn.isSafePrime = b, jn;
 }
-var Qr = {}, a8;
-function Wy() {
-  if (a8) return Qr;
-  a8 = 1;
+var Qr = {}, o8;
+function Zy() {
+  if (o8) return Qr;
+  o8 = 1;
   const e = Nt(), c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", l = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_", w = [
     -1,
     -1,
@@ -115620,11 +115624,11 @@ function Wy() {
   }
   return Qr.native = 0, Qr.encode = a, Qr.decode = s, Qr.test = i, Qr.encodeURL = b, Qr.decodeURL = g, Qr.testURL = S, Qr;
 }
-var f8;
-function Zy() {
-  if (f8) return Ct;
-  f8 = 1;
-  const e = Nt(), c = Xr(), l = yi(), { randomPrime: w } = Jy(), m = Wy(), f = Op(), n = x1(), {
+var a8;
+function Qy() {
+  if (a8) return Ct;
+  a8 = 1;
+  const e = Nt(), c = Xr(), l = yi(), { randomPrime: w } = Wy(), m = Zy(), f = Op(), n = g1(), {
     safeEqual: u,
     safeEqualByte: a,
     safeSelect: s,
@@ -116221,10 +116225,10 @@ function Zy() {
   }
   return Ct.native = 0, Ct.SALT_LENGTH_AUTO = E, Ct.SALT_LENGTH_HASH = F, Ct.privateKeyGenerate = q, Ct.privateKeyGenerateAsync = _, Ct.privateKeyBits = H, Ct.privateKeyVerify = R, Ct.privateKeyImport = V, Ct.privateKeyExport = fe, Ct.publicKeyCreate = ue, Ct.publicKeyBits = se, Ct.publicKeyVerify = D, Ct.publicKeyImport = Q, Ct.publicKeyExport = W, Ct.sign = ae, Ct.verify = v, Ct.encrypt = he, Ct.decrypt = le, Ct.signPSS = ge, Ct.verifyPSS = Ee, Ct.encryptOAEP = z, Ct.decryptOAEP = I, Ct.veil = ie, Ct.unveil = t, Ct;
 }
-var Jh, c8;
-function Qy() {
-  if (c8) return Jh;
-  c8 = 1;
+var Jh, f8;
+function ev() {
+  if (f8) return Jh;
+  f8 = 1;
   const e = Nt(), c = Ar(), l = fi();
   class w extends c {
     constructor() {
@@ -116263,16 +116267,16 @@ function Qy() {
  * Copyright (c) 2014-2019, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcrypto
  */
-var u8;
-function ev() {
-  return u8 || (u8 = 1, function(e) {
-    e.aes = w1(), e.BN = Xr(), e.ChaCha20 = _p(), e.cleanse = En(), e.Hash160 = Gi(), e.Hash256 = mr(), e.HmacDRBG = Rp(), e.Keccak = $p(), e.merkle = Tp(), e.murmur3 = m1(), e.p224 = jy(), e.p256 = Yy(), e.p384 = Xy(), e.p521 = Gy(), e.pbkdf2 = _o(), e.random = yi(), e.RIPEMD160 = s1(), e.rsa = Zy(), e.safe = x1(), e.scrypt = Vp(), e.secp256k1 = zr(), e.SHA1 = kp(), e.SHA224 = Qy(), e.SHA256 = Ar(), e.SHA384 = jp(), e.SHA512 = In(), e.SHAKE = Yp(), e.SHAKE256 = Xp(), e.version = "5.5.1", e.native = e.SHA256.native;
+var c8;
+function tv() {
+  return c8 || (c8 = 1, function(e) {
+    e.aes = x1(), e.BN = Xr(), e.ChaCha20 = _p(), e.cleanse = En(), e.Hash160 = Gi(), e.Hash256 = mr(), e.HmacDRBG = Rp(), e.Keccak = $p(), e.merkle = Tp(), e.murmur3 = p1(), e.p224 = Yy(), e.p256 = Xy(), e.p384 = Gy(), e.p521 = Jy(), e.pbkdf2 = _o(), e.random = yi(), e.RIPEMD160 = n1(), e.rsa = Qy(), e.safe = g1(), e.scrypt = Vp(), e.secp256k1 = zr(), e.SHA1 = kp(), e.SHA224 = ev(), e.SHA256 = Ar(), e.SHA384 = jp(), e.SHA512 = In(), e.SHAKE = Yp(), e.SHAKE256 = Xp(), e.version = "5.5.1", e.native = e.SHA256.native;
   }(Hh)), Hh;
 }
 var Wh = {};
-const tv = "@hansekontor/checkout-components", rv = "1.0.0", h8 = {
-  name: tv,
-  version: rv
+const rv = "@hansekontor/checkout-components", iv = "1.0.0", u8 = {
+  name: rv,
+  version: iv
 };
 /*!
  * pkg.js - package constants
@@ -116281,11 +116285,11 @@ const tv = "@hansekontor/checkout-components", rv = "1.0.0", h8 = {
  * Copyright (c) 2018, bcash developers.
  * https://github.com/bcoin-org/bcash
  */
-var l8;
-function iv() {
-  return l8 || (l8 = 1, function(e) {
+var h8;
+function nv() {
+  return h8 || (h8 = 1, function(e) {
     const c = e;
-    c.name = h8.name, c.core = "bcash", c.organization = "badger-cash", c.currency = "bitcoin cash", c.unit = "bch", c.base = "satoshi", c.cfg = `${c.core}.conf`, c.url = `https://github.com/${c.organization}/${c.name}`, c.version = h8.version;
+    c.name = u8.name, c.core = "bcash", c.organization = "badger-cash", c.currency = "bitcoin cash", c.unit = "bch", c.base = "satoshi", c.cfg = `${c.core}.conf`, c.url = `https://github.com/${c.organization}/${c.name}`, c.version = u8.version;
   }(Wh)), Wh;
 }
 /*!
@@ -116294,18 +116298,18 @@ function iv() {
  * Copyright (c) 2014-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var d8;
+var l8;
 function Gp() {
-  return d8 || (d8 = 1, function(e) {
+  return l8 || (l8 = 1, function(e) {
     const c = e;
     c.set = function(w) {
       return c.Network.set(w), c;
-    }, c.btc = ny(), c.Amount = wi(), c.URI = Pp(), c.coins = sy(), c.Coins = f1(), c.CoinEntry = Io(), c.CoinView = Ao(), c.hd = gy(), c.HDPrivateKey = u1(), c.HDPublicKey = c1(), c.Mnemonic = Ro(), c.primitives = yy(), c.Address = Gr(), c.Block = d1(), c.Coin = cs(), c.Headers = hs(), c.Input = ko(), c.InvItem = Po(), c.KeyRing = b1(), c.MerkleBlock = l1(), c.MTX = p1(), c.Outpoint = Ei(), c.Output = Si(), c.TX = An(), c.protocol = Sy(), c.consensus = Lt(), c.Network = Or(), c.networks = o1(), c.policy = vi(), c.script = Ey(), c.Opcode = a1(), c.Script = Cr(), c.ScriptNum = Ji(), c.SigCache = zp(), c.Stack = So(), c.utils = Vt(), c.util = er(), c.WalletDB = $y(), c.bcrypto = ev(), c.bfilter = Dp(), c.pkg = iv();
+    }, c.btc = sy(), c.Amount = wi(), c.URI = Pp(), c.coins = oy(), c.Coins = a1(), c.CoinEntry = Io(), c.CoinView = Ao(), c.hd = xy(), c.HDPrivateKey = c1(), c.HDPublicKey = f1(), c.Mnemonic = Ro(), c.primitives = vy(), c.Address = Gr(), c.Block = l1(), c.Coin = cs(), c.Headers = hs(), c.Input = ko(), c.InvItem = Po(), c.KeyRing = d1(), c.MerkleBlock = h1(), c.MTX = b1(), c.Outpoint = Ei(), c.Output = Si(), c.TX = An(), c.protocol = Ey(), c.consensus = Lt(), c.Network = Or(), c.networks = s1(), c.policy = vi(), c.script = Iy(), c.Opcode = o1(), c.Script = Cr(), c.ScriptNum = Ji(), c.SigCache = zp(), c.Stack = So(), c.utils = Vt(), c.util = er(), c.WalletDB = jy(), c.bcrypto = tv(), c.bfilter = Dp(), c.pkg = nv();
   }(Dc)), Dc;
 }
-var Zh = {}, b8;
-function nv() {
-  return b8 || (b8 = 1, function(e) {
+var Zh = {}, d8;
+function sv() {
+  return d8 || (d8 = 1, function(e) {
     const c = At(), l = e;
     l.readTag = function(m) {
       let f = m.readU8();
@@ -116511,10 +116515,10 @@ var qs = {};
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var p8;
-function sv() {
-  if (p8) return qs;
-  p8 = 1;
+var b8;
+function ov() {
+  if (b8) return qs;
+  b8 = 1;
   const e = Xe(), c = Gp().bcrypto, {
     SHA224: l,
     SHA256: w,
@@ -116587,10 +116591,10 @@ function sv() {
   }
   return qs;
 }
-var m8;
+var p8;
 function Jp() {
-  return m8 || (m8 = 1, function(e) {
-    const c = Xe(), l = Gp().bcrypto, { SHA256: w } = l, m = nv(), f = sv(), n = xp(), u = e;
+  return p8 || (p8 = 1, function(e) {
+    const c = Xe(), l = Gp().bcrypto, { SHA256: w } = l, m = sv(), f = ov(), n = xp(), u = e;
     u.trusted = /* @__PURE__ */ new Set(), u.allowUntrusted = !1, u.oid = {
       "1.2.840.10040.4.1": { key: "dsa", hash: null },
       "1.2.840.10040.4.2": { key: "dsa", hash: null },
@@ -116741,11 +116745,11 @@ function Jp() {
     }, u.setFingerprints(n);
   }(Cc)), Cc;
 }
-var Qh, g8;
-function ov() {
-  if (g8) return Qh;
-  g8 = 1;
-  const e = Xe(), c = go(), l = xo(), w = n1(), m = Jp();
+var Qh, m8;
+function av() {
+  if (m8) return Qh;
+  m8 = 1;
+  const e = Xe(), c = go(), l = xo(), w = i1(), m = Jp();
   class f {
     /**
      * Create a payment request.
@@ -116937,12 +116941,12 @@ function ov() {
  * Copyright (c) 2016-2017, Christopher Jeffrey (MIT License).
  * https://github.com/bcoin-org/bcoin
  */
-var x8;
-function av() {
-  return x8 || (x8 = 1, li.certs = xp(), li.PaymentACK = Hw(), li.PaymentDetails = n1(), li.Payment = wp(), li.PaymentRequest = ov(), li.x509 = Jp()), li;
+var g8;
+function fv() {
+  return g8 || (g8 = 1, li.certs = xp(), li.PaymentACK = Lw(), li.PaymentDetails = i1(), li.Payment = wp(), li.PaymentRequest = av(), li.x509 = Jp()), li;
 }
-var w8 = av();
-const fv = (e, c, l) => new Promise((w, m) => {
+var x8 = fv();
+const cv = (e, c, l) => new Promise((w, m) => {
   let f = new XMLHttpRequest();
   f.open("POST", e, !0), Object.entries(c).forEach(([n, u]) => {
     f.setRequestHeader(n, u);
@@ -116960,21 +116964,21 @@ const fv = (e, c, l) => new Promise((w, m) => {
   }, f.onerror = function(n) {
     console.warn(n), m(n);
   }, f.send(l);
-}), cv = async (e, c, l) => {
-  const m = new w8.Payment(c).toRaw(), f = {
+}), uv = async (e, c, l) => {
+  const m = new x8.Payment(c).toRaw(), f = {
     Accept: `application/${l}-paymentrequest, application/${l}-paymentack`,
     "Content-Type": `application/${l}-payment`,
     "Content-Transfer-Encoding": "binary"
-  }, n = await fv(
+  }, n = await cv(
     e,
     f,
     m
   ), u = k.from(n);
-  return w8.PaymentACK.fromRaw(u);
-}, { Coin: el, MTX: uv, Input: hv, Script: lv } = ss, Ts = {
+  return x8.PaymentACK.fromRaw(u);
+}, { Coin: el, MTX: hv, Input: lv, Script: dv } = ss, Ts = {
   etokenSats: 546,
   defaultFee: 1.01
-}, dv = () => {
+}, bv = () => {
   const e = async (s, i, b, g, S, y) => {
     const p = i.state.slp, h = p.nonSlpUtxos.map(
       (se) => el.fromJSON(se)
@@ -116989,7 +116993,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
     const F = p.tokens.find((se) => se.tokenId === g);
     if (!F)
       throw new Error("Unknown token");
-    const j = F.info, G = new uv();
+    const j = F.info, G = new hv();
     let N = new Kt(0), T = new Kt(0), A = new Kt(s).times(10 ** j.decimals), q = A;
     const _ = [];
     for (let se = 0; se < o.length; se++) {
@@ -117028,7 +117032,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
         G.addCoin(_[se]);
     else {
       const se = {
-        inputs: _.map((D) => hv.fromCoin(D).prevout),
+        inputs: _.map((D) => lv.fromCoin(D).prevout),
         changeAddress: y,
         rate: Ts.defaultFee * 1e3
       };
@@ -117054,7 +117058,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
     let p = Math.ceil(y / b.weight);
     return p < 1 && (p = 1), b.stamp.rate * p;
   }, w = (s, i) => {
-    const g = new lv().pushSym("return").pushData(k.concat([
+    const g = new dv().pushSym("return").pushData(k.concat([
       k.from("SLP", "ascii"),
       k.alloc(1)
     ])).pushPush(k.alloc(1, 2)).pushData(k.from("SEND", "ascii")).pushData(k.from(s, "hex"));
@@ -117148,14 +117152,14 @@ const fv = (e, c, l) => new Promise((w, m) => {
     },
     buildSendTx: e,
     broadcastTx: c,
-    postPayment: cv
+    postPayment: uv
   };
 }, {
-  TX: bv,
-  KeyRing: pv,
-  Script: y8
-} = ss, Wp = ol({}), mv = ({ children: e }) => {
-  const { createWallet: c, cashtab: l, wallet: w, activateWallet: m, update: f, walletLoading: n, hasInitialized: u, removeWallet: a, renameWalletLocally: s } = Uw(), { getPostageObj: i, getTokenPostage: b, getPostageAmount: g, buildSendTx: S, broadcastTx: y, postPayment: p } = dv(), [h, o] = ki("WALLET_INIT"), [E, F] = ki(null);
+  TX: pv,
+  KeyRing: mv,
+  Script: w8
+} = ss, Wp = ol({}), gv = ({ children: e }) => {
+  const { createWallet: c, cashtab: l, wallet: w, activateWallet: m, update: f, walletLoading: n, hasInitialized: u, removeWallet: a, renameWalletLocally: s } = Fw(), { getPostageObj: i, getTokenPostage: b, getPostageAmount: g, buildSendTx: S, broadcastTx: y, postPayment: p } = bv(), [h, o] = ki("WALLET_INIT"), [E, F] = ki(null);
   return dn(() => {
     u && !n ? o("WALLET_IDLE") : u && h !== "WALLET_LOADING" && o("WALLET_LOADING");
   }, [u, n]), dn(() => {
@@ -117168,7 +117172,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
     hasInitialized: u,
     wallet: w,
     cashtab: l,
-    validateMnemonic: m4,
+    validateMnemonic: p4,
     updateWallet: async (ue) => {
       f(l, ue);
     },
@@ -117190,7 +117194,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
     },
     addWallet: async (ue, se) => {
       if (se)
-        if (m4(se))
+        if (p4(se))
           c(ue, se);
         else
           throw new Error("Invalid mnemonic");
@@ -117223,7 +117227,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
       if (!!!w.state.slp.tokens.find((ie) => ie.tokenId === D))
         throw new Error("Unknown token");
       o("SENDING_TOKENS");
-      const ae = await b(D), v = w.Path1899.cashAddress, Y = await S(ue, w, se, D, ae, v), he = pv.fromSecret(w.Path1899.fundingWif), le = y8.hashType, ge = ae ? le.ALL | le.ANYONECANPAY | le.SIGHASH_FORKID : le.ALL | le.SIGHASH_FORKID;
+      const ae = await b(D), v = w.Path1899.cashAddress, Y = await S(ue, w, se, D, ae, v), he = mv.fromSecret(w.Path1899.fundingWif), le = w8.hashType, ge = ae ? le.ALL | le.ANYONECANPAY | le.SIGHASH_FORKID : le.ALL | le.SIGHASH_FORKID;
       Y.sign(he, ge);
       let Ee;
       const we = Y.toRaw(), z = we.toString("hex");
@@ -117232,7 +117236,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
           merchantData: k.alloc(0),
           transactions: [we],
           refundTo: [{
-            script: y8.fromAddress(v).toRaw(),
+            script: w8.fromAddress(v).toRaw(),
             value: 0
           }],
           memo: ""
@@ -117242,7 +117246,7 @@ const fv = (e, c, l) => new Promise((w, m) => {
           "etoken"
         );
         B.payment && (Ee = B.payment.transactions.map(
-          (J) => bv.fromRaw(J).txid()
+          (J) => pv.fromRaw(J).txid()
         )[0], console.log("MUSD txid", Ee));
       } else {
         let ie = { success: !0 };
@@ -117256,23 +117260,23 @@ const fv = (e, c, l) => new Promise((w, m) => {
       console.log(ue, se);
     }
   }, children: e });
-}, Sv = () => {
-  const e = al(Wp);
+}, Ev = () => {
+  const e = y8(Wp);
   if (!e)
     throw new Error("useApp must be used within an AppProvider");
   return e;
-}, Ev = ({
+}, Iv = ({
   children: e
-}) => /* @__PURE__ */ fn(rm, { children: /* @__PURE__ */ fn(Dw, { children: /* @__PURE__ */ fn(mv, { children: e }) }) });
+}) => /* @__PURE__ */ fn(im, { children: /* @__PURE__ */ fn(Uw, { children: /* @__PURE__ */ fn(gv, { children: e }) }) });
 export {
   Wp as AppContext,
-  mv as AppProvider,
+  gv as AppProvider,
   v8 as AuthContext,
-  rm as AuthProvider,
+  im as AuthProvider,
   Yn as EventBus,
-  Ev as MUSDProvider,
+  Iv as MUSDProvider,
   G7 as Tokens,
-  xx as WalletState,
-  Sv as useApp,
-  yv as useAuth
+  wx as WalletState,
+  Ev as useApp,
+  vv as useAuth
 };
