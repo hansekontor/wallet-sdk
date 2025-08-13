@@ -114,6 +114,7 @@ const parseTx = (tx: any, address: string) => {
     parsedTx.amountSent = 0; 
     parsedTx.amountReceived = 0;
 
+    parsedTx.tokenId = tx.slpToken.tokenId;
     parsedTx.sender = tx.inputs[0].coin.address;
 
     // check if tx is outgoing
