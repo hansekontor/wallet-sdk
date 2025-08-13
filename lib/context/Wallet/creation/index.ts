@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error: bcash does not have TypeScript types available
 import bcash from '@hansekontor/checkout-components';
 const { Mnemonic, HDPrivateKey, KeyRing } = bcash;
 import cashaddr from 'ecashaddrjs';
@@ -13,7 +13,7 @@ export const generateMnemonic = () => {
     return bip39Mnemonic;
 }
 
-export const deriveAccount = (masterHDNode: any, path: string): Path => {
+export const deriveAccount = (masterHDNode: typeof HDPrivateKey, path: string): Path => {
     const node = masterHDNode.derivePath(path);
     const publicKey = node.toPublic().publicKey.toString('hex');
     const keyring = KeyRing.fromPrivate(node.privateKey, null);
@@ -36,7 +36,7 @@ export const deriveAccount = (masterHDNode: any, path: string): Path => {
     };
 }
 
-export const buildWallet = (mnemonic: any) => {
+export const buildWallet = (mnemonic: typeof Mnemonic) => {
     const masterHDNode = HDPrivateKey.fromPhrase(mnemonic.getPhrase());
 
     // Derive account path Path1899 from the master HD node
