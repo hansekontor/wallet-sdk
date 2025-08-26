@@ -1,26 +1,28 @@
 // @ts-expect-error: bcash does not have TypeScript types available
-import bcash from '@hansekontor/checkout-components';
+import bcash from "@hansekontor/checkout-components";
 const { Mnemonic, HDPrivateKey, KeyRing } = bcash;
-import cashaddr from 'ecashaddrjs';
-import { WalletState, type Wallet, type Path } from '../types';
-
+import cashaddr from "ecashaddrjs";
+import { WalletState, type Wallet, type Path } from "../types";
 
 export const generateMnemonic = () => {
     const bip39Mnemonic = new Mnemonic({
-        language: 'english'
+        language: "english"
     });
 
     return bip39Mnemonic;
-}
+};
 
-export const deriveAccount = (masterHDNode: typeof HDPrivateKey, path: string): Path => {
+export const deriveAccount = (
+    masterHDNode: typeof HDPrivateKey,
+    path: string
+): Path => {
     const node = masterHDNode.derivePath(path);
-    const publicKey = node.toPublic().publicKey.toString('hex');
+    const publicKey = node.toPublic().publicKey.toString("hex");
     const keyring = KeyRing.fromPrivate(node.privateKey, null);
-    const cashAddress = keyring.getAddress('string');
+    const cashAddress = keyring.getAddress("string");
     const decodedAddress = cashaddr.decode(cashAddress);
     const slpAddress = cashaddr.encode(
-        'etoken',
+        "etoken",
         decodedAddress.type,
         decodedAddress.hash
     );
@@ -32,9 +34,9 @@ export const deriveAccount = (masterHDNode: typeof HDPrivateKey, path: string): 
         cashAddress,
         slpAddress,
         fundingWif,
-        legacyAddress,
+        legacyAddress
     };
-}
+};
 
 export const buildWallet = (mnemonic: typeof Mnemonic) => {
     const masterHDNode = HDPrivateKey.fromPhrase(mnemonic.getPhrase());
@@ -51,15 +53,16 @@ export const buildWallet = (mnemonic: typeof Mnemonic) => {
         mnemonic: mnemonic,
         name,
         Path1899,
-        state: new WalletState(),
+        state: new WalletState()
     };
-}
+};
 
 export const verifyWallet = (mnemonic: object, wallets: Wallet[] | []) => {
     // todo: test if wallet is not already in saved wallets
     if (wallets) {
-        const walletFound = wallets.find(wallet => {
-            const isEqualMnemonic = wallet.mnemonic.toString() === mnemonic.toString();
+        const walletFound = wallets.find((wallet) => {
+            const isEqualMnemonic =
+                wallet.mnemonic.toString() === mnemonic.toString();
             return isEqualMnemonic;
         });
         const isNewWallet = walletFound ? false : true;
@@ -68,4 +71,4 @@ export const verifyWallet = (mnemonic: object, wallets: Wallet[] | []) => {
     } else {
         return true;
     }
-}
+};

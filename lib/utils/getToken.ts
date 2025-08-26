@@ -1,7 +1,7 @@
 import {
-  SUPPORTED_TOKENS_MAP,
-  UNKNOWN_TOKEN,
-  type SupportedToken,
+    SUPPORTED_TOKENS_MAP,
+    UNKNOWN_TOKEN,
+    type SupportedToken
 } from "../constants/supportedTokens";
 
 /**
@@ -21,5 +21,5 @@ import {
  * console.log(unknown.name); // "Unknown Token"
  */
 export function getToken(tokenId: string): SupportedToken {
-  return SUPPORTED_TOKENS_MAP.get(tokenId) || UNKNOWN_TOKEN;
+    return SUPPORTED_TOKENS_MAP.get(tokenId) || UNKNOWN_TOKEN;
 }
