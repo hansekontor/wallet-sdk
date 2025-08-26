@@ -1,6 +1,6 @@
 import { createContext, use, useState, useEffect, type Context } from 'react';
 import localforage from 'localforage';
-// @ts-ignore
+// @ts-expect-error: bcash does not have TypeScript types available
 import bcash from '@hansekontor/checkout-components';
 const { Mnemonic } = bcash;
 
@@ -24,12 +24,12 @@ import deepEqual from 'deep-equal';
 
 type WalletContextType = {
     wallet: Wallet | undefined,
-    cashtab: any,
-    createWallet: Function,
-    activateWallet: Function,
-    removeWallet: Function,
-    renameWalletLocally: Function,
-    update: Function,
+    cashtab: CashtabState,
+    createWallet: (activate: boolean, mnemonicInput?: string) => Promise<void>,
+    activateWallet: (walletToActivate: Wallet) => Promise<void>,
+    removeWallet: (walletToDelete: Wallet) => Promise<void>,
+    renameWalletLocally: (walletToRename: Wallet, newName: string) => Promise<void>,
+    update: (cashtabState: CashtabState, forceUpdate?: boolean) => Promise<void>,
     walletLoading: boolean,
     hasInitialized: boolean
 }
