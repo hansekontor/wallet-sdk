@@ -1,6 +1,7 @@
 import { Context } from 'react';
 import { Wallet } from '../Wallet/types';
 import { default as CashtabState } from '../Wallet/management';
+import { Contact } from '../../hooks/useContacts';
 export { Tokens } from '../Wallet/tokens';
 /**
  * The context shape for the app.
@@ -77,6 +78,37 @@ type App = {
      * @param type "giftcard" or "fiat"
      */
     withdraw: (amount: number, type: "giftcard" | "fiat") => void;
+    /**
+     * List of contacts stored in local storage.
+     */
+    contacts: Contact[];
+    /**
+     * Adds a single contact to the list.
+     * Generates a unique ID for the contact.
+     *
+     * @param contact - The contact object to add.
+     */
+    addContact: (contact: Contact) => Promise<void>;
+    /**
+     * Adds multiple contacts to the list in bulk.
+     * Generates unique IDs for each contact.
+     *
+     * @param newContacts - Array of contacts to add.
+     */
+    bulkAddContacts: (newContacts: Contact[]) => Promise<void>;
+    /**
+     * Removes a contact by its ID.
+     *
+     * @param id - The ID of the contact to remove.
+     */
+    removeContact: (id: string) => Promise<void>;
+    /**
+     * Edits an existing contact.
+     * Matches contact by ID and updates its information.
+     *
+     * @param updatedContact - The contact object with updated data.
+     */
+    editContact: (updatedContact: Contact) => Promise<void>;
 };
 export declare const AppContext: Context<App>;
 export declare const AppProvider: ({ children }: {

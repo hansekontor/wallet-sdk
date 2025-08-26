@@ -3,8 +3,14 @@ export { type Token, type TokenInfo } from './tokens';
 export interface CashtabState {
     wallets: Wallet[] | [];
 }
+export type Mnemonic = {
+    bits: number;
+    entropy: Uint8Array;
+    language: string;
+    phrase: string;
+};
 export type Wallet = {
-    mnemonic: any;
+    mnemonic: Mnemonic;
     name: string;
     Path1899: Path;
     state: WalletState;
@@ -20,19 +26,19 @@ export interface WalletStateInterface {
     balances: Balances;
     utxos: unknown[] | [];
     slp: Slp;
-    parsedTxHistory: unknown[] | [];
+    parsedTxHistory: ParsedTx[] | [];
 }
 export declare class WalletState implements WalletStateInterface {
     balances: Balances;
     utxos: unknown[] | [];
     slp: Slp;
-    parsedTxHistory: unknown[] | [];
+    parsedTxHistory: ParsedTx[] | [];
     constructor();
 }
 export type Slp = {
     tokens: Token[];
-    nonSlpUtxos: any[] | [];
-    slpUtxos: any[] | [];
+    nonSlpUtxos: unknown[] | [];
+    slpUtxos: unknown[] | [];
 };
 export type Balances = {
     totalBalance: number;

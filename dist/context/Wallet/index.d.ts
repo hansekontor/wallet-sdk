@@ -1,13 +1,14 @@
 import { Context } from 'react';
+import { default as CashtabState } from './management';
 import { Wallet } from './types';
 type WalletContextType = {
     wallet: Wallet | undefined;
-    cashtab: any;
-    createWallet: Function;
-    activateWallet: Function;
-    removeWallet: Function;
-    renameWalletLocally: Function;
-    update: Function;
+    cashtab: CashtabState;
+    createWallet: (activate: boolean, mnemonicInput?: string) => Promise<void>;
+    activateWallet: (walletToActivate: Wallet) => Promise<void>;
+    removeWallet: (walletToDelete: Wallet) => Promise<void>;
+    renameWalletLocally: (walletToRename: Wallet, newName: string) => Promise<void>;
+    update: (cashtabState: CashtabState, forceUpdate?: boolean) => Promise<void>;
     walletLoading: boolean;
     hasInitialized: boolean;
 };
