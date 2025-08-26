@@ -305,7 +305,7 @@ export const useEcash = () => {
         if (!token)
             throw new Error("Token not found in wallet");
 
-        const tokenUtxos = wallet.state.slp.slpUtxos.filter((utxo: any) => utxo.slp.tokenId === tokenId);
+        const tokenUtxos: any[] = wallet.state.slp.slpUtxos.filter((utxo: any) => utxo.slp.tokenId === tokenId);
         let tokenUtxoCount = 0;
         if (!amount) {
             tokenUtxoCount = tokenUtxos.length;
