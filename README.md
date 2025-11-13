@@ -1,69 +1,31 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# wallet-sdk
+## Purpose
+This React component library written in TypeScript allows to wrap a web-app into a `WalletContext`and either use it as a plain wallet or as another application with embedded wallet functionality.
+## Installation
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm install @hansekontor/wallet-sdk
 ```
+## States and Variables
+| Name           | Type                | Description                                                                     |
+|----------------|---------------------|---------------------------------------------------------------------------------|
+| status         | string              | Current status of the wallet.                                                   |
+| hasInitialized | boolean             | Whether the wallet has initialized (created new wallet or retrieved from cache) |
+| wallet         | object \| undefined | The active wallet.                                                              |
+| cashtab        | object              | The Cashtab State (taken from cashtab wallet)                                   |
+| contacts       | object              | List of contacts stored in local storage.                                       |
+## Functions
+| Name                   | Parameters                                                                 | Return Type   | Description                                                                                                  |
+|------------------------|----------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------|
+| validateMnemonic       | (mnemonic: string)                                                         | boolean       | Validates a mnemonic seed phrase.                                                                            |
+| updateWallet           | (forceUpdate: boolean)                                                     | Promise<void> | Synchronizes the currently active wallet and its transactions.                                               |
+| changeWallet           | (name: string)                                                             | Promise<void> | Switches the active wallet to the one with the specified name.                                               |
+| addWallet              | (activateWallet: boolean, mnemonic?: string)                               | Promise<void> | Creates a new wallet randomly or by imported mnemonic, adds it to saved wallets and optionally activates it. |
+| renameWallet           | (oldName: string, newName: string)                                         | Promise<void> | Renames a wallet and updates the local storage.                                                              |
+| deleteWallet           | (name: string)                                                             | Promise<void> | Deletes a wallet from stored wallets.                                                                        |
+| getMaxSendAmount       | (tokenId: string)                                                          | number        | Calculates the maximum token amount to be sent after applying postage.                                       |
+| calculatePostageAmount | (amount: number, tokenId: string)                                          | number        | Calculates postage amount.                                                                                   |
+| send                   | (amount: number, addresses: string[], tokenId: string, testOnly?: boolean) | Promise<void> | Sends tokens to specified output addresses.                                                                  |
+| addContact             | (contact: Contact)                                                         | Promise<void> | Adds a single contact to the list.                                                                           |
+| bulkAddContacts        | (newContacts: Contact[])                                                   | Promise<void> | Adds multiple contacts to the list in bulk.                                                                  |
+| removeContact          | (id: string)                                                               | Promise<void> | Removes a contact by its id.                                                                                 |
+| editContact            | (updatedContact: Contact)                                                  | Promise<void> | Edits an existing contact.                                                                                   |
